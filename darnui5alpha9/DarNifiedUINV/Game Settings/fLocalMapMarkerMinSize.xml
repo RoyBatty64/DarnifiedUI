@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="GMST">
+  <Flags>0</Flags>
+  <FormID ID="01001004">fLocalMapMarkerMinSize</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">fLocalMapMarkerMinSize</EditorID>
+    <Value Tag="DATA">15</Value>
+  </Subrecords>
+</Record>

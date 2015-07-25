@@ -1,0 +1,485 @@
+<!-- trait_menu.xml -->
+<!-- 
+// FILE			trait_menu.xml
+// VERSION		1.0
+// AUTHOR:		Dan Rubalcaba
+// DATE			6-01-2010
+-->
+<menu name="TraitMenu">
+	<class> &TraitMenu; </class>
+	<stackingtype> &no_click_past; </stackingtype>
+
+	<!-- User traits -->
+	<_CurrPoints></_CurrPoints>				<!-- # points that have been assigned for this page -->
+	<_MaxPoints></_MaxPoints>				<!-- Max # points that may be assigned for this page -->
+
+
+  <!-- XBox 360 control bindings -->
+	<xbuttony><ref src="LUM_ResetButton" trait="clicked"/></xbuttony>
+	
+	<_PCButton_R>	LUM_ResetButton </_PCButton_R>
+	<_PCButton_A>	LUM_ContinueButton </_PCButton_A>
+	<_PCButton_E>	LUM_BackButton </_PCButton_E>
+	
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<systemcolor>&hudmain;<!--All menus now pipboy color--></systemcolor>
+
+		<!-- ===== BACKGROUND TEXTURE ===== -->
+		<image name="LUM_Background">
+			<filename> Interface\Shared\Background\solid_black.dds </filename>
+			<zoom> &scale; </zoom>
+
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha" /> </alpha>
+			<depth> 1 </depth>
+
+			<width> 994 </width> <!-- DarN 1144 -->
+			<height>
+				<copy> 955 </copy> <!-- DarN 1070 -->
+				<add>
+					<copy> 155 </copy>
+					<onlyif src="io()" trait="_CurrentPage" />
+				</add>
+			</height>
+			<x>
+				<copy src="sibling(LUM_MainRect)" trait="x" />
+				<sub> 50 </sub>
+			</x>
+			<y>
+				<copy src="sibling(LUM_MainRect)" trait="y" />
+				<sub> 125 </sub>
+			</y>
+		</image>
+		
+		<!-- ===== MAIN POSITIONING RECT ===== -->
+		<rect name="LUM_MainRect">
+			<!-- <width> 1024 </width>
+			<height> 800 </height> -->
+			<width> 874 </width> <!-- DarN 1024 -->
+			<height>
+				<copy> 685 </copy>
+				<add>
+					<copy> 155 </copy>
+					<onlyif src="io()" trait="_CurrentPage" />
+				</add>
+			</height>
+			<!-- Centered on screen-->
+			<x>
+				<copy src="screen()" trait="width" />
+				<sub src="me()" trait="width" />
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+			</y>
+			
+			<locus> &true; </locus>
+			<depth> 2 </depth>
+
+			<!-- ===== HEADLINE BRACKET AND TITLE =====  -->
+			<rect name="LUM_HeadlineRect">
+				<width> <copy src="parent()" trait="width" /> </width>
+				<locus> &true; </locus>
+				
+				<image name="LUM_Headline_h1">
+					<include src="line.xml" />
+					<_length> 50 </_length>
+				</image>
+
+				<image name="LUM_Headline_v1">
+					<include src="vertical_fade_line.xml" />
+					<height> 40 </height>
+				</image>
+
+				<text name="LUM_Headline_Title">
+					<id> 0 </id>
+
+					<x>
+						<copy src="sibling(LUM_headline_h1)" trait="_length" />
+						<add> 20 </add>
+					</x>
+					<y> -14 </y> <!-- DarN -10 -->
+					<font> <copy src="globals()" trait="_gl_HeaderFont" /> </font>
+
+
+				</text>
+
+				<image name="LUM_Headline_h2">
+					<include src="line.xml" />
+					<_length>
+						<copy src="parent()" trait="width" />
+						<sub src="me()" trait="x" />
+					</_length>
+					<x>
+						<copy src="sibling(LUM_Headline_Title)" trait="x" />
+						<add src="sibling(LUM_Headline_Title)" trait="width" />
+						<add> 20 </add>
+					</x>
+				</image>
+
+				<image name="LUM_Headline_v2">
+					<include src="vertical_fade_line.xml" />
+					<_x>
+						<copy src="sibling(LUM_Headline_h2)" trait="x" />
+						<add src="sibling(LUM_Headline_h2)" trait="width" />
+						<sub src="me()" trait="width" />
+					</_x>
+				</image>
+			</rect>			<!-- end LUM_HeadlineRect -->
+
+			<!-- ===== TRAIT LIST BOXES ===== -->
+			<hotrect name="LUM_PerkList">
+				<include src="list_box.xml"/>
+				<id> 1 </id>
+
+				<x> -15 </x>
+				<y> 45 </y> <!-- DarN 60 -->
+				<width> 370 </width> <!-- DarN 470 -->
+				<height> 600 </height> <!-- DarN 676 -->
+
+				<_enabled> <copy src="me()" trait="visible" /> </_enabled>
+			</hotrect>
+
+			<!-- ===== SELECTION ICON ===== -->
+			<image name="LUM_SelectionIcon">
+				<id> 2 </id>
+
+				<x> <!-- DarN 520 -->
+					<copy src="parent()" trait="width" />
+					<sub>
+						<copy src="sibling(LUM_SelectionInfoRect)" trait="width" />
+						<add src="me()" trait="width" />
+						<div> 2 </div>
+					</sub>
+					<sub> 40 </sub>
+				</x>
+				<y> -10 </y> <!-- DarN 0 -->
+				<width> 320 </width> <!-- DarN 400 -->
+				<height> 320 </height> <!-- DarN 400 -->
+
+				<zoom> &scale; </zoom>
+				<visible> &false; </visible>
+			</image>
+			
+			<image name="stats_icon_badge">
+				<id> 7 </id>
+				<visible> &false; </visible>
+				<zoom> &scale; </zoom>
+				<filename></filename>
+				<!-- set in code -->
+				<x> <!-- DarN 475 -->
+					<copy src="sibling(LUM_SelectionInfoRect)" trait="x" />
+					<add> 10 </add>
+				</x>
+				<y> <!-- DarN 300 -->
+					<copy src="sibling(LUM_SelectionInfoRect)" trait="y" />
+					<sub src="me()" trait="height" />
+					<sub> 10 </sub>
+				</y>
+				<width> 48 </width> <!-- DarN 64 -->
+				<height> 48 </height> <!-- DarN 64 -->
+			</image>
+
+			<!-- ===== SELECTION INFO RECT ===== -->		
+			<rect name="LUM_SelectionInfoRect">
+				<x>
+					<copy src="sibling(LUM_PerkList)" trait="x" />
+					<add src="sibling(LUM_PerkList)" trait="width" />
+					<add> 10 </add>
+				</x>
+				<y> <!-- DarN 385 -->
+					320
+				</y>
+				<width>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="x" />
+				</width>
+				<height> <!-- DarN 300 -->
+					<copy> 300 </copy>
+					<sub>
+						<copy> 160 </copy>
+						<onlyifnot src="io()" trait="_CurrentPage" />
+					</sub>
+				</height>
+				<locus> &true; </locus>
+
+				<!-- Divider lines -->
+				<image name="LUM_DividerA">
+					<include src="line.xml" />
+					<_length>
+						<copy src="parent()" trait="width" />
+						<sub> 1 </sub> <!-- DarN 3 -->
+					</_length>
+				</image>
+				
+				<image name="LUM_DividerA_v1">
+					<include src="vertical_fade_line.xml" />
+					<x>
+						<copy src="parent()" trait="width" />
+						<sub src="me()" trait="width" />
+					</x>
+				</image>
+
+        <image name="LUM_DividerB">
+          <include src="line.xml"/>
+          <y>
+            <copy> 300 </copy>
+            <sub src="me()" trait="height"/>
+          </y>
+          <_length>
+            <copy src="parent()" trait="width"/>
+            <sub> 1 </sub>
+          </_length>
+        </image>
+
+        <image name="LUM_DividerB_v1">
+          <include src="vertical_fade_line.xml"/>
+          <x>
+            <copy src="parent()" trait="width"/>
+            <sub src="me()" trait="width"/>
+          </x>
+          <y>
+            <copy src="sibling(LUM_DividerB)" trait="y"/>
+          </y>
+		  <height> 40 </height>
+        </image>
+
+        <!-- Selection text: displays info about selection -->
+        <!--<text name="LUM_SelectionText">
+          <id> 3 </id>
+
+          <y> 20 </y>
+
+          <font> 2 </font>
+          <wrapwidth>
+            <copy src="parent()" trait="width"/>
+            <sub> 40 </sub>
+          </wrapwidth>
+        </text>-->
+        <hotrect name="TM_DescriptionBox">
+          <!--<id>  </id>
+          <x>
+            <copy src="sibling(stats_icon_separator)" trait="x"/>
+          </x>
+          <y> 20 </y>-->
+          <width>
+            <copy src="parent()" trait="width"/>
+            <sub>20</sub>
+              <!--<copy src="child(TM_DescriptionScrollbar)" trait="width"/>
+              <div> 2 </div>-->
+          </width>
+          <height> 300 </height>
+          <locus> &true; </locus>
+          <wheelable> &true; </wheelable>
+          <clipwindow> &true; </clipwindow>
+          <!--<visible>
+            <copy src="stats_icon_separator" trait="visible"/>
+          </visible>-->
+          <!-- Scrollbar for scrolling over-long description text--> 
+          <hotrect name="TM_DescriptionScrollbar">
+            <id> 8 </id>
+             <!--<include src="scrollbar_vert.xml"/>--> 
+            <_height> 130 </_height>
+            <_x>
+              <copy src="parent()" trait="width"/>
+            </_x>
+            <_y> 35 </_y>
+            <y> 95 </y>
+            <_wheelmoved>
+              <copy src="parent()" trait="wheelmoved"/>
+            </_wheelmoved>
+            <_number_of_visible_items> 1 </_number_of_visible_items>
+
+            <_ScrollDelta> 20 </_ScrollDelta>
+          </hotrect>
+
+          <text name="TM_DescriptionText">
+            <id> 3 </id>
+			<y> 20 </y>
+			<brightness> 220 </brightness>
+
+			<font> 1 </font> <!-- DarN 2 -->
+			<wrapwidth>
+				<copy src="parent()" trait="width" />
+				<sub> 20 </sub> <!-- DarN 40 -->
+			</wrapwidth>
+          </text>
+        </hotrect>
+
+        <!-- Point counter: displays number of points left to distribute -->
+        <text name="LUM_PointCounter">
+          <id> 4 </id>
+
+          <y>
+            <copy src="sibling(LUM_DividerB)" trait="y"/>
+            <add> 20 </add>
+          </y>
+          <font> 6 </font>
+        </text>
+      </rect>			<!-- end LUM_SelectionInfoRect -->
+
+			<!-- ===== BUTTON POSITIONING RECT ===== -->
+			<rect name="LUM_ButtonRect">
+				<x>
+					<copy src="parent()" trait="width" />
+					<sub> 40 </sub> <!-- DarN 10 -->
+				</x>
+				<y> 60 </y> <!-- DarN 60 -->
+				<locus> &true; </locus>
+
+				<!-- Reset button: Resets all distributed points-->
+				<hotrect name="LUM_ResetButton">
+					<include src="darn\text_box.xml" />
+					<id> 5 </id>
+
+					<justify> &right; </justify>
+
+					<_xbox_button> &xbuttony; </_xbox_button>
+					<_PCButtonText> &-sPCMenuHintR; </_PCButtonText> 
+					<string> &-sReset; </string>
+				</hotrect>
+
+				<!-- Continue / Done button: Moves to next page, or exits menu if at end -->
+				<hotrect name="LUM_ContinueButton">
+					<include src="darn\text_box.xml" />
+					<id> 6 </id>
+
+					<justify> &right; </justify>
+
+					<_y>
+						<copy src="sibling(LUM_ResetButton)" trait="_y"/>
+						<add src="sibling(LUM_ResetButton)" trait="height"/>
+					</_y>
+					<_xbox_button> &xbuttonx; </_xbox_button>
+					<_PCButtonText> &-sPCMenuHintA; </_PCButtonText>
+					<clicksound> UIMenuOK </clicksound>
+
+					<string> <copy src="me()" trait="_Title"/> </string>
+					<_Title> &-sDone; </_Title>
+
+				</hotrect>
+
+			</rect>			<!-- end LUM_ButtonRect -->
+
+			<!-- ===== TAILLINE BRACKET ===== -->
+			<rect name="LUM_BottomBracket">
+				<include src="bottom_bracket.xml" />
+
+				<y> <copy src="parent()" trait="height" /> </y>
+				<width> <copy src="parent()" trait="width" /> </width>
+				<height> 60 </height> <!-- DarN 60 -->
+			</rect>
+			
+		</rect>		<!-- end LUM_MainRect -->
+	</rect>
+
+	<rect name="GLOW_BRANCH">
+		<id> &glow_branch; </id>
+	</rect>	<!-- end GLOW_BRANCH-->
+
+	<!-- ===== SKILL ITEM TEMPLATE ===== -->
+	<template name="LUM_SkillTemplate">
+		<hotrect name="LUM_SkillItem">
+			<include src="list_box_template.xml"/>
+
+			<_MinValue> 0 </_MinValue>				<!-- The min value for a stat -->
+			<_MaxValue>								<!-- The max value for a stat -->
+				<copy> 100 </copy> <!-- DarN 100 -->
+				<!-- <add>
+					<copy src="io()" trait="_MaxPoints" />
+					<onlyif src="globals()" trait="_lvl_SkillFix" />
+				</add> -->
+				<add>
+					<copy src="globals()" trait="_lvl_SkillFix" />
+					<mul> 899 </mul>
+				</add>
+			</_MaxValue>
+			<_BaseValue> </_BaseValue>				<!-- The base value of this stat -->
+			<_ExtraValue> </_ExtraValue>				<!-- Any values added to the base value from perks, chems, and other enhancers -->
+			<_AddedValue> </_AddedValue>				<!-- Any stat points added in the menu-->
+			<_OverflowValue> </_OverflowValue>		<!-- Any points added that push stats outside their min-max bounds; these are ignored, but stored for addition purposes -->
+			<_DisplayString> </_DisplayString>		<!-- The string to display for the value -->
+			
+			<clicksound> &nosound; </clicksound>
+			<mouseoversound> &nosound; </mouseoversound>
+			<repeathorizontal> &true; </repeathorizontal>		<!-- #16978: Add horizontal repeat -->
+			<xdefault>
+				<copy src="me()" trait="listindex" />
+				<eq> 0 </eq>
+			</xdefault>
+			
+			<_VerticalSpacing> 10 </_VerticalSpacing>
+
+			<text name="ListItemText">
+				<font> 2 </font>
+				<string> <copy src="parent()" trait="string" /> </string>
+				
+				<x> 15 </x> <!-- DarN 15 -->
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+			</text>
+
+			
+			<!-- Small square that denotes selection -->
+			<!--<image name="LUM_Template_ItemMarker">
+				<filename> Interface\Shared\Marker\square_filled.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<width> 25 </width>
+				<height> 25 </height>
+				
+				<x> 15 </x>
+				<y> 17.5 </y>
+				<visible> <copy src="parent()" trait="_selected"/> </visible>
+			</image>-->	
+		</hotrect>
+	</template>
+	
+	<!-- ===== PERK ITEM TEMPLATE ===== -->
+	<template name="LUM_PerkTemplate">
+		<hotrect name="LUM_Perk">
+			<include src="list_box_template.xml" />
+			
+			<_TextAlpha> 255 </_TextAlpha>
+			<mouseoversound> &nosound; </mouseoversound>
+			<clicksound> UIMenuPrevNext </clicksound>
+			<height> 30 </height>
+			
+			<text name="ListItemText">
+				<font> 1 </font> <!-- DarN 2 -->
+				<string> <copy src="parent()" trait="string" /> </string>
+				<wrapwidth> 360 </wrapwidth>
+				
+				<x> 40 </x> <!-- DarN 45 -->
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<alpha> <copy src="parent()" trait="_TextAlpha" /> </alpha>
+			</text>
+			
+			<!-- Small square that denotes selection -->
+			<image name="LUM_Template_ItemMarker">
+				<filename> Interface\Shared\Marker\square_filled.dds </filename>
+				<!-- <texatlas> Interface\InterfaceShared.tai </texatlas> -->
+				<width> 14 </width> <!-- DarN 25 -->
+				<height> 14 </height> <!-- DarN 25 -->
+				<zoom> 67 </zoom>
+				
+				<x> 12 </x> <!-- DarN 15 -->
+				<y> <!-- DarN 17.5 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<visible> <copy src="parent()" trait="_selected" /> </visible>
+			</image>				
+		</hotrect>
+	</template>
+</menu>

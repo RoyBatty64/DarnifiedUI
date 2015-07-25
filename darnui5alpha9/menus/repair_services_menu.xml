@@ -1,0 +1,533 @@
+<!-- repair_services_menu.xml -->
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			repair_services_menu.xml
+// VERSION		1.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			November 9, 2007
+// INFO			Menu used when using a repair vendor.
+-->
+<menu name="RepairServicesMenu">
+	<class> &RepairServicesMenu; </class>
+	<stackingtype> &no_click_past; </stackingtype>
+	
+	<!-- XBox 360 control bindings -->
+	<xbuttonx> <ref src="RSM_RepairAllButton" trait="clicked"/></xbuttonx>
+	<xbuttonb><ref src="RSM_DoneButton" trait="clicked"/></xbuttonb>
+	
+	<_PCButton_A>	RSM_RepairAllButton </_PCButton_A>
+	<_PCButton_E>	RSM_DoneButton </_PCButton_E>
+
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<systemcolor> &hudmain;<!--All menus now pipboy color--> </systemcolor>
+
+		<!-- ===== BACKGROUND TEXTURE ===== -->
+		<image name="RSM_Background">
+			<width> 1084 </width> <!-- DarN 1134 -->
+			<height> 910 </height>
+			
+			<x>
+				<copy src="sibling(RSM_MainRect)" trait="x"/>
+				<sub> 55 </sub>
+			</x>
+			<y>
+				<copy src="sibling(RSM_MainRect)" trait="y"/>
+				<sub> 115 </sub>
+			</y>
+			<depth> 1 </depth>
+
+			<filename> Interface\Shared\Background\solid_black.dds </filename>
+			<zoom> &scale; </zoom>
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha"/> </alpha>
+		</image>
+
+		<!-- ===== MAIN POSITIONING RECT ===== -->
+		<rect name="RSM_MainRect">
+			<!-- Centered on screen-->
+			<x>
+				<copy src="screen()" trait="width"/>
+				<sub src="me()" trait="width"/>
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy src="screen()" trait="height"/>
+				<sub src="me()" trait="height"/>
+				<div> 2 </div>
+			</y>
+			<width> 970 </width> <!-- DarN 1020 -->
+			<height> 680 </height>
+			<depth> 2 </depth>
+			<locus> &true; </locus>
+
+			<!-- ===== HEADLINE ITEMS ===== -->
+			<!-- Upper-left corner -->
+			<image name="RSM_Headline_v1">
+				<include src="vertical_fade_line.xml"/>
+			</image>
+
+			<image name="RSM_Headline_h1">
+				<include src="line.xml"/>
+				<_length> 50 </_length>
+			</image>
+
+			<!-- Menu title -->
+			<text name="RSM_Headline_Title">
+				<font> <copy src="globals()" trait="_gl_HeaderFont" /> </font> <!-- DarN 6 -->
+				<x> 70 </x>
+				<y> -17 </y> <!-- DarN -13 -->
+				<brightness> 255 </brightness>
+
+				<string> <copy src="me()" trait="_Title"/> </string>
+				<_Title> &-sRepairServicesTitle; </_Title>
+			</text>
+
+			<image name="RSM_Headline_h2">
+				<include src="line.xml"/>
+				<x>
+					<copy src="sibling(RSM_Headline_Title)" trait="width"/>
+					<add> 90 </add>
+				</x>
+				<_length>
+					<copy src="RSM_Headline_v2" trait="x"/>
+					<sub src="me()" trait="x"/>
+					<max> 0 </max>
+				</_length>
+			</image>
+			
+			<!-- Vendor skill and Player caps headline displays -->
+			<text name="RSM_VendorSkillLabel">
+				<id> 0 </id>
+				<string></string>
+				<font> 2 </font>
+				<justify> &right; </justify>
+				
+				<x>
+					<copy src="sibling(RSM_Headline_v2)" trait="x"/>
+					<sub> 15 </sub>
+				</x>
+				<y> 15 </y> <!-- DarN 20 -->
+			</text>
+			
+			<image name="RSM_Headline_v2">
+				<include src="vertical_fade_line.xml"/>
+				
+				<!-- Place just to the left of the Caps label -->
+				<x>
+					<copy> 960 </copy> <!-- DarN 1010 -->
+					<sub src="sibling(RSM_CapsLabel)" trait="width"/>
+					<sub> 35 </sub>
+					<min> 810 </min> <!-- DarN 860 -->
+				</x>
+			</image>
+			
+			<image name="RSM_Headline_h3">
+				<include src="line.xml"/>
+				<x>
+					<copy src="sibling(RSM_Headline_v2)" trait="x"/>
+					<add> 10 </add>
+				</x>
+				<_length>
+					<copy> 970 </copy> <!-- DarN 1020 -->
+					<sub src="me()" trait="x"/>
+					<max> 0 </max>
+				</_length>
+			</image>
+
+			<text name="RSM_CapsLabel">
+				<id> 1 </id>
+				<string></string>
+				<font> 2 </font>
+				<justify> &right; </justify>
+				
+				<x> 955 </x> <!-- DarN 1005 -->
+				<y> 15 </y> <!-- DarN 20 -->
+			</text>
+			
+			<image name="RSM_Headline_v3">
+				<include src="vertical_fade_line.xml"/>
+				<x> 970 </x> <!-- DarN 1020 -->
+			</image>
+
+			<!-- ===== LIST BOX ===== -->
+			<hotrect name="RSM_RepairList">
+				<include src="list_box.xml"/>
+				<id> 2 </id>
+
+				<x> -15 </x>
+				<y> 47 </y> <!-- DarN 60 -->
+				<width> 530 </width> <!-- DarN 480 -->
+				<height> 600 </height> <!-- DarN 580 -->
+			</hotrect>
+
+			<!-- Text that shows when broken item list is empty-->
+			<text name="RSM_EmptyRepairListText">
+				<font> 2 </font>
+				<string> &-sNoItemsToRepair; </string>
+
+				<x> 45 </x>
+				<y> 75 </y>
+				<visible>
+					<copy src="sibling(RSM_RepairList)" trait="_num_filtered"/>
+					<sub src="sibling(RSM_RepairList)" trait="childcount"/>
+					<add> 2 </add>
+					<eq> 0 </eq>
+				</visible>
+			</text>
+			
+			<!-- ===== ITEM ICON ===== -->
+			<image name="RSM_ItemIcon">
+				<id> 3 </id>
+
+				<x> 560 </x> <!-- DarN 500 -->
+				<y> 60 </y> <!-- DarN 0 -->
+				<width> 380 </width> <!-- DarN 400 -->
+				<height> 380 </height> <!-- DarN 400 -->
+
+				<visible> &false; </visible>
+				<zoom> &scale; </zoom>
+			</image>
+
+			<!-- ===== ITEM INFO DISPLAYS ===== -->
+			<rect name="RSM_StatsDisplayRect">
+				<id> 4 </id>
+				<x> 535 </x> <!-- DarN 485 -->
+				<y> 430 </y> <!-- DarN 380 -->
+				<locus> &true; </locus>
+				<visible> &false; </visible>
+
+				<!-- Broken item condition / stat ( DPS or DR ) displays -->
+				<rect name="RSM_BrokenItemHealth">
+					<id> 5 </id>
+					<include src="darn\card_info_barter.xml"/>
+					
+					<width> 213 </width> <!-- DarN 263 -->
+					<height> 50 </height> <!-- DarN 60 -->
+					
+					<_Title> &-sInventoryCondition; </_Title>
+					
+					<rect name="RSM_BrokenItemHealthMeter">
+						<include src="meter.xml"/>
+						
+						<x> 85 </x>
+						<y>
+							<copy src="sibling(CI_TitleText)" trait="y"/>
+							<!-- <sub> 3 </sub> -->
+						</y>
+						<width> 100 </width> <!-- DarN 150 -->
+						<height> 16 </height> <!-- DarN 20 -->
+						
+						<_SolidMeter> &true; </_SolidMeter>
+						<_ShowBackground> &true; </_ShowBackground>
+						<_Value> <copy src="parent()" trait="user0"/> </_Value>
+					</rect>
+				</rect>
+				
+				<rect name="RSM_BrokenItemStat">
+					<id> 6 </id>
+					<include src="darn\card_info_barter.xml"/>
+					
+					<x> 220 </x> <!-- DarN 273 -->
+					<width> 213 </width> <!-- DarN 263 -->
+					<height> 50 </height> <!-- DarN 60 -->
+				</rect>
+				
+				<!-- Arrow icon -->
+				<image name="RSM_ArrowIcon">
+					<filename> Interface\Shared\Arrow\repair_arrow_down.dds </filename>
+					
+					<x> 183 </x> <!-- DarN 223 -->
+					<y> 50 </y>
+					<height> 60 </height> <!-- DarN 80 -->
+					<width> 60 </width> <!-- DarN 80 -->
+					<zoom> &scale; </zoom>
+				</image>
+				
+				<!-- Condition / stat improvement percentages -->
+				<text name="RSM_HealthImprovementText">
+					<id> 7 </id>
+					<font> 3 </font> <!-- DarN 4 -->
+					<justify> &center; </justify>
+					
+					<x> <!-- DarN 100 -->
+						<copy src="sibling(RSM_BrokenItemHealth)" trait="x" />
+						<add>
+							<copy src="sibling(RSM_BrokenItemHealth)" trait="width" />
+							<div> 2 </div>
+						</add>
+						<sub> 10 </sub> <!-- DarN %... -->
+					<y> 70 </y> <!-- DarN 90 -->
+					<visible> <copy src="sibling(RSM_FixedItemHealth)" trait="visible"/> </visible>
+				</text>
+				
+				<text name="RSM_StatImprovementText">
+					<id> 8 </id>
+					<font> 3 </font> <!-- DarN 4 -->
+					<justify> &center; </justify>
+					
+					<x> <!-- DarN 400 -->
+						<copy src="sibling(RSM_BrokenItemStat)" trait="x" />
+						<add>
+							<copy src="sibling(RSM_BrokenItemStat)" trait="width" />
+							<div> 2 </div>
+						</add>
+					</x>
+					<y> 70 </y> <!-- DarN 90 -->
+					<visible> <copy src="sibling(RSM_FixedItemHealth)" trait="visible"/> </visible>
+				</text>
+				
+				<!-- Error message -- Shows when an item can't be repaired, like if the vendor's skill is too low -->
+				<text name="RSM_ErrorText">
+					<font> 2 </font>
+					<id> 9 </id>
+					<x>
+						<copy src="sibling(RSM_ArrowIcon)" trait="x" />
+						<add>
+							<copy src="sibling(RSM_ArrowIcon)" trait="width" />
+							<div> 2 </div>
+						</add>
+					</x> <!-- DarN 250 -->
+					<y> 140 </y> <!-- DarN 160 -->
+					<justify> &center; </justify>
+					<visible> <not src="sibling(RSM_FixedItemHealth)" trait="visible"/> </visible>
+					<string></string>		<!-- Set in code -->
+				</text>
+				
+				<!-- Repaired item condition / stat displays -->
+				<rect name="RSM_FixedItemHealth">
+					<id> 10 </id>
+					<include src="darn\card_info_barter.xml"/>
+					
+					<y> 120 </y> <!-- DarN 140 -->
+					<width> 213 </width> <!-- DarN 263 -->
+					<height> 50 </height> <!-- DarN 60 -->
+					<visible> &false; </visible>
+					
+					<_Title> &-sInventoryCondition; </_Title>
+					
+					<rect name="RSM_FixedItemHealthMeter">
+						<include src="meter.xml"/>
+						
+						<x> 85 </x>
+						<y>
+							<copy src="sibling(CI_TitleText)" trait="y"/>
+							<!-- <sub> 3 </sub> -->
+						</y>
+						<width> 100 </width> <!-- DarN 150 -->
+						<height> 16 </height> <!-- DarN 20 -->
+
+						
+						<_SolidMeter> &true; </_SolidMeter>
+						<_ShowBackground> &true; </_ShowBackground>
+						<_Value> <copy src="parent()" trait="user0"/> </_Value>
+					</rect>
+				</rect>
+				
+				<rect name="RSM_FixedItemStat">
+					<id> 11 </id>
+					<include src="darn\card_info_barter.xml"/>
+					
+					<x> 220 </x> <!-- DarN 273 -->
+					<y> 120 </y> <!-- DarN 140 -->
+					<width> 213 </width> <!-- DarN 263 -->
+					<height> 50 </height> <!-- DarN 60 -->
+					<visible> <copy src="sibling(RSM_FixedItemHealth)" trait="visible"/> </visible>
+				</rect>
+				
+				<text name="RSM_RepairCostText">
+					<id> 12 </id>
+					<font> 6 </font>
+					<y> 190 </y> <!-- DarN 230 -->
+					<visible> <copy src="sibling(RSM_FixedItemHealth)" trait="visible"/> </visible>
+				</text>
+			</rect>				<!-- end RSM_StatsDisplayRect-->
+
+			<!-- ===== BUTTON POSITIONING RECT ===== -->
+			<rect name="RSM_ButtonRect">
+				<x> 930 </x> <!-- DarN 1010 -->
+				<y> 65 </y> <!-- DarN 75 -->
+				<height> 120 </height>
+				<locus> &true; </locus>
+
+				<!-- Repair button: Repairs the broken item -->
+				<image name="RSM_RepairButton">
+					<id> 13 </id>
+					<include src="darn\text_box.xml"/>
+
+					<_horbuf> 20 </_horbuf>
+					<_verbuf> 10 </_verbuf> <!-- DarN 15 -->
+					<justify> &right; </justify>
+					<string> &-sRepairItem; </string>
+					<_line_alpha>
+						<copy> 128 </copy>
+						<add>
+							<copy> 127 </copy>
+							<onlyif src="me()" trait="target"/>
+						</add>
+					</_line_alpha>
+					<visible> &xbox; </visible>
+					
+					<_xbox_button> &xbuttona; </_xbox_button>
+				</image>
+
+				<image name="RSM_RepairAllButton">
+					<id> 14 </id>
+					<include src="darn\text_box.xml"/>
+
+					<_y>
+						<copy> 42 </copy> <!-- DarN 47 -->
+						<onlyif> &xbox; </onlyif>
+					</_y>
+					<_horbuf> 20 </_horbuf>
+					<_verbuf> 10 </_verbuf> <!-- DarN 15 -->
+					<justify> &right; </justify>
+					<_line_alpha>
+						<copy> 128 </copy>
+						<add>
+							<copy> 127 </copy>
+							<onlyif src="me()" trait="target"/>
+						</add>
+					</_line_alpha>
+					
+					<string> &-sRepairAllItems; </string>
+					<_xbox_button> &xbuttonx; </_xbox_button>
+					<_PCButtonText> &-sPCMenuHintA; </_PCButtonText>
+				</image>
+
+				<!-- Done button: Exits menu -->
+				<image name="RSM_DoneButton">
+					<id> 15 </id>
+					<include src="darn\text_box.xml"/>
+
+					<_y>
+						<copy> 42 </copy> <!-- DarN 47 -->
+						<add>
+							<copy> 42 </copy> <!-- DarN 47 -->
+							<onlyif> &xbox; </onlyif>
+						</add>
+					</_y>
+					<_horbuf> 20 </_horbuf>
+					<_verbuf> 10 </_verbuf> <!-- DarN 15 -->
+					<justify> &right; </justify>
+					
+					<string> &-sDone; </string>
+					<_xbox_button> &xbuttonb; </_xbox_button>
+					<_PCButtonText> &-sPCMenuHintE; </_PCButtonText>
+				</image>
+			</rect>				<!-- end RSM_ButtonRect-->
+			
+			<!-- ===== BOTTOM BRACKET ===== -->
+			<rect name="RSM_BottomBracket">
+				<include src="bottom_bracket.xml"/>
+				
+				<width> 970 </width> <!-- DarN 1020 -->
+				<height> 40 </height>
+				<y> 680 </y>
+			</rect>
+			
+		</rect>		<!-- end RSM_MainRect -->
+	</rect>		<!-- end NOGLOW_BRANCH -->
+
+	<!--======================== LIST BOX TEMPLATE =========================-->
+	<template name="RSM_RepairListTemplate">
+		<hotrect name="RSM_RepairListTemplateRect">
+			<include src="list_box_template.xml"/>
+
+			<_Value></_Value>							<!-- The item's health -->
+			<_RepairCost></_RepairCost>				<!-- # caps it costs to repair this item -->
+			<_CanRepair> &true; </_CanRepair>	<!-- True if we have enough money and vendor skill to repair this item -->
+			
+			<clicksound> &nosound; </clicksound>
+			<_VerticalSpacing> 9 </_VerticalSpacing> <!-- DarN Add -->
+			
+			<!-- OPTIMIZATION: Explicitly declare traits; avoid action lists -->
+			<x> 32 </x>
+			<width> 490 </width>
+			<target> &true; </target>
+			<visible> &true; </visible>
+			
+			<!-- OPTIMIZATION: Alpha set in code; this tile is assumed to be the top-most declared child! -->
+			<text name="ListItemText">
+				<font> 1 </font> <!-- DarN 2 -->
+				<wrapwidth> 310 </wrapwidth> <!-- DarN 260 -->
+				<string> <copy src="parent()" trait="string"/> </string>				
+				<x> 40 </x>
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+			</text>
+
+			<!-- Item condition meter -->
+			<!-- OPTIMIZATION: Avoid meter.xml as it's slow to use and this list can get large -->
+			<image name="RSM_Template_MeterBackground">
+				<filename> solid.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				
+				<x> 420 </x> <!-- DarN 370 -->
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<width> 60 </width>
+				<height> 16 </height>
+				<alpha> 64 </alpha>
+				<clips> &true; </clips>
+				<depth> 1 </depth>
+				<target> &false; </target>
+			</image>
+			
+			<image name="RSM_Template_Meter">
+				<id> 18 </id>
+				<filename> solid.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				
+				<x> 420 </x> <!-- DarN 370 -->
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<width> 0 </width>		<!-- Set in code -->
+				<height> 16 </height>
+				<clips> &true; </clips>
+				<depth> 2 </depth>
+				<target> &false; </target>
+			</image>
+
+			<!-- Small square that becomes filled if item is equipped -->
+			<!-- OPTIMIZATION: Visibility set in code; this tile is assumed to be the bottom-most declared child! -->
+			<image name="RSM_Template_ItemMarker">
+				<filename> Interface\Shared\Marker\square_filled.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<width> 14 </width>
+				<height> 14 </height>
+				<zoom> 67 </zoom>
+			
+				<x> 15 </x>
+				<y> <!-- DarN 17.5 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<visible> &false; </visible>
+				<target> &false; </target>
+				<alpha> <copy src="sibling(ListItemText)" trait="alpha"/> </alpha>
+			</image>			
+		</hotrect>
+	</template> <!-- end RSM_Template_ListItem -->
+</menu>

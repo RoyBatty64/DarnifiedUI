@@ -1,0 +1,181 @@
+﻿
+<!-- hotrect name="selected_box" -->
+
+<xbuttona> <ref src="me()" trait="clicked" /> </xbuttona>
+
+	<_horbuf> 10 </_horbuf>
+	<_verbuf> 10 </_verbuf>
+	<!-- <xdefault>1</xdefault> -->
+
+<!-- Alpha of the text and enclosing box; set to 255 when targeted, 128 otherwise -->
+	<_line_alpha>
+		<copy> 128 </copy>
+		<add>
+			<copy> 127 </copy>
+			<onlyif>
+				<copy src="me()" trait="_Start" />
+				<and src="me()" trait="target" />
+			</onlyif>
+		</add>
+	</_line_alpha>
+
+	<x> 0 </x>
+	<y> 0 </y>
+
+	<width> 200 </width>
+	<height>
+		<copy src="child(button_text)" trait="height" />
+		<add src="me()" trait="_verbuf" />
+		<add> 4 </add>
+	</height>
+
+	<string> Button Text </string>
+	
+	<target> <copy src="me()" trait="_enabled" /> </target>
+
+	<locus> &true; </locus>
+	<alpha>
+		<copy> 60 </copy> <!-- DarN 40> -->
+		<onlyif src="me()" trait="mouseover" />
+	</alpha>
+	<brightness> 255 </brightness>
+	<mouseoversound> UIMenuFocus </mouseoversound>
+	<clicksound> UIMenuOK </clicksound>
+	
+	<_State>
+		<copy src="child(marker)" trait="_value_scrolled_to" />
+		<add src="me()" trait="_start" />
+		<sub> 1 </sub>
+	</_State>
+	
+	<user1>
+		<copy src="me()" trait="user2" />
+		<sub> 1 </sub>
+	</user1>
+	<!-- maximum range value -->
+	<user2>
+		<copy> 2 </copy>
+		<sub src="me()" trait="_start" />
+	</user2>
+
+	<!-- Underline for headers -->
+	<rect name="underline">
+		<locus> &true; </locus>
+		<visible> 1 </visible>
+		<width>
+			<copy src="parent()" trait="width" />
+			<add> 15 </add>
+		</width>
+		<height> <copy src="child(cLine)" trait="height" /> </height>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<sub> 3 </sub>
+		</y>
+		<alpha> <copy src="sibling(button_text)" trait="alpha" /> </alpha>
+		
+		<image name="lFader">
+			<filename> interface\shared\line\fade_to_left.dds </filename>
+			<width> 5 </width>
+			<height> <copy src="sibling(cLine)" trait="height" /> </height>
+			<zoom> &scale; </zoom>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+		</image>
+		<image name="cLine">
+			<include src="line.xml" />
+			<_length>
+				<copy src="parent()" trait="width" />
+				<sub src="sibling(lFader)" trait="width" />
+				<sub src="sibling(rFader)" trait="width" />
+			</_length>
+			<height>
+				<copy> 1 </copy>
+				<mul src="screen()" trait="resolutionconverter" />
+			</height>
+			<x> <copy src="sibling(lFader)" trait="width" /> </x>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+		</image>
+		<image name="rFader">
+			<filename> interface\shared\line\fade_to_right.dds </filename>
+			<x>
+				<copy src="parent()" trait="width" />
+				<sub src="me()" trait="width" />
+			</x>
+			<width> 48 </width>
+			<height> <copy src="sibling(cLine)" trait="height" /> </height>
+			<zoom> &scale; </zoom>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+		</image>
+	</rect>
+
+	<!-- Caption -->
+	<text name="button_text">
+		<font> 4 </font>
+
+		<string> <copy src="parent()" trait="_Caption" /> </string>
+
+		<alpha>
+			<copy> 255 </copy>
+			<div>
+				<copy> 2 </copy>
+				<onlyifnot src="parent()" trait="target" />
+			</div>
+		</alpha>
+
+		<brightness> 255 </brightness>
+		<wrapwidth>
+			<copy src="parent()" trait="width" />
+			<sub src="parent()" trait="_horbuf" />
+		</wrapwidth>
+		<depth> 2 </depth>
+
+		<!-- Text has the same justification as the surrounding box -->
+		<x> 5 </x>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+	</text>
+	
+	<image name="stateImg">
+		<string> <copy src="me()" trait="_fn" /> </string>
+		<_fn_0> interface\shared\marker\glow_square_small.dds </_fn_0>
+		<_fn_1> darn\glow_square_small_checked.dds </_fn_1>
+		<filename>
+			<copy src="parent()" trait="_State" />
+			<copy src="me()" trait="_fn_" />
+		</filename>
+		<width> 22	</width>
+		<height> 22	</height>
+		<x>
+			<copy src="parent()" trait="width" />
+			<sub> 32 </sub>
+
+		</x>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+		<visible> 1 </visible>
+		<alpha> <copy src="parent()" trait="_line_alpha" /> </alpha>
+	</image>
+
+	<rect name="marker">
+		<visible> &false; </visible>
+		<_value_scrolled_to>
+			<!-- copy old value -->
+			<sub>
+				<copy src="parent()" trait="clicked" />
+				<onlyif src="parent()" trait="_Start" />
+			</sub>
+			<add>
+				<copy src="parent()" trait="clicked" />
+				<onlyifnot src="parent()" trait="_Start" />
+			</add>
+			<max src="parent()" trait="user1" />
+			<min src="parent()" trait="user2" />
+		</_value_scrolled_to>
+	</rect>
+<!-- /hotrect -->

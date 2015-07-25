@@ -1,0 +1,104 @@
+<!-- TextEditMenu.xml -->
+<menu name="TextEditMenu">
+	<class> &TextEditMenu; </class>
+	<stackingtype> &no_click_past; </stackingtype>
+	<alpha>	0 </alpha>
+	<locus> &true; </locus>
+	<explorefade> 0.25 </explorefade>
+	<systemcolor>&hudmain;</systemcolor>
+
+  <xbuttona>
+    <ref src="textedit_button_ok" trait="clicked" />
+  </xbuttona>
+
+  <rect name="TEM_MainRect">
+		<width> 620 </width> <!-- DarN 720 -->
+		<height> 180 </height>
+		<x>
+			<copy src="screen()" trait="width" />
+			<sub src="me()" trait="width" />
+			<div> 2 </div>
+		</x>
+		<y>
+			<copy src="screen()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+		<locus>&true;</locus>
+
+		<!-- #36358: Added background and brackets to menu -->
+		<image name="TEM_Background">
+			<x> -25 </x>
+			<y> -25 </y>
+			<width> 670 </width> <!-- DarN 770 -->
+			<height> 230 </height>
+
+			<filename> Interface\Shared\background\solid_black.dds </filename>
+			<zoom> &scale; </zoom>
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha" /> </alpha>
+			<depth> -1 </depth>
+		</image>
+
+		<rect name="TEM_TopBracket">
+			<include src="top_bracket.xml" />
+			<width> 620 </width>
+		</rect>
+
+		<rect name="TEM_BottomBracket">
+			<include src="bottom_bracket.xml" />
+			<y> 180 </y>
+			<width> 620 </width>
+		</rect>
+
+		<text name="textedit_prompt">
+			<id> 2 </id>
+			<string> &-sEnterName; </string>
+			<justify> &center; </justify>
+			<depth> 3 </depth>
+			<x>
+				<copy src="parent()" trait="width" />
+				<div> 2 </div>
+			</x>
+			<y> 32 </y>
+			<font> 2 </font> <!-- DarN add -->
+		</text>
+
+		<text name="textedit_text">
+			<id> 0 </id>
+			<depth> 3 </depth>
+			<justify> &center; </justify>
+			<string> </string>
+			<wrapwidth> 250 </wrapwidth>
+			<x>
+				<copy src="parent()" trait="width" />
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy src="parent()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+			</y>
+			<font> 1 </font>
+		</text>
+
+		<hotrect name="textedit_button_ok">
+			<include src="darn\text_box.xml" />
+
+			<id> 1 </id>
+			<_x>
+				<copy src="parent()" trait="width" />
+				<sub> 16 </sub>
+			</_x>
+			<_y>
+				<copy src="parent()" trait="height" />
+				<sub src="me()" trait="height" />
+				<sub> 16 </sub>
+			</_y>
+			<string> &-sOk; </string>
+			<justify> &right; </justify>
+		</hotrect>
+
+	</rect> <!-- end generic background -->
+
+</menu>

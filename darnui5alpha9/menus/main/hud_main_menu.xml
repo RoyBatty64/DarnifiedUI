@@ -1,0 +1,1383 @@
+	<!-- hud_main_menu.xml -->
+<menu name="HUDMainMenu">
+	<class> &HUDMainMenu; </class>
+	<stackingtype> &does_not_stack; </stackingtype>
+	<visible> &false; </visible>
+	<alpha> 255 </alpha>
+	<locus> &true; </locus>
+	<depth> -50 </depth>
+	<x> 0 </x>
+	<y> 0 </y>
+	<menufade> 0.25 </menufade>
+	
+	<!-- Region text -->
+	<user7> 0 </user7>
+	<!-- alpha -->
+	<user8> Region name text </user8>
+
+	<!-- named traits -->
+	<_SpreadPercentage> 1.0 </_SpreadPercentage>
+	<_CrosshairVisible> &false; </_CrosshairVisible>
+	<_CrosshairAlpha> 255 </_CrosshairAlpha>
+	<_SpreadChangeSpeed> 0.125 </_SpreadChangeSpeed>
+	<_ReticleAlpha> 255 </_ReticleAlpha>
+	<_FadeSpeed> 0.25 </_FadeSpeed>
+	<_SneakVisible> &false; </_SneakVisible>
+	<_SneakLevel> 0.0 </_SneakLevel>
+	<_RadiationLevel> 0 </_RadiationLevel>
+	<_TargetType> 0 </_TargetType>
+	<_ActionType> 0 </_ActionType>
+
+	
+	<image name="vertGuide">
+		<include src="line.xml" />
+		<_horizontal> &false; </_horizontal>
+		<systemcolor> &nosystemcolor; </systemcolor>
+		<_width> <copy src="io()" trait="_HUDShowGuides" /> </_width>
+		<visible> <copy src="io()" trait="_HUDShowGuides" /> </visible>
+		<alpha> 128 </alpha>
+		<x>
+			<copy src="screen()" trait="width" />
+			<sub src="me()" trait="width" />
+			<div> 2 </div>
+		</x>
+		<y> 0 </y>
+		<_length> <copy src="screen()" trait="height" /> </_length>
+	</image>
+	
+	<image name="vertGuide2">
+		<include src="line.xml" />
+		<_horizontal> &false; </_horizontal>
+		<systemcolor> &nosystemcolor; </systemcolor>
+		<_width> 1 </_width>
+		<visible> 0 </visible>
+		<alpha> 128 </alpha>
+		<x> 25 </x>
+		<y> 0 </y>
+		<_length> <copy src="screen()" trait="height" /> </_length>
+	</image>
+	
+	<image name="horizGuide">
+		<include src="line.xml" />
+		<systemcolor> &nosystemcolor; </systemcolor>
+		<_width> <copy src="io()" trait="_HUDShowGuides" /> </_width>
+		<visible> <copy src="io()" trait="_HUDShowGuides" /> </visible>
+		<alpha> 128 </alpha>
+		<x> 0 </x>
+		<y>
+			<copy src="screen()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+		<_length> <copy src="screen()" trait="width" /> </_length>
+	</image>
+
+	<include src="darn\fooknvmeter.xml" />
+	<include src="darn\duiF3Extras.xml" />
+	
+	<_HUDMode> <copy src="ActionPoints" trait="visible" /> </_HUDMode>
+	<_HUDAlpha>
+		<copy src="ActionPoints" trait="_alphaSource" />
+		<add>
+			<copy> 255 </copy>
+			<onlyifnot src="ActionPoints" trait="_alphaSource" /> <!-- DarN will be 0 if alpha is max in settings -->
+		</add>
+	</_HUDAlpha>
+	<_MeterAlpha>
+		<copy src="me()" trait="_HUDAlpha" />
+		<min> 210 </min>
+	</_MeterAlpha>
+	<_HUDinCombat> <copy src="io()" trait="_HUDShowCI" /> </_HUDinCombat> <!-- DarN for FOSE -->
+	<_inCombat> 0 </_inCombat>
+	
+	<include src="darn\hudtemplates.xml" />
+
+	<!--*********************************************************************************** GLOW_BRANCH -->
+	
+	<image name="DUIF3_CombatIndicator">
+		<filename> Interface\loading\glow_loading_vdsgsymbol.dds </filename>
+		<x>
+			<copy src="screen()" trait="width" />
+			<sub src="me()" trait="width" />
+			<div> 2 </div>
+			<add src="io()" trait="_HUDCI_X" />
+		</x>
+		<y> <copy src="io()" trait="_HUDCI_Y" /> </y>
+		<width>
+			<copy> 128 </copy>
+			<mul src="io()" trait="_duiscale" />
+		</width>
+		<height>
+			<copy> 64 </copy>
+			<mul src="io()" trait="_duiscale" />
+		</height>
+		<zoom> <copy src="io()" trait="_duiHUDscale" /> </zoom>
+		<systemcolor> &hudalt; </systemcolor>
+		<alpha> <copy src="io()" trait="_HUDAlpha" /> </alpha>
+		<visible>
+			<copy src="io()" trait="_HUDShowCI" /> <!-- DarN redundant? -->
+			<and src="io()" trait="_HUDMode" />
+			<and src="io()" trait="_inCombat" />
+		</visible>
+	</image>
+
+	<rect name="AP_Wrap">
+		<x>
+			<copy src="globals()" trait="_duiHUDOffset" />
+			<!--<onlyif src="io()" trait="_HUDShowAPInfo" />-->
+			<add src="screen()" trait="width" />
+			<sub>
+				<copy> 345 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</sub>
+			<add src="io()" trait="_HUDAPInfo_X" />
+		</x>
+		<y>
+			<copy src="screen()" trait="height" />
+			<sub>
+				<copy src="child(ActionPoints)" trait="height" />
+				<mul src="io()" trait="_duiscale_65" />
+			</sub>
+			<add src="io()" trait="_HUDAPInfo_Y" />
+		</y>
+		<locus> &true; </locus>
+		<visible> <copy src="io()" trait="_HUDShowAPInfo" /> </visible>
+
+		<rect name="ActionPoints">
+			<id> &noglow_branch; </id>
+			<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+			<width> 386 </width>
+			<height> 127 </height>
+			<_isAPRect> &true; </_isAPRect>
+		</rect>
+	</rect>
+
+	<!--*********************************************************************************** GLOW_BRANCH -->
+	<rect name="HP_Wrap">
+		<x>
+			<copy src="globals()" trait="_duiHUDOffset" />
+			<add src="io()" trait="_HUDHPInfo_X" />
+		</x>
+		<y>
+			<copy src="screen()" trait="height" />
+			<sub>
+				<copy src="child(HitPoints)" trait="height" />
+				<mul src="io()" trait="_duiscale_65" />
+			</sub>
+			<add src="io()" trait="_HUDHPInfo_Y" />
+		</y>
+		<locus> &true; </locus>
+		<visible> <copy src="io()" trait="_HUDShowHPInfo" /> </visible>
+
+		<rect name="HitPoints">
+			<id> &noglow_branch; </id>
+			<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+			<width> 369 </width>
+			<height> 127 </height>
+			<_isHPRect> &true; </_isHPRect>
+		</rect>
+	</rect>
+	
+	<!--*********************************************************************************** GLOW_BRANCH -->
+	<rect name="SneakMeter">
+		<id> &noglow_branch; </id>
+		<systemcolor> &hudmain; </systemcolor>
+		<width> 356 </width>
+		<height> 34 </height>
+
+		<text name="sneak_nif">
+			<width> 128 </width>
+			<height> 128 </height>
+			<x>
+				<copy src="globals()" trait="_duiHUDOffset" />
+				<onlyifnot src="io()" trait="_HUDShowSneak" />
+				<add src="io()" trait="_HUDSneak_X" />
+			</x>
+			<y> <copy src="io()" trait="_HUDSneak_Y" /> </y>
+			<justify> &center; </justify>
+			<font> <copy src="io()" trait="_HUDSneakFont" /> </font>
+			<brightness>
+				<copy> &uselocalcolor; </copy>
+				<add>
+					<copy> 256 </copy>
+					<onlyif>
+						<copy src="me()" trait="systemcolor" />
+						<eq> &hudalt; </eq>
+						<or> <not src="io()" trait="_HUDOverrideColor" /> </or>
+					</onlyif>
+				</add>
+			</brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		</text>
+	</rect>
+
+
+	<!--*********************************************************************************** GLOW_BRANCH -->
+	<rect name="ReticleCenter">
+		<id> &noglow_branch; </id>
+		<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+		<width> <!-- DarN 63 -->
+			<copy> 63 </copy>
+			<mul src="io()" trait="_duiscale" />
+		</width>
+		<height>
+			<copy> 75 </copy> <!-- DarN 75 -->
+			<mul src="io()" trait="_duiscale" />
+		</height>
+	</rect>
+
+	<!--*********************************************************************************** GLOW_BRANCH -->
+	<rect name="EH_Wrap">
+		<x>
+			<copy src="globals()" trait="_duiHUDOffset" />
+			<!-- <onlyif src="io()" trait="_HUDShowEH" /> -->
+			<add src="io()" trait="_HUDEH_X" />
+		</x>
+		<y> <copy src="io()" trait="_HUDEH_Y" /> </y>
+		<width> 350 </width>
+		<height> 52 </height>
+		<locus> &true; </locus>
+		<visible> <copy src="io()" trait="_HUDShowEH" /> </visible>
+		<rect name="EnemyHealth">
+			<id> &noglow_branch; </id>
+			<!-- <systemcolor> &hudmain; </systemcolor> -->
+			<width>
+				<copy> 350 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</width>
+			<height>
+				<copy> 52 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</height>
+			<_isEHRect> &true; </_isEHRect>
+		</rect>
+	</rect>
+
+	<!--===========	Quest Reminder =====================-->
+	<rect name="QuestWrap">
+		<locus> &true; </locus>
+		<x> <copy src="globals()" trait="_duiHUDOffset" /> </x>
+		<y> 0 </y>
+		<locus> &true; </locus>
+
+		<rect name="QuestReminder">
+			<id> &noglow_branch; </id>
+
+			<width> 400 </width>
+			<height> 200 </height>
+			<locus> &true; </locus> <!-- DarN true -->
+			<_isQRRect> &true; </_isQRRect>
+			<!--=========== Quest stages ========================-->
+			<rect name="QSWrap">
+				<x> <copy src="io()" trait="_HUDQR_X" /> </x>
+				<y> <copy src="io()" trait="_HUDQR_Y" /> </y>
+				<locus> &true; </locus>
+				<visible> <copy src="io()" trait="_HUDShowQR" /> </visible>
+				<rect name="QuestStages">
+					<id> &noglow_branch; </id>
+					<systemcolor> &hudmain; </systemcolor>
+					<width> 100 </width>
+					<height> 50 </height>
+					<x> 20 </x>
+					<y> 40 </y>
+					<locus> &true; </locus>
+					<_isQSRect> &true; </_isQSRect>
+				</rect>
+			</rect>
+			<template name="template_filled_checkbox">
+				<image name="filled_checkbox">
+					<visible> &false; </visible>
+					<alpha> 0 </alpha>
+					<filename> Interface\Shared\Marker\glow_square_filled_small.dds </filename>
+					<texatlas> Interface\InterfaceShared.tai </texatlas>
+					<width> 26 </width>
+					<height> 26 </height>
+					<x> -20 </x>
+					<y> 3 </y>
+					<locus> &true; </locus>
+					<_daY> <copy src="sibling(justify_left_text)" trait="_daY2" /> </_daY>
+					<image name="filled_checkbox_c">
+						<visible> <copy src="parent()" trait="visible" /> </visible>
+						<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+						<filename> <copy src="parent()" trait="filename" /> </filename>
+						<texatlas> Interface\InterfaceShared.tai </texatlas>
+						<width> 26 </width>
+						<height> 26 </height>
+						<x>
+							<copy> -5 </copy>
+							<sub src="globals()" trait="_duiHUDOffset" />
+						</x>
+						<y>
+							<copy src="parent()" trait="_daY" />
+							<add> -3 </add> <!-- DarN CHECK -->
+						</y>
+						<brightness>
+							<copy> &uselocalcolor; </copy>
+							<add>
+								<copy> 255 </copy>
+								<onlyifnot src="io()" trait="_HUDOverrideColor" />
+							</add>
+						</brightness>
+						<red> <copy src="io()" trait="_HUDRed" /> </red>
+						<green> <copy src="io()" trait="_HUDGreen" /> </green>
+						<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+					</image>
+				</image>
+				
+			</template>
+			<template name="template_checkbox">
+				<image name="checkbox">
+					<visible> &false; </visible>
+					<alpha> 0 </alpha>
+					<filename> Interface\Shared\Marker\glow_square_small.dds </filename>
+					<texatlas> Interface\InterfaceShared.tai </texatlas>
+					<width> 16 </width>
+					<height> 16 </height>
+					<x> -20 </x>
+					<y> 3 </y>
+					<locus> &true; </locus>
+				</image>
+			</template>
+			<!--=========== Quest added =========================-->
+ 			<rect name="qa_wrap">
+				<x>
+					<copy src="io()" trait="_HUDQA_X" />
+					<sub src="globals()" trait="_duiHUDOffset" />
+				</x>
+				<y> <copy src="io()" trait="_HUDQA_Y" /> </y>
+				<locus> &true; </locus>
+				<visible> <copy src="io()" trait="_HUDShowQuestAdded" /> </visible>
+
+				<rect name="QuestAdded">
+					<id> &noglow_branch; </id>
+					<width> 100 </width>
+					<height> 150 </height>
+					<y> 80 </y>
+					<locus> &true; </locus>
+					<_isQARect> &true; </_isQARect>
+				</rect>
+			</rect>
+		</rect>
+	</rect>
+	<!--=========== Message =============================-->
+	<rect name="Msg_Wrap">
+		<x>
+			<copy src="globals()" trait="_duiHUDOffset" />
+			<add src="io()" trait="_HUDMsg_X" />
+		</x>
+		<y> <copy src="io()" trait="_HUDMsg_Y" /> </y>
+		<locus> &true; </locus>
+		<visible> <copy src="io()" trait="_HUDShowMessages" /> </visible>
+		<rect name="Messages">
+			<id> &noglow_branch; </id>
+			<width> 460 </width> <!-- DarN 460 -->
+			<height> 45 </height> <!-- DarN 45 -->
+			<locus> &true; </locus>
+			<_isMsgRect> &true; </_isMsgRect>
+			
+		</rect>
+	</rect>
+
+	<!--============ Subtitle ===========================-->
+ 	<rect name="ST_Wrap">
+		<x>
+			<copy src="globals()" trait="_duiHUDOffset" />
+			<add src="io()" trait="_HUDSubtitles_X" />
+		</x>
+		<y> <copy src="io()" trait="_HUDSubtitles_Y" /> </y>
+		<locus> &true; </locus>
+		<visible> <copy src="io()" trait="_HUDShowSubtitles" /> </visible>
+		<rect name="Subtitles">
+			<id> &noglow_branch; </id>
+			<width> 800 </width>
+			<height> 110 </height>
+			<_isSTRect> &true; </_isSTRect>
+		</rect>
+
+	</rect>
+
+	<!--============ Info ===============================-->
+	<rect name="InfoWrap">
+		<x>
+			<copy src="globals()" trait="_duiHUDOffset" />
+			<add src="io()" trait="_HUDInfo_X" />
+		</x>
+		<y> <copy src="io()" trait="_HUDInfo_Y" /> </y>
+		<locus> &true; </locus>
+		<visible> <copy src="io()" trait="_HUDShowInfo" /> </visible>
+
+		<rect name="Info">
+			<id> &noglow_branch; </id>
+			<_isInfoRect> &true; </_isInfoRect>
+			<width>
+				<copy> 320 </copy>
+				<mul src="io()" trait="_duiscale_70" /> <!-- DarN _duiscale_60 -->
+			</width>
+			<height>
+				<copy> 80 </copy>
+				<mul src="io()" trait="_duiscale_70" /> <!-- DarN _duiscale_60 -->
+			</height>
+
+			<rect name="justify_center_hotrect">
+				<include src="darn\text_box_hud.xml" />
+
+				<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+				<justify> &center; </justify>
+				<_glow> &true; </_glow>
+				<visible> &false; </visible>
+				
+				<_y> -50 </_y>
+				<user0> -50 </user0> <!-- DarN y -->
+				<x>
+					<copy src="me()" trait="_x" />
+					<sub src="globals()" trait="_duiHUDOffset" />
+					<sub>
+						<copy src="child(button_text)" trait="width" />
+						<div> 2 </div>
+					</sub>
+					<add>
+						<copy src="child(PCShortcutLabel)" trait="width" />
+						<div> 2 </div>
+						<onlyif src="child(PCShortcutLabel)" trait="visible" />
+					</add>
+					<add>
+						<copy src="child(xbox_button)" trait="width" />
+						<mul src="io()" trait="_duiscale_70" />
+						<div> 2 </div>
+						<sub> 8 </sub>
+						<onlyif src="child(xbox_button)" trait="visible" />
+					</add>
+				</x>
+
+				<_verbuf> 10 </_verbuf>
+				<_line_alpha> 255 </_line_alpha>
+				<_xbox_button> &xbuttona; </_xbox_button>
+				<_PCButtonText></_PCButtonText>
+				<_button_placement> &left; </_button_placement>
+			</rect>
+		</rect>
+	</rect>
+
+	<!--=========== Hotkeys =============================-->
+	<rect name="LocWrap">
+		<x> <copy src="io()" trait="_HUDHotKeys_X" /> </x>
+		<y> <copy src="io()" trait="_HUDHotKeys_Y" /> </y>
+		<locus> &true; </locus>
+
+		<rect name="Hokeys">
+			<id> &noglow_branch; </id>
+			<systemcolor> &hudmain; </systemcolor>
+			<width> 300 </width>
+			<height> 300 </height>
+		</rect>
+	</rect>
+	<!--========= Region and Location text ==============-->
+	<rect name="LocWrap">
+		 <x>
+			<copy src="globals()" trait="_duiHUDOffset" />
+			<add src="io()" trait="_HUDLoc_X" />
+		</x>
+		<y> <copy src="io()" trait="_HUDLoc_Y" /> </y>
+		<locus> &true; </locus>
+		<visible> <copy src="io()" trait="_HUDShowLoc" /> </visible>
+
+		<rect name="Region_Location">
+			<id> &noglow_branch; </id>
+			<width> 100 </width>
+			<height> 100 </height>
+			<locus> &true; </locus>
+			<_isLocation> &true; </_isLocation>
+		</rect>
+	</rect>
+	<!--========= XP Meter =============================-->
+	<rect name="XPWrap">
+		<x>
+			<copy src="io()" trait="_HUDXP_X" />
+			<add>
+				<copy src="screen()" trait="width" />
+				<sub src="child(XPMeter)" trait="x" />
+				<sub>
+					<copy> 382 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</sub>
+			</add>
+		</x>
+		<y> <copy src="io()" trait="_HUDXP_Y" /> </y>
+		<locus> &true; </locus>
+		<visible>
+			<copy src="io()" trait="_HUDShowXP" />
+			<and> <not src="io()" trait="_xXP" /> </and>
+			<and> <not src="child(XPMeter)" trait="_lvlUpVisible" /> </and>
+			<or>
+				<copy src="io()" trait="_HUDShowXP" />
+				<!-- <and src="io()" trait="_xXP" /> -->
+				<and src="child(XPMeter)" trait="_lvlUpVisible" />
+			</or>
+		</visible>
+
+		<rect name="XPMeter">
+			<depth> 10000 </depth>
+			<locus> &true; </locus>
+			<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+			<_lvlUpVisible>
+				<copy src="child(XPLevelUp)" trait="visible" />
+				<and>
+					<copy src="child(XPLevelUp)" trait="alpha" />
+					<gt> 0 </gt>
+				</and>
+			</_lvlUpVisible>
+			<image name="XPBracket">
+				<filename> Interface\HUD\glow_XP_bar_over.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<width>
+					<copy> 512 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</width>
+				<height>
+					<copy> 256 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</height>
+				<visible> &false; </visible>
+				<alpha> 0 </alpha>
+				<!-- <brightness> <copy src="parent()" trait="brightness" /> </brightness> -->
+				<brightness> 255 </brightness>
+				<red> <copy src="parent()" trait="red" /> </red>
+				<green> <copy src="parent()" trait="green" /> </green>
+				<blue> <copy src="parent()" trait="blue" /> </blue>
+			</image>
+			<image name="XPPointer">
+				<!-- <filename> Interface\HUD\glow_XP_bar_pointer.dds </filename> -->
+				<filename> empty.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<width> 64 </width>
+				<height> 64 </height>
+				<_x_min> 55 </_x_min>
+				<_x_max> 270 </_x_max>
+				<x> 65 </x>
+				<y> 0 </y>
+				<visible> &false; </visible>
+			</image>
+			<image name="XPPointer_Clone">
+				<filename> Interface\HUD\glow_XP_bar_pointer.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<width>
+					<copy> 64 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</width>
+				<height>
+					<copy> 64 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</height>
+				<x>
+					<copy src="sibling(XPPointer)" trait="x" />
+					<mul src="io()" trait="_duiscale" />
+				</x>
+				<visible> <copy src="sibling(XPPointer)" trait="visible" /> </visible>
+				<alpha> <copy src="sibling(XPPointer)" trait="alpha" /> </alpha>
+				<systemcolor> <copy src="parent()" trait="systemcolor" /> </systemcolor>
+				<brightness> <copy src="parent()" trait="brightness" /> </brightness>
+				<red> <copy src="parent()" trait="red" /> </red>
+				<green> <copy src="parent()" trait="green" /> </green>
+				<blue> <copy src="parent()" trait="blue" /> </blue>
+			</image>
+			<text name="XPAmount">
+				<x>
+					<!-- <copy> 315 </copy>
+					<mul src="io()" trait="_duiscale" /> -->
+					<copy src="sibling(XPLabel)" trait="x" />
+					<sub src="sibling(XPLabel)" trait="width" />
+					<sub> 2 </sub>
+				</x>
+				<y>
+					<copy> 90 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</y>
+				<font> <copy src="io()" trait="_HUDMeterFont" /> </font> <!-- DarN 8 -->
+				<justify> &right; </justify>
+				<visible> &false; </visible>
+				<brightness> <copy src="parent()" trait="brightness" /> </brightness>
+				<red> <copy src="parent()" trait="red" /> </red>
+				<green> <copy src="parent()" trait="green" /> </green>
+				<blue> <copy src="parent()" trait="blue" /> </blue>
+			</text>
+			<text name="XPLabel">
+				<x>
+					<copy> 350 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</x>
+				<y> <copy src="sibling(XPAmount)" trait="y" /> </y>
+				<font> 7 </font> <!-- DarN 7 -->
+				<justify> &right; </justify>
+				<string> &-sStatsXP; </string>
+				<visible> &false; </visible>
+				<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+				<brightness> <copy src="parent()" trait="brightness" /> </brightness>
+				<red> <copy src="parent()" trait="red" /> </red>
+				<green> <copy src="parent()" trait="green" /> </green>
+				<blue> <copy src="parent()" trait="blue" /> </blue>
+			</text>
+			<text name="XPLastLevel">
+				<x>
+					<copy> 70 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</x>
+				<y>
+					<copy> 30 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</y>
+				<justify> &right; </justify>
+				<visible> &false; </visible>
+				<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+				<brightness> <copy src="parent()" trait="brightness" /> </brightness>
+				<red> <copy src="parent()" trait="red" /> </red>
+				<green> <copy src="parent()" trait="green" /> </green>
+				<blue> <copy src="parent()" trait="blue" /> </blue>
+			</text>
+			<text name="XPNextLevel">
+				<x>
+					<copy> 315 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</x>
+				<y> <copy src="sibling(XPLastLevel)" trait="y" /> </y>
+				<visible> &false; </visible>
+				<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+				<brightness> <copy src="parent()" trait="brightness" /> </brightness>
+				<red> <copy src="parent()" trait="red" /> </red>
+				<green> <copy src="parent()" trait="green" /> </green>
+				<blue> <copy src="parent()" trait="blue" /> </blue>
+			</text>
+			<text name="XPLevelUp">
+				<justify> &right; </justify>
+				<font> 8 </font>
+				<visible> &false; </visible>
+				<x> <!-- DarN 360 -->
+					<copy> 360 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</x>
+				<y> 70 </y>
+				<string> &-sLevelUp; </string>
+				<brightness> <copy src="parent()" trait="brightness" /> </brightness>
+				<red> <copy src="parent()" trait="red" /> </red>
+				<green> <copy src="parent()" trait="green" /> </green>
+				<blue> <copy src="parent()" trait="blue" /> </blue>
+			</text>
+		</rect>
+	</rect>
+	<!--========== Radiation Meter =======================-->
+	<rect name="RadWrap">
+		<locus> &true; </locus>
+		<x>
+			<copy> 50 </copy>
+			<add src="io()" trait="_HUDRad_X" />
+		</x>
+		<y>
+			<copy> -37 </copy> <!-- DarN CHECK -->
+			<add src="io()" trait="_HUDRad_Y" />
+		</y>
+		<visible>
+			<copy src="io()" trait="_HUDShowRadiation" />
+			<and> <not src="io()" trait="_xRad" /> </and>
+		</visible>
+
+		<rect name="RadiationMeter">
+			<locus> &true; </locus>
+			<systemcolor> &hudalt; </systemcolor>
+			<width>
+				<copy> 367 </copy>
+				<mul src="io()" trait="_duiscale" />
+			</width>
+			<height>
+				<copy> 60 </copy>
+				<mul src="io()" trait="_duiscale" />
+			</height>
+			<image name="radiation_bracket">
+				<depth> 10 </depth>
+				<filename> Interface\HUD\glow_messages_radiation_seperator_right.dds </filename>
+				<!-- <texatlas> Interface\InterfaceShared.tai </texatlas> -->
+				<width> <copy src="me()" trait="filewidth" /> </width>
+				<height> <copy src="me()" trait="fileheight" /> </height>
+				<zoom> <copy src="io()" trait="_duiHUDScale" /> </zoom>
+				<x>
+					<copy> -135 </copy> <!-- DarN needed for ptr to work -->
+					<mul src="io()" trait="_duiscale" />
+				</x>
+				<alpha> 0 </alpha>
+				<visible> &true; </visible>
+			</image>
+			<image name="radiation_pointer">
+				<filename> Interface\HUD\glow_messages_radiation_seperator_arrow.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<width> 46 </width>
+				<height> 24 </height>
+				<alpha> 0 </alpha>
+				<x> 15 </x>
+				<y> 25 </y>
+				<visible> &false; </visible> <!-- DarN true -->
+			</image>
+			<image name="radiation_ptr_clone">
+				<filename> Interface\HUD\glow_messages_radiation_seperator_arrow.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<width>
+					<copy> 46 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</width>
+				<height>
+					<copy> 24 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</height>
+				<x>
+					<copy src="sibling(radiation_pointer)" trait="x" />
+					<mul src="io()" trait="_duiscale" />
+				</x>
+				<y>
+					<copy src="sibling(radiation_pointer)" trait="y" />
+					<mul src="io()" trait="_duiscale" />
+				</y>
+				<alpha> <copy src="sibling(radiation_pointer)" trait="alpha" /> </alpha>
+			</image>
+
+			<text name="radiation_text_value">
+				<x> <!-- DarN 237 -->
+					<copy src="sibling(radiation_text)" trait="x" />
+					<sub src="sibling(radiation_text)" trait="width" />
+					<sub> 4 </sub>
+				</x>
+				<y>
+					<copy> 65 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</y>
+				<alpha> 0 </alpha>
+				<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+				<visible> &true; </visible>
+				<string></string>
+				<justify> &right; </justify>
+			</text>
+			<text name="radiation_text">
+				<x> <!-- DarN 245 -->
+					<copy src="parent()" trait="width" />
+					<sub> 15 </sub>
+				</x>
+				<y>
+					<copy> 65 </copy>
+					<mul src="io()" trait="_duiscale" />
+				</y>
+				<justify> &right; </justify>
+				<alpha> 0 </alpha>
+				<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+				<visible> &true; </visible>
+				<string></string>
+			</text>
+		</rect>
+	</rect>
+	<!--========= BREATH METER ==============================-->
+	<rect name="BMWrap">
+		<locus> &true; </locus>
+		<x> <copy src="io()" trait="_HUDBM_X" /> </x>
+		<y> <copy src="io()" trait="_HUDBM_Y" /> </y>
+		<visible> <copy src="io()" trait="_HUDShowBM" /> </visible>
+		<nif name="BreathMeter">
+			<filename> Interface\HUD\AirTimer01.NIF</filename>
+			<animation> Forward </animation>
+			<visible> &false; </visible>
+			<alpha> 0 </alpha>
+			<width> 64 </width>
+			<height> 64 </height>
+			<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		</nif>
+	</rect>
+	<!--========== Explosive indicator=======================-->
+	<rect name="Explosive_positioning_rect">
+		<locus> &true; </locus>
+	</rect>
+	<!--<text name="explosive_text">
+		<string> &-sExplosive; </string>
+		<font> 3 </font>.
+		<systemcolor> &hudalt; </systemcolor>
+		<justify> &center; </justify>
+		<alpha> 0 </alpha>
+	</text> -->
+	<!--========== Crippled Limb Indicator ==================-->
+	<rect name="CLIWrap">
+		<x> <copy src="io()" trait="_HUDCLI_X" /> </x>
+		<y> <copy src="io()" trait="_HUDCLI_Y" /> </y>
+		<locus> &true; </locus>
+		<visible> <copy src="io()" trait="_HUDShowCLI" /> </visible>
+
+		<rect name="crippled_limb_indicator">
+			<locus> &true; </locus>
+			<visible> &false; </visible>
+			
+			<image name="Head">
+				<brightness>
+					<copy src="io()" trait="_duiHUDBrightness" />
+					<add>
+						<copy> 255 </copy>
+						<onlyif>
+							<copy src="me()" trait="systemcolor" />
+							<eq> &hudalt; </eq>
+							<and>
+								<copy src="io()" trait="_duiHUDBrightness" />
+								<eq> &uselocalcolor; </eq>
+							</and>
+						</onlyif>
+					</add>
+				</brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				<filename> Interface\Stats\head.dds </filename>
+				<alpha> 0 </alpha>
+			</image>
+			<image name="Face">
+				<filename> Interface\Stats\face_00.dds </filename>
+				<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				<alpha> 0 </alpha>
+			</image>
+			<image name="Torso">
+				<filename> Interface\Stats\torso.dds </filename>
+				<brightness>
+					<copy src="io()" trait="_duiHUDBrightness" />
+					<add>
+						<copy> 255 </copy>
+						<onlyif>
+							<copy src="me()" trait="systemcolor" />
+							<eq> &hudalt; </eq>
+							<and>
+								<copy src="io()" trait="_duiHUDBrightness" />
+								<eq> &uselocalcolor; </eq>
+							</and>
+						</onlyif>
+					</add>
+				</brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				<alpha> 0 </alpha>
+			</image>
+			<image name="Left_Arm">
+				<filename> Interface\Stats\left_arm.dds </filename>
+				<brightness>
+					<copy src="io()" trait="_duiHUDBrightness" />
+					<add>
+						<copy> 255 </copy>
+						<onlyif>
+							<copy src="me()" trait="systemcolor" />
+							<eq> &hudalt; </eq>
+							<and>
+								<copy src="io()" trait="_duiHUDBrightness" />
+								<eq> &uselocalcolor; </eq>
+							</and>
+						</onlyif>
+					</add>
+				</brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				<alpha> 0 </alpha>
+			</image>
+			<image name="Right_Arm">
+				<filename> Interface\Stats\right_arm.dds </filename>
+				<brightness>
+					<copy src="io()" trait="_duiHUDBrightness" />
+					<add>
+						<copy> 255 </copy>
+						<onlyif>
+							<copy src="me()" trait="systemcolor" />
+							<eq> &hudalt; </eq>
+							<and>
+								<copy src="io()" trait="_duiHUDBrightness" />
+								<eq> &uselocalcolor; </eq>
+							</and>
+						</onlyif>
+					</add>
+				</brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				<alpha> 0 </alpha>
+			</image>
+			<image name="Left_Leg">
+				<filename> Interface\Stats\left_leg.dds </filename>
+				<brightness>
+					<copy src="io()" trait="_duiHUDBrightness" />
+					<add>
+						<copy> 255 </copy>
+						<onlyif>
+							<copy src="me()" trait="systemcolor" />
+							<eq> &hudalt; </eq>
+							<and>
+								<copy src="io()" trait="_duiHUDBrightness" />
+								<eq> &uselocalcolor; </eq>
+							</and>
+						</onlyif>
+					</add>
+				</brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				<alpha> 0 </alpha>
+			</image>
+			<image name="Right_Leg">
+				<filename> Interface\Stats\right_leg.dds </filename>
+				<brightness>
+					<copy src="io()" trait="_duiHUDBrightness" />
+					<add>
+						<copy> 255 </copy>
+						<onlyif>
+							<copy src="me()" trait="systemcolor" />
+							<eq> &hudalt; </eq>
+							<and>
+								<copy src="io()" trait="_duiHUDBrightness" />
+								<eq> &uselocalcolor; </eq>
+							</and>
+						</onlyif>
+					</add>
+				</brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				<alpha> 0 </alpha>
+			</image>
+		</rect>
+	</rect>
+
+	<!-- DarN FONV Additions from here on out -->
+
+	<image name="DDTIcon">
+		<locus> &true; </locus>
+		<filename> Interface\HUD\hud_icon_armor.dds </filename> <!-- Shield -->
+		<width> 32 </width>
+		<height> 32 </height>
+		<alpha> 255 </alpha>
+		<x></x>
+		<!-- these x and y are set in code because most of the HUD's parameters are also set there -->
+		<y></y>
+		<!-- and it makes it hard to do inheritance from the xml - jwr-oei-->
+		<zoom> &scale; </zoom>
+		<visible> &false; </visible>
+	</image>
+
+	<image name="DDTIconAP">
+		<locus> &true; </locus>
+		<filename> Interface\HUD\hud_icon_armor_ap.dds </filename> <!-- broken Shield -->
+		<width> 32 </width>
+		<height> 32 </height>
+		<alpha> 255 </alpha>
+		<x></x>
+		<!-- these x and y are set in code because most of the HUD's parameters are also set there -->
+		<y></y>
+		<!-- and it makes it hard to do inheritance from the xml - jwr-oei-->
+		<zoom> &scale; </zoom>
+		<visible> &false; </visible>
+	</image>
+
+	<image name="DDTIconEnemy">
+		<locus> &true; </locus>
+		<filename> Interface\HUD\hud_icon_armor.dds </filename>
+		<width> 32 </width>
+		<height> 32 </height>
+		<alpha> 255 </alpha>
+		<x></x>
+		<!-- these x and y are set in code because most of the HUD's parameters are also set there -->
+		<y></y>
+		<!-- and it makes it hard to do inheritance from the xml - jwr-oei-->
+		<zoom> &scale; </zoom>
+		<visible> &false; </visible>
+	</image>
+
+	<image name="DDTIconEnemyAP">
+		<locus> &true; </locus>
+		<filename> Interface\HUD\hud_icon_armor_ap.dds </filename>
+		<width> 32 </width>
+		<height> 32 </height>
+		<alpha> 255 </alpha>
+		<x></x>
+		<!-- these x and y are set in code because most of the HUD's parameters are also set there -->
+		<y></y>
+		<!-- and it makes it hard to do inheritance from the xml - jwr-oei-->
+		<zoom> &scale; </zoom>
+		<visible> &false; </visible>
+	</image>
+
+	<rect name="atlWrap">
+		<x> <copy src="globals()" trait="_duiHUDOffset" /> </x>
+		<locus> &true; </locus>
+		<text name="AmmoTypeLabel">
+			<x></x>
+			<y></y>
+			<font> 4 </font>
+			<justify> &right; </justify>
+			
+			<string></string>
+			<!-- Set it code! -->
+			<visible> &false; </visible>
+			<_str> <copy src="me()" trait="string" /> </_str> <!-- DarN use this to make sure string is set first -->
+		</text>
+	</rect>
+
+	<_ATLDisplaceX> <!-- DarN Translate coords from screen to DUI local -->
+		<copy src="AmmoTypeLabel" trait="x" />
+		<sub src="ActionPoints" trait="x" />
+		<add> -20 </add> <!-- DarN Fix overlap -->
+		<mul src="io()" trait="_duiscale_65" />
+		
+	</_ATLDisplaceX>
+	<_ATLDisplaceY>
+		<copy src="AmmoTypeLabel" trait="y" />
+		<sub src="ActionPoints" trait="y" />
+		<mul src="io()" trait="_duiscale_65" />
+	</_ATLDisplaceY>
+
+	<text name="AmmoTypeLabel_clone">
+		<x>
+			<copy src="AP_Wrap" trait="x" />
+			<sub src="globals()" trait="_duiHUDOffset" />
+			<add src="parent()" trait="_ATLDisplaceX" />
+		</x>
+		<y>
+			<copy src="AP_Wrap" trait="y" />
+			<add src="parent()" trait="_ATLDisplaceY" />
+		</y>
+		<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+		<justify> &center; </justify> <!-- DarN right -->
+		<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+		<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+		<string> <copy src="AmmoTypeLabel" trait="_str" /> </string>
+		<visible> <copy src="AmmoTypeLabel" trait="visible" /> </visible>
+	</text>
+
+	<!--- LOCALIZE THESE--->
+	<rect name="HCWrap">
+		<x> <copy src="globals()" trait="_duiHUDOffset" /> </x>
+		<y> 0 </y>
+		<locus> &true; </locus>
+		<_dehyd> <copy src="child(Dehydration)" trait="alpha" /> </_dehyd>
+		<_hunger> <copy src="child(Hunger)" trait="alpha" /> </_hunger>
+		<_sleep> <copy src="child(Sleep)" trait="alpha" /> </_sleep>
+		<_rads> <copy src="child(Rads)" trait="alpha" /> </_rads>
+		<_lmbs> <copy src="child(LMBs)" trait="alpha" /> </_lmbs>
+		<_hydrsyscolor> <copy src="child(Dehydration)" trait="systemcolor" /> </_hydrsyscolor>
+		<_hungsyscolor> <copy src="child(Hunger)" trait="systemcolor" /> </_hungsyscolor>
+		<_sleepsyscolor> <copy src="child(Sleep)" trait="systemcolor" /> </_sleepsyscolor>
+		<_radssyscolor> <copy src="child(Rads)" trait="systemcolor" /> </_radssyscolor>
+		<_lmbssyscolor> <copy src="child(LMBs)" trait="systemcolor" /> </_lmbssyscolor>
+
+		<rect name="HardcoreMode">
+			<width> 386 </width>
+			<height> 20 </height>
+			<alpha> 255 </alpha>
+			<x></x>
+			<y></y>
+			<text name="Dehydration">
+				<systemcolor> &hudmain; </systemcolor>
+				<zoom> &scale; </zoom>
+				<font> 6 </font>
+				<justify> &right; </justify>
+				<string> THR </string>
+				<alpha> 255 </alpha>
+				<!-- Set it code! -->
+				<visible> &true; </visible>
+			</text>
+			<text name="Hunger">
+				<systemcolor> &hudmain; </systemcolor>
+				<zoom> &scale; </zoom>
+				<font> 6 </font>
+				<justify> &right; </justify>
+				<string> HUN </string>
+				<alpha> 255 </alpha>
+				<!-- Set it code!  --->
+				<visible> &true; </visible>
+			</text>
+			<text name="Sleep">
+				<systemcolor> &hudmain; </systemcolor>
+				<zoom> &scale; </zoom>
+				<font> 6 </font>
+				<justify> &right; </justify>
+				<string> SLP </string>
+				<!-- Set it code!   --->
+				<alpha> 255 </alpha>
+				<visible> &true; </visible>
+			</text>
+			<text name="Rads">
+				<systemcolor> &hudmain; </systemcolor>
+				<zoom> &scale; </zoom>
+				<font> 6 </font>
+				<justify> &right; </justify>
+				<string> RAD </string>
+				<!-- Set it code!   --->
+				<alpha> 255 </alpha>
+				<visible> &true; </visible>
+			</text>
+			<text name="LMBs">
+				<systemcolor> &hudmain; </systemcolor>
+				<zoom> &scale; </zoom>
+				<font> 6 </font>
+				<justify> &right; </justify>
+				<string> LMB </string>
+				<!-- Set it code!   --->
+				<alpha> 255 </alpha>
+				<visible> &true; </visible>
+			</text>
+		</rect>
+	</rect>
+
+	<rect name="DUIHCMode">
+		<x>
+			<copy src="io()" trait="_HUDHPInfo_X" />
+			<add> 10 </add>
+			<!-- <add>
+				<copy> 100 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</add> -->
+		</x>
+		<y>
+			<!-- <copy src="screen()" trait="height" />
+			<add src="io()" trait="_HUDHPInfo_Y" />
+			<sub>
+				<copy> 127 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</sub> -->
+			<copy src="screen()" trait="height" />
+			<add src="io()" trait="_HUDHPInfo_Y" />
+			<sub>
+				<copy> 160 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</sub>
+		</y>
+		<height> 20 </height>
+		<locus> &true; </locus>
+
+		<_dehyd2> <copy src="sibling(HCWrap)" trait="_dehyd" /> </_dehyd2>
+		<_hunger2> <copy src="sibling(HCWrap)" trait="_hunger" /> </_hunger2>
+		<_sleep2> <copy src="sibling(HCWrap)" trait="_sleep" /> </_sleep2>
+		<_rads2> <copy src="sibling(HCWrap)" trait="_rads" /> </_rads2>
+		<_lmbs2> <copy src="sibling(HCWrap)" trait="_lmbs" /> </_lmbs2>
+		<_hydrsyscolor> <copy src="sibling(HCWrap)" trait="_hydrsyscolor" /> </_hydrsyscolor>
+		<_hungsyscolor> <copy src="sibling(HCWrap)" trait="_hungsyscolor" /> </_hungsyscolor>
+		<_sleepsyscolor> <copy src="sibling(HCWrap)" trait="_sleepsyscolor" /> </_sleepsyscolor>
+		<_radssyscolor> <copy src="sibling(HCWrap)" trait="_radssyscolor" /> </_radssyscolor>
+		<_lmbssyscolor> <copy src="sibling(HCWrap)" trait="_lmbssyscolor" /> </_lmbssyscolor>
+		
+
+		<text name="spacer">
+			<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+			<string> </string>
+			<visible> &false; </visible>
+		</text>
+		<text name="DUIDehydration">
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDSysColor" />
+				<onlyif>
+					<copy src="parent()" trait="_hydrsyscolor" />
+					<neq> &hudalt; </neq>
+				</onlyif>
+				<add>
+					<copy src="parent()" trait="_hydrsyscolor" />
+					<onlyif>
+						<copy src="parent()" trait="_hydrsyscolor" />
+						<eq> &hudalt; </eq>
+					</onlyif>
+				</add>
+			</systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+			<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+			<string> THR </string>
+			<alpha> <copy src="parent()" trait="_dehyd2" /> </alpha>
+			<visible> <copy src="io()" trait="_HUDMode" /> </visible>
+		</text>
+		<text name="DUIHunger">
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDSysColor" />
+				<onlyif>
+					<copy src="parent()" trait="_hungsyscolor" />
+					<neq> &hudalt; </neq>
+				</onlyif>
+				<add>
+					<copy src="parent()" trait="_hungsyscolor" />
+					<onlyif>
+						<copy src="parent()" trait="_hungsyscolor" />
+						<eq> &hudalt; </eq>
+					</onlyif>
+				</add>
+			</systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+			<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+			<string> HUN </string>
+			<alpha> <copy src="parent()" trait="_hunger2" /> </alpha>
+			<x>
+				<copy src="sibling(DUIDehydration)" trait="x" />
+				<add src="sibling(DUIDehydration)" trait="width" />
+				<add src="sibling(spacer)" trait="width" />
+			</x>
+			<visible> <copy src="io()" trait="_HUDMode" /> </visible>
+		</text>
+		<text name="DUISleep">
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDSysColor" />
+				<onlyif>
+					<copy src="parent()" trait="_sleepsyscolor" />
+					<neq> &hudalt; </neq>
+				</onlyif>
+				<add>
+					<copy src="parent()" trait="_sleepsyscolor" />
+					<onlyif>
+						<copy src="parent()" trait="_sleepsyscolor" />
+						<eq> &hudalt; </eq>
+					</onlyif>
+				</add>
+			</systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+			<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+			<string> SLP </string>
+			<x>
+				<copy src="sibling(DUIHunger)" trait="x" />
+				<add src="sibling(DUIHunger)" trait="width" />
+				<add src="sibling(spacer)" trait="width" />
+			</x>
+			<alpha> <copy src="parent()" trait="_sleep2" /> </alpha>
+			<visible> <copy src="io()" trait="_HUDMode" /> </visible>
+		</text>
+		<text name="DUIRads">
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDSysColor" />
+				<onlyif>
+					<copy src="parent()" trait="_radssyscolor" />
+					<neq> &hudalt; </neq>
+				</onlyif>
+				<add>
+					<copy src="parent()" trait="_radssyscolor" />
+					<onlyif>
+						<copy src="parent()" trait="_radssyscolor" />
+						<eq> &hudalt; </eq>
+					</onlyif>
+				</add>
+			</systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+			<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+			<string> RAD </string>
+			<x>
+				<copy src="sibling(DUISleep)" trait="x" />
+				<add src="sibling(DUISleep)" trait="width" />
+				<add src="sibling(spacer)" trait="width" />
+			</x>
+			<alpha> <copy src="parent()" trait="_rads2" /> </alpha>
+			<visible> <copy src="io()" trait="_HUDMode" /> </visible>
+		</text>
+		<text name="DUILMBs">
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDSysColor" />
+				<onlyif>
+					<copy src="parent()" trait="_lmbssyscolor" />
+					<neq> &hudalt; </neq>
+				</onlyif>
+				<add>
+					<copy src="parent()" trait="_lmbssyscolor" />
+					<onlyif>
+						<copy src="parent()" trait="_lmbssyscolor" />
+						<eq> &hudalt; </eq>
+					</onlyif>
+				</add>
+			</systemcolor>
+			
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+			<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+			<string> LMB </string>
+			<x>
+				<copy src="sibling(DUIRads)" trait="x" />
+				<add src="sibling(DUIRads)" trait="width" />
+				<add src="sibling(spacer)" trait="width" />
+			</x>
+			<alpha> <copy src="parent()" trait="_lmbs2" /> </alpha>
+			<visible> <copy src="io()" trait="_HUDMode" /> </visible>
+		</text>
+	</rect>
+
+
+	<!-- Interface\HUD\hud_icon_armor_ap.dds < -->
+	<rect name="CNDArrowsWrap">
+		<x> <copy src="globals()" trait="_duiHUDOffset" /> </x>
+		<y> 0 </y>
+		<locus> &true; </locus>
+
+		<image name="CNDArrows">
+			<id></id>
+			<depth> 10 </depth>
+			<systemcolor></systemcolor>
+			<locus> &true; </locus>
+			<filename> interface\shared\arrow\repair_meter_pips.dds </filename> 
+			<!-- <filename> Interface\HUD\hud_icon_armor_ap.dds </filename> -->
+			<width> 16 </width>
+			<height> 16 </height>
+			<alpha> 255 </alpha>
+			<!-- these x and y are set in code because the arrows can show up in various places. -->
+			<x></x>
+			<y></y>
+			<zoom> &scale; </zoom>
+			<visible> &true; </visible>
+		</image>
+	</rect>
+	
+	<image name="CNDArrowsClone">
+		<depth> 11 </depth>
+		<_diffX> <!-- DarN Translate coords from screen to DUI local -->
+			<copy src="CNDArrows" trait="x" />
+			<sub src="ActionPoints" trait="x" />
+			<mul src="io()" trait="_duiscale_65" />
+		</_diffX>
+		<_diffY>
+			<copy src="CNDArrows" trait="y" />
+			<sub src="ActionPoints" trait="y" />
+			<mul src="io()" trait="_duiscale_65" />
+		</_diffY>
+		<locus> &false; </locus>
+		<filename> interface\shared\arrow\repair_meter_pips.dds </filename>
+		<width> 16 </width>
+		<height>
+			<copy> 20 </copy>
+			<mul src="io()" trait="_duiscale_65" />
+		</height>
+		<alpha> 255 </alpha>
+		<x>
+			<copy src="AP_Wrap" trait="x" />
+			<sub src="globals()" trait="_duiHUDOffset" />
+			<add src="me()" trait="_diffX" />
+			<onlyif src="io()" trait="_HUDShowAPInfo" />
+		</x>
+		<y>
+			<copy src="AP_Wrap" trait="y" />
+			<add src="me()" trait="_diffY" />
+		</y>
+		<zoom> &scale; </zoom>
+		<visible> <copy src="CNDArrows" trait="visible" /> </visible>
+	</image>
+</menu>

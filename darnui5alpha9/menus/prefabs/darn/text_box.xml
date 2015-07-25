@@ -1,0 +1,371 @@
+<!--
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			text_box.xml
+// VERSION		2.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			November 1, 2006
+// INFO			A GUI element that shows a text string, with an optional surrounding box that appears upon mouseover and an optional button image.
+//					In version 2.0, text_box was corrected to justify properly.
+-->
+
+<!-- hotrect name="selected_box" -->
+
+<!-- USER TRAITS: May be optionally overridden -->
+	<!-- Visibility of the enclosing box; default behavior is to show the box when moused over -->
+	<_box_visible> <copy src="me()" trait="mouseover" /> </_box_visible>
+
+	<!-- Usage: Define a fixed width for the text box here or leave as 0 and set _horbuf and _verbuf
+		to specify how much buffer space around the text to leave when drawing the box.-->
+	<_fixedwidth> 0 </_fixedwidth>
+
+	<_horbuf> 10 </_horbuf>
+	<_verbuf> 10 </_verbuf>
+
+<!-- Alpha of the text and enclosing box; set to 255 when targeted, 128 otherwise -->
+	<_line_alpha>
+		<copy> 128 </copy>
+		<add>
+			<copy> 127 </copy>
+			<onlyif src="me()" trait="target" />
+		</add>
+	</_line_alpha>
+
+	<!-- for using baked in glow font and art -->
+	<_glow> &false; </_glow>
+
+	<!-- If true, text box brightness is inherited by text and button icon. -->
+	<_InheritBrightness> &true; </_InheritBrightness>
+
+	<!-- Presence / placement of XBox button image-->
+	<_xbox_button> 0 </_xbox_button>
+	<_button_placement> &right; </_button_placement>
+
+	<!-- #21186: _PCButtonText: used to specify the keyboard shortcut text -->
+	<_PCButtonText></_PCButtonText>
+
+	<!-- Override for text y-position adjustment -->
+	<_text_y_adjust> 0 </_text_y_adjust>
+
+	<!-- Tile is x-shifted for justification -->
+	<_x> 0 </_x>
+	<_y> 0 </_y>
+	<x>
+		<copy src="me()" trait="_x" />
+
+		<!-- Move text box left by (width / 2) if center-justifed -->
+		<sub>
+			<copy src="me()" trait="width" />
+			<div> 2 </div>
+			<onlyif>
+				<copy src="me()" trait="justify" />
+				<eq> &center; </eq>
+			</onlyif>
+		</sub>
+
+		<!-- Move text box left by width if right-justifed -->
+		<sub>
+			<copy src="me()" trait="width" />
+			<onlyif>
+				<copy src="me()" trait="justify" />
+				<eq> &right; </eq>
+			</onlyif>
+		</sub>
+	</x>
+	<y> <copy src="me()" trait="_y" /> </y>
+
+	<_duiFullWidth>
+		<copy src="me()" trait="width" />
+		<add>
+			<add src="child(PCShortcutLabel)" trait="width" />
+			<add> 5 </add>
+			<onlyif src="child(PCShortcutLabel)" trait="visible" />
+		</add>
+	</_duiFullWidth>
+	<!-- Width == text width + horiz. buffer OR _fixedwidth if _fixedwidth != 0 -->
+	<width>
+		<copy src="child(button_text)" trait="width" />
+		<add src="me()" trait="_horbuf" />
+		<onlyif>
+			<copy src="me()" trait="_fixedwidth" />
+			<eq> 0 </eq>
+		</onlyif>
+		<add src="me()" trait="_fixedwidth" />
+	</width>
+	<height>
+		<copy src="child(button_text)" trait="height" />
+		<add src="me()" trait="_verbuf" />
+	</height>
+
+	<!-- Usage: Override these as needed underneath your inclusion of this prefab. -->
+	<string> Button Text </string>
+	<justify> &left; </justify>
+	
+	<target> &true; </target>
+	<font> 0 </font>
+
+	<!-- END USER TRAITS -->
+
+	<locus> &true; </locus>
+	<alpha> 0 </alpha>
+	<brightness> 255 </brightness>
+	<mouseoversound> UIMenuFocus </mouseoversound>
+
+	<!-- Text within the text box-->
+	<text name="button_text">
+		<font>
+			<copy src="parent()" trait="font" />
+			<add>
+				<copy src="globals()" trait="_gl_ButtonFont" />
+				<!-- <onlyif>
+					<copy src="parent()" trait="font" />
+					<eq> 0 </eq>
+				</onlyif> -->
+				<onlyifnot src="parent()" trait="font" />
+			</add>
+		</font>
+
+		<string> <copy src="parent()" trait="string" /> </string>
+		<justify> <copy src="parent()" trait="justify" /> </justify>
+
+		<alpha> <copy src="parent()" trait="_line_alpha" /> </alpha>
+		<brightness>
+			<copy> 0 </copy>
+			<add>
+				<copy> 255 </copy>
+				<onlyifnot src="parent()" trait="_InheritBrightness" />
+			</add>
+			<add>
+				<copy src="parent()" trait="brightness" />
+				<onlyif src="parent()" trait="_InheritBrightness" />
+			</add>
+		</brightness>
+		<wrapwidth>
+			<copy src="parent()" trait="_fixedwidth" />
+			<sub src="parent()" trait="_horbuf" />
+			<onlyif>
+				<copy src="parent()" trait="_fixedwidth" />
+				<gt> 0 </gt>
+			</onlyif>
+		</wrapwidth>
+		<depth> 2 </depth>
+
+		<!-- Text has the same justification as the surrounding box -->
+		<x>
+			<copy src="sibling(box)" trait="x" />
+
+			<!-- Move to left of box if left-justified -->
+			<add>
+				<copy src="parent()" trait="_horbuf" />
+				<div> 2 </div>
+				<onlyif>
+					<copy src="parent()" trait="justify" />
+					<eq> &left; </eq>
+				</onlyif>
+			</add>
+
+			<!-- Move to center of box if center-justified -->
+			<add>
+				<copy src="parent()" trait="width" />
+				<div> 2 </div>
+				<onlyif>
+					<copy src="parent()" trait="justify" />
+					<eq> &center; </eq>
+				</onlyif>
+			</add>
+
+			<!-- Move to right of box if right-justified -->
+			<add>
+				<copy src="parent()" trait="width" />
+				<sub>
+					<copy src="parent()" trait="_horbuf" />
+					<div> 2 </div>
+				</sub>
+				<onlyif>
+					<copy src="parent()" trait="justify" />
+					<eq> &right; </eq>
+				</onlyif>
+			</add>
+
+			<!-- glow font's position is f'ed up -->
+			<!-- <sub>
+				<copy> 4 </copy>
+				<onlyif src="parent()" trait="_glow" />
+			</sub> -->
+		</x>
+		<y>
+			<copy src="sibling(box)" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+			<add>
+				<copy> 7 </copy>
+				<onlyif>
+					<copy src="me()" trait="font" />
+					<eq> 3 </eq>
+				</onlyif>
+				<!-- <add>
+					<copy> 3 </copy>
+					<onlyifnot src="parent()" trait="_glow" />
+				</add> -->
+				<add src="parent()" trait="_text_y_adjust" />
+			</add>
+		</y>
+	</text>
+
+	<!-- The surrounding box-->
+	<rect name="box">
+		<include src="box.xml" />
+		<visible><copy src="parent()" trait="_box_visible" /></visible>
+
+		<_line_alpha> <copy src="parent()" trait="_line_alpha" /> </_line_alpha>
+	</rect>
+
+	<!-- XBox button art: present if specified by _xbox_button trait -->
+	<image name="xbox_button">
+		<visible>
+			<copy src="globals()" trait="_Has360Controller" />
+			<and>
+				<copy src="parent()" trait="_xbox_button" />
+				<gt> 0 </gt>
+			</and>
+		</visible>
+		<filename>
+			<copy src="parent()" trait="_xbox_button" />
+			<sub> &default_accept; </sub>
+			<add> 1 </add>
+			<add>
+				<copy> 13 </copy>
+				<onlyif>
+					<copy src="parent()" trait="_glow" />
+					<eq> &true; </eq>
+				</onlyif>
+			</add>
+			<copy src="me()" trait="_filename_" />
+		</filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+
+		<width>
+			<copy> 75 </copy>
+			<mul> .7 </mul>
+		</width>
+		<height>
+			<copy> 75 </copy>
+			<mul> .7 </mul>
+		</height>
+
+		<alpha> <copy src="parent()" trait="_line_alpha" /> </alpha>
+		<brightness>
+			<copy> 0 </copy>
+			<add>
+				<copy> 255 </copy>
+				<onlyifnot src="parent()" trait="_InheritBrightness" />
+			</add>
+			<add>
+				<copy src="parent()" trait="brightness" />
+				<onlyif src="parent()" trait="_InheritBrightness" />
+			</add>
+		</brightness>
+
+		<!-- Image is x-shifted based on _button_placement -->
+		<x>
+			<copy src="sibling(box)" trait="x" />
+
+			<add>
+				<copy src="sibling(box)" trait="width" />
+				<sub> 17 </sub>
+				<onlyif>
+					<copy src="parent()" trait="_button_placement" />
+					<eq> &right; </eq>
+				</onlyif>
+			</add>
+
+			<sub>
+				<copy src="me()" trait="width" />
+				<sub> 10 </sub>
+				<onlyif>
+					<copy src="parent()" trait="_button_placement" />
+					<eq> &left; </eq>
+				</onlyif>
+			</sub>
+		</x>
+		<y>
+			<copy src="sibling(box)" trait="y" />
+			<add>
+				<copy src="sibling(box)" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+			</add>
+		</y>
+
+		<_filename_1> general_button_a.dds </_filename_1>
+		<_filename_2> general_button_b.dds </_filename_2>
+		<_filename_3> general_button_x.dds </_filename_3>
+		<_filename_4> general_button_y.dds </_filename_4>
+		<_filename_5> general_button_lt.dds </_filename_5>
+		<_filename_6> general_button_rt.dds </_filename_6>
+		<_filename_7> general_button_lb.dds </_filename_7>
+		<_filename_8> general_button_rb.dds </_filename_8>
+		<_filename_9> general_button_ls.dds </_filename_9>
+		<_filename_10> general_button_rs.dds </_filename_10>
+		<_filename_11> general_button_back.dds </_filename_11>
+		<_filename_12> general_button_l.dds </_filename_12>
+		<_filename_13> general_button_r.dds </_filename_13>
+		<_filename_14> glow_general_button_a.dds </_filename_14>
+		<_filename_15> glow_general_button_b.dds </_filename_15>
+		<_filename_16> glow_general_button_x.dds </_filename_16>
+		<_filename_17> glow_general_button_y.dds </_filename_17>
+		<_filename_18> glow_general_button_lt.dds </_filename_18>
+		<_filename_19> glow_general_button_rt.dds </_filename_19>
+		<_filename_20> glow_general_button_lb.dds </_filename_20>
+		<_filename_21> glow_general_button_rb.dds </_filename_21>
+		<_filename_22> glow_general_button_ls.dds </_filename_22>
+		<_filename_23> glow_general_button_rs.dds </_filename_23>
+		<_filename_24> glow_general_button_back.dds </_filename_24>
+		<_filename_25> glow_general_button_l.dds </_filename_25>
+		<_filename_26> glow_general_button_r.dds </_filename_26>
+  </image>
+
+	<text name="PCShortcutLabel">
+		<visible>
+			<not src="globals()" trait="_Has360Controller" />
+			<and src="parent()" trait="_PCButtonText" />
+		</visible>
+		<alpha> <copy src="parent()" trait="_line_alpha" /> </alpha>
+
+		<!-- Image is x-shifted based on _button_placement -->
+		<x>
+			<copy src="sibling(box)" trait="x" />
+
+			<add>
+				<copy src="sibling(box)" trait="width" />
+				<add> 5 </add>
+				<onlyif>
+					<copy src="parent()" trait="_button_placement" />
+					<eq> &right; </eq>
+				</onlyif>
+			</add>
+
+			<sub>
+				<copy src="me()" trait="width" />
+				<add> 5 </add>
+				<onlyif>
+					<copy src="parent()" trait="_button_placement" />
+					<eq> &left; </eq>
+				</onlyif>
+			</sub>
+		</x>
+		<y> <copy src="sibling(button_text)" trait="y" /> </y>
+		<font> <copy src="sibling(button_text)" trait="font" /> </font>
+		<string> <copy src="parent()" trait="_PCButtonText" /> </string>
+	</text>
+<!-- /hotrect -->

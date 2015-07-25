@@ -1,0 +1,129 @@
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			HotKeys.xml
+// VERSION		1.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			5-23-2007
+// INFO			A "wheel" of eight hot key elements.
+-->		
+<!--<rect name="HK_MainRect">-->
+	<locus> &true; </locus>
+	<width> 400 </width>
+	<height> 400 </height>
+	
+	<_SelectedHotkey></_SelectedHotkey>
+	<_SelectedText></_SelectedText>
+  
+	<rect name="HK_Item_0">
+		<include src="darn\HotKey.xml"/>
+		<_HotKeyNumber> 0 </_HotKeyNumber>
+	</rect>
+
+	<!-- <rect name="HK_Item_1">
+		<include src="darn\HotKey.xml"/>
+		<_HotKeyNumber> 1 </_HotKeyNumber> -->
+		<image name="IM_AmmoSwap">
+			<filename>interface\icons\typeicons\hot_keys_icon_ammoswap.dds</filename>
+			<!-- Set in code -->
+			<zoom> &scale; </zoom>
+			<width> 50 </width>
+			<height> 50 </height>
+			<x>
+				<copy src="parent()" trait="width"/>
+				<sub src="me()" trait="width"/>
+				<div> 2 </div>
+			</x>
+		</image>
+		<!-- <x>
+			<copy src="parent()" trait="width"/>
+			<sub src="me()" trait="width"/>
+			<div> 2 </div>
+		</x>
+	</rect> -->
+	
+	<rect name="HK_Item_2">
+		<include src="darn\HotKey.xml"/>
+		<_HotKeyNumber> 2 </_HotKeyNumber>
+		
+		<x>
+			<copy src="parent()" trait="width"/>
+			<sub src="me()" trait="width"/>
+		</x>
+	</rect>
+
+	<rect name="HK_Item_3">
+		<include src="darn\HotKey.xml"/>
+		<_HotKeyNumber> 3 </_HotKeyNumber>
+		
+		<y>
+			<copy src="parent()" trait="height"/>
+			<sub src="me()" trait="height"/>
+			<div> 2 </div>
+		</y>
+	</rect>
+
+	<rect name="HK_Item_4">
+		<include src="darn\HotKey.xml"/>
+		<_HotKeyNumber> 4 </_HotKeyNumber>
+		
+		<x>
+			<copy src="parent()" trait="width"/>
+			<sub src="me()" trait="width"/>
+		</x>
+		<y>
+			<copy src="parent()" trait="height"/>
+			<sub src="me()" trait="height"/>
+			<div> 2 </div>
+		</y>
+	</rect>
+	
+	<rect name="HK_Item_5">
+		<include src="darn\HotKey.xml"/>
+		<_HotKeyNumber> 5 </_HotKeyNumber>
+		
+		<y>
+			<copy src="parent()" trait="height"/>
+			<sub src="me()" trait="height"/>
+		</y>
+	</rect>
+	
+	<rect name="HK_Item_6">
+		<include src="darn\HotKey.xml"/>
+		<_HotKeyNumber> 6 </_HotKeyNumber>
+		
+		<x>
+			<copy src="parent()" trait="width"/>
+			<sub src="me()" trait="width"/>
+			<div> 2 </div>
+		</x>
+		<y>
+			<copy src="parent()" trait="height"/>
+			<sub src="me()" trait="height"/>
+		</y>
+	</rect>
+	
+	<rect name="HK_Item_7">
+		<include src="darn\HotKey.xml"/>
+		<_HotKeyNumber> 7 </_HotKeyNumber>
+		
+		<x>
+			<copy src="parent()" trait="width"/>
+			<sub src="me()" trait="width"/>
+		</x>
+		<y>
+			<copy src="parent()" trait="height"/>
+			<sub src="me()" trait="height"/>
+		</y>
+	</rect>
+<!--</rect>-->

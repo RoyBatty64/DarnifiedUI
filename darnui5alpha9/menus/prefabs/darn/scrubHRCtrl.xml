@@ -1,0 +1,322 @@
+﻿<!-- <hotrect name="HighResScrub">
+	DarN: Scrub Ctrl with FP precision
+-->
+	<locus> &true; </locus>
+	<clicksound> UIMenuPrevNext </clicksound>
+	<mouseoversound> UIMenuFocus </mouseoversound>
+	<xdefault> 0 </xdefault>
+	<xleft> <ref src="child(leftArrow)" trait="clicked" /> </xleft>
+	<xright> <ref src="child(rightArrow)" trait="clicked" /> </xright>
+	<repeathorizontal> &true; </repeathorizontal>
+
+	<_Step> .1 </_Step> <!-- Default increment -->
+	<width> 200 </width>
+	<height>
+		<copy src="child(ItemText)" trait="height" />
+		<add src="me()" trait="_verbuf" />
+	</height>
+
+	<_horbuf> 10 </_horbuf>
+	<_verbuf> 10 </_verbuf>
+
+	<wheelable> &true; </wheelable>
+	<draggable> &true; </draggable>
+
+	<user1> <!-- minimum range value -->
+		<copy src="me()" trait="user2" />
+		<sub>
+			<copy src="me()" trait="_Max" />
+			<sub src="me()" trait="_Min" />
+		</sub>
+	</user1>
+	<user2> <!-- maximum range value -->
+		<copy src="me()" trait="_Max" />
+		<sub src="me()" trait="_Start" />
+	</user2>
+
+	<user3>
+		<copy src="me()" trait="_Step" />
+		<max> .1 </max>
+	</user3> <!-- step distance -->
+
+	<_State>
+		<copy src="child(marker)" trait="_value" />
+		<add src="me()" trait="_Start" />
+	</_State>
+
+	<_alpha>
+		<copy> 128 </copy>
+		<add>
+			<copy> 127 </copy>
+			<onlyif src="me()" trait="target" />
+		</add>
+	</_alpha>
+	<alpha>
+		<copy> 60 </copy> <!-- DarN 40 -->
+		<onlyif src="me()" trait="mouseover" />
+	</alpha>
+
+	<target> <copy src="me()" trait="_enabled" /> </target>
+
+	<_mouseover_any>
+		<copy src="me()" trait="mouseover" />
+		<add src="child(leftArrow)" trait="mouseover" />
+		<add src="child(lb_meter_hotrect)" trait="mouseover" />
+		<add src="child(rightArrow)" trait="mouseover" />
+	</_mouseover_any>
+
+	<brightness> 255 </brightness>
+
+	<text name="ItemText">
+		<font> 4 </font> <!-- DarN 7 -->
+		<string> <copy src="parent()" trait="_Caption" /> </string>
+		<alpha> <copy src="parent()" trait="_alpha" /> </alpha>
+
+		<x> 5 </x>
+		<y> <!-- DarN 13 -->
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+	</text>
+
+	<image name="leftArrow">
+		<id> &generic; </id>
+		<filename> Interface\Main\glow_main_arrow_left.dds </filename>
+		<alpha>
+			<copy> 128 </copy>
+			<add>
+				<copy> 127 </copy>
+				<onlyif src="me()" trait="mouseover" />
+			</add>
+		</alpha>
+		<target> <copy src="parent()" trait="target" /> </target>
+		<clicksound> UIMenuPrevNext </clicksound>
+		<mouseoversound> UIMenuFocus </mouseoversound>
+		<depth> 3 </depth>
+		<visible>
+			<copy src="parent()" trait="_mouseover_any" />
+			<and>
+				<copy src="parent()" trait="_Value" />
+				<gt src="parent()" trait="_Min" />
+			</and>
+		</visible>
+		<x>
+			<copy src="sibling(lb_meter_hotrect)" trait="x" />
+			<sub src="me()" trait="width" />
+		</x>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+		<width> 22 </width>
+		<height> 44 </height>
+		<zoom> &scale; </zoom>
+	</image>
+
+	<rect name="lb_meter_hotrect">
+		<locus> &true; </locus>
+		<depth> 3 </depth>
+		<_rightAlign> <not src="sibling(rightArrow)" trait="visible" /> </_rightAlign>
+
+		<x>
+			<copy src="parent()" trait="width" />
+			<sub>
+				<copy src="sibling(rightArrow)" trait="width" />
+				<add> 5 </add>
+				<onlyif src="sibling(rightArrow)" trait="visible" />
+			</sub>
+			<sub src="me()" trait="width" />
+			<sub>
+				<copy> 10 </copy>
+				<onlyifnot src="sibling(rightArrow)" trait="visible" />
+			</sub>
+		</x>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+		<text name="valueSizer">
+			<font> <copy src="sibling(ValueText)" trait="font" /> </font>
+			<string> +9999.9 </string>
+			<visible> &false; </visible>
+		</text>
+
+		<width> <copy src="child(valueSizer)" trait="width" /> </width>
+		<height> 18 </height> <!-- DarN 24 -->
+
+		<text name="ValueText">
+			<font> 4 </font> <!-- DarN 7 -->
+			<string>
+				<copy src="grandparent()" trait="_Value" />
+				<add>
+					<copy> .01 </copy>
+					<onlyifnot src="grandparent()" trait="_Value" /> <!-- DarN show zero -->
+				</add>
+			</string>
+
+			<alpha> <copy src="grandparent()" trait="_alpha" /> </alpha>
+
+			<x>
+				<copy src="sibling(ValueText_DOT)" trait="x" />
+				<sub src="me()" trait="width" />
+				<div>
+					<copy> 2 </copy>
+					<onlyifnot src="parent()" trait="_rightAlign" />
+				</div>
+			</x>
+			<y> <!-- DarN 13 -->
+				<copy src="parent()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+			</y>
+			<depth> 1 </depth>
+		</text>
+		<text name="ValueText_DOT">
+			<font> 4 </font> <!-- DarN 7 -->
+			<string> , </string>
+			<alpha> <copy src="grandparent()" trait="_alpha" /> </alpha>
+			<x>
+				<copy src="sibling(ValueText_DP)" trait="x" />
+				<sub src="me()" trait="width" />
+				<div>
+					<copy> 2 </copy>
+					<onlyifnot src="parent()" trait="_rightAlign" />
+				</div>
+			</x>
+			<y> <copy src="sibling(ValueText)" trait="y" /> </y>
+			<depth> 1 </depth>
+		</text>
+		<text name="ValueText_DP">
+			<font> 4 </font> <!-- DarN 7 -->
+			<string>
+				<!-- <copy> 0 </copy>
+				<add>
+					<copy> 6 </copy>
+					<onlyif>
+						<copy src="grandparent()" trait="_Value" />
+						<mod> 1 </mod>
+						<mul> 100 </mul>
+						<eq> 0 </eq>
+					</onlyif>
+				</add> -->
+				<copy src="grandparent()" trait="_Value" />
+				<div> 1 </div>
+				<mul> 10 </mul>
+				<max> 0 </max>
+				<min> 9 </min>
+				<add>
+					<copy> .01 </copy>
+					<!-- <onlyifnot src="grandparent()" trait="_Value" /> -->
+				</add>
+			</string>
+			<alpha> <copy src="grandparent()" trait="_alpha" /> </alpha>
+			<x>
+				<copy src="parent()" trait="width" />
+				<sub src="me()" trait="width" />
+				<div>
+					<copy> 2 </copy>
+					<onlyifnot src="parent()" trait="_rightAlign" />
+				</div>
+			</x>
+			<y> <copy src="sibling(ValueText)" trait="y" /> </y>
+			<depth> 1 </depth>
+		</text>
+	</rect>
+
+	<image name="rightArrow">
+		<id> &generic; </id>
+		<alpha>
+			<copy> 128 </copy>
+			<add>
+				<copy> 127 </copy>
+				<onlyif src="me()" trait="mouseover" />
+			</add>
+		</alpha>
+		<filename> Interface\Main\glow_main_arrow_right.dds </filename>
+		<target> <copy src="parent()" trait="target" /> </target>
+		<clicksound> UIMenuPrevNext </clicksound>
+		<mouseoversound> UIMenuFocus </mouseoversound>
+		<depth> 3 </depth>
+		<visible>
+			<copy src="parent()" trait="_mouseover_any" />
+			<and>
+				<copy src="parent()" trait="_Value" />
+				<lt src="parent()" trait="_Max" />
+			</and>
+		</visible>
+		<x>
+			<copy src="parent()" trait="width" />
+			<sub src="me()" trait="width" />
+			<sub> 5 </sub>
+		</x>
+		<y> <copy src="sibling(leftArrow)" trait="y" /> </y>
+		<width> <copy src="sibling(leftArrow)" trait="width" /> </width>
+		<height> <copy src="sibling(leftArrow)" trait="height" /> </height>
+		<zoom> &scale; </zoom>
+	</image>
+	<rect name="marker">
+		<visible> &false; </visible>
+		<_reset> <copy src="resetBtn" trait="_State" /> </_reset>
+		<_value>
+			<!-- copy old value -->
+			<sub>
+				<copy src="sibling(leftArrow)" trait="clicked" />
+				<mul src="parent()" trait="user3" />
+			</sub>
+			<add>
+				<copy src="sibling(rightArrow)" trait="clicked" />
+				<mul src="parent()" trait="user3" />
+			</add>
+			<add>
+				<copy src="parent()" trait="wheelmoved" />
+				<mul src="parent()" trait="user3" />
+			</add>
+			
+			<!-- <add>
+				<copy src="parent()" trait="dragdeltax" />
+				<mul src="parent()" trait="user3" />
+				<onlyifnot>
+					<copy src="parent()" trait="dragstartx" />
+					<lt> 0 </lt>
+				</onlyifnot>
+			</add> -->
+			<max>
+				<copy src="parent()" trait="user1" />
+				<!-- DarN a12: make sure _Min isn't added each menu open -->
+				<!-- <sub>
+					<copy src="parent()" trait="user1" />
+					<onlyif>
+						<copy src="parent()" trait="user1" />
+						<gt> 0 </gt>
+					</onlyif>
+				</sub> -->
+				<!-- DarN fun reset/undo code... -->
+				<!-- <add>
+					<copy src="parent()" trait="_Start" />
+					<add>
+						<copy src="parent()" trait="_Min" />
+						<add src="parent()" trait="_Start" />
+						<mul> -1 </mul>
+						<onlyif>
+							<copy src="parent()" trait="_Start" />
+							<lt> 0 </lt>
+						</onlyif>
+					</add>
+					<onlyif src="me()" trait="_reset" />
+				</add> -->
+			</max>
+			<min>
+				<copy src="parent()" trait="user2" />
+				<!-- DarN fun reset code... -->
+				<!-- <sub>
+					<copy src="parent()" trait="_Max" />
+					<sub src="parent()" trait="_Start" />
+					<onlyif src="me()" trait="_reset" />
+				</sub> -->
+			</min>
+		</_value>
+	</rect>
+<!-- </hotrect> -->

@@ -1,0 +1,1933 @@
+<template name="template_positioning_grid">
+	<image name="grid_point">
+		<visible> &true; </visible>
+		<width> 4 </width>
+		<height> 4 </height>
+	</image>
+</template>
+
+<!--<rect name="test_fonts">
+	<visible> &true; </visible>
+	<locus> &true; </locus>
+	<x> <copy src="screen()" trait="cropx" /> <mul> 2 </mul> </x>
+	<y> <copy src="screen()" trait="cropy" /> <mul> 2 </mul> </y>
+	<text name="font1">
+		<font> 1 </font>
+		<string>The quick brown fox jumps over the lazy dog.!?	THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.!?</string>
+	</text>
+	<text name="font2">
+		<font> 2 </font>
+		<string>The quick brown fox jumps over the lazy dog.!?	THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.!?</string>
+		<y> <copy src="font1" trait="y" /> <add src="font1" trait="height" /> <add> 5 </add> </y>
+	</text>
+	<text name="font3">
+		<font> 3 </font>
+		<string>The quick brown fox jumps over the lazy dog.!?	THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.!?</string>
+		<y> <copy src="font2" trait="y" /> <add src="font2" trait="height" /> <add> 5 </add> </y>
+	</text>
+	<text name="font4">
+		<font> 4 </font>
+		<string>The quick brown fox jumps over the lazy dog.!?	THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.!?</string>
+		<y> <copy src="font3" trait="y" /> <add src="font3" trait="height" /> <add> 5 </add> </y>
+	</text>
+	<text name="font5">
+		<font> 5 </font>
+		<string>The quick brown fox jumps over the lazy dog.!?	THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.!?</string>
+		<y> <copy src="font4" trait="y" /> <add src="font4" trait="height" /> <add> 5 </add> </y>
+	</text>
+	<text name="font6">
+		<font> 6 </font>
+		<string>The quick brown fox jumps over the lazy dog.!?	THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.!?</string>
+		<y> <copy src="font5" trait="y" /> <add src="font5" trait="height" /> <add> 5 </add> </y>
+	</text>
+	<text name="font7">
+		<font> 7 </font>
+		<string>The quick brown fox jumps over the lazy dog.!?	THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.!?</string>
+		<y> <copy src="font6" trait="y" /> <add src="font6" trait="height" /> <add> 5 </add> </y>
+	</text>
+	<text name="font8">
+		<font> 8 </font>
+		<string>The quick brown fox jumps over the lazy dog.!?	THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.!?</string>
+		<y> <copy src="font7" trait="y" /> <add src="font7" trait="height" /> <add> 5 </add> </y>
+	</text>
+</rect> -->
+
+<template name="template_justify_right_text">
+	<text name="justify_right_text">
+		<justify> &right; </justify>
+		<font> 7 </font>
+		<x> 0 </x>
+		<y> 0 </y>
+	</text>
+	<text name="darn_jrt_clone">
+		<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+		<alpha> <copy src="sibling(justify_right_text)" trait="alpha" /> </alpha>
+		<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+		<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+		<string> <copy src="sibling(justify_right_text)" trait="string" /> </string>
+		<visible>
+			<copy src="parent()" trait="_isAPRect" />
+			<or src="parent()" trait="_isHPRect" />
+			<and src="sibling(justify_right_text)" trait="visible" />
+		</visible>
+		<justify> &right; </justify>
+		<x>
+			<copy src="sibling(justify_right_text)" trait="x" />
+			<mul src="io()" trait="_duiscale_65" />
+			<onlyifnot src="parent()" trait="_isHPRect" />
+			<add> <!-- DarN original HP = 53 right of parent x -->
+				<copy> 30 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+				<add src="me()" trait="width" />
+				<onlyif src="parent()" trait="_isHPRect" />
+			</add>
+			<sub src="globals()" trait="_duiHUDOffset" />
+		</x>
+		<y>
+			<copy src="sibling(justify_right_text)" trait="y" />
+			<mul src="io()" trait="_duiscale_65" />
+			<add src="io()" trait="_HUDMeterTxtAdj" />
+		</y>
+	</text>
+	<text name="darn_jrt_info_clone"> <!-- DarN WG and VAL text -->
+		<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+		<systemcolor>
+			<copy src="io()" trait="_duiHUDSysColor" />
+			<onlyif>
+				<copy src="sibling(justify_right_text)" trait="systemcolor" />
+				<neq> &hudalt; </neq>
+			</onlyif>
+			<add>
+				<copy src="sibling(justify_right_text)" trait="systemcolor" />
+				<onlyif>
+					<copy src="sibling(justify_right_text)" trait="systemcolor" />
+					<eq> &hudalt; </eq>
+				</onlyif>
+			</add>
+		</systemcolor>
+		<!-- <brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness> -->
+		<brightness> 255 </brightness>
+		<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+		<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+		<string> <copy src="sibling(justify_right_text)" trait="string" /> </string>
+		<alpha> <copy src="sibling(justify_right_text)" trait="alpha" /> </alpha>
+		<visible>
+			<copy src="parent()" trait="_isInfoRect" />
+			<and src="sibling(justify_right_text)" trait="visible" />
+		</visible>
+		<justify> &right; </justify>
+		<x>
+			<copy src="sibling(justify_right_text)" trait="x" />
+			<sub src="globals()" trait="_duiHUDOffset" />
+			<add> 12 </add> <!-- DarN 12 - prevent overlap -->
+		</x>
+		<y>
+			<copy src="sibling(justify_right_text)" trait="y" />
+			<mul src="io()" trait="_duiscale_70" /> <!-- DarN _duiscale_60 -->
+		</y>
+	</text>
+</template>
+
+<template name="template_justify_left_text">
+	<rect name="justify_left_text">
+		<_isInfo> <copy src="parent()" trait="_isInfoRect" /> </_isInfo>
+		<_isQuest>
+			<copy src="grandparent()" trait="_isQRRect" />
+			<or src="parent()" trait="_isQSRect" />
+			<!-- <or src="parent()" trait="_isLocation" /> -->
+		</_isQuest>
+		<_cloneMe> <not src="parent()" trait="_isQARect" /> </_cloneMe>
+		<justify> &left; </justify>
+		<font> 7 </font>
+		<wrapwidth> 2048 </wrapwidth>
+		<alpha> 0 </alpha>
+		<visible> &false; </visible>
+		<_daY2> <copy src="child(replacementTextQuest)" trait="y" /> </_daY2>
+		<_msgTextWidth> <copy src="child(replacementTextL)" trait="width" /> </_msgTextWidth>
+		<_msgTextHeight> <copy src="child(replacementTextL)" trait="height" /> </_msgTextHeight>
+
+		<text name="actualText">
+            <x> <copy src="parent()" trait="x" /></x>
+            <y> <copy src="parent()" trait="y" /> </y>
+            <string> <copy src="parent()" trait="string"/> </string>
+            <font> <copy src="parent()" trait="font" /></font>
+            <wrapwidth> <copy src="parent()" trait="wrapwidth" /> </wrapwidth>
+            <visible>
+				<copy src="parent()" trait="visible" />
+				<and> <not src="parent()" trait="_cloneMe"/> </and>
+			</visible>
+            <alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+        </text>
+
+        <text name="replacementTextL">
+            <x>
+				<copy src="parent()" trait="x" />
+				<mul> <!-- DarN TODO! -->
+					<copy src="io()" trait="_duiscale" />
+					<max>
+						<copy> 1 </copy>
+						<onlyifnot src="grandparent()" trait="_isMsgRect" />
+					</max>
+				</mul>
+				<add>
+					<copy> 5 </copy>
+					<!-- <onlyif src="parent()" trait="_isInfo" />
+					<onlyif src="grandparent()" trait="_isMsgRect" /> -->
+					<onlyif src="parent()" trait="_isInfo" />
+				</add>
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+            <y>
+				<copy src="parent()" trait="y" />
+				<mul src="io()" trait="_duiscale" />
+				<add>
+					<copy> 10 </copy>
+					<onlyif src="parent()" trait="_isInfo" />
+				</add>
+				<sub>
+					<copy> 5 </copy>
+					<onlyif src="grandparent()" trait="_isMsgRect" />
+				</sub>
+			</y>
+            <string> <copy src="parent()" trait="string"/> </string>
+            <justify> &left; </justify>
+            <font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+            <wrapwidth>
+				<copy src="parent()" trait="wrapwidth" />
+				<mul>
+					<copy> 1 </copy>
+					<add>
+						<copy> -1 </copy>
+						<add src="io()" trait="_duiscale_70" />
+						<onlyif src="grandparent()" trait="_isMsgRect" />
+					</add>
+				</mul>
+			</wrapwidth>
+			<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+            <visible>
+				<copy src="parent()" trait="_cloneMe"/>
+				<and> <not src="parent()" trait="_isQuest" /> </and>
+				<and> <not src="parent()" trait="_isInfo" /> </and>
+				<and> <not src="grandparent()" trait="_isLocation" /> </and>
+			</visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+        </text>
+		<text name="replacementTextInfoL"> <!-- DarN WG and VAL -->
+            <x>
+				<copy src="parent()" trait="x" />
+				<add> 5 </add>
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+            <y>
+				<copy src="parent()" trait="y" />
+				<mul src="io()" trait="_duiscale_70" />
+			</y>
+            <string> <copy src="parent()" trait="string"/> </string>
+            <justify> &left; </justify>
+            <font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDSysColor" />
+				<onlyif>
+					<copy src="parent()" trait="systemcolor" />
+					<neq> &hudalt; </neq>
+				</onlyif>
+				<add>
+					<copy src="parent()" trait="systemcolor" />
+					<onlyif>
+						<copy src="parent()" trait="systemcolor" />
+						<eq> &hudalt; </eq>
+					</onlyif>
+				</add>
+			</systemcolor>
+			<!-- <brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness> -->
+			<brightness> 255 </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+            <visible> <copy src="parent()" trait="_isInfo"/> </visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+        </text>
+		<text name="replacementTextQuest">
+            <x>
+				<copy src="parent()" trait="x" />
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+            <y> <copy src="parent()" trait="y" /> </y>
+            <string> <copy src="parent()" trait="string"/> </string>
+            <justify> &left; </justify>
+            <font> 6 </font>
+            <wrapwidth> <copy src="parent()" trait="wrapwidth" /> </wrapwidth>
+            <systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+            <visible> <copy src="parent()" trait="_isQuest" />  </visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+        </text>
+		<text name="replacementTextLoc">
+            <x>
+				<copy src="parent()" trait="x" />
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+            <y> <copy src="parent()" trait="y" /> </y>
+            <string> <copy src="parent()" trait="string"/> </string>
+            <justify> &left; </justify>
+            <font> <copy src="io()" trait="_HUDLocFont" /> </font>
+            <wrapwidth> <copy src="parent()" trait="wrapwidth" /> </wrapwidth>
+            <systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+            <visible> <copy src="grandparent()" trait="_isLocation" />  </visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+        </text>
+	</rect>
+</template>
+
+<template name="template_justify_center_text">
+	<rect name="justify_center_text">
+		<justify> &center; </justify>
+		<font> 7 </font>
+		<_state>
+			<copy src="me()" trait="y" />
+			<eq> 65 </eq> <!-- DarN door/cont. state -->
+		</_state>
+		<alpha> 255 </alpha>
+		<text name="replacementTextC_EH">
+           <x>
+				<copy src="parent()" trait="x" />
+				<mul src="io()" trait="_duiscale_65" />
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+            <y> <copy src="parent()" trait="y" /> </y>
+			<string> <copy src="parent()" trait="string"/> </string>
+            <justify> &center; </justify>
+			<font> 6 </font>
+
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDSysColor" />
+				<onlyif>
+					<copy src="grandparent()" trait="systemcolor" />
+					<neq> &hudalt; </neq>
+				</onlyif>
+				<add>
+					<copy src="grandparent()" trait="systemcolor" />
+					<onlyif>
+						<copy src="grandparent()" trait="systemcolor" />
+						<eq> &hudalt; </eq>
+					</onlyif>
+				</add>
+			</systemcolor>
+			<brightness> 255 </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+            <visible>
+				<copy src="parent()" trait="visible" />
+				<and src="grandparent()" trait="_isEHRect" />
+				<!-- <and> <not src="io()" trait="_inVATS" /> </and> -->
+			</visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<wrapwidth> <copy src="parent()" trait="wrapwidth" /> </wrapwidth>
+        </text>
+		<text name="replacementTextC_EH_VATS">
+           <x>
+				<copy src="parent()" trait="x" />
+				<mul src="io()" trait="_duiscale_65" />
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+            <y> <copy src="parent()" trait="y" /> </y>
+			<string> <copy src="parent()" trait="string"/> </string>
+            <justify> &center; </justify>
+			<font> 6 </font>
+
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDSysColor" />
+				<onlyif>
+					<copy src="parent()" trait="systemcolor" />
+					<neq> &hudalt; </neq>
+				</onlyif>
+				<add>
+					<copy src="parent()" trait="systemcolor" />
+					<onlyif>
+						<copy src="parent()" trait="systemcolor" />
+						<eq> &hudalt; </eq>
+					</onlyif>
+				</add>
+			</systemcolor>
+			<brightness> 255 </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+            <visible>
+				<copy src="parent()" trait="visible" />
+				<and src="grandparent()" trait="_isVEHRect" />
+				<!-- <and src="io()" trait="_inVATS" /> -->
+			</visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<wrapwidth> <copy src="parent()" trait="wrapwidth" /> </wrapwidth>
+        </text>
+		<text name="replacementTextC">
+            <x>
+				<copy src="parent()" trait="x" />
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+            <y> <copy src="parent()" trait="y" /> </y>
+			<string> <copy src="parent()" trait="string"/> </string>
+            <justify> &center; </justify>
+			<font>
+				<!-- <copy src="io()" trait="_HUDMeterFont" />
+				<onlyif src="parent()" trait="_state" />
+				<add>
+					<copy> 6 </copy>
+					<onlyifnot src="parent()" trait="_state" />
+				</add> -->6
+			</font>
+
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDSysColor" />
+				<onlyif>
+					<copy src="parent()" trait="systemcolor" />
+					<neq> &hudalt; </neq>
+				</onlyif>
+				<add>
+					<copy src="parent()" trait="systemcolor" />
+					<onlyif>
+						<copy src="parent()" trait="systemcolor" />
+						<eq> &hudalt; </eq>
+					</onlyif>
+				</add>
+			</systemcolor>
+			<brightness> 255 </brightness>
+			<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+			<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+            <visible>
+				<copy src="parent()" trait="visible" />
+				<and> <not src="grandparent()" trait="_isEHRect" /> </and>
+				<and> <not src="parent()" trait="_state" /> </and>
+				<and> <not src="io()" trait="_inVATS" /> </and>
+			</visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<wrapwidth> <copy src="parent()" trait="wrapwidth" /> </wrapwidth>
+        </text>
+
+		<text name="replacementTextLock">
+            <x>
+				<copy src="parent()" trait="x" />
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+            <y> <copy src="parent()" trait="y" /> </y>
+			<string> <copy src="parent()" trait="string"/> </string>
+            <justify> &center; </justify>
+			<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+
+			<systemcolor> &hudalt; </systemcolor>
+			<brightness> 255 </brightness>
+            <visible>
+				<copy src="parent()" trait="visible" />
+				<and> <not src="grandparent()" trait="_isEHRect" /> </and>
+				<and src="parent()" trait="_state" />
+			</visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<wrapwidth> <copy src="parent()" trait="wrapwidth" /> </wrapwidth>
+        </text>
+	</rect>
+</template>
+
+<!-- DarN AP/CND/AMMO -->
+<template name="template_right_bracket">
+	<image name="right_bracket">
+		<locus> &true; </locus>
+		<depth> -1 </depth>
+		<visible> &false; </visible>
+		<width> 512 </width>
+		<height> 256 </height>
+		<filename> Interface\HUD\glow_hud_right_seperatorglow.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+	</image>
+
+	<_alphaSource> <copy src="child(right_bracket)" trait="alpha" /> </_alphaSource>
+
+	<image name="dui_right_bracket_clone">
+		<depth> 1 </depth>
+		<locus> &true; </locus>
+		<visible> <copy src="io()" trait="_HUDShowAPBracket" /> </visible>
+		<alpha> <copy src="sibling(right_bracket)" trait="alpha" /> </alpha>
+		<width>
+			<copy> 512 </copy> <!-- DarN 512 -->
+			<mul src="io()" trait="_duiscale_65" /> <!-- DarN _duiscale -->
+		</width>
+		<height>
+			<copy> 256 </copy>
+			<mul src="io()" trait="_duiscale_65" /> <!-- DarN _duiscale -->
+		</height>
+		<filename> Interface\HUD\glow_hud_right_seperatorglow.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<x>
+			<copy src="sibling(right_bracket)" trait="x" />
+			<mul src="io()" trait="_duiscale_65" /> <!-- DarN _duiscale -->
+			<sub src="globals()" trait="_duiHUDOffset" />
+		</x>
+		<y> <copy src="sibling(right_bracket)" trait="y" /> </y>
+		<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		<image name="FWEGrenIcon">
+			<locus> &true; </locus>
+			<x>
+				<copy src="me()" trait="width" />
+				<mul> -1 </mul>
+				<add src="globals()" trait="_xHUDGrenXPos" />
+			</x>
+			<y>
+				<copy> 0 </copy>
+				<add src="globals()" trait="_xHUDGrenYPos" />
+			</y>
+			<width>
+				<copy> 128 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</width>
+			<height>
+				<copy> 128 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</height>
+			<zoom>
+				<copy src="io()" trait="_duiscale_65" />
+				<mul> 100 </mul>
+				<!-- <div> 2 </div> -->
+			</zoom>
+			<visible>
+				<copy src="io()" trait="_xHUDShowGren" />
+				<and>
+					<copy src="io()" trait="_FWE_Grentype" />
+					<gt> 0 </gt>
+				</and>
+			</visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<!-- <_fn_1> Interface\Icons\pipboyimages\FWE\GrenFrag.dds </_fn_1> -->
+			<_fn_1> Interface\hud\FWE\GrenFrag.dds </_fn_1>
+			<_fn_2> Interface\hud\FWE\GrenPulse.dds </_fn_2>
+			<_fn_3> Interface\Icons\pipboyimages\FWE\GrenPlasma.dds </_fn_3>
+			<_fn_4> Interface\Icons\pipboyimages\FWE\GrenNuka.dds </_fn_4>
+			<_fn_5> Interface\Icons\pipboyimages\FWE\GrenMolotov.dds </_fn_5>
+			<_fn_6> Interface\Icons\pipboyimages\FWE\GrenCryo.dds </_fn_6>
+			<_fn_7> Interface\Icons\pipboyimages\FWE\GrenMisc.dds </_fn_7>
+			<filename>
+				<copy src="io()" trait="_FWE_Grentype" />
+				<copy src="me()" trait="_fn_" />
+			</filename>
+			<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+
+			<text name="FWEGrenCount">
+				<depth> 1 </depth>
+				<string> <copy src="io()" trait="_FWE_Grencount" /> </string>
+				<x>
+					<copy src="parent()" trait="width" />
+					<!-- <sub src="me()" trait="width" /> -->
+					<sub>
+						<copy src="parent()" trait="width" />
+						<mul> .25 </mul>
+					</sub>
+				</x>
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<sub> 12 </sub>
+				</y>
+				<font> <copy src="io()" trait="_HUDMeterFont" /> </font>
+				<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+				<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+				<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+				<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+				<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+			</text>
+		</image>
+
+	</image>
+
+	<locus> &false; </locus>
+
+</template>
+
+<template name="template_weapon_icon">
+	<image name="weapon_icon">
+		<width> 42 </width>
+		<height> 42 </height>
+		<zoom> 125 </zoom>
+	</image>
+</template>
+
+<template name="template_meter">
+	<image name="meter">
+		<_isHPMeter> <copy src="parent()" trait="_isHPRect" /> </_isHPMeter>
+		<_isAPMeter>
+			<copy src="me()" trait="x" />
+			<eq> 30 </eq>
+		</_isAPMeter>
+		<_isCNDMeter>
+			<!-- <copy src="me()" trait="x" /> -->
+			<copy src="me()" trait="_OriginalX" />
+			<eq> 90 </eq>
+		</_isCNDMeter>
+		<_cndX>
+			<!-- <copy src="me()" trait="_OriginalX" /> -->
+			<copy src="me()" trait="x" />
+			<mul> -1 </mul>
+			<add>1</add>
+			<!-- <mul src="me()" trait="_isCNDMeter" />
+			<max>1</max> -->
+		</_cndX>
+		<_isEHMeter> <copy src="parent()" trait="_isEHRect" /> </_isEHMeter>
+		<_mtr_red> <copy src="child(dui_mtr_clone)" trait="red" /> </_mtr_red>
+		<_mtr_green> <copy src="child(dui_mtr_clone)" trait="green" /> </_mtr_green>
+		<_mtr_blue> <copy src="child(dui_mtr_clone)" trait="blue" /> </_mtr_blue>
+		<_mtr2_red> <copy src="child(dui_mtr_clone_VATS)" trait="red" /> </_mtr2_red>
+		<_mtr2_green> <copy src="child(dui_mtr_clone_VATS)" trait="green" /> </_mtr2_green>
+		<_mtr2_blue> <copy src="child(dui_mtr_clone_VATS)" trait="blue" /> </_mtr2_blue>
+		<_mtrSysColor> <copy src="child(dui_mtr_clone)" trait="systemcolor" /> </_mtrSysColor>
+		<_mtrBrightness> <copy src="child(dui_mtr_clone)" trait="brightness" /> </_mtrBrightness>
+
+		<filename> Interface\HUD\hud_tick_mark.dds </filename>
+		<tile> &true; </tile>
+		<red> 200 </red>
+		<green> 100 </green>
+		<blue> 200 </blue>
+		<height> 20 </height>
+		<width> 8 </width>
+		<_TotalWidth> 300 </_TotalWidth>
+		<_ImageWidth> 8 </_ImageWidth>
+		<_OriginalX> 0 </_OriginalX>
+		<justify> &left; </justify>
+
+		<image name="dui_mtr_clone">
+			<depth> <copy src="parent()" trait="depth" /> <sub> 1 </sub></depth>
+			<_hostile>
+				<copy src="parent()" trait="systemcolor" />
+				<eq> &hudalt; </eq>
+				<or>
+					<copy src="grandparent()" trait="systemcolor" />
+					<eq> &hudalt; </eq>
+				</or>
+			</_hostile>
+			<visible>
+				<copy src="parent()" trait="visible" />
+				<and> <not src="grandparent()" trait="_isVEHRect" /> </and>
+			</visible>
+			<alpha>
+				<copy src="io()" trait="_MeterAlpha" />
+				<onlyifnot src="io()" trait="_inVATS" />
+				<add>
+					<copy src="parent()" trait="alpha" />
+					<onlyif src="io()" trait="_inVATS" />
+				</add>
+			</alpha>
+			<x>
+				<copy src="parent()" trait="x" />
+				<mul src="io()" trait="_duiscale_65" />
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+			<y>
+				<copy src="parent()" trait="y" />
+				<mul src="io()" trait="_duiscale_65" />
+			</y>
+			<width>
+				<copy src="parent()" trait="width" />
+				<mul src="io()" trait="_duiscale_65" />
+				<sub>
+					<copy> 2 </copy> <!-- DarN offset for vanilla error... -->
+					<onlyif src="parent()" trait="_isAPMeter" />
+				</sub>
+			</width>
+			<height>
+				<copy> 20 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</height>
+			<filename>
+				<copy src="io()" trait="_HUDSolidMeters" />
+				<max>
+					<copy> 1 </copy>
+					<onlyif src="parent()" trait="_isCNDMeter" />
+				</max>
+				<copy src="me()" trait="_filename_" />
+			</filename>
+			<_filename_0> Interface\HUD\hud_tick_mark.dds </_filename_0>
+			<_filename_1> Interface\Shared\solid.dds </_filename_1>
+			<tile>
+				<not src="io()" trait="_HUDSolidMeters" />
+				<or> <not src="parent()" trait="_isCNDMeter" /> </or>
+			</tile>
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDMtrSysColor" />
+				<onlyifnot src="me()" trait="_hostile" />
+				<add>
+					<copy> &hudalt; </copy>
+					<onlyif src="me()" trait="_hostile" />
+				</add>
+				<add>
+					<copy> &hudmain; </copy>
+					<onlyif>
+						<copy src="io()" trait="_HUDDynamicColors" />
+						<and> <not src="me()" trait="_warn" /> </and>
+						<and> <not src="io()" trait="_HUDOverrideColor" /> </and>
+					</onlyif>
+				</add>
+				<!-- <add>
+					<copy> &hudmain; </copy>
+					<onlyif>
+						<copy src="io()" trait="_HUDDynamicColors" />
+						<and> <not src="me()" trait="_warn" /> </and>
+						<!-- <not src="me()" trait="_hostile" />
+						<or src="io()" trait="_inVATS" />
+					</onlyif>
+				</add>
+				<onlyifnot src="me()" trait="_hostile" />
+				<add>
+					<copy> &hudalt; </copy>
+					<onlyif src="me()" trait="_hostile" />
+				</add> -->
+				<!-- <add>
+					<copy> &hudmain; </copy>
+					<onlyif>
+						<copy src="io()" trait="_HUDDynamicColors" />
+						<and> <not src="me()" trait="_warn" /> </and>
+						<and> <not src="me()" trait="_hostile" /> </and>
+						<or>
+							<copy src="io()" trait="_HUDDynamicColors" />
+							<and> <not src="me()" trait="_warn" /> </and>
+							<and> <not src="me()" trait="_hostile" /> </and>
+							<and src="io()" trait="_inVATS" />
+						</or>
+					</onlyif>
+				</add> -->
+			</systemcolor>
+
+			<brightness>
+				<copy src="io()" trait="_duiHUDMtrBrightness" />
+				<add>
+					<copy> 256 </copy>
+					<onlyif>
+						<copy src="me()" trait="_hostile" />
+						<or src="io()" trait="_inVATS" />
+						<and>
+							<copy src="io()" trait="_duiHUDMtrBrightness" />
+							<eq> &uselocalcolor; </eq>
+						</and>
+					</onlyif>
+				</add>
+				<add>
+					<copy> 256 </copy>
+					<onlyif>
+						<copy src="io()" trait="_HUDDynamicColors" />
+						<and> <not src="me()" trait="_warn" /> </and>
+					</onlyif>
+				</add>
+				<min> 255 </min>
+			</brightness>
+			<_TotalWidth>
+				<copy src="parent()" trait="_TotalWidth" />
+				<mul src="io()" trait="_duiscale_65" />
+			</_TotalWidth>
+			<_warn>
+				<copy src="me()" trait="width" />
+				<lte>
+					<copy src="me()" trait="_TotalWidth" />
+					<mul src="io()" trait="_HUDWarnLvl" />
+					<div> 100 </div>
+				</lte>
+				<onlyif src="io()" trait="_HUDDynamicColors" />
+				<onlyifnot src="io()" trait="_inVATS" />
+			</_warn>
+			<_alert>
+				<copy src="me()" trait="width" />
+				<lte>
+					<copy src="me()" trait="_TotalWidth" />
+					<mul src="io()" trait="_HUDAlertLvl" />
+					<div> 100 </div>
+				</lte>
+				<onlyif src="io()" trait="_HUDDynamicColors" />
+				<onlyifnot src="io()" trait="_inVATS" />
+			</_alert>
+			<!-- DarN - don't concat. -->
+			<red>
+				<copy src="io()" trait="_HUDRed" />
+				<onlyifnot src="me()" trait="_warn" />
+				<add>
+					<copy src="io()" trait="_HUDWarnRed" />
+					<onlyif src="me()" trait="_warn" />
+					<onlyifnot src="me()" trait="_alert" />
+				</add>
+				<add>
+					<copy src="io()" trait="_HUDAlertRed" />
+					<onlyif src="me()" trait="_alert" />
+				</add>
+			</red>
+			<green>
+				<copy src="io()" trait="_HUDGreen" />
+				<onlyifnot src="me()" trait="_warn" />
+				<add>
+					<copy src="io()" trait="_HUDWarnGreen" />
+					<onlyif src="me()" trait="_warn" />
+					<onlyifnot src="me()" trait="_alert" />
+				</add>
+				<add>
+					<copy src="io()" trait="_HUDAlertGreen" />
+					<onlyif src="me()" trait="_alert" />
+				</add>
+			</green>
+			<blue>
+				<copy src="io()" trait="_HUDBlue" />
+				<onlyifnot src="me()" trait="_warn" />
+				<add>
+					<copy src="io()" trait="_HUDWarnBlue" />
+					<onlyif src="me()" trait="_warn" />
+					<onlyifnot src="me()" trait="_alert" />
+				</add>
+				<add>
+					<copy src="io()" trait="_HUDAlertBlue" />
+					<onlyif src="me()" trait="_alert" />
+				</add>
+			</blue>
+			<zoom> <copy src="io()" trait="_duiHUDScale" /> <max> 65 </max></zoom>
+
+		</image>
+
+		<image name="dui_mtr_clone_VATS"> <!-- DarN all VATS meters except right EHB -->
+			<_enemy>
+				<copy src="parent()" trait="systemcolor" />
+				<eq> &hudalt; </eq>
+			</_enemy>
+			<depth> <copy src="parent()" trait="depth" /> </depth>
+			<visible>
+				<copy src="parent()" trait="visible" />
+				<and src="grandparent()" trait="_isVEHRect" />
+			</visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<x>
+				<copy src="parent()" trait="x" />
+				<mul src="io()" trait="_duiscale_65" />
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+			<y>
+				<copy src="parent()" trait="y" />
+				<mul src="io()" trait="_duiscale_65" />
+			</y>
+			<width>
+				<copy src="parent()" trait="width" />
+				<mul src="io()" trait="_duiscale_65" />
+			</width>
+			<height>
+				<copy> 20 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</height>
+			<filename>
+				<copy src="io()" trait="_HUDSolidMeters" />
+				<!-- <max>
+					<copy> 1 </copy>
+					<onlyif src="parent()" trait="_isCNDMeter" />
+				</max> -->
+				<copy src="me()" trait="_filename_" />
+			</filename>
+			<_filename_0> Interface\HUD\hud_tick_mark.dds </_filename_0>
+			<_filename_1> Interface\Shared\solid.dds </_filename_1>
+			<tile> <not src="io()" trait="_HUDSolidMeters" /> </tile>
+			<systemcolor>
+				<copy> &hudalt; </copy>
+				<onlyif src="me()" trait="_enemy" />
+				<add>
+					<copy src="io()" trait="_duiHUDSysColor" />
+					<onlyifnot src="me()" trait="_enemy" />
+				</add>
+			</systemcolor>
+			<brightness>
+				<copy src="io()" trait="_duiHUDBrightness" />
+				<add>
+					<copy> 256 </copy>
+					<onlyif src="me()" trait="_enemy" />
+					<onlyif>
+						<copy src="io()" trait="_duiHUDBrightness" />
+						<eq> &uselocalcolor; </eq>
+					</onlyif>
+				</add>
+			</brightness>
+			<_TotalWidth>
+				<copy src="parent()" trait="_TotalWidth" />
+				<mul src="io()" trait="_duiscale_65" />
+			</_TotalWidth>
+			<_warn>
+				<copy src="me()" trait="width" />
+				<lte>
+					<copy src="me()" trait="_TotalWidth" />
+					<mul src="io()" trait="_HUDWarnLvl" />
+					<div> 100 </div>
+				</lte>
+				<onlyif src="io()" trait="_HUDDynamicColors" />
+				<onlyifnot src="io()" trait="_inVATS" />
+			</_warn>
+			<_alert>
+				<copy src="me()" trait="width" />
+				<lte>
+					<copy src="me()" trait="_TotalWidth" />
+					<mul src="io()" trait="_HUDAlertLvl" />
+					<div> 100 </div>
+				</lte>
+				<onlyif src="io()" trait="_HUDDynamicColors" />
+				<onlyifnot src="io()" trait="_inVATS" />
+			</_alert>
+
+
+			<red>
+				<copy src="io()" trait="_HUDRed" />
+				<onlyifnot src="me()" trait="_warn" />
+				<add>
+					<copy src="io()" trait="_HUDWarnRed" />
+					<onlyif src="me()" trait="_warn" />
+					<onlyifnot src="me()" trait="_alert" />
+				</add>
+				<add>
+					<copy src="io()" trait="_HUDAlertRed" />
+					<onlyif src="me()" trait="_alert" />
+				</add>
+			</red>
+			<green>
+				<copy src="io()" trait="_HUDGreen" />
+				<onlyifnot src="me()" trait="_warn" />
+				<add>
+					<copy src="io()" trait="_HUDWarnGreen" />
+					<onlyif src="me()" trait="_warn" />
+					<onlyifnot src="me()" trait="_alert" />
+				</add>
+				<add>
+					<copy src="io()" trait="_HUDAlertGreen" />
+					<onlyif src="me()" trait="_alert" />
+				</add>
+			</green>
+			<blue>
+				<copy src="io()" trait="_HUDBlue" />
+				<onlyifnot src="me()" trait="_warn" />
+				<add>
+					<copy src="io()" trait="_HUDWarnBlue" />
+					<onlyif src="me()" trait="_warn" />
+					<onlyifnot src="me()" trait="_alert" />
+				</add>
+				<add>
+					<copy src="io()" trait="_HUDAlertBlue" />
+					<onlyif src="me()" trait="_alert" />
+				</add>
+			</blue>
+			<zoom> <copy src="io()" trait="_duiHUDScale" /> <max> 65 </max> </zoom>
+		</image>
+	</image>
+
+</template>
+
+<template name="template_meter_background">
+	<image name="MeterBackground">
+		<depth> -1 </depth>
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<height> 20 </height>
+		<width> 60 </width>
+		<x> 60 </x>
+		<justify> &left; </justify>
+	</image>
+
+	<image name="dui_mtrbck_clone">
+		<visible>
+			<copy src="sibling(MeterBackground)" trait="visible" />
+			<and> <not src="io()" trait="_inVATS" /> </and>
+		</visible>
+		<depth> -2 </depth>
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<height>
+			<copy> 20 </copy>
+			<mul src="io()" trait="_duiscale_65" />
+		</height>
+		<width>
+			<copy src="sibling(MeterBackground)" trait="width" />
+			<mul src="io()" trait="_duiscale_65" />
+		</width>
+		<x>
+			<copy src="sibling(meter)" trait="x" />
+			<mul src="io()" trait="_duiscale_65" />
+			<sub src="globals()" trait="_duiHUDOffset" />
+		</x>
+		<y>
+			<copy src="sibling(MeterBackground)" trait="y" />
+			<mul src="io()" trait="_duiscale_65" />
+		</y>
+		<justify> &left; </justify>
+		<alpha>
+			<copy src="sibling(meter)" trait="alpha" />
+			<div> 2 </div>
+		</alpha>
+		<brightness>
+			<!-- <copy> &uselocalcolor; </copy>
+			<add>
+				<copy> 128 </copy>
+				<onlyifnot src="io()" trait="_HUDDynamicColors" />
+				<onlyifnot src="io()" trait="_HUDOverrideColor" />
+			</add>
+			<add>
+				<copy> 128 </copy>
+				<onlyifnot src="io()" trait="_HUDDynamicColors" />
+				<onlyifnot src="io()" trait="_HUDOverrideColor" />
+			</add>
+			<min> 128 </min> -->
+			<copy src="sibling(meter)" trait="_mtrBrightness" />
+			<div>
+				<copy> 2 </copy>
+				<onlyifnot>
+					<copy src="sibling(meter)" trait="_mtrBrightness" />
+					<eq> &uselocalcolor; </eq>
+				</onlyifnot>
+			</div>
+		</brightness>
+		<!-- <systemcolor> <copy src="io()" trait="_duiHUDMtrSysColor" /> </systemcolor> -->
+		<systemcolor> <copy src="sibling(meter)" trait="_mtrSysColor" /> </systemcolor>
+		<red> <copy src="sibling(meter)" trait="_mtr_red" /> </red>
+		<green> <copy src="sibling(meter)" trait="_mtr_green" /> </green>
+		<blue> <copy src="sibling(meter)" trait="_mtr_blue" /> </blue>
+	</image>
+
+	<image name="dui_mtrbck_clone_VATS">
+		<visible>
+			<copy src="sibling(meter)" trait="visible" />
+			<and src="io()" trait="_inVATS" />
+		</visible>
+		<depth> -1 </depth>
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<tile> &true; </tile>
+		<height>
+			<copy> 20 </copy>
+			<mul src="io()" trait="_duiscale_65" />
+		</height>
+		<width>
+			<copy src="sibling(MeterBackground)" trait="width" />
+			<mul src="io()" trait="_duiscale_65" />
+			<max> 0 </max>
+		</width>
+		<x>
+			<copy src="sibling(meter)" trait="x" />
+			<mul src="io()" trait="_duiscale_65" />
+			<sub src="globals()" trait="_duiHUDOffset" />
+		</x>
+		<y>
+			<copy src="sibling(MeterBackground)" trait="y" />
+			<mul src="io()" trait="_duiscale_65" />
+		</y>
+		<justify> &left; </justify>
+		<alpha>
+			<copy src="sibling(MeterBackground)" trait="alpha" />
+			<div> 3 </div>
+		</alpha>
+		<brightness>
+			<copy> &uselocalcolor; </copy>
+			<add>
+				<copy> 255 </copy>
+				<onlyifnot src="io()" trait="_HUDDynamicColors" />
+				<onlyifnot src="io()" trait="_HUDOverrideColor" />
+			</add>
+		</brightness>
+		<red> <copy src="sibling(meter)" trait="_mtr2_red" /> </red>
+		<green> <copy src="sibling(meter)" trait="_mtr2_green" /> </green>
+		<blue> <copy src="sibling(meter)" trait="_mtr2_blue" /> </blue>
+	</image>
+</template>
+
+ <!-- DarN HP and compass -->
+<template name="template_left_bracket">
+	<image name="left_bracket">
+		<depth> -1 </depth>
+		<width> 512 </width>
+		<height> 256 </height>
+		<filename> Interface\HUD\glow_hud_left_seperatorglow.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<visible> &false; </visible>
+	</image>
+
+	<locus> &false; </locus>
+
+	<image name="dui_left_bracket_clone">
+		<locus> &true; </locus>
+		<depth> 1 </depth>
+		<alpha> <copy src="sibling(left_bracket)" trait="alpha" /> </alpha>
+		<visible>
+			<copy src="io()" trait="_HUDShowHPBracket" />
+		</visible>
+		<width>
+			<copy> 512 </copy> <!-- DarN 512 -->
+			<mul src="io()" trait="_duiscale_65" />
+		</width>
+		<height>
+			<copy> 256 </copy>
+			<mul src="io()" trait="_duiscale_65" />
+		</height>
+		<filename> Interface\HUD\glow_hud_left_seperatorglow.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<x>
+			<copy src="sibling(left_bracket)" trait="x" />
+			<sub src="globals()" trait="_duiHUDOffset" />
+		</x>
+		<y> <copy src="sibling(left_bracket)" trait="y" /> </y>
+
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+	</image>
+	<_isLeftBracket> &true; </_isLeftBracket>
+
+</template>
+
+<template name="template_enemy_health_bracket">
+	<image name="enemy_health_bracket">
+		<filename> Interface\HUD\glow_enemy_health_seperator.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<width> 500 </width>
+		<height> 64 </height>
+		<y> 3 </y>
+		<x> -7 </x>
+		<image name="darn_enemy_health_bracket">
+			<filename> Interface\HUD\glow_enemy_health_seperator.dds </filename>
+			<texatlas> Interface\InterfaceShared.tai </texatlas>
+			<visible>
+				<copy src="parent()" trait="visible" />
+				<and src="io()" trait="_HUDShowEHBracket" />
+				<and> <not src="io()" trait="_inVATS" /> </and>
+			</visible>
+			<width>
+				<copy> 500 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</width>
+			<height>
+				<copy> 64 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</height>
+			<x>
+				<copy> -7 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+			<y>
+				<copy> 3 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</y>
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDSysColor" />
+				<onlyif>
+					<copy src="grandparent()" trait="systemcolor" />
+					<neq> &hudalt; </neq>
+				</onlyif>
+				<add>
+					<copy src="grandparent()" trait="systemcolor" />
+					<onlyif>
+						<copy src="grandparent()" trait="systemcolor" />
+						<eq> &hudalt; </eq>
+					</onlyif>
+				</add>
+			</systemcolor>
+			<brightness> 255 </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+		</image>
+		<image name="darn_enemy_health_bracket_VATS">
+			<filename> Interface\HUD\glow_enemy_health_seperator.dds </filename>
+			<texatlas> Interface\InterfaceShared.tai </texatlas>
+			<visible>
+				<copy src="parent()" trait="visible" />
+				<and src="io()" trait="_HUDShowEHBracket" />
+				<and src="io()" trait="_inVATS" />
+			</visible>
+			<width>
+				<copy> 500 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</width>
+			<height>
+				<copy> 64 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</height>
+			<x>
+				<copy> -7 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+			<y>
+				<copy> 3 </copy>
+				<mul src="io()" trait="_duiscale_65" />
+			</y>
+			<systemcolor>
+				<copy src="io()" trait="_duiHUDSysColor" />
+				<onlyif>
+					<copy src="parent()" trait="systemcolor" />
+					<neq> &hudalt; </neq>
+				</onlyif>
+				<add>
+					<copy src="parent()" trait="systemcolor" />
+					<onlyif>
+						<copy src="parent()" trait="systemcolor" />
+						<eq> &hudalt; </eq>
+					</onlyif>
+				</add>
+			</systemcolor>
+			<brightness> 255 </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+		</image>
+	</image>
+
+</template>
+
+<template name="template_reticle_center">
+	<image name="reticle_center">
+		<user0> Interface\HUD\glow_crosshair.dds </user0>
+		<user1> Interface\HUD\glow_crosshair_filled.dds </user1>
+		<filename> Interface\HUD\glow_crosshair.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<width> 0 </width>
+		<height> 0 </height>
+	</image>
+	<image name="reticle_center_clone">
+		<_chScale>
+			<copy src="io()" trait="_duiscale" />
+			<onlyifnot>
+				<copy src="globals()" trait="_HUDCHScaleOverride" />
+				<gte> 40 </gte>
+			</onlyifnot>
+			<add>
+				<copy src="globals()" trait="_HUDCHScaleOverride" />
+				<min> 100 </min>
+				<max> 40 </max>
+				<div> 100 </div>
+				<onlyif>
+					<copy src="globals()" trait="_HUDCHScaleOverride" />
+					<gte> 40 </gte>
+				</onlyif>
+			</add>
+		</_chScale>
+		<_isRed>
+			<copy src="sibling(reticle_center)" trait="systemcolor" />
+			<eq> &hudalt; </eq>
+		</_isRed>
+		<filename> <copy src="sibling(reticle_center)" trait="filename" /> </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<width>
+			<copy> 64 </copy>
+			<mul>
+				<!-- <copy src="io()" trait="_duiscale" /> -->
+				<copy src="me()" trait="_chscale" />
+				<onlyif src="io()" trait="_HUDShowCrosshair" />
+			</mul>
+		</width>
+		<height>
+			<copy> 64 </copy>
+			<!-- <copy src="io()" trait="_duiscale" /> -->
+			<mul src="me()" trait="_chscale" />
+			<!-- <onlyifnot src="globals()" trait="_HUDCHScaleOverride" /> -->
+		</height>
+		<x>
+			<copy> 2 </copy>
+			<add src="io()" trait="_HUDCrosshair_X" />
+		</x>
+		<y>
+			<copy> 9 </copy>
+			<mul src="io()" trait="_duiscale" />
+			<add src="io()" trait="_HUDCrosshair_Y" />
+		</y>
+		<!-- <zoom> &scale; </zoom> -->
+		<brightness>
+			<copy> &uselocalcolor; </copy>
+			<add>
+				<copy> 256 </copy>
+				<onlyif>
+					<copy src="me()" trait="_isRed" />
+					<or> <not src="io()" trait="_HUDOverrideColor" /> </or>
+				</onlyif>
+			</add>
+		</brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		<systemcolor> <copy src="sibling(reticle_center)" trait="systemcolor" /> </systemcolor>
+		<visible> <copy src="sibling(reticle_center)" trait="visible" /> </visible>
+		<alpha>
+			<copy src="io()" trait="_HUDAlpha" />
+			<max>
+				<copy> 255 </copy>
+				<mul src="io()" trait="_HUDCHAlphaOverride" />
+			</max>
+		</alpha>
+		<text name="dbg1">
+			<font> 4 </font>
+			<systemcolor> &hudalt; </systemcolor>
+			<x> 40 </x>
+			<y> 40 </y>
+			<!-- <string> <copy src="sibling(dbg2)" trait="brightness" /> </string> -->
+			<string> <copy src="parent()" trait="alpha" /> </string>
+			<visible> 0 </visible>
+		</text>
+		<text name="dbg2">
+			<font> 4 </font>
+			<systemcolor> &nosystemcolor; </systemcolor>
+			<brightness> &uselocalcolor; </brightness>
+			<x> 40 </x>
+			<y> 60 </y>
+			<string> <copy src="parent()" trait="systemcolor" /> </string>
+			<visible> 0 </visible>
+		</text>
+	</image>
+
+</template>
+<!--<image name="center_test">
+	<visible> &true; </visible>
+	<width>50</width>
+	<height>50</height>
+	<alpha>255</alpha>
+	<x> <copy src="screen()" trait="width" /> <div> 2 </div> </x>
+	<y> <copy src="screen()" trait="height" /> <div> 2 </div> </y>
+</image> -->
+
+<template name="template_warning_background">
+	<rect name="warning_background">
+		<!--<systemcolor> &hudalt; </systemcolor>
+		<visible> &true; </visible>
+		<width>10</width>
+		<height>10</height>
+		<alpha> 0 </alpha> -->
+	</rect>
+</template>
+
+<template name="template_sneak_bracket">
+	<image name="sneak_bracket">
+		<depth> 10 </depth>
+		<filename> Interface\HUD\glow_stealth_metre_seperator.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<width> 356 </width>
+		<height> 34 </height>
+		<zoom> &scale; </zoom>
+	</image>
+</template>
+
+<template name="template_message_bracket">
+	<image name="message_bracket">
+		<!-- <filename> Interface\icons\MOOD\glow_messages_seperator_left.dds </filename> -->
+		<filename> empty.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<visible>
+			<copy src="io()" trait="_HUDShowMsgBracket" />
+			<and> <not src="me()" trait="_blocked" /> </and>
+		</visible>
+		<_blocked>
+			<copy src="sibling(justify_left_text)" trait="_msgTextWidth" />
+			<eq src="globals()" trait="_emptyString_4" />
+		</_blocked>
+		<x>
+			<copy> 0 </copy>
+			<sub src="globals()" trait="_duiHUDOffset" />
+		</x>
+		<y> -20 </y>
+		<width>
+			<copy> 470 </copy>
+			<mul src="io()" trait="_duiscale_70" />
+		</width>
+		<height>
+			<copy> 192 </copy>
+			<mul src="io()" trait="_duiscale_60" />
+		</height>
+		<alpha> 0 </alpha>
+		<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+
+		<_textWidth> <copy src="sibling(justify_left_text)" trait="_msgTextWidth" /> </_textWidth>
+		<_textHeight> <copy src="sibling(justify_left_text)" trait="_msgTextHeight" /> </_textHeight>
+		<_iconHeight> <copy src="sibling(message_icon)" trait="height" /> </_iconHeight>
+		<_minWidth>
+			<copy src="sibling(justify_left_text)" trait="x" />
+			<add src="me()" trait="_textWidth" />
+		</_minWidth>
+		<_minHeight>
+			<copy src="sibling(justify_left_text)" trait="y" />
+			<add>
+				<copy src="me()" trait="_textHeight" />
+				<!-- <mul src="sibling(justify_left_text)" trait="wraplines" /> -->
+				<mul> 3 </mul>
+			</add>
+			<max>
+				<copy src="sibling(message_icon)" trait="height" />
+				<add> 32 </add>
+			</max>
+		</_minHeight>
+		<text name="msgDbgText">
+			<x> <copy src="parent()" trait="x" /></x>
+			<y> <copy src="parent()" trait="y" /> </y>
+			<string> <copy src="parent()" trait="_iconHeight" /> </string>
+			<font> 4 </font>
+			<systemcolor> &hudalt; </systemcolor>
+			<visible> 0 </visible>
+		</text>
+
+		<rect name="darn_MsgBracket">
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<visible> <not src="parent()" trait="_blocked" /> </visible>
+			<x>
+				<copy src="parent()" trait="x" />
+				<!-- <add> 2 </add> -->
+				<sub> 10 </sub>
+			</x>
+			<y> <copy src="parent()" trait="y" /> </y>
+			<width>
+				<copy src="parent()" trait="width" />
+				<max src="parent()" trait="_minWidth" />
+			</width>
+			<height>
+				<copy src="parent()" trait="height" />
+				<max src="parent()" trait="_minHeight" />
+				<min src="parent()" trait="_minHeight" />
+			</height>
+			<locus> &true; </locus>
+
+			<image name="msgTopLine">
+				<include src="line.xml" />
+				<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+				<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				<_width> 2 </_width>
+				<_length>
+					<copy src="parent()" trait="width" />
+					<sub> 64 </sub>
+				</_length>
+				<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			</image>
+			<image name="msgTopRightLine">
+				<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+				<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				<filename> Interface\shared\line\fade_to_right.dds </filename>
+				<zoom> &scale; </zoom>
+				<height> 2 </height>
+				<width> 64 </width>
+				<x>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="width" />
+				</x>
+				<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			</image>
+			<image name="msgLeftLine">
+				<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+				<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				<include src="vertical_fade_line.xml" />
+				<y> 2 </y>
+				<height>
+					<copy src="parent()" trait="height" />
+					<sub> 2 </sub>
+				</height>
+				<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			</image>
+		</rect>
+
+	</image>
+</template>
+
+<template name="template_message_icon">
+	<image name="message_icon">
+		<filename> Interface\Icons\Mood\glow_messages_happy.dds </filename>
+	    <texatlas> Interface\InterfaceShared.tai </texatlas>
+		<visible> <copy src="io()" trait="_HUDShowMsgIcon" /> </visible>
+		<x>
+			<copy> 0 </copy> <!-- DarN 20 -->
+			<!-- <sub src="globals()" trait="_duiHUDOffset" /> -->
+		</x>
+		<y> 0 </y> <!-- DarN -10/-20 -->
+	    <depth> 2 </depth>
+		<width>
+			<copy> 100 </copy>
+			<mul src="io()" trait="_duiscale_70" />
+		</width>
+		<height>
+			<copy> 100 </copy>
+			<mul src="io()" trait="_duiscale_70" />
+		</height>
+		<alpha> 0 </alpha>
+		<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+
+		<image name="message_icon_clone">
+			<filename> <copy src="parent()" trait="filename" /> </filename>
+			<texatlas> <copy src="parent()" trait="texatlas" /> </texatlas>
+			<visible> <copy src="io()" trait="_HUDShowMsgIcon" /> </visible>
+			<x>
+				<copy> 0 </copy> <!-- DarN 20 -->
+				<sub src="globals()" trait="_duiHUDOffset" />
+			</x>
+			<y> -20 </y> <!-- DarN -10 -->
+			<depth> 2 </depth>
+			<width>
+				<copy> 100 </copy>
+				<mul src="io()" trait="_duiscale_70" />
+			</width>
+			<height>
+				<copy> 100 </copy>
+				<mul src="io()" trait="_duiscale_70" />
+			</height>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+			<zoom> &scale; </zoom>
+		</image>
+	</image>
+
+
+
+</template>
+
+<template name="template_line_base">
+	<image name="line_base">
+		<visible> &false; </visible>
+		<filename> Interface\Shared\solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<x> 0 </x>
+		<y> 0 </y>
+		<width> 4 </width>
+		<height> 4 </height>
+		<zoom> &scale; </zoom>
+	</image>
+</template>
+
+<template name="template_fade_left">
+	<image name="fade_left">
+		<visible> &false; </visible>
+		<filename> Interface\Shared\Line\fade_to_left.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<height> 4 </height>
+		<zoom> &scale; </zoom>
+	</image>
+</template>
+
+<template name="template_fade_down">
+	<image name="fade_down">
+		<visible> &false; </visible>
+		<filename> Interface\Shared\Line\fade_to_bottom.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<width> 4 </width>
+		<zoom> &scale; </zoom>
+	</image>
+</template>
+
+<template name="template_info_seperator">
+	<image name="info_seperator">
+		<filename> Interface\HUD\glow_hud_bottom_info_seperator_divider.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<width> 500 </width>
+		<height> 136 </height>
+		<y> 32 </y>
+		<x> 2 </x>
+		<visible> &false; </visible>
+	</image>
+	<image name="info_seperator_clone"> <!-- DarN HC brightness -->
+		<filename> Interface\HUD\glow_hud_bottom_info_seperator_divider.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<width>
+			<copy> 500 </copy>
+			<mul src="io()" trait="_duiscale_70" /> <!-- DarN _duiscale_60 -->
+		</width>
+		<height>
+			<copy> 136 </copy>
+			<mul src="io()" trait="_duiscale_70" /> <!-- DarN _duiscale_60 -->
+		</height>
+		<x>
+			<copy> 2 </copy>
+			<sub src="globals()" trait="_duiHUDOffset" />
+		</x>
+		<y>
+			<copy> 32 </copy>
+			<mul src="io()" trait="_duiscale_70" /> <!-- DarN _duiscale_60 -->
+		</y>
+		<systemcolor>
+			<copy src="io()" trait="_duiHUDSysColor" />
+			<onlyif>
+				<copy src="sibling(info_seperator)" trait="systemcolor" />
+				<neq> &hudalt; </neq>
+			</onlyif>
+			<add>
+				<copy src="sibling(info_seperator)" trait="systemcolor" />
+				<onlyif>
+					<copy src="sibling(info_seperator)" trait="systemcolor" />
+					<eq> &hudalt; </eq>
+				</onlyif>
+			</add>
+		</systemcolor>
+		<!-- <brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness> -->
+		<brightness> 255 </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		<alpha> <copy src="sibling(info_seperator)" trait="alpha" /> </alpha>
+		<visible>
+			<copy src="sibling(info_seperator)" trait="visible" />
+			<and src="io()" trait="_HUDShowIBracket" />
+		</visible>
+	</image>
+</template>
+
+<template name="template_hotkey_selector">
+	<rect name="hotkey_selector">
+		<_IconFilename> </_IconFilename>
+		<_IconVisible> &false; </_IconVisible>
+
+		<visible> &false; </visible>
+		<include src="darn\HotKeys.xml" />
+		<width> 320 </width>
+		<height> 300 </height>
+		<locus> &true; </locus>
+
+		<image name="hotkey_icon">
+			<filename> <copy src="parent()" trait="_IconFilename" /> </filename>
+			<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+			<x> 65 </x>
+			<y> 30 </y>
+			<width> 220 </width>
+			<height> 220 </height>
+			<zoom> &scale; </zoom>
+			<visible> <copy src="parent()" trait="_IconVisible" /> </visible>
+		</image>
+	</rect>
+</template>
+
+<template name="template_compass_window">
+	<image name="compass_window">
+		<!-- <filename> Interface\HUD\glow_hud_comp_direction_strip.dds </filename> -->
+		<filename> darn\darn_compass.dds </filename>
+		<!-- <texatlas> Interface\InterfaceShared.tai </texatlas> -->
+		<locus> &true; </locus>
+		<width>
+			<copy> 270 </copy> <!-- DarN 345 -->
+			<mul src="io()" trait="_duiCScale" />
+			<add> 70 </add> <!-- DarN -35 * 2 -->
+		</width>
+		<height>
+			<copy> 64 </copy>
+			<mul src="io()" trait="_duiCScale" />
+		</height>
+		<depth> 1 </depth>
+		<!-- <visible> &true; </visible> -->
+		<visible> <copy src="io()" trait="_HUDShowCompass" /> </visible>
+		<zoom>
+			<copy src="io()" trait="_duiCScale" />
+			<mul> 100 </mul>
+		</zoom> <!-- DarN 100 -->
+		<!-- <systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor> -->
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		<x> <!-- DarN 20 -->
+			<copy> 20 </copy>
+			<mul src="io()" trait="_duiscale_65" />
+			<sub src="globals()" trait="_duiHUDOffset" />
+			<add>
+				<copy src="io()" trait="_HUDCompass_X" />
+				<onlyif src="io()" trait="_HUDDetachCompass" />
+			</add>
+		</x>
+		<y> <!-- DarN 65 -->
+			<copy> 65 </copy>
+			<mul src="io()" trait="_duiscale_65" />
+			<add>
+				<copy src="io()" trait="_HUDCompass_Y" />
+				<onlyif src="io()" trait="_HUDDetachCompass" />
+			</add>
+		</y>
+
+		<image name="compass_frame">
+			<filename> darn\darn_compass_frame.dds </filename>
+			<x>
+				<copy> -20 </copy>
+				<mul src="io()" trait="_duiCScale" />
+			</x>
+			<y> 0 </y>
+			<width> <copy src="parent()" trait="width" /> <add> 20 </add> </width>
+			<height> <copy src="parent()" trait="height" /> </height>
+			<zoom> <copy src="parent()" trait="zoom" /> </zoom>
+			<!-- <systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor> -->
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+			<visible>
+				<copy src="io()" trait="_HUDDetachCompass" />
+				<and src="io()" trait="_HUDCompassFrame" />
+			</visible>
+		</image>
+	</image>
+
+</template>
+
+
+<template name="template_compass_icon_group">
+	<rect name="compass_icon_group">
+		<locus> &false; </locus> <!-- DarN true -->
+		<y> 5 </y>
+	</rect>
+</template>
+
+<template name="template_compass_icon">
+	<image name="compass_icon">
+		<depth> 2 </depth>
+		<locus> &true; </locus>
+		<include src="CompassIcon.xml" />
+		<y>
+			<copy> 5 </copy>
+			<mul src="io()" trait="_duiCScale" />
+		</y>
+		<_AlphaDown> &false; </_AlphaDown>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		<zoom> <copy src="io()" trait="_duiHUDScale" /> </zoom>
+	</image>
+</template>
+
+<template name="template_compass_icon_quest">
+	<image name="darn_compass_icon_Q">
+		<depth> 5 </depth>
+		<locus> &false; </locus>
+		<include src="CompassIcon.xml" />
+		<filename> Interface\HUD\glow_hud_compass_objective_marker.dds </filename>
+		<y>
+			<copy src="grandparent()" trait="height" />
+			<sub>
+				<copy src="me()" trait="height" />
+				<div> 1.8 </div>
+			</sub>
+			<add>
+				<copy src="globals()" trait="_duiHUDOffset" />
+				<onlyifnot src="io()" trait="_HUDShowQuestMarkers" />
+			</add>
+		</y>
+		<_AlphaDown> &false; </_AlphaDown>
+		<_Distance> 1.0 </_Distance>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		<width>
+			<copy> 64 </copy>
+			<mul>
+				<copy src="io()" trait="_duiCScale" />
+				<sub> .20 </sub>
+			</mul>
+		</width>
+		<height>
+			<copy> 64 </copy>
+			<mul>
+				<copy src="io()" trait="_duiCScale" />
+				<sub> .20 </sub>
+			</mul>
+		</height>
+		<zoom> &scale; </zoom>
+	</image>
+</template>
+
+<template name="template_compass_icon_player">
+	<image name="darn_compass_icon_P">
+		<depth> 4 </depth>
+		<locus> &false; </locus>
+		<include src="CompassIcon.xml" />
+		<filename> Interface\HUD\glow_hud_compass_pc_marker.dds </filename>
+		<!-- <y>
+			<copy src="parent()" trait="height" />
+			<sub> 5 </sub>
+		</y> -->
+		<_AlphaDown> &false; </_AlphaDown>
+		<_Distance> 1.0 </_Distance>
+		<zoom> &scale; </zoom>
+	</image>
+</template>
+
+<template name="template_compass_icon_marker">
+	<!-- <image name="compass_icon">
+	</image> -->
+	<image name="darn_compass_icon_LM">
+		<depth> 3 </depth>
+		<locus> &false; </locus>
+		<include src="CompassIcon.xml" />
+		<filename> Interface\HUD\glow_hud_compass_landmark.dds </filename>
+		<width>
+			<copy> 64 </copy>
+			<mul src="io()" trait="_duiCScale" />
+		</width>
+		<height>
+			<copy> 64 </copy>
+			<mul src="io()" trait="_duiCScale" />
+		</height>
+		<y>
+			<copy src="grandparent()" trait="height" />
+			<sub>
+				<copy> 28 </copy>
+				<mul src="io()" trait="_duiCScale" />
+			</sub>
+			<add>
+				<copy src="globals()" trait="_duiHUDOffset" />
+				<onlyifnot src="io()" trait="_HUDShowLandmarks" />
+			</add>
+		</y> <!-- DarN 5 -->
+		<_AlphaDown> &false; </_AlphaDown>
+ 		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		<zoom> &scale; </zoom>
+	</image>
+</template>
+
+<template name="template_compass_npc_icon_group">
+	<rect name="compass_npc_icon_group">
+		<depth> 2 </depth>
+		<locus> &true; </locus>
+		<y> 5 </y>
+	</rect>
+</template>
+
+<template name="compass_npc_icon">
+	<image name="compass_npc_icon">
+		<include src="CompassIcon.xml" />
+		<depth> -10 </depth>
+		<filename> Interface\HUD\glow_hud_tick_mark.dds </filename>
+		<zoom> &scale; </zoom>
+		<_friendly>
+			<copy src="me()" trait="systemcolor" />
+			<neq> &hudalt; </neq>
+			<or> <copy src="io()" trait="_HUDMarkEnemies" /><eq> 0 </eq> </or>
+		</_friendly>
+		<width>
+			<copy> 32 </copy>
+			<mul src="io()" trait="_duiCScale" />
+		</width>
+		<height>
+			<copy> 32 </copy>
+			<mul src="io()" trait="_duiCScale" />
+		</height>
+		<y> <!-- DarN -10 -->
+			<copy> 0 </copy>
+			<add>
+				<copy src="globals()" trait="_duiHUDOffset" />
+				<onlyif>
+					<not src="io()" trait="_HUDShowEnemies" />
+					<and> <not src="me()" trait="_friendly" /> </and>
+					<or>
+						<not src="io()" trait="_HUDShowNPC" />
+						<and src="me()" trait="_friendly" />
+					</or>
+				</onlyif>
+			</add>
+		</y>
+		<_Distance> 1.0 </_Distance>
+		<brightness>
+			<copy src="io()" trait="_duiHUDBrightness" />
+			<add>
+				<copy> 256 </copy>
+				<onlyif>
+					<not src="me()" trait="_friendly" />
+					<and>
+						<copy src="io()" trait="_duiHUDBrightness" />
+						<eq> &uselocalcolor; </eq>
+					</and>
+				</onlyif>
+			</add>
+		</brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+	</image>
+</template>
+
+<template name="template_hit_direction_indicator">
+	<image name="hit_direction_indicator">
+		<depth> 2 </depth>
+		<systemcolor> &hudalt; </systemcolor>
+		<filename> Interface\HUD\HitGradientLeft.dds </filename>
+		<brightness> 200 </brightness>
+		<zoom> -1 </zoom>
+		<x> 10 </x>
+		<y> 10 </y>
+		<width> 30 </width>
+		<height> 180 </height>
+		<visible> &true; </visible>
+		<alpha> 0 </alpha>
+	</image>
+</template>
+
+<template name="template_shaded_background">
+	<image name="shaded_background">
+		<filename> Interface\Shared\Background\solid_black.dds </filename>
+		<systemcolor> &nosystemcolor; </systemcolor>
+		<brightness> 128 </brightness>
+		<zoom> -1 </zoom>
+		<alpha> 140 </alpha>
+		<depth> -1 </depth>
+		<visible> &false; </visible>
+	</image>
+</template>
+
+<template name="template_explosive_indicator">
+	<image name="explosive_indicator">
+		<filename> Interface\HUD\explosive_indicator.dds </filename>
+		<systemcolor> &hudalt; </systemcolor>
+		<width> 151 </width>
+		<height> 187 </height>
+		<x> -75 </x>
+		<y> -93 </y>
+		<zoom> 120 </zoom>
+		<visible> &true; </visible>
+		<alpha> 0 </alpha>
+	</image>
+</template>

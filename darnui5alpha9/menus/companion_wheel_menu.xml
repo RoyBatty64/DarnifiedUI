@@ -1,0 +1,451 @@
+<!-- companion_wheel_menu.xml -->
+<!--
+// Obsidian Entertainment Incorporated.
+//
+// FILE			companion_wheel_menu.xml
+// VERSION		1.0
+// AUTHOR:		Dan Rubalcaba
+// DATE			August 27, 2009
+// INFO			XML file for the Companion Radial menu
+-->
+<menu name="CompanionWheelMenu">
+	<class> &CompanionWheelMenu; </class>
+	<stackingtype> &no_click_past; </stackingtype>
+
+	<!-- XBox 360 control bindings -->
+	<xbuttona> <ref src="SWM_WaitButton" trait="clicked" /> </xbuttona>
+	<xbuttonb> <ref src="SWM_CancelButton" trait="clicked" /> </xbuttonb>
+	<xleft> <ref src="scrollbar_horiz_left" trait="clicked" /> </xleft>
+	<xright> <ref src="scrollbar_horiz_right" trait="clicked" /> </xright>
+	<xbuttonlt> <ref src="scrollbar_horiz_page_left" trait="clicked" /> </xbuttonlt>
+	<xbuttonrt> <ref src="scrollbar_horiz_page_right" trait="clicked" /> </xbuttonrt>
+
+	<!-- <_PCButton_W>	SWM_WaitButton </_PCButton_W> -->	<!-- DarN This is not the SleepWait Menu... -->
+	<!-- <_PCButton_E>	SWM_CancelButton </_PCButton_E> -->
+	<_PCButton_E>	CWM_Button_Exit </_PCButton_E>			<!-- DarN NOT the SleepWait Menu. -->
+
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<systemcolor> &hudmain; </systemcolor>
+
+		<!-- Menu Matte -->
+		<image name="CWM_Matte">
+			<x>
+				<copy src="sibling(CWM_MainRect)" trait="x" />
+				<sub> 15 </sub>
+			</x>
+			<y>
+				<copy src="sibling(CWM_MainRect)" trait="y" />
+				<sub> 15 </sub>
+			</y>
+			<width>
+				<copy src="sibling(CWM_MainRect)" trait="width" />
+				<add> 30 </add>
+			</width>
+			<height>
+				<copy src="sibling(CWM_MainRect)" trait="height" />
+				<add> 30 </add>
+			</height>
+
+			<filename> Interface\companion_wheel\hud_comp_bkg.dds </filename>
+			<zoom> &scale; </zoom>
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha" /> </alpha>
+			<depth> 1 </depth>
+		</image>
+
+		<!-- Menu background -->
+		<image name="CWM_Background">
+			<x> <copy src="sibling(CWM_MainRect)" trait="x" /> </x>
+			<y> <copy src="sibling(CWM_MainRect)" trait="y" /> </y>
+			<width> <copy src="sibling(CWM_MainRect)" trait="width" /> </width>
+			<height> <copy src="sibling(CWM_MainRect)" trait="height" /> </height>
+
+			<filename> Interface\companion_wheel\hud_comp_pie.dds </filename>
+			<zoom> &scale; </zoom>
+			<!--<brightness> 128 </brightness>-->
+			<!--<alpha> <copy src="globals()" trait="_background_fill_alpha" /> </alpha>-->
+			<alpha> 255 </alpha>
+			<depth> 2 </depth>
+		</image>
+
+		<hotrect name="CWM_MainRect">
+			<locus> &true; </locus>
+			<id> &generic; </id>
+			<target> &true; </target>
+			<wheelable> &true; </wheelable>
+			<depth> 3 </depth>
+
+			<x>
+				<copy src="screen()" trait="width" />
+				<sub src="me()" trait="width" />
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+				<sub> 55 </sub> <!-- Making room for the subtitle -->
+			</y>
+			<width> 760 </width>
+			<height> 760 </height>
+
+
+			<!--================= NON-RADIAL-BUTTON ELEMENTS ==============-->
+
+			<!-- Label up top -->
+			<text name="CWM_RadialLabel">
+				<id> 8 </id>
+				<x>
+					<copy src="parent()" trait="width" />
+					<div> 2 </div>
+				</x>
+				<y>
+					<copy> 110 </copy> <!-- DarN 110 -->
+					<!-- The YScreenHeight=960 absolute position of the y coordinate-->
+					<sub src="parent()" trait="y" />
+					<!-- compensating for coordinates being in frame of reference of parents-->
+				</y>
+
+				<font> 3 </font> <!-- DarN 2/none -->
+				<string> &-sCWheelTitle; </string>
+				<!-- Companion Commands -->
+				<depth> 4 </depth>
+				<justify> &center; </justify>
+				<wrapwidth> 230 </wrapwidth>
+				<!-- in scale of a 1536 screen -->
+			</text>
+
+			<!-- The label of current selected node -->
+			<text name="CWM_ButtonPreviewText">
+				<id> 9 </id>
+				<x>
+					<copy src="parent()" trait="width" />
+					<div> 2 </div>
+				</x>
+				<y>
+					<copy> 205 </copy> <!-- DarN 205 -->
+					<!-- The YScreenHeight=960 absolute position of the y coordinate-->
+					<sub src="parent()" trait="y" />
+					<!-- compensating for coordinates being in frame of reference of parents-->
+				</y>
+				<font> 2 </font> <!-- DarN 3 -->
+				<justify> &center; </justify>
+				<wrapwidth> 190 </wrapwidth>
+				<!-- in scale of a 1536 screen -->
+				<string> </string>
+				<!-- Should be Set in code -->
+				<depth> 4 </depth>
+			</text>
+
+			<!-- The context label for current selected node -->
+			<text name="CWM_ButtonContextText">
+				<id> 10 </id>
+				<x>
+					<copy src="parent()" trait="width" />
+					<div> 2 </div>
+				</x>
+				<y>
+					<copy> 600 </copy> <!-- DarN 570 -->
+					<!-- The YScreenHeight=960 absolute position of the y coordinate-->
+					<sub src="parent()" trait="y" />
+					<!-- compensating for coordinates being in frame of reference of parents-->
+				</y>
+				<font> 1 </font> <!-- DarN 3 -->
+				<justify> &center; </justify>
+				<wrapwidth> 190 </wrapwidth>
+				<!-- in scale of a 1536 screen -->
+				<string> </string>
+				<!-- Should be Set in code -->
+				<depth> 4 </depth>
+			</text>
+
+			<!-- Button: Exit -->
+			<hotrect name="CWM_Button_Exit">
+				<include src="darn\text_box.xml" />
+				<id> 11 </id>
+				<justify> &right; </justify>
+				<string> &-sExit; </string>
+				<_PCButtonText> &-sPCMenuHintE; </_PCButtonText>
+				<x>
+					<copy> 770 </copy>
+					<!-- Double x coordinate across a 780 circle-->
+					<sub src="me()" trait="_duiFullWidth" />
+					<!-- subtract my full width -->
+					<div> 2 </div>
+				</x>
+				<y>
+					<copy> 850 </copy> <!-- DarN 850 -->
+					<!-- Double The Height = 960 absolte position of the y coordinate-->
+					<sub src="me()" trait="height" />
+					<!-- subtract my full width -->
+					<div> 2 </div>
+					<sub src="parent()" trait="y" />
+					<!-- compensating for coordinates being in frame of reference of parents-->
+				</y>
+				<visible> <not src="globals()" trait="_Has360Controller" /> </visible> <!-- Only visible on PC -->
+				<depth> 4 </depth>
+			</hotrect>
+
+			<!-- Console Button Callout: Exit -->
+			<hotrect name="CWM_Callout_Exit">
+				<include src="darn\text_box.xml" />
+				<id> 13 </id>
+				<justify> &center; </justify>
+				<string> &-sExit; </string>
+				<x>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="width" />
+					<!-- subtract my full width -->
+					<div> 2 </div>
+					<add> -90 </add> <!-- DarN -100 -->
+					<!-- The x offset from the center of the circle-->
+				</x>
+				<y>
+					<copy> 1430 </copy> <!-- DarN 1430 -->
+					<!-- Double The 1536/960 absolte position of the y coordinate-->
+					<sub src="me()" trait="height" />
+					<!-- subtract my full width -->
+					<div> 2 </div>
+					<sub src="parent()" trait="y" />
+					<!-- compensating for coordinates being in frame of reference of parents-->
+				</y>
+				<_xbox_button> &xbuttonb; </_xbox_button>
+				<_button_placement> &right; </_button_placement>
+				<visible> <copy src="globals()" trait="_Has360Controller" /> </visible> <!-- Only visible on Console -->
+				<!-- <font> 3 </font> -->
+				<depth> 4 </depth>
+			</hotrect>
+
+			<!-- Console Button Callout: Select -->
+			<hotrect name="CWM_Callout_Select">
+				<include src="darn\text_box.xml" />
+				<id> 14 </id>
+				<justify> &center; </justify>
+				<string> &-sSelect; </string>
+				<x>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="width" />
+					<!-- subtract my full width -->
+					<div> 2 </div>
+					<add> 49 </add> <!-- DarN 39 -->
+					<!-- The x offset from the center of the circle-->
+				</x>
+				<y>
+					<copy> 1430 </copy> <!-- DarN 1430 -->
+					<!-- Double The 1536/960 absolte position of the y coordinate-->
+					<sub src="me()" trait="height" />
+					<!-- subtract my full width -->
+					<div> 2 </div>
+					<sub src="parent()" trait="y" />
+					<!-- compensating for coordinates being in frame of reference of parents-->
+				</y>
+				<_xbox_button> &xbuttona; </_xbox_button>
+				<_button_placement> &right; </_button_placement>
+				<visible> <copy src="globals()" trait="_Has360Controller" /> </visible> <!-- Only visible on Console -->
+				<!-- <font> 3 </font> -->
+				<depth> 4 </depth>
+			</hotrect>
+
+			<!-- Console Button Callout: Navigate -->
+			<hotrect name="CWM_Callout_Navigate">
+				<include src="darn\text_box.xml" />
+				<id> 15 </id>
+				<justify> &center; </justify>
+				<string> &-sNavigate; </string>
+				<x>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="width" />
+					<!-- subtract my full width -->
+					<div> 2 </div>
+					<!-- <add> -10 </add> -->
+					<!-- The x offset from the center of the circle-->
+				</x>
+				<y>
+					<copy> 1350 </copy> <!-- DarN 1330 -->
+					<!-- Double The 1536/960 absolte position of the y coordinate-->
+					<sub src="me()" trait="height" />
+					<!-- subtract my full width -->
+					<div> 2 </div>
+					<sub src="parent()" trait="y" />
+					<!-- compensating for coordinates being in frame of reference of parents-->
+				</y>
+				<_xbox_button> &xbuttonl; </_xbox_button>
+				<_button_placement> &right; </_button_placement>
+				<visible> <copy src="globals()" trait="_Has360Controller" /> </visible> <!-- Only visible on Console -->
+				<!-- <font> 3 </font> -->
+				<depth> 4 </depth>
+			</hotrect>
+
+			<!-- Text: Subtitle -->
+			<rect name="CWM_Subtitle">
+				<include src="darn\text_box.xml" />
+				<id> 12 </id>
+				<justify> &center; </justify>
+				<string> </string>
+				<x>
+					<copy> 780 </copy> <!-- DarN 800 -->
+					<!-- Double x coordinate across a 780 circle-->
+					<sub src="me()" trait="width" />
+					<!-- subtract my full width -->
+					<div> 2 </div>
+				</x>
+				<y> 800 </y> <!-- 740 the 960 absolute position of the y coordinate-->
+					
+					
+				<depth> 4 </depth>
+				<_fixedwidth> 1000 </_fixedwidth> <!-- DarN 800 -->
+			</rect>
+
+
+			<!--=================RADIAL SEGMENTS==============-->
+
+			<!-- Button: Agressive/Passive -->
+			<radial name="CWM_Button_Aggressive_Passive">
+				<id> 0 </id>
+				<include src="darn\button_companion_wheel.xml" />
+				<filename> Interface\companion_wheel\hud_comp_slice1.dds </filename>
+
+				<user2> 0.523598 </user2> <!-- 0.523598 The Minimum angle you must be to be in this slice of pie -->
+				<user3> 1.047196 </user3> <!-- 1.047196 The Maximum angle you must be to be in this slice of pie -->
+				<user6> 467 </user6>	<!-- The x coordinate of the icon scaled to 780 circle width-->
+				<user7> 180 </user7>	<!-- 160 The 960 scaled y coordinate of the icon-->
+
+				<user8> Interface\companion_wheel\Comp_peaceful_off.dds </user8>		<!-- the off icon filename-->
+				<user9> Interface\companion_wheel\Comp_peaceful_on.dds </user9>			<!-- the on icon filename-->
+				<user12> Interface\companion_wheel\Comp_aggressive_off.dds </user12>	<!-- the alt off icon filename-->
+				<user13> Interface\companion_wheel\Comp_aggressive_on.dds </user13>		<!-- the alt on icon filename-->
+
+				<include src="darn\icon_companion_wheel.xml" />
+			</radial>
+
+			<!-- Button: Use Stim -->
+			<radial name="CWM_Button_Use_Stim">
+				<id> 1 </id>
+				<include src="darn\button_companion_wheel.xml" />
+				<filename> Interface\companion_wheel\hud_comp_slice2.dds </filename>
+
+				<user2> 1.047196 </user2>	<!-- 1.047196 The Minimum angle you must be to be in this slice of pie -->
+				<user3> 1.5707943 </user3>	<!-- 1.5707943 The Maximum angle you must be to be in this slice of pie -->
+				<user6> 532 </user6>	<!-- The x coordinate of the icon scaled to 780 circle width-->
+				<user7> 285 </user7>	<!-- 275 The 960 scaled y coordinate of the icon-->
+
+				<user8> Interface\companion_wheel\Comp_stimpack_off.dds </user8>	<!-- the off icon filename-->
+				<user9> Interface\companion_wheel\Comp_stimpack_on.dds </user9>		<!-- the on icon filename-->
+
+				<include src="darn\icon_companion_wheel.xml" />
+			</radial>
+
+			<!-- Button: Stay Follow -->
+			<radial name="CWM_Button_Stay_Follow">
+				<id> 2 </id>
+				<include src="darn\button_companion_wheel.xml" />
+				<filename> Interface\companion_wheel\hud_comp_slice3.dds </filename>
+
+				<user2> 1.5707943 </user2>	<!-- 1.5707943 The Minimum angle you must be to be in this slice of pie -->
+				<user3> 2.094329 </user3>	<!-- 2.094329 The Maximum angle you must be to be in this slice of pie -->
+				<user6> 532 </user6>	<!-- The x coordinate of the icon scaled to 780 circle width-->
+				<user7> 404 </user7>	<!-- 404 The 960 scaled y coordinate of the icon-->
+
+				<user8> Interface\companion_wheel\Comp_follow_off.dds </user8>	<!-- the off icon filename-->
+				<user9> Interface\companion_wheel\Comp_follow_on.dds </user9>	<!-- the on icon filename-->
+				<user12> Interface\companion_wheel\Comp_stay_off.dds </user12>	<!-- the alt off icon filename-->
+				<user13> Interface\companion_wheel\Comp_stay_on.dds </user13>	<!-- the alt on icon filename-->
+
+				<include src="darn\icon_companion_wheel.xml" />
+			</radial>
+
+			<!-- Button: Talk -->
+			<radial name="CWM_Button_Talk_To">
+				<id> 3 </id>
+				<include src="darn\button_companion_wheel.xml" />
+				<filename> Interface\companion_wheel\hud_comp_slice4.dds </filename>
+
+				<user2> 2.094329 </user2>	<!-- 2.094329 The Minimum angle you must be to be in this slice of pie -->
+				<user3> 2.61799 </user3>	<!-- 2.61799 The Maximum angle you must be to be in this slice of pie -->
+				<user6> 477 </user6>	<!-- 467 The x coordinate of the icon scaled to 780 circle width-->
+				<user7> 510 </user7>	<!-- 510 The 960 scaled y coordinate of the icon-->
+
+				<user8> Interface\companion_wheel\Comp_talk_off.dds </user8>	<!-- the off icon filename-->
+				<user9> Interface\companion_wheel\Comp_talk_on.dds </user9>		<!-- the on icon filename-->
+
+				<include src="darn\icon_companion_wheel.xml" />
+			</radial>
+
+			<!-- Button: Back Up -->
+			<radial name="CWM_Button_Back_Up">
+				<id> 4 </id>
+				<include src="darn\button_companion_wheel.xml" />
+				<filename> Interface\companion_wheel\hud_comp_slice5.dds </filename>
+
+				<user2> 3.665186 </user2>	<!-- 3.665186 The Minimum angle you must be to be in this slice of pie -->
+				<user3> 4.188784 </user3>	<!-- 4.188784 The Maximum angle you must be to be in this slice of pie -->
+				<user6> 132 </user6>	<!-- 112 The x coordinate of the icon scaled to 780 circle width-->
+				<user7> 500 </user7>	<!-- 500 The 960 scaled y coordinate of the icon-->
+
+				<user8> Interface\companion_wheel\Comp_stepback_off.dds </user8>	<!-- the off icon filename-->
+				<user9> Interface\companion_wheel\Comp_stepback_on.dds </user9>		<!-- the on icon filename-->
+
+				<include src="darn\icon_companion_wheel.xml" />
+			</radial>
+
+			<!-- Button: Near Far -->
+			<radial name="CWM_Button_Near_Far">
+				<id> 5 </id>
+				<include src="darn\button_companion_wheel.xml" />
+				<filename> Interface\companion_wheel\hud_comp_slice6.dds </filename>
+
+				<user2> 4.188784 </user2>	<!-- 4.188784 The Minimum angle you must be to be in this slice of pie -->
+				<user3> 4.7123823 </user3>	<!-- 4.7123823 The Maximum angle you must be to be in this slice of pie -->
+				<user6> 72 </user6>		<!-- 52 The x coordinate of the icon scaled to 780 circle width-->
+				<user7> 404 </user7>	<!-- 404 The 960 scaled y coordinate of the icon-->
+
+				<user8> Interface\companion_wheel\Comp_stayclose_off.dds </user8>	<!-- the off icon filename-->
+				<user9> Interface\companion_wheel\Comp_stayclose_on.dds </user9>	<!-- the on icon filename-->
+				<user12> Interface\companion_wheel\Comp_stayfar_off.dds </user12>	<!-- the alt off icon filename-->
+				<user13> Interface\companion_wheel\Comp_stayfar_on.dds </user13>	<!-- the alt on icon filename-->
+
+				<include src="darn\icon_companion_wheel.xml" />
+			</radial>
+
+			<!-- Button: Open Inventory -->
+			<radial name="CWM_Button_Open_Inventory">
+				<id> 6 </id>
+				<include src="darn\button_companion_wheel.xml" />
+				<filename> Interface\companion_wheel\hud_comp_slice7.dds </filename>
+
+				<user2> 4.7123823 </user2>	<!-- 4.7123823 The Minimum angle you must be to be in this slice of pie -->
+				<user3> 5.235980 </user3>	<!-- 5.235980 The Maximum angle you must be to be in this slice of pie -->
+				<user6> 62 </user6>		<!-- 52 The x coordinate of the icon scaled to 780 circle width-->
+				<user7> 285 </user7>	<!-- 275 The 960 scaled y coordinate of the icon-->
+
+				<user8> Interface\companion_wheel\Comp_inven_off.dds </user8>	<!-- the off icon filename-->
+				<user9> Interface\companion_wheel\Comp_inven_on.dds </user9>	<!-- the on icon filename-->
+
+				<include src="darn\icon_companion_wheel.xml" />
+			</radial>
+
+			<!-- Button: Ranged Melee Button -->
+			<radial name="CWM_Button_Ranged_Melee">
+				<id> 7 </id>
+				<include src="darn\button_companion_wheel.xml" />
+				<filename> Interface\companion_wheel\hud_comp_slice8.dds </filename>
+
+				<user2> 5.235980 </user2>	<!-- 5.235980 The Minimum angle you must be to be in this slice of pie -->
+				<user3> 5.759578 </user3>	<!-- 5.759578 The Maximum angle you must be to be in this slice of pie -->
+				<user6> 142 </user6>	<!-- 122 The x coordinate of the icon scaled to 780 circle width-->
+				<user7> 180 </user7>	<!-- 160 The 960 scaled y coordinate of the icon-->
+
+				<user8> Interface\companion_wheel\Comp_melee_off.dds </user8>		<!-- the off icon filename-->
+				<user9> Interface\companion_wheel\Comp_melee_on.dds </user9>		<!-- the on icon filename-->
+				<user12> Interface\companion_wheel\Comp_ranged_off.dds </user12>	<!-- the alt off icon filename-->
+				<user13> Interface\companion_wheel\Comp_ranged_on.dds </user13>		<!-- the alt on icon filename-->
+
+				<include src="darn\icon_companion_wheel.xml" />
+			</radial>
+
+		</hotrect>
+		<!-- end CWM_MainRect -->
+	</rect>
+	<!-- end NOGLOW_BRANCH-->
+</menu>

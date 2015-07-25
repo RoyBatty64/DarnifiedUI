@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="SCPT">
+  <Flags>0</Flags>
+  <FormID ID="0100400C">DUIF3ConfigSubMenu505</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">DUIF3ConfigSubMenu505</EditorID>
+    <Data>
+      <Data Tag="SCHR">
+        <ReferenceCount>1</ReferenceCount>
+        <CompiledSize>707</CompiledSize>
+        <VariableCount>4</VariableCount>
+        <Type>Quest</Type>
+        <Flags>Enabled</Flags>
+      </Data>
+      <CompiledScript Tag="SCDA">HQAAABAABgAAAJQAAAAWAAoABAAGACBYqBQAABYALAACACgAIFiuFCIAAQAeAFRoZSBNb2QgQ29uZmlndXJhdGlvbiBNZW51LmVzcBUALQBzAwAoACBYrxQiAAEAHgBUaGUgTW9kIENvbmZpZ3VyYXRpb24gTWVudS5lc3AVABUAZgQAEAAgWNkUCgACAHMDAG7mCgAAGQAAABkAAAARAAAAEAANAAEAEAIAAAEAbvUDAAAWAFYAAABSACBYrhQiAAEAHgBUaGUgTW9kIENvbmZpZ3VyYXRpb24gTWVudS5lc3AgWMIhHAADAG4AAAAAbgAAAAAOAF9BY3RpdmVTdWJNZW51IDkgPT0gJiYXAAIAAQAeAAAAGQAAABYAQAAKADwAIFjCIRgAAwBuAAAAAG4AAAAACgBfQWN0aXZlTW9kIFivFBUAAQARAERhck5pZmllZFVJTlYuZXNwID09FQAmAHMBACEAIFjCIRsAAwBuAAAAAG4AAAAADQBfQWN0aXZlT3B0aW9uFQAfAGYCABoAIFjCIRQAAwBuAAAAAG4AAAAABgBfVmFsdWUWACMABgAfACBYwiEUAAMAbgAAAABuAAAAAAYAX1Jlc2V0IDEgPT3DIR0ABABuAAAAAG4AAAAABgBfUmVzZXR6AAAAAAAAAADDIR8ABABuAQAAAG4AAAAACABfY29sdW1uc3oAAAAAAADwP8MhHgAEAG4BAAAAbgEAAAAHAF9lbmFibGV6AAAAAAAA8D/EITcABABuAQAAAG4BAAAABgBfdGl0bGUhADUwNSBFcnJvciAtIFZlcnNpb24gTm90IFN1cHBvcnRlZMMhHwAEAG4BAAAAbgEAAAAIAF9hbHRGb250egAAAAAAABRAwyEcAAQAbgEAAABuAQAAAAUAX3R5cGV6AAAAAAAAAAAZAAAAGQAAABEAAAA=</CompiledScript>
+      <ScriptSource Tag="SCTX" External="DUIF3ConfigSubMenu505.fnvscript" />
+      <LocalVariables>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>3</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">iMaster</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>1</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">iOption</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>2</Index>
+            <Flags>0</Flags>
+          </Data>
+          <Name Tag="SCVR">fValue</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>4</Index>
+            <Flags>0</Flags>
+          </Data>
+          <Name Tag="SCVR">rList</Name>
+        </Variable>
+      </LocalVariables>
+      <References>
+        <Reference Tag="SCRV">4</Reference>
+      </References>
+    </Data>
+  </Subrecords>
+</Record>

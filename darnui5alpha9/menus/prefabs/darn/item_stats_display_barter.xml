@@ -1,0 +1,346 @@
+<!-- item_stats_display.xml -->
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			item_stats_display.xml
+// VERSION		1.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			2-4-2008
+// INFO			Item stats display used by Container, Barter, and Inventory menus among others
+-->
+<!--rect name="ItemData"-->
+	<x> 0 </x>
+	<y> 0 </y>
+	<width> 530 </width> <!-- DarN 530 -->
+	<height> 120 </height> <!-- DarN 120 -->
+	<depth> 2 </depth>
+	<locus> &true; </locus>
+
+	<!-- 1/3 total width: standard width of one display tile -->
+	<user0>
+		<copy src="me()" trait="width" />
+		<div> 3 </div>
+	</user0>
+	<!-- 1/3 total width: standard height of one display tile -->
+	<user1>	
+		<copy src="me()" trait="height" />
+		<div> 3 </div> <!-- DarN 2 -->
+	</user1>
+	<font> 1 </font> <!-- DarN Add -->
+
+	<!-- ===== SELECTED ITEM INFO BRACKETS =====-->
+	<!-- Damage Resistance (DR) -->
+	<rect name="DamageResistInfo">
+		<include src="darn\card_info_barter.xml" />
+		<id> 17 </id> <!-- FONV -->
+		<width> <copy src="parent()" trait="user0" /> </width>
+		<height>	 <copy src="parent()" trait="user1" /> </height>
+		
+		<_Title> &-sInventoryDamageResistance; </_Title>
+		
+		<_Value></_Value>					<!-- Set in code -->
+		<visible> &false; </visible>		<!-- Set in code -->
+	</rect>
+
+	<!-- Damage Per Second (DPS) -->
+	<rect name="DPSInfo">
+		<include src="darn\card_info_barter.xml" />
+		<id> 15 </id> <!-- FONV -->
+		<width> <copy src="parent()" trait="user0" /> </width>
+		<height> <copy src="parent()" trait="user1" /> </height>
+		<alpha> 255 </alpha> <!-- DarN: CHECK - FONV -->
+		<_Title> &-sInventoryDamagePerSecond; </_Title>
+		
+		<_Value></_Value>					<!-- Set in code -->
+		<visible> &false; </visible>		<!-- Set in code -->
+	</rect>
+
+	<!-- Item Weight (WG) -->
+	<rect name="WeightInfo">
+		<include src="darn\card_info_barter.xml" />
+
+		<x>
+			<copy src="parent()" trait="user0" />
+			<add> 10 </add>
+		</x>
+		<width> <copy src="parent()" trait="user0" /> </width>
+		<height>	 <copy src="parent()" trait="user1" /> </height>
+		
+		<_Title> &-sInventoryWeightUpper; </_Title>
+		
+		<_Value></_Value>					<!-- Set in code -->
+		<visible> &false; </visible>		<!-- Set in code -->
+	</rect>
+
+	<!-- Item Value (VAL)-->
+	<rect name="ValueInfo">
+		<include src="darn\card_info_barter.xml" />
+
+		<x>
+			<copy src="parent()" trait="user0" />
+			<add> 10 </add>
+			<mul> 2 </mul>
+		</x>
+		<width> <copy src="parent()" trait="user0" /> </width>
+		<height>	 <copy src="parent()" trait="user1" /> </height>
+		
+		<_Title> &-sInventoryValue; </_Title>
+		
+		<_Value></_Value>					<!-- Set in code -->
+		<visible> &false; </visible>		<!-- Set in code -->
+	</rect>
+
+	<!-- Item Condition (CND)-->
+	<rect name="ConditionInfo">
+		<include src="darn\card_info_barter.xml" />
+		<user6></user6> <!-- FONV -->
+		<y> <copy src="parent()" trait="user1" /> </y>
+		<width> <copy src="parent()" trait="user0" /> </width>
+		<height> <copy src="parent()" trait="user1" /> </height>
+		
+		<_Title> &-sInventoryCondition; </_Title>
+		<visible> &false; </visible>		<!-- Set in code -->
+
+		<!-- Condition value is shown as a bar -->
+		<rect name="ConditionMeter">
+			<include src="meter.xml" />
+
+			<visible> <copy src="parent()" trait="visible" /> </visible>
+			<_SolidMeter> &true; </_SolidMeter>
+			<_ShowBackground> &true; </_ShowBackground>
+			<_Value> <copy src="parent()" trait="user5" /> </_Value>
+			<height> 15 </height> <!-- DarN 20 -->
+			<width>
+				<copy src="parent()" trait="width" />
+				<sub> 72 </sub> <!-- DarN 72 -->
+			</width>
+			<x> 62 </x> <!-- DarN 62 -->
+			<y>
+				<copy src="parent()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+			</y> <!-- DarN 15 -->
+		</rect>
+		
+		<!-- Interface\HUD\hud_icon_armor_ap.dds< -->
+		<!-- DarN FONV Addition -->
+		<image name="CNDArrows">
+			<id></id>
+			<depth> 10 </depth>
+			<systemcolor></systemcolor>
+			<locus> &true; </locus>
+			<filename> interface\shared\arrow\repair_meter_pips.dds </filename>
+			<width> 16 </width>
+			<height> 16 </height>
+			<alpha> 255 </alpha>
+			<x>
+				<copy src="sibling(ConditionMeter)" trait="x" />
+				<add>
+					<copy src="sibling(ConditionMeter)" trait="width" />
+					<div> 2 </div>
+				</add>
+				<add>
+					<copy src="sibling(ConditionMeter)" trait="width" />
+					<div> 4 </div>
+					<onlyif>
+						<copy src="parent()" trait="user6" />
+						<eq> 1 </eq>
+					</onlyif>
+				</add>
+			</x>
+			<!-- these x and y are set in code because the arrows can show up in various places. -->
+			<y>
+				<copy src="sibling(ConditionMeter)" trait="y" />
+				<!-- <add> 2 </add> -->
+			</y>
+			<zoom> &scale; </zoom>
+			<visible> &true; </visible>
+		</image>
+	
+	</rect>
+
+	<!-- Item's Ammo type -->
+	<rect name="AmmoInfo">
+		<include src="darn\card_info_barter.xml" />
+
+		<x>
+			<copy src="parent()" trait="user0" />
+			<add> 10 </add>
+		</x>
+		<y> <copy src="parent()" trait="user1" /> </y>
+		<width>
+			<copy src="parent()" trait="user0" />
+			<mul> 2 </mul>
+			<add> 10 </add>
+		</width>
+		<height>	 <copy src="parent()" trait="user1" /> </height>
+
+		<_Title></_Title>					<!-- Set in code -->
+		<visible> &false; </visible>		<!-- Set in code -->
+	</rect>
+	
+	<!-- Effects list info -->
+	<rect name="EffectsInfo">
+		<include src="darn\card_info_barter.xml" />
+		
+		<y> <copy src="parent()" trait="user1" /> </y>
+		<width>
+			<copy src="parent()" trait="user0" />
+			<mul> 3 </mul>
+			<add> 20 </add>
+		</width>
+		<height>
+			<copy src="parent()" trait="user1" />
+			<add> 40 </add> <!-- DarN 30 -->
+		</height>
+		<_Title> &-sInventoryEffects; </_Title>
+	
+		<_Value></_Value>				<!-- Set in code -->
+		<visible> &false; </visible>		<!-- Set in code -->
+	</rect>
+	
+	<!-- Mod list info -->
+	<rect name="ModInfoOne">
+	  <include src="darn\card_info_barter.xml" />
+
+	  <y>
+		<copy src="parent()" trait="user1" />
+	  </y>
+	  <width>
+		<copy src="parent()" trait="user0" />
+		<mul> 3 </mul>
+		<add> 20 </add>
+	  </width>
+	  <height>
+		<copy src="parent()" trait="user1" />
+	  </height>
+	  <_Title> &-sModffects; </_Title>
+
+	  <_Value></_Value>
+	  <!-- Set in code -->
+	  <visible> &false; </visible>
+	  <!-- Set in code -->
+	</rect>
+	<!-- Mod list info -->
+	<rect name="ModInfoTwo">
+	  <include src="darn\card_info_barter.xml" />
+
+	  <y>
+		<copy src="parent()" trait="user1" />
+	  </y>
+	  <width>
+		<copy src="parent()" trait="user0" />
+		<mul> 3 </mul>
+		<add> 20 </add>
+	  </width>
+	  <height>
+		<copy src="parent()" trait="user1" />
+	  </height>
+	  <_Title> &-sModffects; </_Title>
+
+	  <_Value></_Value>
+	  <!-- Set in code -->
+	  <visible> &false; </visible>
+	  <!-- Set in code -->
+	</rect>
+	<!-- Mod list info -->
+	<rect name="ModInfoThree">
+	  <include src="darn\card_info_barter.xml" />
+
+	  <y> <copy src="parent()" trait="user1" /> </y>
+	  <width>
+		<copy src="parent()" trait="user0" />
+		<mul> 3 </mul>
+		<add> 20 </add>
+	  </width>
+	  <height> <copy src="parent()" trait="user1" /> </height>
+	  <_Title> &-sModffects; </_Title>
+
+	  <_Value></_Value>
+	  <!-- Set in code -->
+	  <visible> &false; </visible>
+	  <!-- Set in code -->
+	</rect>
+
+	<!-- strength requirement (STR)-->
+	<rect name="StrengthReqInfo">
+		<id> 16 </id>
+	  <include src="darn\card_info_barter.xml" />
+
+	  <x>
+		<copy src="sibling(ValueInfo)" trait="x" />
+		<add src="sibling(ValueInfo)" trait="width" />
+		<add> 10 </add>
+	  </x>
+	  <y>
+		<copy src="sibling(ValueInfo)" trait="y" />
+		<!-- <sub>
+		  <copy src="sibling(ValueInfo)" trait="height" />
+		</sub> -->
+	  </y>
+	  <width> <copy src="parent()" trait="user0" /> </width>
+	  <height> <copy src="parent()" trait="user1" /> </height>
+
+	  <alpha> 0 </alpha>
+	  <_Title> &-sInventoryStrReq; </_Title>
+	  <_Value> 0 </_Value>
+	  <!-- Set in code -->
+	  <visible> &false; </visible>
+	  <!-- temp -->
+	  <!-- Set in code -->
+	</rect>
+
+	<!-- Damage (DPS) -->
+	<rect name="DAMInfo">
+	  <id> 14 </id>
+	  <include src="darn\card_info_barter.xml" />
+
+
+	  <width>
+		<copy src="parent()" trait="user0" />
+	  </width>
+	  <height>
+		<copy src="parent()" trait="user1" />
+	  </height>
+
+	  <_Title> &-sInventoryDamage; </_Title>
+	  <alpha> 0 </alpha> <!-- set in code -->
+	  <_Value></_Value>
+	  <!-- Set in code -->
+	  <visible> &false; </visible>
+	  <!-- Set in code -->
+	</rect>
+
+	<!-- Damage Resistance (DR) -->
+	<rect name="DamageThresholdInfo">
+		<id> 18 </id>
+		<include src="darn\card_info_barter.xml" />
+
+		<width>
+			<copy src="parent()" trait="user0" />
+		</width>
+		<height>
+			<copy src="parent()" trait="user1" />
+		</height>
+
+		<_Title> &-sInventoryDamageThreshold; </_Title>
+
+		<_Value></_Value>
+		<!-- Set in code -->
+		<visible> &false; </visible>
+		<!-- Set in code -->
+	</rect>
+	
+<!--</rect>-->
+
+

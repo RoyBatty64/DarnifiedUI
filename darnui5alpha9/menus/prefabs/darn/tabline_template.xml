@@ -1,0 +1,63 @@
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			tabline_template.xml
+// VERSION		1.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			December 5, 2006
+// INFO			A tab button template that should be included in every XML file that uses tabline.xml.  Due to how the <include>
+// tag works, this template can't be included within tabline.xml, as it would get re-copied with every <include src=tabline.xml>, messing up the internal
+// template definitions.
+-->
+<!-- template name="TabButtonTemplate"-->
+<!-- hotrect name='TabButton-->
+	<include src="darn\super_text_box.xml"/>
+	<font> <copy src="globals()" trait="_pb_TabFont" /> </font>
+
+<!-- These traits are inherited from the tabline -->
+	<_LeftLineLength> <copy src="parent()" trait="_LeftLineLength"/> </_LeftLineLength>
+	<_enabled> <copy src="parent()" trait="_enabled"/> </_enabled>
+	<_line_alpha> <copy src="parent()" trait="alpha"/> </_line_alpha>
+
+	<_y>
+		<copy src="me()" trait="height"/>
+		<div> -2 </div>
+	</_y>
+	<_selected>
+		<copy src="parent()" trait="_CurrentTab"/>
+		<eq src="me()" trait="listindex"/>
+	</_selected>
+	<_horbuf> 35 </_horbuf>
+	<_verbuf> 15 </_verbuf>
+
+	<!-- Line in-between this tab button and the previous one -->
+	<image name="LeftLine">
+		<include src="line.xml"/>
+
+		<_length> <copy src="parent()" trait="_LeftLineLength"/> </_length>
+		<alpha> <copy src="parent()" trait="_line_alpha"/> </alpha>
+		<x>
+			<copy src="parent()" trait="x"/>
+			<sub src="me()" trait="_length"/>
+		</x>
+		<y>
+			<copy src="parent()" trait="y"/>
+			<add>
+				<copy src="parent()" trait="height"/>
+				<div> 2 </div>
+			</add>
+		</y>
+	</image>
+	<!--/hotrect-->
+<!--/template-->
+	

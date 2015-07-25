@@ -1,0 +1,65 @@
+scn DUIF3DynamicQuantityScript
+
+short BasePromptAmount
+short takeall
+
+BEGIN MENUMODE
+
+	if menumode 1008 || menumode 1002 || menumode 1053 ;inventory, container, or barter
+		if menumode 1016 == 0		
+			SetQuestDelay DUIF3DynamicQuantityQuest .1
+		endif
+		if iskeypressed 29 ;&& iskeypressed 42 == 0  ;if left Ctrl but not left Shift
+			;     iInventoryAskQuantityAt means it will only do one at a time unless the stack is at least that large.
+			;     If item stack is larger, then the Quantity menu pops up.
+			;     this high number ensures it will never ask and always do 1
+			SetNumericGameSetting iInventoryAskQuantityAt 99999
+			set takeall to 0
+			;endif
+
+		elseif iskeypressed 42 ;&& iskeypressed 29 == 0   ;if left Shift but not left Ctrl
+			;     Here it will always bring up the quantity prompt, and then when the Quantity menu comes up (menumode 1016)
+			;     a script will press the accept key automatically.
+			SetNumericGameSetting iInventoryAskQuantityAt 1
+			if menumode 1016
+				;return
+			else
+				set takeall to 1
+			endif
+			;endif
+
+		else ;if iskeypressed 29 == 0 && iskeypressed 42 == 0  ;if neither left Ctrl nor left Shift
+			if BasePromptAmount != GetNumericGameSetting iInventoryAskQuantityAt
+				SetNumericGameSetting iInventoryAskQuantityAt BasePromptAmount  ;set it to what it was before
+			else
+				SetNumericGameSetting iInventoryAskQuantityAt 5 ; if for whatever reason something caused the stored variable to be lost, set it to the game-default
+			endif
+			set takeall to 0
+		endif
+	else
+		if BasePromptAmount <= 0
+			set BasePromptAmount to GetNumericGameSetting iInventoryAskQuantityAt
+			SetQuestDelay DUIF3DynamicQuantityQuest 1
+		endif
+	endif
+
+	if menumode 1016 ;quantity
+		if iskeypressed 42  ;left shift
+			if takeall == 1
+				MenuTapKey 30  ;scancode for "A". This can be changed if player has non-standard accept key defined in quantity_menu.xml
+				set takeall to 0
+			endif
+		endif
+	endif
+
+	if menumode 1016 || menumode 1012 ;quantity or wait/sleep
+		SetQuestDelay DUIF3DynamicQuantityQuest .01
+		if iskeypressed 265
+			MenuTapKey 203
+		endif
+		if iskeypressed 264
+			MenuTapKey 205
+		endif
+	endif
+
+END

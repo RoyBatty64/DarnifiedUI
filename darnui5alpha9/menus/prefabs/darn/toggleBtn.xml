@@ -1,0 +1,124 @@
+﻿<!-- hotrect name="selected_box" -->
+
+<xbuttona> <ref src="me()" trait="clicked" /> </xbuttona>
+
+	<_horbuf> 10 </_horbuf>
+	<_verbuf> 10 </_verbuf>
+	<!-- <xdefault> 1 </xdefault> -->
+
+	<_line_alpha>
+		<copy> 128 </copy>
+		<add>
+			<copy> 127 </copy>
+			<onlyif>
+				<copy src="me()" trait="_Start" />
+				<and src="me()" trait="target" />
+			</onlyif>
+		</add>
+	</_line_alpha>
+
+	<x> 0 </x>
+	<y> 0 </y>
+
+	<width> 200 </width>
+	<height>
+		<copy src="child(button_text)" trait="height" />
+		<add src="me()" trait="_verbuf" />
+	</height>
+
+	<string> Button Text </string>
+	
+	<target> <copy src="me()" trait="_enabled" /> </target>
+
+	<locus> &true; </locus>
+	<alpha>
+		<copy> 60 </copy> <!-- DarN 40> -->
+		<onlyif src="me()" trait="mouseover" />
+	</alpha>
+
+	<brightness> 255 </brightness>
+	<mouseoversound> UIMenuFocus </mouseoversound>
+	<clicksound> UIMenuOK </clicksound>
+	
+	<_State>
+		<copy src="child(marker)" trait="_value_scrolled_to" />
+		<add src="me()" trait="_start" />
+		<sub> 1 </sub>
+	</_State>
+	
+	<user1>
+		<copy src="me()" trait="user2" />
+		<sub> 1 </sub>
+	</user1>
+	<!-- maximum range value -->
+	<user2>
+		<copy> 2 </copy>
+		<sub src="me()" trait="_start" />
+	</user2>
+
+	<text name="button_text"> <!-- Caption -->
+		<font> 4 </font>
+
+		<string> <copy src="parent()" trait="_Caption" /> </string>
+
+		<alpha>
+			<copy> 255 </copy>
+			<div>
+				<copy> 2 </copy>
+				<onlyifnot src="parent()" trait="target" />
+			</div>
+		</alpha>
+
+		<wrapwidth>
+			<copy src="parent()" trait="width" />
+			<sub src="parent()" trait="_horbuf" />
+		</wrapwidth>
+		<depth> 2 </depth>
+
+		<x> 5 </x>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+	</text>
+	
+	<image name="stateImg">
+		<_fn_0> interface\shared\marker\glow_square_small.dds </_fn_0>
+		<_fn_1> darn\glow_square_small_checked.dds </_fn_1>
+		<filename>
+			<copy src="parent()" trait="_State" />
+			<copy src="me()" trait="_fn_" />
+		</filename>
+		<width> 22	</width>
+		<height> 22	</height>
+		<x>
+			<copy src="parent()" trait="width" />
+			<sub> 32 </sub>
+		</x>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+		<alpha> <copy src="parent()" trait="_line_alpha" /> </alpha>
+	</image>
+
+	<rect name="marker">
+		<visible> &false; </visible>
+
+		<_value_scrolled_to>
+			<!-- copy old value -->
+			<sub>
+				<copy src="parent()" trait="clicked" />
+				<onlyif src="parent()" trait="_Start" />
+			</sub>
+			<add>
+				<copy src="parent()" trait="clicked" />
+				<onlyifnot src="parent()" trait="_Start" />
+			</add>
+			<max src="parent()" trait="user1" />
+			<min src="parent()" trait="user2" />
+		</_value_scrolled_to>
+	</rect>
+<!-- /hotrect -->

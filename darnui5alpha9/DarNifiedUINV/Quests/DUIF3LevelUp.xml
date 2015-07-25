@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="QUST">
+  <Flags>0</Flags>
+  <FormID ID="01003004">DUIF3LevelUp</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">DUIF3LevelUp</EditorID>
+    <Script Tag="SCRI">
+      <Reference ID="01004004">DUIF3LevelUpScript</Reference>
+    </Script>
+    <Name Tag="FULL">DUIF3LevleUp</Name>
+    <Data Tag="DATA">
+      <Flags>0</Flags>
+      <Priority>50</Priority>
+      <QuestDelay>1</QuestDelay>
+    </Data>
+  </Subrecords>
+</Record>

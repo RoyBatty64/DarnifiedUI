@@ -1,0 +1,520 @@
+<!-- rect name="vertical_tabline"-->
+
+	<locus> &true; </locus>
+	<width>
+		<copy src="child(subButton1)" trait="width" />
+		<max>
+			<copy src="child(subButton2)" trait="width" />
+			<onlyif src="child(subButton2)" trait="visible" />
+		</max>
+		<max>
+			<copy src="child(subButton3)" trait="width" />
+			<onlyif src="child(subButton3)" trait="visible" />
+		</max>
+		<max>
+			<copy src="child(subButton4)" trait="width" />
+			<onlyif src="child(subButton4)" trait="visible" />
+		</max>
+		<max>
+			<copy src="child(subButton5)" trait="width" />
+			<onlyif src="child(subButton5)" trait="visible" />
+		</max>
+		<max>
+			<copy src="child(subButton6)" trait="width" />
+			<onlyif src="child(subButton6)" trait="visible" />
+		</max>
+		<max>
+			<copy src="child(subButton7)" trait="width" />
+			<onlyif src="child(subButton7)" trait="visible" />
+		</max>
+		<max>
+			<copy src="child(subButton8)" trait="width" />
+			<onlyif src="child(subButton8)" trait="visible" />
+		</max>
+		<max>
+			<copy src="child(subButton9)" trait="width" />
+			<onlyif src="child(subButton9)" trait="visible" />
+		</max>
+		<max>
+			<copy src="child(subButton10)" trait="width" />
+			<onlyif src="child(subButton10)" trait="visible" />
+		</max>
+		
+	</width>
+	<height>
+		<copy src="child(subButton1)" trait="height" />
+		<add>
+			<copy src="child(subButton2)" trait="height" />
+			<onlyif src="child(subButton2)" trait="visible" />
+		</add>
+		<add>
+			<copy src="child(subButton3)" trait="height" />
+			<onlyif src="child(subButton3)" trait="visible" />
+		</add>
+		<add>
+			<copy src="child(subButton4)" trait="height" />
+			<onlyif src="child(subButton4)" trait="visible" />
+		</add>
+		<add>
+			<copy src="child(subButton5)" trait="height" />
+			<onlyif src="child(subButton5)" trait="visible" />
+		</add>
+		<add>
+			<copy src="child(subButton6)" trait="height" />
+			<onlyif src="child(subButton6)" trait="visible" />
+		</add>
+		<add>
+			<copy src="child(subButton7)" trait="height" />
+			<onlyif src="child(subButton7)" trait="visible" />
+		</add>
+		<add>
+			<copy src="child(subButton8)" trait="height" />
+			<onlyif src="child(subButton8)" trait="visible" />
+		</add>
+		<add>
+			<copy src="child(subButton9)" trait="height" />
+			<onlyif src="child(subButton9)" trait="visible" />
+		</add>
+		<add>
+			<copy src="child(subButton10)" trait="height" />
+			<onlyif src="child(subButton10)" trait="visible" />
+		</add>
+		<add>
+			<copy src="me()" trait="_TopLineLength" />
+			<mul src="me()" trait="_subButtonCount" />
+		</add>
+	</height>
+	<alpha> 255 </alpha>
+	
+	<_currentSubTab> 1 </_currentSubTab> <!-- DarN - Override in code  -->
+
+	<_subClicker>
+		<copy> 1 </copy>
+		<mul src="child(subButton1)" trait="_State" />
+		<onlyif>
+			<copy src="me()" trait="_currentSubTab" />
+			<neq> 1 </neq>
+		</onlyif>
+		<add>
+			<copy> 2 </copy>
+			<mul src="child(subButton2)" trait="_State" />
+			<onlyif>
+				<copy src="me()" trait="_currentSubTab" />
+				<neq> 2 </neq>
+				<or>
+					<copy src="me()" trait="_currentSubTab" />
+					<eq> 2 </eq>
+					<and>
+						<copy src="child(subButton1)" trait="_State" />
+						<add src="child(subButton3)" trait="_State" />
+						<add src="child(subButton4)" trait="_State" />
+						<add src="child(subButton5)" trait="_State" />
+						<add src="child(subButton6)" trait="_State" />
+						<add src="child(subButton7)" trait="_State" />
+						<add src="child(subButton8)" trait="_State" />
+						<add src="child(subButton9)" trait="_State" />
+						<add src="child(subButton10)" trait="_State" />
+						<eq> 0 </eq>
+					</and>
+				</or>
+			</onlyif>
+		</add>
+		<add>
+			<copy> 3 </copy>
+			<mul src="child(subButton3)" trait="_State" />
+			<onlyif>
+				<copy src="me()" trait="_currentSubTab" />
+				<neq> 3 </neq>
+				<or>
+					<copy src="me()" trait="_currentSubTab" />
+					<eq> 3 </eq>
+					<and>
+						<copy src="child(subButton1)" trait="_State" />
+						<add src="child(subButton2)" trait="_State" />
+						<add src="child(subButton4)" trait="_State" />
+						<add src="child(subButton5)" trait="_State" />
+						<add src="child(subButton6)" trait="_State" />
+						<add src="child(subButton7)" trait="_State" />
+						<add src="child(subButton8)" trait="_State" />
+						<add src="child(subButton9)" trait="_State" />
+						<add src="child(subButton10)" trait="_State" />
+						<eq> 0 </eq>
+					</and>
+				</or>
+			</onlyif>
+		</add>
+		<add>
+			<copy> 4 </copy>
+			<mul src="child(subButton4)" trait="_State" />
+			<onlyif>
+				<copy src="me()" trait="_currentSubTab" />
+				<neq> 4 </neq>
+				<or>
+					<copy src="me()" trait="_currentSubTab" />
+					<eq> 4 </eq>
+					<and>
+						<copy src="child(subButton1)" trait="_State" />
+						<add src="child(subButton2)" trait="_State" />
+						<add src="child(subButton3)" trait="_State" />
+						<add src="child(subButton5)" trait="_State" />
+						<add src="child(subButton6)" trait="_State" />
+						<add src="child(subButton7)" trait="_State" />
+						<add src="child(subButton8)" trait="_State" />
+						<add src="child(subButton9)" trait="_State" />
+						<add src="child(subButton10)" trait="_State" />
+						<eq> 0 </eq>
+					</and>
+				</or>
+			</onlyif>
+		</add>
+		<add>
+			<copy> 5 </copy>
+			<mul src="child(subButton5)" trait="_State" />
+			<onlyif>
+				<copy src="me()" trait="_currentSubTab" />
+				<neq> 5 </neq>
+				<or>
+					<copy src="me()" trait="_currentSubTab" />
+					<eq> 5 </eq>
+					<and>
+						<copy src="child(subButton1)" trait="_State" />
+						<add src="child(subButton2)" trait="_State" />
+						<add src="child(subButton3)" trait="_State" />
+						<add src="child(subButton4)" trait="_State" />
+						<add src="child(subButton6)" trait="_State" />
+						<add src="child(subButton7)" trait="_State" />
+						<add src="child(subButton8)" trait="_State" />
+						<add src="child(subButton9)" trait="_State" />
+						<add src="child(subButton10)" trait="_State" />
+						<eq> 0 </eq>
+					</and>
+				</or>
+			</onlyif>
+		</add>
+		<add>
+			<copy> 6 </copy>
+			<mul src="child(subButton6)" trait="_State" />
+			<onlyif>
+				<copy src="me()" trait="_currentSubTab" />
+				<neq> 6 </neq>
+				<or>
+					<copy src="me()" trait="_currentSubTab" />
+					<eq> 6 </eq>
+					<and>
+						<copy src="child(subButton1)" trait="_State" />
+						<add src="child(subButton2)" trait="_State" />
+						<add src="child(subButton3)" trait="_State" />
+						<add src="child(subButton4)" trait="_State" />
+						<add src="child(subButton5)" trait="_State" />
+						<add src="child(subButton7)" trait="_State" />
+						<add src="child(subButton8)" trait="_State" />
+						<add src="child(subButton9)" trait="_State" />
+						<add src="child(subButton10)" trait="_State" />
+						<eq> 0 </eq>
+					</and>
+				</or>
+			</onlyif>
+		</add>
+		<add>
+			<copy> 7 </copy>
+			<mul src="child(subButton7)" trait="_State" />
+			<onlyif>
+				<copy src="me()" trait="_currentSubTab" />
+				<neq> 7 </neq>
+				<or>
+					<copy src="me()" trait="_currentSubTab" />
+					<eq> 7 </eq>
+					<and>
+						<copy src="child(subButton1)" trait="_State" />
+						<add src="child(subButton2)" trait="_State" />
+						<add src="child(subButton3)" trait="_State" />
+						<add src="child(subButton4)" trait="_State" />
+						<add src="child(subButton5)" trait="_State" />
+						<add src="child(subButton6)" trait="_State" />
+						<add src="child(subButton8)" trait="_State" />
+						<add src="child(subButton9)" trait="_State" />
+						<add src="child(subButton10)" trait="_State" />
+						<eq> 0 </eq>
+					</and>
+				</or>
+			</onlyif>
+		</add>
+		<add>
+			<copy> 8 </copy>
+			<mul src="child(subButton8)" trait="_State" />
+			<onlyif>
+				<copy src="me()" trait="_currentSubTab" />
+				<neq> 8 </neq>
+				<or>
+					<copy src="me()" trait="_currentSubTab" />
+					<eq> 8 </eq>
+					<and>
+						<copy src="child(subButton1)" trait="_State" />
+						<add src="child(subButton2)" trait="_State" />
+						<add src="child(subButton3)" trait="_State" />
+						<add src="child(subButton4)" trait="_State" />
+						<add src="child(subButton5)" trait="_State" />
+						<add src="child(subButton6)" trait="_State" />
+						<add src="child(subButton7)" trait="_State" />
+						<add src="child(subButton9)" trait="_State" />
+						<add src="child(subButton10)" trait="_State" />
+						<eq> 0 </eq>
+					</and>
+				</or>
+			</onlyif>
+		</add>
+		<add>
+			<copy> 9 </copy>
+			<mul src="child(subButton9)" trait="_State" />
+			<onlyif>
+				<copy src="me()" trait="_currentSubTab" />
+				<neq> 9 </neq>
+				<or>
+					<copy src="me()" trait="_currentSubTab" />
+					<eq> 9 </eq>
+					<and>
+						<copy src="child(subButton1)" trait="_State" />
+						<add src="child(subButton2)" trait="_State" />
+						<add src="child(subButton3)" trait="_State" />
+						<add src="child(subButton4)" trait="_State" />
+						<add src="child(subButton5)" trait="_State" />
+						<add src="child(subButton6)" trait="_State" />
+						<add src="child(subButton7)" trait="_State" />
+						<add src="child(subButton8)" trait="_State" />
+						<add src="child(subButton10)" trait="_State" />
+						<eq> 0 </eq>
+					</and>
+				</or>
+			</onlyif>
+		</add>
+		<add>
+			<copy> 10 </copy>
+			<mul src="child(subButton10)" trait="_State" />
+			<onlyif>
+				<copy src="me()" trait="_currentSubTab" />
+				<neq> 10 </neq>
+				<or>
+					<copy src="me()" trait="_currentSubTab" />
+					<eq> 10 </eq>
+					<and>
+						<copy src="child(subButton1)" trait="_State" />
+						<add src="child(subButton2)" trait="_State" />
+						<add src="child(subButton3)" trait="_State" />
+						<add src="child(subButton4)" trait="_State" />
+						<add src="child(subButton5)" trait="_State" />
+						<add src="child(subButton6)" trait="_State" />
+						<add src="child(subButton7)" trait="_State" />
+						<add src="child(subButton8)" trait="_State" />
+						<add src="child(subButton9)" trait="_State" />
+						<eq> 0 </eq>
+					</and>
+				</or>
+			</onlyif>
+		</add>
+		<max> 1 </max>
+	</_subClicker>
+
+	<_subButtonCount> 0 </_subButtonCount>			<!-- Total # tab subButtons - override -->
+
+	<_TopLineLength> 10 </_TopLineLength>		<!-- The length of the in-between border lines -->
+
+	<_enabled> &true; </_enabled>
+
+	<hotrect name="subButton1">
+		<include src="darn\duif3Settings_verttabBtn.xml" />
+		<listindex> 1 </listindex>
+ 		<visible>
+			<copy src="me()" trait="listindex" />
+			<lte src="parent()" trait="_subButtonCount" />
+		</visible>
+		<_x> 0 </_x>
+		<_y> 0 </_y>
+		 <string> <copy src="parent()" trait="_Tab1Caption" /> </string>
+	</hotrect>
+	<hotrect name="subButton2">
+		<include src="darn\duif3Settings_verttabBtn.xml" />
+		<listindex> 2 </listindex>
+		<visible>
+			<copy src="me()" trait="listindex" />
+			<lte src="parent()" trait="_subButtonCount" />
+		</visible>
+		<_x>
+			0
+		</_x>
+		<_y>
+			<copy src="sibling(subButton1)" trait="y" />
+			<add src="sibling(subButton1)" trait="height" />
+			<add src="parent()" trait="_TopLineLength" />
+		</_y>
+		<string> <copy src="parent()" trait="_Tab2Caption" /> </string>
+	</hotrect>
+	<hotrect name="subButton3">
+		<include src="darn\duif3Settings_verttabBtn.xml" />
+		<listindex> 3 </listindex>
+		<visible>
+			<copy src="me()" trait="listindex" />
+			<lte src="parent()" trait="_subButtonCount" />
+		</visible>
+		<_x>0
+		</_x>
+		<_y>
+			<copy src="sibling(subButton2)" trait="y" />
+			<add src="sibling(subButton2)" trait="height" />
+			<add src="parent()" trait="_TopLineLength" />
+		</_y>
+		<string> <copy src="parent()" trait="_Tab3Caption" /> </string>
+	</hotrect>
+	<hotrect name="subButton4">
+		<include src="darn\duif3Settings_verttabBtn.xml" />
+		<listindex> 4 </listindex>
+		<visible>
+			<copy src="me()" trait="listindex" />
+			<lte src="parent()" trait="_subButtonCount" />
+		</visible>
+		<_x>0
+		</_x>
+		<_y>
+			<copy src="sibling(subButton3)" trait="y" />
+			<add src="sibling(subButton3)" trait="height" />
+			<add src="parent()" trait="_TopLineLength" />
+		</_y>
+		<string> <copy src="parent()" trait="_Tab4Caption" /> </string>
+	</hotrect>
+	<hotrect name="subButton5">
+		<include src="darn\duif3Settings_verttabBtn.xml" />
+		<listindex> 5 </listindex>
+		<visible>
+			<copy src="me()" trait="listindex" />
+			<lte src="parent()" trait="_subButtonCount" />
+		</visible>
+		<_x>
+			0
+		</_x>
+		<_y>
+			<copy src="sibling(subButton4)" trait="y" />
+			<add src="sibling(subButton4)" trait="height" />
+			<add src="parent()" trait="_TopLineLength" />
+		</_y>
+		<string> <copy src="parent()" trait="_Tab5Caption" /> </string>
+	</hotrect>
+	<hotrect name="subButton6">
+		<include src="darn\duif3Settings_verttabBtn.xml" />
+		<listindex> 6 </listindex>
+		<visible>
+			<copy src="me()" trait="listindex" />
+			<lte src="parent()" trait="_subButtonCount" />
+		</visible>
+		<_x>
+			0
+		</_x>
+		<_y>
+			<copy src="sibling(subButton5)" trait="y" />
+			<add src="sibling(subButton5)" trait="height" />
+			<add src="parent()" trait="_TopLineLength" />
+		</_y>
+		<string> <copy src="parent()" trait="_Tab6Caption" /> </string>
+	</hotrect>
+	<hotrect name="subButton7">
+		<include src="darn\duif3Settings_verttabBtn.xml" />
+		<listindex> 7 </listindex>
+		<visible>
+			<copy src="me()" trait="listindex" />
+			<lte src="parent()" trait="_subButtonCount" />
+		</visible>
+		<_x>
+			0
+		</_x>
+		<_y>
+			<copy src="sibling(subButton6)" trait="y" />
+			<add src="sibling(subButton6)" trait="height" />
+			<add src="parent()" trait="_TopLineLength" />
+		</_y>
+		<string> <copy src="parent()" trait="_Tab7Caption" /> </string>
+	</hotrect>
+	<hotrect name="subButton8">
+		<include src="darn\duif3Settings_verttabBtn.xml" />
+		<listindex> 8 </listindex>
+		<visible>
+			<copy src="me()" trait="listindex" />
+			<lte src="parent()" trait="_subButtonCount" />
+		</visible>
+		<_x>
+			0
+		</_x>
+		<_y>
+			<copy src="sibling(subButton7)" trait="y" />
+			<add src="sibling(subButton7)" trait="height" />
+			<add src="parent()" trait="_TopLineLength" />
+		</_y>
+		<string> <copy src="parent()" trait="_Tab8Caption" /> </string>
+	</hotrect>
+	<hotrect name="subButton9">
+		<include src="darn\duif3Settings_verttabBtn.xml" />
+		<listindex> 9 </listindex>
+		<visible>
+			<copy src="me()" trait="listindex" />
+			<lte src="parent()" trait="_subButtonCount" />
+		</visible>
+		<_x>
+			0
+		</_x>
+		<_y>
+			<copy src="sibling(subButton8)" trait="y" />
+			<add src="sibling(subButton8)" trait="height" />
+			<add src="parent()" trait="_TopLineLength" />
+		</_y>
+		<string> <copy src="parent()" trait="_Tab9Caption" /> </string>
+	</hotrect>
+	<hotrect name="subButton10">
+		<include src="darn\duif3Settings_verttabBtn.xml" />
+		<listindex> 10 </listindex>
+		<visible>
+			<copy src="me()" trait="listindex" />
+			<lte src="parent()" trait="_subButtonCount" />
+		</visible>
+		<_x>
+			0
+		</_x>
+		<_y>
+			<copy src="sibling(subButton9)" trait="y" />
+			<add src="sibling(subButton9)" trait="height" />
+			<add src="parent()" trait="_TopLineLength" />
+		</_y>
+		<string> <copy src="parent()" trait="_Tab10Caption" /> </string>
+	</hotrect>
+
+	<!-- The bordering brackets-->
+	<!-- <image name="LeftVert">
+		<include src="vertical_fade_line.xml"/>
+		
+		<_bottom_to_top> &true; </_bottom_to_top>
+		<height> <copy src="parent()" trait="height"/> </height>
+		<alpha> <copy src="parent()" trait="alpha"/> </alpha>
+	</image>
+
+	<image name="RightVert">
+		<include src="vertical_fade_line.xml"/>
+		
+		<_bottom_to_top> &true; </_bottom_to_top>
+
+		<x>
+			<copy src="parent()" trait="width"/>
+			<sub src="me()" trait="width"/>
+		</x>
+		<height> <copy src="parent()" trait="height"/> </height>
+		<alpha> <copy src="parent()" trait="alpha"/> </alpha>
+	</image> -->
+
+<!-- 	<image name="RightHoriz">
+		<include src="line.xml"/>
+		
+		<_length> <copy src="parent()" trait="_TopLineLength"/> </_length>
+		<alpha> <copy src="parent()" trait="alpha"/> </alpha>
+		<_horizontal> &false; </_horizontal>
+		
+		<x>
+			<copy src="parent()" trait="width"/>
+			<sub src="me()" trait="_length"/>
+			<div> 2 </div>
+		</x>
+	</image> -->

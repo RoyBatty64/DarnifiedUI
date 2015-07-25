@@ -1,0 +1,505 @@
+<!-- repair_menu.xml -->
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			repair_menu.xml
+// VERSION		2.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			February 12, 2006
+// INFO			Pipboy repair menu.  Used within Inventory Menu.
+-->
+<menu name="RepairMenu">
+	<class> &RepairMenu; </class>
+	<id> &pipboymenu; </id>
+	<systemcolor> &pipboy; </systemcolor>
+	
+	<_PCButton_E>	RM_CancelButton </_PCButton_E>
+
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<!-- NOT USED IN PIPBOY MENUS -->
+	</rect>
+
+	<rect name="GLOW_BRANCH">
+		<id> &glow_branch; </id>
+
+		<!-- ===== BACKGROUND TEXTURE ===== -->
+		<image name="RM_Background">
+			<filename> Interface\Shared\Background\pipboy.dds </filename>
+			<width> 1024 </width>
+			<height> 768 </height>
+			<zoom> &scale; </zoom>
+			<depth> 1 </depth>
+			<brightness> 90 </brightness>
+		</image>
+
+		<!-- ===== MAIN POSITIONING RECT ===== -->
+		<rect name="RM_MainRect">
+			<x> 50 </x>
+			<y> 50 </y>
+			<width> 855 </width>
+			<height> 650 </height>
+			<depth> 2 </depth>
+			<locus> &true; </locus>
+
+			<!-- ===== HEADLINE RECT ===== -->
+			<rect name="RM_HeadlineRect">
+				<width> <copy src="parent()" trait="width"/> </width>
+				<height> 50 </height>
+
+				<!-- Upper-left corner -->
+				<image name="RM_Headline_v1">
+					<include src="vertical_fade_line.xml"/>
+				</image>
+
+				<image name="RM_Headline_h1">
+					<include src="line.xml"/>
+					<_length> 50 </_length>
+				</image>
+
+				<!-- Menu title -->
+				<text name="RM_Headline_Title">
+					<font> <copy src="globals()" trait="_gl_HeaderFont" /> </font> <!-- DarN 4 -->
+
+					<x>
+						<copy src="sibling(RM_Headline_h1)" trait="x"/>
+						<add src="sibling(RM_Headline_h1)" trait="_length"/>
+						<add> 20 </add>
+					</x>
+					<y> -5 </y> <!-- DarN 0 -->
+
+					<string> <copy src="me()" trait="_Title"/> </string>
+					<_Title> &-sInventoryItems; </_Title>
+				</text>
+
+				<image name="RM_Headline_h2">
+					<include src="line.xml"/>
+					<x>
+						<copy src="sibling(RM_Headline_Title)" trait="x"/>
+						<add src="sibling(RM_Headline_Title)" trait="width"/>
+						<add> 20 </add>
+					</x>
+					<_length>
+						<copy src="sibling(RM_Headline_PlayerSkillInfo)" trait="x"/>
+						<sub src="me()" trait="x"/>
+						<max> 0 </max>
+					</_length>
+				</image>
+
+				<!-- Player skill info display -->
+				<rect name="RM_Headline_PlayerSkillInfo">
+					<include src="darn\card_info_barter.xml"/>
+					<id> 0 </id>
+
+					<x>
+						<copy src="parent()" trait="width"/>
+						<sub src="me()" trait="width"/>
+					</x>
+					<width> 220 </width>
+
+					<_Title> &-sRepairSkill; </_Title>
+				</rect>
+			</rect>			<!-- end RM_HeadlineRect -->
+
+			<hotrect name="RM_RepairList">
+				<include src="list_box.xml"/>
+				<id> 1 </id>
+
+				<x> -15 </x>
+				<y> 75 </y>
+				<width> 430 </width>
+				<height> 468 </height>
+				
+				<!-- BRACKETS: Used to border the selected repair item -->
+				<rect name="RM_LeftBracket">
+					<include src="bracket_vert.xml"/>
+					<id> 2 </id>
+					
+					<x> 33 </x>
+					<y> 0 </y>					<!-- Set in code -->
+					<height> 0 </height>		<!-- Set in code -->
+					<width> 30 </width>
+					<_OpenToLeft> &false; </_OpenToLeft>
+				</rect>
+				
+				<rect name="RM_RightBracket">
+					<include src="bracket_vert.xml"/>
+					
+					<x> 422 	</x>
+					<y> <copy src="sibling(RM_LeftBracket)" trait="y"/> </y>
+					<height> <copy src="sibling(RM_LeftBracket)" trait="height"/> </height>
+					<width> 30 </width>
+				</rect>
+			</hotrect>
+			
+			<!-- ===== ITEM ICON ===== -->
+			<image name="RM_ItemIcon">
+				<id> 3 </id>
+
+				<x> 450 </x>
+				<y> 20 </y>
+				<width> 400 </width>
+				<height> 400 </height>
+
+				<zoom> &scale; </zoom>
+				<cropx> 20 </cropx>
+			</image>
+
+			<!-- ===== ITEM INFO DISPLAYS ===== -->
+			<rect name="RM_CompareRect">
+				<x>
+					<copy src="sibling(RM_RepairList)" trait="x"/>
+					<add src="sibling(RM_RepairList)" trait="width"/>
+				</x>
+				<y> 400 </y>
+				<width>
+					<copy src="parent()" trait="width"/>
+					<sub src="me()" trait="x"/>
+					<sub> 11 </sub> <!-- DarN 13 -->
+				</width>
+				<height> 180 </height>
+				<locus> &true; </locus>
+
+				<rect name="RM_BrokenItemHealth">
+					<id> 4 </id>
+					<include src="darn\card_info_barter.xml"/>
+					
+					<width>
+						<copy src="parent()" trait="width"/>
+						<div> 2 </div>
+					</width>
+					<height> 60 </height>
+					
+					<_Title> &-sInventoryCondition; </_Title>
+					<visible> &false; </visible>
+					
+					<rect name="RM_BrokenItemHealthMeter">
+						<include src="meter.xml"/>
+						
+						<x>
+							<copy src="parent()" trait="width"/>
+							<sub src="me()" trait="width"/>
+							<sub> 15 </sub>
+						</x>
+						<y>
+							<copy src="sibling(CI_TitleText)" trait="y"/>
+							<!-- <sub> 3 </sub> -->
+						</y>
+						<width> 60 </width>
+						<height> 16 </height>
+						
+						<_SolidMeter> &true; </_SolidMeter>
+						<_ShowBackground> &true; </_ShowBackground>
+						<_Value> <copy src="parent()" trait="user0"/> </_Value>
+					</rect>
+				</rect>
+				
+				<rect name="RM_BrokenItemStat">
+					<id> 5 </id>
+					<include src="darn\card_info_barter.xml"/>
+					
+					<x>
+						<copy src="sibling(RM_BrokenItemHealth)" trait="width"/>
+						<add> 10 </add>
+					</x>
+					<width>
+						<copy src="parent()" trait="width"/>
+						<div> 2 </div>
+					</width>
+					<height> 60 </height>
+					<visible> <copy src="sibling(RM_BrokenItemHealth)" trait="visible"/> </visible>
+				</rect>
+				
+				<image name="RM_ArrowIcon">
+					<filename> Interface\Shared\Arrow\repair_arrow_down.dds </filename>
+					
+					<x>
+						<copy src="parent()" trait="width"/>
+						<sub src="me()" trait="width"/>
+						<div> 2 </div>
+					</x>
+					<y>
+						<copy src="parent()" trait="height"/>
+						<sub src="me()" trait="height"/>
+						<div> 2 </div>
+						<sub> 5 </sub>
+					</y>
+					<height> 80 </height>
+					<width> 80 </width>
+					<zoom> &scale; </zoom>
+					<visible>
+						<copy src="sibling(RM_FixedItemHealth)" trait="visible"/>
+						<or src="sibling(RM_ChooseItemText)" trait="visible"/>
+					</visible>
+				</image>
+				
+				<text name="RM_HealthImprovementText">
+					<id> 6 </id>
+					<font> 3 </font> <!-- DarN 4 -->
+					<justify> &center; </justify>
+					
+					<x>
+						<copy src="parent()" trait="width"/>
+						<div> 4 </div>
+					</x>
+					<y>
+						<copy src="sibling(RM_ArrowIcon)" trait="y"/>
+						<add> 30 </add>
+					</y>
+					<visible> <copy src="sibling(RM_FixedItemHealth)" trait="visible"/> </visible>
+				</text>
+				
+				<text name="RM_StatImprovementText">
+					<id> 7 </id>
+					<font> 3 </font> <!-- DarN 4 -->
+					<justify> &center; </justify>
+					
+					<x>
+						<copy src="parent()" trait="width"/>
+						<mul> 3 </mul>
+						<div> 4 </div>
+					</x>
+					<y> <copy src="sibling(RM_HealthImprovementText)" trait="y"/></y>
+					<visible> <copy src="sibling(RM_FixedItemHealth)" trait="visible"/> </visible>
+				</text>
+				
+				<text name="RM_ChooseItemText">
+					<id> 8 </id>
+					<font> 2 </font>
+					
+					<x>
+						<copy src="parent()" trait="width"/>
+						<div> 2 </div>
+					</x>
+					<y>
+						<copy src="sibling(RM_FixedItemHealth)" trait="y"/>
+						<add> 15 </add>
+					</y>
+					<visible> &false; </visible>		<!-- Set in code -->
+					<wrapwidth> 400 </wrapwidth>
+					<justify> &center; </justify>
+				</text>
+				
+				<rect name="RM_FixedItemHealth">
+					<id> 9 </id>
+					<include src="darn\card_info_barter.xml"/>
+					
+					<y>
+						<copy src="parent()" trait="height"/>
+						<sub src="me()" trait="height"/>
+					</y>
+					<width>
+						<copy src="parent()" trait="width"/>
+						<div> 2 </div>
+					</width>
+					<height> 60 </height>
+					<visible> &false; </visible>
+					
+					<_Title> &-sInventoryCondition; </_Title>
+					
+					<rect name="RM_FixedItemHealthMeter">
+						<include src="meter.xml"/>
+						
+						<x>
+							<copy src="parent()" trait="width"/>
+							<sub src="me()" trait="width"/>
+							<sub> 15 </sub>
+						</x>
+						<y>
+							<copy src="sibling(CI_TitleText)" trait="y"/>
+							<!-- <sub> 3 </sub> -->
+						</y>
+						<width> 60 </width>
+						<height> 16 </height>
+						
+						<_SolidMeter> &true; </_SolidMeter>
+						<_ShowBackground> &true; </_ShowBackground>
+						<_Value> <copy src="parent()" trait="user0"/> </_Value>
+					</rect>
+				</rect>
+				
+				<rect name="RM_FixedItemStat">
+					<id> 10 </id>
+					<include src="darn\card_info_barter.xml"/>
+					
+					<x>
+						<copy src="sibling(RM_FixedItemHealth)" trait="width"/>
+						<add> 10 </add>
+					</x>
+					<y> <copy src="sibling(RM_FixedItemHealth)" trait="y"/> </y>
+					<width>
+						<copy src="parent()" trait="width"/>
+						<div> 2 </div>
+					</width>
+					<height> 60 </height>
+					<visible> <copy src="sibling(RM_FixedItemHealth)" trait="visible"/> </visible>
+				</rect>
+			</rect>				<!-- end RM_CompareRect-->
+
+			<!-- ===== BUTTON POSITIONING RECT ===== -->
+			<rect name="RM_ButtonRect">
+				<x>
+					<copy src="parent()" trait="width"/>
+					<sub> 30 </sub>
+				</x>
+				<y> <copy src="sibling(RM_RepairList)" trait="y"/> </y>
+				<height> 120 </height>
+				<locus> &true; </locus>
+
+				<!-- Only visible on XBox -->
+
+				<!-- Repair button: Repairs the broken item with the selected spare part -->
+				<image name="RM_RepairButton">
+					<id> 11 </id>
+					<include src="darn\text_box.xml"/>
+
+					<_horbuf> 20 </_horbuf>
+					<_verbuf> 15 </_verbuf>
+					<justify> &right; </justify>
+					<string> &-sRepairItem; </string>
+					<visible> &xbox; </visible>
+					<_line_alpha> 255 </_line_alpha>		<!-- Set in code -->
+					
+					<_xbox_button> &xbuttona; </_xbox_button>
+				</image>
+
+				<!-- Cancel button: Cancels the repair of the broken item -->
+				<image name="RM_CancelButton">
+					<id> 12 </id>
+					<include src="darn\text_box.xml"/>
+
+					<_y>
+						<copy src="sibling(RM_RepairButton)" trait="_y"/>
+						<add>
+							<copy src="me()" trait="height"/>
+							<onlyif src="sibling(RM_RepairButton)" trait="visible"/>
+						</add>
+					</_y>
+					<_horbuf> 20 </_horbuf>
+					<_verbuf> 15 </_verbuf>
+					<justify> &right; </justify>
+					
+					<string> &-sCancel; </string>
+
+					<_xbox_button> &xbuttonb; </_xbox_button>
+					<_PCButtonText> &-sPCMenuHintE; </_PCButtonText>
+				</image>
+			</rect>				<!-- end RM_ButtonRect-->
+			
+			<rect name="RM_BottomBracket">
+				<include src="bottom_bracket.xml"/>
+			
+				<width> 855 </width>
+				<height> 60 </height>
+				<x> 0 </x>
+				<y> 600 </y>
+				<depth> 2 </depth>
+			</rect>
+		</rect>		<!-- end RM_MainRect -->
+	</rect>		<!-- end GLOW_BRANCH -->
+
+	<!--======================== LIST BOX TEMPLATE =========================-->
+	<template name="RM_RepairListTemplate">
+		<hotrect name="RM_RepairListTemplateRect">
+			<include src="list_box_template.xml"/>
+
+			<_Value></_Value>								<!-- The item's health -->
+			<_IsRepairItem> &false; </_IsRepairItem>		<!-- True if this item has been selected to be repaired -->
+			
+			<user0> 0 </user0>		<!-- The repaired health of the item; set in code -->
+			<user1> 0 </user1>		<!-- The min skill needed to repair with this item; set in code -->
+			
+			<mouseoversound> &nosound; </mouseoversound>
+			<clicksound> &nosound; </clicksound>
+			<_VerticalSpacing> 8 </_VerticalSpacing>
+			
+			<x> 32 </x>
+			<width> 393 </width>
+			<target> &true; </target>
+			<visible> &true; </visible>
+			
+			<text name="ListItemText">
+				<font> 2 </font>
+				<string> <copy src="parent()" trait="string"/> </string>
+				
+				<alpha> 255 </alpha>		<!-- Set in code -->
+				<wrapwidth> 270 </wrapwidth>
+				
+				<x> 40 </x>
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+			</text>
+
+			<!-- Item condition meter -->
+			<!-- OPTIMIZATION: Avoid meter.xml as it's slow to use and this list can get large -->
+			<image name="RM_Template_MeterBackground">
+				<filename> solid.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				
+				<x> 320 </x>
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<width> 60 </width>
+				<height> 16 </height>
+				<alpha> 64 </alpha>
+				<clips> &true; </clips>
+				<depth> 1 </depth>
+				<target> &false; </target>
+			</image>
+			
+			<image name="RM_Template_Meter">
+				<id> 15 </id>
+				<filename> solid.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				
+				<x> 320 </x>
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<width> 0 </width>		<!-- Set in code -->
+				<height> 16 </height>
+				<alpha> <copy src="sibling(ListItemText)" trait="alpha"/> </alpha>
+				<clips> &true; </clips>
+				<depth> 2 </depth>
+				<target> &false; </target>
+			</image>
+
+			<!-- Small square that becomes filled if item is equipped -->
+			<image name="RM_Template_ItemMarker">
+				<filename> Interface\Shared\Marker\square_filled.dds </filename>
+				<!-- <texatlas> Interface\InterfaceShared.tai </texatlas> -->
+				<width> 14 </width>
+				<height> 14 </height>
+				<zoom> 67 </zoom>
+			
+				<x> 15 </x>
+				<y> <!-- DarN 17.5 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<visible> &false; </visible>
+				<alpha> <copy src="sibling(ListItemText)" trait="alpha"/> </alpha>
+				<target> &false; </target>
+			</image>			
+		</hotrect>
+	</template> <!-- end RM_Template_ListItem -->
+</menu>

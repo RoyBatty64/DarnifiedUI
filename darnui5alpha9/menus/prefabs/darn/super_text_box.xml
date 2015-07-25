@@ -1,0 +1,80 @@
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			super_text_box.xml
+// VERSION		1.0
+// AUTHOR:		Dan Teitel
+// DATE			
+// INFO			This is a text box which lights up around the text when moused-over and
+//					highlights when told to.  (Usually when clicked on.)
+--> 
+<!-- <hotrect name="super_text_box" -->
+<!-- USER TRAITS: May be optionally overriden -->
+	<_selected> &false; </_selected>
+	<_horbuf> 40 </_horbuf>
+	<_verbuf> 20 </_verbuf>
+	<_fixedwidth> 0 </_fixedwidth>		<!-- 0 means don't use fixed width.  Place a positive value here to override width calculation based on text size. -->
+	<_enabled> &true; </_enabled>
+	<_line_alpha>
+		<copy> 128 </copy>
+		<add>
+			<copy> 127 </copy>
+			<onlyif src="me()" trait="target" />
+		</add>
+	</_line_alpha>
+
+	<brightness> <copy src="globals()" trait="_background_fill_brightness" /> </brightness>
+	<justify> &left; </justify>
+	<target> <copy src="me()" trait="_enabled" /> </target>
+	<alpha>
+		<copy> 80 </copy>
+		<onlyif src="me()" trait="_selected" />
+		<add> <!-- DarN add -->
+			<copy> 128 </copy>
+			<onlyif src="me()" trait="mouseover" />
+		</add>
+	</alpha>
+<!-- END USER TRAITS -->
+
+<!-- These values are calculated separately within text_box.xml-->
+	<height> <copy src="child(stb_text_box)" trait="height" /> </height>
+	<width> <copy src="child(stb_text_box)" trait="width" /> </width>
+	<x> <copy src="child(stb_text_box)" trait="x" /> </x>
+	<y> <copy src="child(stb_text_box)" trait="y" /> </y>
+
+	<mouseoversound> UIMenuFocus </mouseoversound>
+
+<!-- The text box -->
+	<rect name="stb_text_box">
+		<include src="darn\text_box.xml" />
+		<font> <copy src="parent()" trait="font" /> </font>
+		<depth> 1 </depth>
+
+		<!-- Box is visible upon mouse over and stays visible if it's selected -->
+		<_box_visible>
+			<copy src="parent()" trait="mouseover" />
+			<eq> 1 </eq>
+			<or src="parent()" trait="_selected" />
+		</_box_visible>
+
+		<!-- These values are inherited from parent() -->
+		<string> <copy src="parent()" trait="string" />	</string>
+		<justify>	<copy src="parent()" trait="justify" /> </justify>
+		<_horbuf> <copy src="parent()" trait="_horbuf" /> </_horbuf>
+		<_verbuf> <copy src="parent()" trait="_verbuf" /> </_verbuf>
+		<_x> <copy src="parent()" trait="_x" /> </_x>
+		<_y> <copy src="parent()" trait="_y" /> </_y>
+		<_fixedwidth> <copy src="parent()" trait="_fixedwidth" /> </_fixedwidth>
+		<_line_alpha> <copy src="parent()" trait="_line_alpha" /> </_line_alpha>
+	</rect>
+<!-- /hotrect> -->

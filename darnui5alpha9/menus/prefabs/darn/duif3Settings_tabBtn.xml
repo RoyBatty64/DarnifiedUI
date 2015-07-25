@@ -1,0 +1,148 @@
+<!-- hotrect name='TabButton-->
+	<include src="darn\super_text_box.xml" />
+	
+	<clicksound> UIPipBoyTab </clicksound>
+	
+	<_enabled>
+		<copy src="io()" trait="_CurrentTab" />
+		<neq src="me()" trait="listindex" />
+	</_enabled>
+	<_selected> <not src="me()" trait="_enabled" /> </_selected>	
+	
+	<_State>
+		<copy src="child(marker)" trait="_value_scrolled_to" />
+		<add src="me()" trait="_selected" />
+		<sub> 1 </sub>
+	</_State>
+	
+	<user1>
+		<copy src="me()" trait="user2" />
+		<sub> 1 </sub>
+	</user1>
+	<!-- maximum range value -->
+	<user2>
+		<copy> 2 </copy>
+		<sub src="me()" trait="_selected" />
+	</user2>
+	<rect name="marker">
+		<!-- <id> &generic; </id> -->
+		<visible> &false; </visible>
+		<_value_scrolled_to>
+			<!-- copy old value -->
+			<sub>
+				<copy src="parent()" trait="clicked" />
+				<onlyif src="parent()" trait="_selected" />
+			</sub>
+			<add>
+				<copy src="parent()" trait="clicked" />
+				<onlyifnot src="parent()" trait="_selected" />
+			</add>
+			<max src="parent()" trait="user1" />
+			<min src="parent()" trait="user2" />
+		</_value_scrolled_to>
+	</rect>
+
+	<font> <copy src="globals()" trait="_pb_TabFont" /> </font>
+
+<!-- These traits are inherited from the tabline -->
+	<_LeftLineLength> <copy src="parent()" trait="_LeftLineLength" /> </_LeftLineLength>
+
+	<_line_alpha> <copy src="parent()" trait="alpha" /> </_line_alpha>
+
+	<_y>
+		<copy src="me()" trait="height" />
+		<div> -2 </div>
+	</_y>
+
+	<_horbuf> 20 </_horbuf>
+	<_verbuf> 10 </_verbuf>
+	
+	<image name="TopLine">
+		<include src="line.xml" />
+		<_horizontal> &false; </_horizontal>
+		<_length>
+			<copy> 10 </copy>
+			<!-- <mul src="screen()" trait="resolutionconverter" /> -->
+		</_length>
+		<alpha> 130 </alpha>
+		<x>
+			<copy src="parent()" trait="x" />
+			<add>
+				<copy src="parent()" trait="width" />
+				<sub src="me()" trait="width" />
+				<div> 2 </div>
+			</add>
+			
+		</x>
+		<y>
+			<copy src="parent()" trait="y" />
+			<sub src="me()" trait="_length" />
+		</y>
+		<visible>
+			<copy src="parent()" trait="_selected" />
+			<and src="DUIF3SettingsMain" trait="_multiPage" />
+		</visible>
+	</image>
+	<image name="TopLeftLine">
+		<include src="line.xml" />
+		<_length>
+			<copy src="sibling(TopLine)" trait="x" />
+			<sub>
+				<copy> 18 </copy>
+				<!-- <mul src="screen()" trait="resolutionconverter" /> -->
+			</sub>
+		</_length>
+		<alpha> 130 </alpha>
+		<x>
+			<copy src="sibling(TopLine)" trait="x" />
+			<sub src="me()" trait="_length" />
+		</x>
+		<y>
+			<copy src="sibling(TopLine)" trait="y" />
+		</y>
+		<visible> <copy src="sibling(TopLine)" trait="visible" /> </visible>
+	</image>
+	
+	<image name="TopVertLine">
+		<include src="line.xml" />
+		<_horizontal> &false; </_horizontal>
+		<_length>
+			<copy> 5 </copy>
+			<mul src="screen()" trait="resolutionconverter" />
+		</_length>
+		<alpha> 130 </alpha>
+		<x>
+			<copy src="sibling(TopLeftLine)" trait="x" />
+			<sub src="me()" trait="width" />
+		</x>
+		<y>
+			<copy src="sibling(TopLeftLine)" trait="y" />
+			<sub>
+				<copy src="me()" trait="_length" />
+				<sub src="globals()" trait="_line_thickness" />
+			</sub>
+		</y>
+		<!-- <systemcolor> &hudalt; </systemcolor> -->
+		<visible> <copy src="sibling(TopLine)" trait="visible" /> </visible>
+	</image>
+
+	<!-- Line in-between this tab button and the previous one -->
+	<image name="LeftLine">
+		<include src="line.xml" />
+
+		<_length> <copy src="parent()" trait="_LeftLineLength" /> </_length>
+		<alpha> <copy src="parent()" trait="_line_alpha" /> </alpha>
+		<x>
+			<copy src="parent()" trait="x" />
+			<sub src="me()" trait="_length" />
+		</x>
+		<y>
+			<copy src="parent()" trait="y" />
+			<add>
+				<copy src="parent()" trait="height" />
+				<div> 2 </div>
+			</add>
+		</y>
+
+	</image>
+	<!--/hotrect-->

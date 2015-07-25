@@ -1,0 +1,77 @@
+﻿		<image name="tlLine">
+			<filename> interface\shared\line\fade_to_left.dds </filename>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<visible>
+				<copy src="io()" trait="_xBrackets" />
+				<and src="io()" trait="_PanelSide" />
+			</visible>
+			<x> 0 </x>
+			<width> 64 </width>
+			<height> <copy src="sibling(tLine)" trait="height" /> </height>
+			<zoom> &scale; </zoom>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		</image>
+		<image name="trLine">
+			<filename> interface\shared\line\fade_to_right.dds </filename>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<visible>
+				<copy src="io()" trait="_xBrackets" />
+				<and> <not src="io()" trait="_PanelSide" /> </and>
+			</visible>
+			<x>
+				<copy src="parent()" trait="width" />
+				<sub src="me()" trait="width" />
+			</x>
+			<width> 64 </width>
+			<height> <copy src="sibling(tLine)" trait="height" /> </height>
+			<zoom> &scale; </zoom>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		</image>
+		<image name="tLine">
+			<filename> solid.dds </filename>
+			<texatlas> Interface\InterfaceShared.tai </texatlas>
+			<visible> <copy src="io()" trait="_xBrackets" /> </visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<x>
+				<copy src="sibling(tlLine)" trait="x" />
+				<add src="sibling(tlLine)" trait="width" />
+				<onlyif src="sibling(tlLine)" trait="visible" />
+			</x>
+			<y> 0 </y>
+			<width>
+				<copy src="parent()" trait="width" />
+				<sub src="sibling(tlLine)" trait="width" />
+			</width>
+			<height>
+				<copy> 1 </copy>
+				<mul src="screen()" trait="resolutionconverter" />
+			</height>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		</image>
+		<image name="vLine">
+			<include src="vertical_fade_line.xml" />
+			<visible> <copy src="io()" trait="_xBrackets" /> </visible>
+			<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			<width>
+				<copy> 1 </copy>
+				<mul src="screen()" trait="resolutionconverter" />
+			</width>
+			<height> <copy src="parent()" trait="height" /> </height>
+			<x>
+				<copy src="parent()" trait="width" />
+				<onlyif src="io()" trait="_PanelSide" />
+			</x>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		</image>

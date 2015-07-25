@@ -1,0 +1,109 @@
+<!-- 
+	DarNified UI FONV - duiUtilFunc.xml
+	- DO NOT EDIT -
+-->
+
+<_duiHUDOffset> 9999 </_duiHUDOffset>
+
+<!-- The height of a line of text with a given font -->
+<_fontSize_1> <copy src="child(font1)" trait="height" /> </_fontSize_1>
+<_fontSize_2> <copy src="child(font2)" trait="height" /> </_fontSize_2>
+<_fontSize_3> <copy src="child(font3)" trait="height" /> </_fontSize_3>
+<_fontSize_4> <copy src="child(font4)" trait="height" /> </_fontSize_4>
+<_fontSize_5> <copy src="child(font5)" trait="height" /> </_fontSize_5>
+<_fontSize_6> <copy src="child(font6)" trait="height" /> </_fontSize_6>
+<_fontSize_7> <copy src="child(font7)" trait="height" /> </_fontSize_7>
+<_fontSize_8> <copy src="child(font8)" trait="height" /> </_fontSize_8>
+
+<text name="font1">
+	<font> 1 </font>
+	<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+	<visible> &false; </visible>
+</text>
+<text name="font2">
+	<font> 2 </font>
+	<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+	<visible> &false; </visible>
+</text>
+<text name="font3">
+	<font> 3 </font>
+	<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+	<visible> &false; </visible>
+</text>
+<text name="font4">
+	<font> 4 </font>
+	<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+	<visible> &false; </visible>
+</text>
+<text name="font5">
+	<font> 5 </font>
+	<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+	<visible> &false; </visible>
+</text>
+<text name="font6">
+	<font> 6 </font>
+	<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+	<visible> &false; </visible>
+</text>
+<text name="font7">
+	<font> 7 </font>
+	<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+	<visible> &false; </visible>
+</text>
+<text name="font8">
+	<font> 8 </font>
+	<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+	<visible> &false; </visible>
+</text>
+
+<!-- The width of an empty string with a given font -->
+<_emptyString_1> <copy src="child(emptyFont1)" trait="width" /> </_emptyString_1>
+<_emptyString_2> <copy src="child(emptyFont2)" trait="width" /> </_emptyString_2>
+<_emptyString_3> <copy src="child(emptyFont3)" trait="width" /> </_emptyString_3>
+<_emptyString_4> <copy src="child(emptyFont4)" trait="width" /> </_emptyString_4>
+<_emptyString_5> <copy src="child(emptyFont5)" trait="width" /> </_emptyString_5>
+<_emptyString_6> <copy src="child(emptyFont6)" trait="width" /> </_emptyString_6>
+<_emptyString_7> <copy src="child(emptyFont7)" trait="width" /> </_emptyString_7>
+<_emptyString_8> <copy src="child(emptyFont8)" trait="width" /> </_emptyString_8>
+
+<text name="emptyFont1">
+	<font> 1 </font>
+	<string>  </string>
+	<visible> &false; </visible>
+</text>
+<text name="emptyFont2">
+	<font> 2 </font>
+	<string>  </string>
+	<visible> &false; </visible>
+</text>
+<text name="emptyFont3">
+	<font> 3 </font>
+	<string>  </string>
+	<visible> &false; </visible>
+</text>
+<text name="emptyFont4">
+	<font> 4 </font>
+	<string>  </string>
+	<visible> &false; </visible>
+</text>
+<text name="emptyFont5">
+	<font> 5 </font>
+	<string>  </string>
+	<visible> &false; </visible>
+</text>
+<text name="emptyFont6">
+	<font> 6 </font>
+	<string>  </string>
+	<visible> &false; </visible>
+</text>
+<text name="emptyFont7">
+	<font> 7 </font>
+	<string>  </string>
+	<visible> &false; </visible>
+</text>
+<text name="emptyFont8">
+	<font> 8 </font>
+	<string>  </string>
+	<visible> &false; </visible>
+</text>
+

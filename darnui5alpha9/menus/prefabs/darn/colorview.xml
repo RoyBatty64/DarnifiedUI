@@ -1,0 +1,44 @@
+﻿<!-- <rect name="ColorView"> -->
+
+	<locus> &true; </locus>
+	<width> 100 </width>
+	<height> 100 </height>
+	
+	<red> 100 </red>
+	<green> 100 </green>
+	<blue> 100 </blue>
+	<alpha> 255 </alpha>
+	
+	<image name="colorview">
+		<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<brightness> &uselocalcolor; </brightness>
+		<red> <copy src="parent()" trait="red" /> </red>
+		<green> <copy src="parent()" trait="green" /> </green>
+		<blue> <copy src="parent()" trait="blue" /> </blue>
+		<width>
+			<copy src="parent()" trait="width" />
+			<sub>
+				<copy> 8 </copy>
+				<mul src="screen()" trait="resolutionconverter" />
+			</sub>
+		</width>
+		<height> <copy src="me()" trait="width" /> </height>
+		<x>
+			<copy> 4 </copy>
+			<mul src="screen()" trait="resolutionconverter" />
+		</x>
+		<y>
+			<copy> 4 </copy>
+			<mul src="screen()" trait="resolutionconverter" />
+		</y>
+	</image>
+	<rect name="box">
+		<include src="box.xml" />
+
+		<_line_alpha> <copy src="parent()" trait="alpha" /> </_line_alpha>
+	</rect>
+
+
+<!-- </rect> -->

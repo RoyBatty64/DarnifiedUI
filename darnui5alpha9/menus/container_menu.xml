@@ -1,0 +1,635 @@
+<!-- container_menu.xml -->
+<!--
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			container_menu.xml
+// VERSION		2.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			12-20-2007
+// INFO			Menu used to transfer items to and from containers
+-->
+<menu name="ContainerMenu">
+	<class> &ContainerMenu; </class>
+	<stackingtype> &no_click_past; </stackingtype>
+
+	<_PCButton_R> CM_TakeAllButton </_PCButton_R>
+	<_PCButton_E> CM_ExitButton </_PCButton_E>
+
+	<user0> 0 </user0>		<!-- 1 if on PS3 -->
+
+	<_itemHeight>
+		<copy src="child(sizer)" trait="height" />
+		<add> 7 </add>
+	</_itemHeight>
+	<_itemCount>
+		<copy> 600 </copy> <!-- DarN max list height -->
+		<div src="me()" trait="_itemHeight" />
+		<floor> 0 </floor>
+	</_itemCount>
+	<_listHeight>
+		<copy src="me()" trait="_itemCount" />
+		<mul src="me()" trait="_itemHeight" />
+	</_listHeight>
+	<text name="sizer">
+		<font> <copy src="globals()" trait="_gl_listFont" /> </font> <!-- DarN TODO: _gl_listfont -->
+		<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+		<visible> &false; </visible>
+	</text>
+
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<systemcolor> &hudmain; </systemcolor>
+
+		<!-- ===== MAIN POSITIONING RECT ===== -->
+		<rect name="CM_MainRect">
+			<width> 1024 </width>
+			<height> 960 </height> <!-- DarN 800/900 -->
+
+			<!-- Centered on screen-->
+			<x>
+				<copy src="screen()" trait="width" />
+				<sub src="me()" trait="width" />
+				<div> 2 </div>
+			</x>
+			<y>
+				<!-- <copy src="screen()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div> -->10
+			</y>
+		</rect>
+
+<!-- ===== BACKGROUND TEXTURE ===== -->
+		<image name="CM_Background">
+			<width> 1144 </width>
+			<height> 1110 </height> <!-- DarN 970 -->
+			<x>
+				<copy src="sibling(CM_MainRect)" trait="x" />
+				<sub> 40 </sub>
+			</x>
+			<y>
+				<copy src="sibling(CM_MainRect)" trait="y" />
+				<sub> 105 </sub>
+			</y>
+			<depth> 1 </depth>
+
+			<filename> Interface\Shared\Background\solid_black.dds </filename>
+			<zoom> &scale; </zoom>
+			<systemcolor> &nosystemcolor; </systemcolor>
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha" /> </alpha>
+		</image>
+		
+		<!-- ===== SUBTITLE ===== -->
+		<rect name="CM_Subtitle">
+		  <include src="darn\text_box.xml"/>
+		  <justify> &center; </justify>
+		  <string> </string>
+		  <x>
+			<copy src="screen()" trait="width"/>
+			<sub src="me()" trait="width"/>
+			<div> 2 </div>
+		  </x>
+		  <y>
+			<!-- Get half my height -->
+			<copy src="me()" trait="height"/>
+			<div> 2 </div>
+			<!-- Add on the 960 absolte position of the y coordinate-->
+			<add> 800 </add>
+		  </y>
+		  <depth> 4 </depth>
+		</rect>
+
+<!-- ========== START ITEMS (LEFT) SIDE ========== -->
+		<rect name="CM_ItemsRect">
+			<depth> 2 </depth>
+			<locus> &true; </locus>
+
+			<width> 464 </width>
+			<height> 630 </height> <!-- DarN 480 -->
+			<x>
+				<copy src="CM_MainRect" trait="x" />
+				<add> 20 </add>
+			</x>
+			<y>
+				<copy src="CM_MainRect" trait="y" />
+				<add> 20 </add>
+			</y>
+
+			<!-- ===== HEADLINE ===== -->
+			<image name="CM_Items_headline_v1">
+				<include src="vertical_fade_line.xml" />
+				<height> 40 </height>
+			</image>
+
+			<image name="CM_Items_headline_h1">
+				<include src="line.xml" />
+				<_length> 25 </_length>
+			</image>
+
+			<image name="CM_Items_LeftFilterArrow">
+				<id> 0 </id>
+				<filename> Interface\Main\main_arrow_left.dds </filename>
+				<x> 30 </x>
+				<y> -10 </y>
+				<width> 17.5 </width>
+				<height> 35 </height>
+				<zoom> &scale; </zoom>
+				<target> &true; </target>
+				<visible> &true; </visible>		<!-- Set in code -->
+			</image>
+
+			<text name="CM_ItemsTitle">
+				<id> 1 </id>
+				<font> 3 </font> <!-- DarN 6 -->
+				<string> &-sInventoryItems; </string>
+				<x>
+					<copy> 30 </copy>
+					<add>
+						<copy> 20 </copy>
+						<onlyif src="sibling(CM_Items_LeftFilterArrow)" trait="visible" />
+					</add>
+				</x>
+				<y> -5 </y> <!-- DarN -12.5 -->
+				<target> &true; </target>
+				<wheelable> &true; </wheelable>
+			</text>
+
+			<image name="CM_Items_RightFilterArrow">
+				<id> 2 </id>
+				<filename> Interface\Main\main_arrow_right.dds </filename>
+				<x>
+					<copy> 60 </copy>
+					<add src="sibling(CM_ItemsTitle)" trait="width" />
+				</x>
+				<y> -10 </y>
+				<width> 17.5 </width>
+				<height> 35 </height>
+				<zoom> &scale; </zoom>
+				<target> &true; </target>
+				<visible> &true; </visible>		<!-- Set in code -->
+			</image>
+
+			<image name="CM_Items_headline_h2">
+				<include src="line.xml" />
+				<_length>
+					<copy> 464 </copy>
+					<sub src="me()" trait="x" />
+					<max> 0 </max>
+				</_length>
+
+				<x>
+					<copy> 0 </copy>
+					<add>
+						<copy src="sibling(CM_Items_RightFilterArrow)" trait="x" />
+						<add> 20 </add>
+						<onlyif src="sibling(CM_Items_RightFilterArrow)" trait="visible" />
+					</add>
+					<add>
+						<copy src="sibling(CM_ItemsTitle)" trait="width" />
+						<add> 40 </add>
+						<onlyifnot src="sibling(CM_Items_RightFilterArrow)" trait="visible" />
+					</add>
+				</x>
+			</image>
+
+			<!-- Player caps info -->
+			<text name="CM_Items_CapsLabel">
+				<id> 3 </id>
+				<font> <copy src="globals()" trait="_gl_listFont" /> </font> <!-- DarN 2 -->
+				<justify> &right; </justify>
+				<string></string>		<!-- Set in code -->
+
+				<x> 449 </x>
+				<y> 16 </y> <!-- DarN 20 -->
+			</text>
+
+			<image name="CM_Items_headline_v2">
+				<include src="vertical_fade_line.xml" />
+				<height> 40 </height>
+				<x>
+					<copy> 464 </copy>
+					<sub src="me()" trait="width" />
+				</x>
+			</image>
+
+			<!-- ===== PLAYER'S INVENTORY LIST ===== -->
+			<hotrect name="CM_Items_InventoryList">
+				<include src="list_box.xml" />
+				<id> 4 </id>
+
+				<x> -15 </x>
+				<y> 46 </y> <!-- DarN 60/46 -->
+				<width> 462 </width>
+				<height> <copy src="io()" trait="_listHeight" /> </height> <!-- DarN 365/505 -->
+			</hotrect>
+
+			<!-- ===== FOOTER ===== -->
+			<image name="CM_Items_footer_v1">
+				<include src="vertical_fade_line.xml" />
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<height> 30 </height>
+				<y> 640 </y> <!-- DarN 440 -->
+			</image>
+
+			<image name="CM_Items_footer_h1">
+				<include src="line.xml" />
+				<_length> 25 </_length>
+				<y> 670 </y> <!-- DarN 480 -->
+			</image>
+			
+			<image name="CM_Items_TitleButton">
+				<filename>
+					<copy src="io()" trait="user0"/>
+					<add> 1 </add>
+					<copy src="me()" trait="_filename_"/>
+				</filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<visible> &xbox; </visible>
+				
+				<width> 65 </width>
+				<height> 65 </height>
+
+				<x> 15 </x>
+				<y> 640 </y>
+				
+				<_filename_1> general_button_lt.dds </_filename_1>
+				<_filename_2> general_button_lb.dds </_filename_2>
+			</image>
+
+			<image name="CM_Items_footer_h2">
+				<include src="line.xml" />
+				<_length>
+					<copy> 464 </copy>
+					<add src="CM_Items_footer_v2" trait="width" />
+					<sub src="me()" trait="x" />
+				</_length>
+				<x>
+					<copy> 25 </copy>
+					<add>
+						<copy> 50 </copy>
+						<onlyif> &xbox; </onlyif>
+					</add>
+				</x>
+				<y> 670 </y> <!-- DarN 480 -->
+			</image>
+
+			<image name="CM_Items_footer_v2">
+				<include src="vertical_fade_line.xml" />
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<height> 30 </height>
+				<x> 464 </x>
+				<y> 640 </y> <!-- DarN 440 -->
+			</image>
+		</rect>
+
+		<!-- ============= BEGIN CONTAINER (RIGHT) SIDE ============ -->
+		<rect name="CM_ContainerRect">
+			<depth> 2 </depth>
+			<locus> &true; </locus>
+
+			<width> 464 </width>
+			<height> 630 </height> <!-- DarN 480 -->
+			<x>
+				<copy src="sibling(CM_ItemsRect)" trait="x" />
+				<add> 560 </add>
+			</x>
+			<y> <copy src="sibling(CM_ItemsRect)" trait="y" /> </y>
+
+			<!-- ===== HEADLINE ===== -->
+			<image name="CM_Container_headline_v1">
+				<include src="vertical_fade_line.xml" />
+				<height> 40 </height>
+			</image>
+
+			<image name="CM_Container_headline_h1">
+				<include src="line.xml" />
+				<_length> 25 </_length>
+			</image>
+
+			<image name="CM_Container_LeftFilterArrow">
+				<id> 5 </id>
+				<filename> Interface\Main\main_arrow_left.dds </filename>
+				<x> 30 </x>
+				<y> -10 </y>
+				<width> 17.5 </width>
+				<height> 35 </height>
+				<zoom> &scale; </zoom>
+				<target> &true; </target>
+				<visible> &true; </visible>		<!-- Set in code -->
+			</image>
+
+			<text name="CM_ContainerTitle">
+				<id> 6 </id>
+				<font> 3 </font> <!-- DarN 6 -->
+				<string></string>		<!-- Set in code -->
+				<x>
+					<copy> 30 </copy>
+					<add>
+						<copy> 20 </copy>
+						<onlyif src="sibling(CM_Container_LeftFilterArrow)" trait="visible" />
+					</add>
+				</x>
+				<y> -5 </y> <!-- DarN -12.5 -->
+				<target> &true; </target>
+				<wheelable> &true; </wheelable>
+			</text>
+
+			<image name="CM_Container_RightFilterArrow">
+				<id> 7 </id>
+				<filename> Interface\Main\main_arrow_right.dds </filename>
+				<x>
+					<copy> 60 </copy>
+					<add src="sibling(CM_ContainerTitle)" trait="width" />
+				</x>
+				<y> -10 </y>
+				<width> 17.5 </width>
+				<height> 35 </height>
+				<zoom> &scale; </zoom>
+				<target> &true; </target>
+				<visible> &true; </visible>		<!-- Set in code -->
+			</image>
+
+			<image name="CM_Container_headline_h2">
+				<include src="line.xml" />
+
+				<x>
+					<copy> 0 </copy>
+					<add>
+						<copy src="sibling(CM_Container_RightFilterArrow)" trait="x" />
+						<add> 20 </add>
+						<onlyif src="sibling(CM_Container_RightFilterArrow)" trait="visible" />
+					</add>
+					<add>
+						<copy src="sibling(CM_ContainerTitle)" trait="width" />
+						<add> 40 </add>
+						<onlyifnot src="sibling(CM_Container_RightFilterArrow)" trait="visible" />
+					</add>
+				</x>
+				<_length>
+					<copy> 464 </copy>
+					<sub src="me()" trait="x" />
+				</_length>
+			</image>
+
+			<image name="CM_Container_headline_v2">
+				<include src="vertical_fade_line.xml" />
+				<height> 40 </height>
+				<x>
+					<copy> 464 </copy>
+					<sub src="me()" trait="width" />
+				</x>
+			</image>
+
+			<!--======================= CONTAINER'S INVENTORY =======================-->
+			<hotrect name="CM_Container_InventoryList">
+				<include src="list_box.xml" />
+				<id> 8 </id>
+
+				<x> -15 </x>
+				<y> 46 </y> <!-- DarN 60/46 -->
+				<width> 464 </width>
+				<height> <copy src="io()" trait="_listHeight" /> </height> <!-- DarN 365/505 -->
+			</hotrect>
+
+			<image name="CM_Container_footer_v1">
+				<include src="vertical_fade_line.xml" />
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<height> 30 </height>
+				<y> 640 </y> <!-- DarN 440 -->
+			</image>
+
+			<image name="CM_Container_footer_h1">
+				<include src="line.xml" />
+				<_length>
+					<copy> 439 </copy>
+					<sub>
+						<copy> 50 </copy>
+						<onlyif> &xbox; </onlyif>
+					</sub>
+				</_length>
+				<y> 670 </y> <!-- DarN 480 -->
+			</image>
+			
+			<image name="CM_Container_TitleButton">
+				<filename>
+					<copy src="io()" trait="user0"/>
+					<add> 1 </add>
+					<copy src="me()" trait="_filename_"/>
+				</filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<visible> &xbox; </visible>
+				
+				<width> 65 </width>
+				<height> 65 </height>
+
+				<x> 384 </x> <!-- DarN 364 -->
+				<y> 640 </y>
+				
+				<_filename_1> general_button_rt.dds </_filename_1>
+				<_filename_2> general_button_rb.dds </_filename_2>
+			</image>
+
+			<image name="CM_Container_footer_h2">
+				<include src="line.xml" />
+				<_length>
+					<copy> 25 </copy>
+					<add src="CM_Container_footer_v2" trait="width" />
+				</_length>
+				<x> 439 </x>
+				<y> 670 </y> <!-- DarN 480 -->
+			</image>
+
+			<image name="CM_Container_footer_v2">
+				<include src="vertical_fade_line.xml" />
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<height> 30 </height>
+				<x> 464 </x>
+				<y> 640 </y> <!-- DarN 440 -->
+			</image>
+		</rect>		<!-- end CM_ContainerRect -->
+
+		<!-- ===== ARROW ICON ===== -->
+		<image name="CM_ArrowIcon">
+			<id> 9 </id>			<!-- Switch arrow direction based on item flow -->
+			<filename>
+				<copy src="me()" trait="user0" />
+				<copy src="me()" trait="_filename_" />
+			</filename>
+
+			<height> 128 </height>
+			<width> 64 </width>
+			<zoom> &scale; </zoom>
+			<depth> 2 </depth>
+
+			<!-- Visibility set in code -->
+			<visible> &false; </visible>
+
+			<x>
+				<copy src="CM_ItemsRect" trait="x" />
+				<add> 474 </add>
+			</x>
+			<y>
+				<copy> 300 </copy> <!-- DarN 250 -->
+				<add>
+					<copy> 6 </copy>
+					<onlyif><copy src="me()" trait="user0" /><eq>2</eq></onlyif>
+				</add>
+			</y>
+			<user0></user0>		<!-- Direction of arrow -->
+
+			<_filename_1> Interface\Shared\Arrow\right.dds </_filename_1>
+			<_filename_2> Interface\Shared\Arrow\left.dds </_filename_2>
+		</image>
+
+<!-- ===== BUTTON RECT ===== -->
+		<rect name="CM_ButtonRect">
+			<x>
+				<copy src="CM_ContainerRect" trait="x" />
+				<add src="CM_ContainerRect" trait="width" />
+				<sub> 55 </sub> <!-- DarN 10 -->
+				<!-- <add> 454 </add> -->
+			</x>
+			<y> 810 </y> <!-- DarN 670/800 -->
+			<locus> &true; </locus>
+			<depth> 6 </depth>
+
+<!-- ===== X BUTTON =====-->
+			<image name="CM_TakeAllButton">
+				<id> 10 </id>
+				<include src="darn\text_box.xml" />
+
+				<_verbuf> 6 </_verbuf> <!-- DarN 15 -->
+				<justify> &right; </justify>
+				<_xbox_button> &xbuttonx; </_xbox_button>
+				<_PCButtonText> &-sPCMenuHintR; </_PCButtonText>
+				<string> &-sTakeAll; </string>
+			</image>
+
+<!-- ===== B BUTTON =====-->
+			<image name="CM_ExitButton">
+				<id> 11 </id>
+				<include src="darn\text_box.xml" />
+
+				<_verbuf> 6 </_verbuf> <!-- DarN 15 -->
+				<!-- <_y> 45 </_y> -->
+				<_y>
+					<copy src="sibling(CM_TakeAllButton)" trait="_y" />
+					<add>
+						<copy src="me()" trait="height" />
+						<onlyif src="sibling(CM_TakeAllButton)" trait="visible" />
+					</add>
+				</_y>
+
+				<justify> &right; </justify>
+				<string> &-sExit; </string>
+
+				<systemcolor> &hudalt; </systemcolor>
+				<_xbox_button> &xbuttonb; </_xbox_button>
+				<_PCButtonText> &-sPCMenuHintE; </_PCButtonText>
+			</image>
+		</rect>
+<!-- ===== END CM_BUTTONRECT ===== -->
+
+<!-- ===== ITEM ICON ===== -->
+		<image name="CM_ItemIcon">
+			<id> 12 </id>
+			<depth> 2 </depth>
+
+			<x> <copy src="sibling(CM_ItemsRect)" trait="x" /><add> 22 </add></x>
+			<y>
+				<copy src="sibling(CM_ItemsRect)" trait="y" />
+				<add> 657 </add> <!-- DarN 472/612 -->
+			</y>
+			<width> 256 </width> <!-- DarN 256 -->
+			<height> 256 </height> <!-- DarN 256 -->
+			<zoom> &scale; </zoom>
+			<visible> &false; </visible>
+		</image>
+
+<!--================================= ITEM DATA ==================================-->
+		<rect name="CM_ItemData">
+			<include src="darn\item_stats_display_inventory.xml" />
+			<id> 13 </id>
+			<!-- <x>
+				<copy src="sibling(CM_ItemsRect)" trait="x" />
+				<add> 307 </add>
+			</x> -->
+			<x>
+				<copy src="sibling(CM_MainRect)" trait="x" />
+				<add>
+					<copy src="me()" trait="width" />
+					<div> 2 </div>
+				</add>
+			</x>
+			<y>
+				<copy src="sibling(CM_ItemsRect)" trait="y" />
+				<add> 730 </add> <!-- DarN 515/690 -->
+			</y>
+			<font> 1 </font>
+		</rect>
+
+<!-- ===== BOTTOM BRACKET ===== -->
+		<rect name="CM_BottomBracket">
+			<include src="bottom_bracket.xml" />
+
+			<width> 1024 </width>
+			<height> 40 </height>
+			<x> <copy src="sibling(CM_ItemsRect)" trait="x" /> </x>
+			<y> 940 </y> <!-- DarN 820/900 -->
+
+			<depth> 2 </depth>
+		</rect>
+	</rect>	<!-- end NOGLOW_BRANCH -->
+
+<!--======================== LIST BOX TEMPLATE =========================-->
+	<template name="CM_list_template">
+		<hotrect name="CM_list_template_container">
+			<include src="list_box_template.xml" />
+			<id> 20 </id>		<!-- 40503: Setting ID directly so that it's set at creation time and not later; an empty ID trait can cause certain event handlers to get skipped -->
+
+			<height> <copy src="io()" trait="_itemHeight" /> </height>
+			<_VerticalSpacing> 7 </_VerticalSpacing>
+
+			<text name="ListItemText">
+				<font> <copy src="globals()" trait="_gl_listFont" /> </font> <!-- DarN 2 -->
+				<wrapwidth> 370 </wrapwidth>
+
+				<x> 40 </x>
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y> <!-- DarN 20 -->
+				<string></string>			<!-- Set in code -->
+				<alpha> 255 </alpha>		<!-- Set in code -->
+			</text>
+
+			<!-- Small square denotes an equipped item -->
+			<image name="CM_list_template_ItemMarker">
+				<filename> interface\shared\marker\square_filled.dds </filename>
+				<!-- <texatlas> Interface\InterfaceShared.tai </texatlas> -->
+				<width> 14 </width> <!-- DarN 25 -->
+				<height> 14 </height> <!-- DarN 25 -->
+				<zoom> 67 </zoom>
+
+				<x> 12 </x> <!-- DarN 15 -->
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y> <!-- DarN 15 -->
+				<visible> &false; </visible>		<!-- Set in code -->
+			</image>
+		</hotrect>
+	</template>
+</menu>

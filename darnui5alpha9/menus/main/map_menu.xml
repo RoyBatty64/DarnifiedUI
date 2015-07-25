@@ -1,0 +1,1651 @@
+<!-- map_menu.xml -->
+<!--
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			map_menu.xml
+// VERSION		2.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			3-23-2007
+// INFO			XML file for the Pipboy DATA menu
+-->
+<menu name="MapMenu">
+	<class> &MapMenu; </class>
+	<id> &pipboymenu; </id>
+
+	<!-- XBox 360 control bindings -->
+	<xbuttonx> <ref src="MM_ButtonX" trait="clicked"/> </xbuttonx>
+	<xbuttony> <ref src="MM_ButtonY" trait="clicked"/>	</xbuttony>
+	<_PCButton_R> MM_ButtonY </_PCButton_R>
+
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<!-- NOT USED IN PIPBOY MENUS -->
+	</rect>
+
+
+	<rect name="GLOW_BRANCH">
+		<id> &glow_branch; </id>
+		<systemcolor> &Pipboy; </systemcolor>
+
+
+		<!-- ===== BACKGROUND TEXTURE ===== -->
+		<image name="MM_Background">
+			<filename> Interface\Shared\Background\pipboy.dds </filename>
+			<width> <copy src="globals()" trait="_pipboy_width"/> </width>
+			<height> <copy src="globals()" trait="_pipboy_height"/> </height>
+			<zoom> &scale; </zoom>
+			<depth> 1 </depth>
+			<brightness> 90 </brightness>
+		</image>
+
+
+		<!-- ===== MAIN POSITIONING RECT ===== -->
+		<rect name="MM_MainRect">
+			<x> 50 </x>
+			<y> 50 </y>
+			<width> 855 </width>
+			<height> 650 </height>
+			<depth> 2 </depth>
+			<locus> &true; </locus>
+
+
+			<!-- ===== HEADLINE RECT ===== -->
+			<rect name="MM_HeadlineRect">
+				<width> <copy src="parent()" trait="width"/> </width>
+				<height> 50 </height>
+
+				<!-- Upper-left corner -->
+				<image name="MM_Headline_v1">
+					<include src="vertical_fade_line.xml"/>
+				</image>
+
+				<image name="MM_Headline_h1">
+					<include src="line.xml"/>
+					<_length> 50 </_length>
+				</image>
+
+				<!-- Menu title -->
+				<text name="MM_Headline_Title">
+					<font> <copy src="globals()" trait="_gl_HeaderFont" /> </font>
+					<y> <copy src="globals()" trait="_pb_HeaderVOffset" /> </y>
+					<x> 70 </x>
+					<string> &-sData; </string>
+				</text>
+
+				<image name="MM_Headline_h2">
+					<include src="line.xml"/>
+					<_length> <!-- DarN 470 -->
+						<copy src="sibling(MM_Headline_v2)" trait="x" />
+						<sub src="me()" trait="x" />
+					</_length>
+					<x> <!-- DarN 180 -->
+						<copy> 70 </copy>
+						<add src="sibling(MM_Headline_Title)" trait="width" />
+						<add> 20 </add>
+					</x>
+				</image>
+
+				<!-- Player's current location -->
+				<text name="MM_Headline_LocationInfo">
+					<id> 0 </id>
+					<font> 2 </font>
+					<justify> &right; </justify>
+
+					<x> 630 </x>
+					<y> 10 </y> <!-- DarN 20 -->
+					<string></string>		<!-- Set in code -->
+				</text>
+
+				<image name="MM_Headline_v2">
+					<include src="vertical_fade_line.xml"/>
+					<x> 650 </x>
+				</image>
+
+				<image name="MM_Headline_h3">
+					<include src="line.xml"/>
+					<x>
+						<copy src="sibling(MM_Headline_v2)" trait="x"/>
+						<add> 10 </add>
+					</x>
+					<_length>
+						<copy> 855 </copy>
+						<sub src="me()" trait="x"/>
+						<max> 0 </max>
+					</_length>
+				</image>
+
+				<!-- The current time -->
+				<text name="MM_Headline_TimeDateInfo">
+					<id> 1 </id>
+					<font> 2 </font>
+					<justify> &right; </justify>
+
+					<x> 845 </x>
+					<y> 10 </y> <!-- DarN 20 -->
+					<string></string>		<!-- Set in code -->
+				</text>
+
+				<image name="MM_Headline_v3">
+					<include src="vertical_fade_line.xml"/>
+					<x> 855 </x>
+				</image>
+			</rect>		<!-- end MM_HeadlineRect -->
+
+
+			<!-- ===== LOCAL MAP ===== -->
+			<hotrect name="MM_LocalMap_ClipWindow">
+				<clipwindow> &true; </clipwindow>
+
+				<y> 50 </y>
+				<width> 855 </width>
+				<height> 500 </height>
+				<visible>
+					<copy src="MM_Tabline" trait="_CurrentTab"/>
+					<eq> 0 </eq>
+				</visible>
+				<target> &false; </target>
+				<locus> &true; </locus>
+
+				<!-- Main map image
+				      NOTE: Map markers are allocated as child tiles to this tile and all children are removed every update,
+				      so don't add any children to this tile lest they get deleted after one update -->
+				<hotrect name="MM_LocalMap_ParentImage">
+					<id> 2 </id>
+					<draggable> &true; </draggable>
+					<wheelable> &true; </wheelable>
+					<clips> &true; </clips>
+					<alpha> 255 </alpha>
+					<locus> &true; </locus>
+					<zoom> &scale; </zoom>
+					<visible> &false; </visible>
+					<_QuestMarkersVisible> &true; </_QuestMarkersVisible>	<!-- Set in code -->
+
+					<_Magnification> 1.0 </_Magnification>		<!-- Scale factor used to zoom in / out of map -->
+					<user0></user0>										<!-- Width of map markers; set in code -->
+					<user1></user1>										<!-- Width of quest markers; set in code -->
+					<user2></user2>										<!-- Width of player cursor; set in code -->
+
+					<width>
+						<copy src="me()" trait="filewidth"/>
+						<mul src="me()" trait="_Magnification"/>
+					</width>
+					<height>
+						<copy src="me()" trait="fileheight"/>
+						<mul src="me()" trait="_Magnification"/>
+					</height>
+
+					<x>
+						<!-- Use mouse drag to pan map -->
+						<add src="me()" trait="dragdeltax"/>
+
+						<max>
+							<copy> 427.5 </copy>
+							<sub src="me()" trait="width"/>
+						</max>
+						<min> 427.5 </min>
+					</x>
+					<y>
+						<!-- Use mouse drag to pan map -->
+						<add src="me()" trait="dragdeltay"/>
+
+						<max>
+							<copy> 250 </copy>
+							<sub src="me()" trait="height"/>
+						</max>
+						<min> 250 </min>
+					</y>
+				</hotrect>
+
+				<!-- Player arrow -->
+				<image name="MM_LocalMapCursor">
+					<id> 3 </id>
+					<filename> Interface\Icons\Misc\glow_cursor.dds </filename>
+					<depth> 7 </depth>
+					<clips> &true; </clips>
+
+					<!-- The player's position on the world map texture in texture coords ( between 0 and 1 );
+					done this way so that we can preserve the position when the map size changes upon zooming -->
+					<_x></_x>
+					<_y></_y>
+					<x>
+						<copy src="me()" trait="_x"/>
+						<mul src="sibling(MM_LocalMap_ParentImage)" trait="width"/>
+						<add src="sibling(MM_LocalMap_ParentImage)" trait="x"/>
+						<sub>
+							<copy src="me()" trait="width"/>
+							<div> 2 </div>
+						</sub>
+					</x>
+					<y>
+						<copy src="me()" trait="_y"/>
+						<mul src="sibling(MM_LocalMap_ParentImage)" trait="height"/>
+						<add src="sibling(MM_LocalMap_ParentImage)" trait="y"/>
+						<sub>
+							<copy src="me()" trait="height"/>
+							<div> 2 </div>
+						</sub>
+					</y>
+
+					<!-- Rotate arrow about its center -->
+					<rotateaxisx>
+						<copy src="me()" trait="width"/>
+						<div> 2 </div>
+					</rotateaxisx>
+					<rotateaxisy>
+						<copy src="me()" trait="height"/>
+						<div> 2 </div>
+					</rotateaxisy>
+
+					<!-- Arrow size also changes with map zoom -->
+					<width> <copy src="sibling(MM_LocalMap_ParentImage)" trait="user2"/> </width>
+					<height>
+						<copy src="me()" trait="width"/>
+						<mul> 1.28 </mul>
+					</height>
+					<zoom>
+						<copy src="me()" trait="width"/>
+						<mul> 3.5 </mul>
+					</zoom>
+					<visible> &false; </visible>
+				</image>
+			</hotrect>
+
+
+			<!-- ===== WORLD MAP ===== -->
+			<hotrect name="MM_WorldMap_ClipWindow">
+				<clipwindow> &true; </clipwindow>
+
+				<y> 50 </y>
+				<width> 855 </width>
+				<height> 500 </height>
+				<visible>
+					<copy src="MM_Tabline" trait="_CurrentTab"/>
+					<eq> 1 </eq>
+				</visible>
+				<target> &false; </target>
+				<locus> &true; </locus>
+
+
+				<!-- Main map image
+				      NOTE: Map markers are allocated as child tiles to this tile and all children are removed every update,
+				      so don't add any children to this tile lest they get deleted after one update -->
+				<hotrect name="MM_WorldMap_ParentImage">
+					<id> 4 </id>
+					<draggable> &true; </draggable>
+					<wheelable> &true; </wheelable>
+					<clips> &true; </clips>
+					<alpha> 128 </alpha>
+					<brightness> 255 </brightness>
+					<locus> &true; </locus>
+					<zoom> &scale; </zoom>
+					<_QuestMarkersVisible> &true; </_QuestMarkersVisible>	<!-- Set in code -->
+
+					<filename> Interface\Worldmap\Wasteland_1024_no_map.dds </filename>
+					<filewidth> 2048 </filewidth>
+					<fileheight> 2048 </fileheight>
+
+					<_Magnification> 1.0 </_Magnification>		<!-- Scale factor used to zoom in / out of map -->
+					<user0></user0>										<!-- Width of map markers; set in code -->
+					<user1></user1>										<!-- Width of quest markers; set in code -->
+					<user2></user2>										<!-- Width of player cursor; set in code -->
+
+					<width>
+						<copy src="me()" trait="filewidth"/>
+						<mul src="me()" trait="_Magnification" />
+					</width>
+					<height>
+						<copy src="me()" trait="fileheight"/>
+						<mul src="me()" trait="_Magnification" />
+					</height>
+
+					<x>
+						<!-- Use mouse drag to pan map -->
+						<add src="me()" trait="dragdeltax"/>
+
+						<max>
+							<copy> 427.5 </copy>
+							<sub src="me()" trait="width"/>
+						</max>
+						<min> 427.5 </min>
+					</x>
+					<y>
+						<!-- Use mouse drag to pan map -->
+						<add src="me()" trait="dragdeltay"/>
+
+						<max>
+							<copy> 250 </copy>
+							<sub src="me()" trait="height"/>
+						</max>
+						<min> 250 </min>
+					</y>
+
+
+				</hotrect>
+
+
+				<!-- Player arrow -->
+				<image name="MM_WorldMapCursor">
+					<id> 5 </id>
+					<filename> Interface\Icons\Misc\glow_cursor.dds </filename>
+					<depth> 7 </depth>
+					<clips> &true; </clips>
+
+					<!-- The player's position on the world map texture in texture coords ( between 0 and 1 );
+					done this way so that we can preserve the position when the map size changes on zooming -->
+					<_x></_x>
+					<_y></_y>
+					<x>
+						<copy src="me()" trait="_x"/>
+						<mul src="sibling(MM_WorldMap_ParentImage)" trait="width"/>
+						<add src="sibling(MM_WorldMap_ParentImage)" trait="x"/>
+						<sub>
+							<copy src="me()" trait="width"/>
+							<div> 2 </div>
+						</sub>
+					</x>
+					<y>
+						<copy src="me()" trait="_y"/>
+						<mul src="sibling(MM_WorldMap_ParentImage)" trait="height"/>
+						<add src="sibling(MM_WorldMap_ParentImage)" trait="y"/>
+						<sub>
+							<copy src="me()" trait="height"/>
+							<div> 2 </div>
+						</sub>
+					</y>
+
+					<!-- Rotate arrow about its center -->
+					<rotateaxisx>
+						<copy src="me()" trait="width"/>
+						<div> 2 </div>
+					</rotateaxisx>
+					<rotateaxisy>
+						<copy src="me()" trait="height"/>
+						<div> 2 </div>
+					</rotateaxisy>
+
+					<!-- Arrow size also changes with map zoom -->
+					<width> <copy src="sibling(MM_WorldMap_ParentImage)" trait="user2"/> </width>
+					<height>
+						<copy src="me()" trait="width"/>
+						<mul> 1.28 </mul>
+					</height>
+					<zoom>
+						<copy src="me()" trait="width"/>
+						<mul> 3.5 </mul>
+					</zoom>
+				</image>
+			</hotrect>
+
+			<!-- Centered highlight box -->
+			<hotrect name="MM_Highlight_ClipWindow">
+				<clipwindow> &true; </clipwindow>
+
+				<y> 50 </y>
+				<width> 855 </width>
+				<height> 500 </height>
+				<visible>
+					<copy src="MM_Tabline" trait="_CurrentTab"/>
+					<lte> 1 </lte>
+				</visible>
+				<target> &false; </target>
+				<locus> &true; </locus>
+
+				<rect name="MM_MapHighlightBox">
+					<id> 6 </id>
+					<_Title></_Title>
+
+					<width> 80 </width>
+					<height> 80 </height>
+					<x> 388 </x>
+					<y> 210 </y>
+					<depth> 8 </depth>
+					<visible>
+						<copy src="MM_Tabline" trait="_CurrentTab"/>
+						<eq> 0 </eq>
+						<and> <copy src="MM_LocalMap_ParentImage" trait="visible"/> </and>
+						<or>
+							<copy src="MM_Tabline" trait="_CurrentTab"/>
+							<eq> 1 </eq>
+						</or>
+					</visible>
+					<locus> &true; </locus>
+
+					<text name="MM_HighlightLocationName">
+						<font> 3 </font>
+						<string> <copy src="parent()" trait="_Title"/> </string>
+						<justify> &center; </justify>
+						<clips> &true; </clips>
+
+						<x> 40 </x>
+						<y> 100 </y>
+					</text>
+
+					<image name="MM_Highlight_CenterDot">
+						<filename> Interface\Worldmap\waypoint_node.dds </filename>
+						<height> 8 </height>
+						<width> 8 </width>
+						<x> 37 </x>
+						<y> 37 </y>
+						<zoom> &scale; </zoom>
+						<clips> &true; </clips>
+					</image>
+
+					<image name="MM_Highlight_ULHoriz">
+						<filename> solid.dds </filename>
+						<texatlas> Interface\InterfaceShared.tai </texatlas>
+
+						<height> <copy src="globals()" trait="_line_thickness"/></height>
+						<width> 20 </width>
+						<locus> &true; </locus>
+						<clips> &true; </clips>
+
+						<image name="MM_Highlight_ULHorizTip">
+							<filename> fade_to_right.dds </filename>
+							<texatlas> Interface\InterfaceShared.tai </texatlas>
+							<clips> &true; </clips>
+
+							<x> 20 </x>
+							<height> <copy src="globals()" trait="_line_thickness"/></height>
+							<width> 8 </width>
+						</image>
+					</image>
+					<image name="MM_Highlight_ULVert">
+						<filename> solid.dds </filename>
+						<texatlas> Interface\InterfaceShared.tai </texatlas>
+						<clips> &true; </clips>
+
+						<height> 20 </height>
+						<width> <copy src="globals()" trait="_line_thickness"/> </width>
+						<locus> &true; </locus>
+
+						<image name="MM_Highlight_ULVertTip">
+							<filename> fade_to_bottom.dds </filename>
+							<texatlas> Interface\InterfaceShared.tai </texatlas>
+							<clips> &true; </clips>
+
+							<y> 20 </y>
+							<width> <copy src="globals()" trait="_line_thickness"/> </width>
+							<height> 15 </height>
+						</image>
+					</image>
+
+					<image name="MM_Highlight_URHoriz">
+						<filename> solid.dds </filename>
+						<texatlas> Interface\InterfaceShared.tai </texatlas>
+						<clips> &true; </clips>
+
+						<x> 60 </x>
+						<height> <copy src="globals()" trait="_line_thickness"/></height>
+						<width> 20 </width>
+						<locus> &true; </locus>
+
+						<image name="MM_Highlight_URHorizTip">
+							<filename> fade_to_left.dds </filename>
+							<texatlas> Interface\InterfaceShared.tai </texatlas>
+							<clips> &true; </clips>
+
+							<x> -8 </x>
+							<height> <copy src="globals()" trait="_line_thickness"/></height>
+							<width> 8 </width>
+						</image>
+					</image>
+					<image name="MM_Highlight_URVert">
+						<filename> solid.dds </filename>
+						<texatlas> Interface\InterfaceShared.tai </texatlas>
+						<clips> &true; </clips>
+
+						<x>
+							<copy> 80 </copy>
+							<sub src="me()" trait="width"/>
+						</x>
+						<height> 20 </height>
+						<width> <copy src="globals()" trait="_line_thickness"/> </width>
+						<locus> &true; </locus>
+
+						<image name="MM_Highlight_URVertTip">
+							<filename> fade_to_bottom.dds </filename>
+							<texatlas> Interface\InterfaceShared.tai </texatlas>
+							<clips> &true; </clips>
+
+							<y> 20 </y>
+							<width> <copy src="globals()" trait="_line_thickness"/> </width>
+							<height> 8 </height>
+						</image>
+					</image>
+
+					<image name="MM_Highlight_LLHoriz">
+						<filename> solid.dds </filename>
+						<texatlas> Interface\InterfaceShared.tai </texatlas>
+						<clips> &true; </clips>
+
+						<y>
+							<copy> 80 </copy>
+							<sub src="me()" trait="height"/>
+						</y>
+						<height> <copy src="globals()" trait="_line_thickness"/></height>
+						<width> 20 </width>
+						<locus> &true; </locus>
+
+						<image name="MM_Highlight_LLHorizTip">
+							<filename> fade_to_right.dds </filename>
+							<texatlas> Interface\InterfaceShared.tai </texatlas>
+							<clips> &true; </clips>
+
+							<x> 20 </x>
+							<height> <copy src="globals()" trait="_line_thickness"/></height>
+							<width> 8 </width>
+						</image>
+					</image>
+					<image name="MM_Highlight_LLVert">
+						<filename> solid.dds </filename>
+						<texatlas> Interface\InterfaceShared.tai </texatlas>
+						<clips> &true; </clips>
+
+						<y> 60 </y>
+						<height> 20 </height>
+						<width> <copy src="globals()" trait="_line_thickness"/> </width>
+						<locus> &true; </locus>
+
+						<image name="MM_Highlight_LLVertTip">
+							<filename> fade_to_top.dds </filename>
+							<texatlas> Interface\InterfaceShared.tai </texatlas>
+							<clips> &true; </clips>
+
+							<y> -8 </y>
+							<width> <copy src="globals()" trait="_line_thickness"/> </width>
+							<height> 8 </height>
+						</image>
+					</image>
+
+					<image name="MM_Highlight_LRHoriz">
+						<filename> solid.dds </filename>
+						<texatlas> Interface\InterfaceShared.tai </texatlas>
+						<clips> &true; </clips>
+
+						<x> 60 </x>
+						<y>
+							<copy> 80 </copy>
+							<sub src="me()" trait="height"/>
+						</y>
+						<height> <copy src="globals()" trait="_line_thickness"/></height>
+						<width> 20 </width>
+						<locus> &true; </locus>
+
+						<image name="MM_Highlight_LRHorizTip">
+							<filename> fade_to_left.dds </filename>
+							<texatlas> Interface\InterfaceShared.tai </texatlas>
+							<clips> &true; </clips>
+
+							<x> -8 </x>
+							<height> <copy src="globals()" trait="_line_thickness"/></height>
+							<width> 8 </width>
+						</image>
+					</image>
+					<image name="MM_Highlight_LRVert">
+						<filename> solid.dds </filename>
+						<texatlas> Interface\InterfaceShared.tai </texatlas>
+						<clips> &true; </clips>
+
+						<x>
+							<copy> 80 </copy>
+							<sub src="me()" trait="width"/>
+						</x>
+						<y> 60 </y>
+						<height> 20 </height>
+						<width> <copy src="globals()" trait="_line_thickness"/> </width>
+						<locus> &true; </locus>
+
+						<image name="MM_Highlight_LRVertTip">
+							<filename> fade_to_top.dds </filename>
+							<texatlas> Interface\InterfaceShared.tai </texatlas>
+							<clips> &true; </clips>
+
+							<y> -8 </y>
+							<width> <copy src="globals()" trait="_line_thickness"/> </width>
+							<height> 8 </height>
+						</image>
+					</image>
+				</rect>
+			</hotrect>
+
+			<!-- ===== LISTBOXES: used by Quests, Notes, and Radio pages ===== -->
+			<hotrect name="MM_QuestsList">
+				<include src="list_box.xml"/>
+				<id> 7 </id>
+
+				<x> -15 </x>
+				<y> 75 </y>
+				<width> 400 </width>
+				<height> 468 </height>
+
+				<_enabled></_enabled>
+				<visible>
+					<copy src="MM_Tabline" trait="_CurrentTab"/>
+					<eq> 2 </eq>
+				</visible>
+			</hotrect>
+			<!-- 			<hotrect name="MM_ChallengeList"> -->
+<!-- 				<include src="list_box.xml"/> -->
+<!-- 				<id> 17 </id> -->
+<!--  -->
+<!-- 				<x> -15 </x> -->
+<!-- 				<y> 75 </y> -->
+<!-- 				<width> 400 </width> -->
+<!-- 				<height> 468 </height> -->
+<!--  -->
+<!-- 				<_enabled></_enabled> -->
+<!-- 				<visible> -->
+<!-- 					<copy src="MM_Tabline" trait="_CurrentTab"/> -->
+<!-- 					<eq> 2 </eq> -->
+<!-- 				</visible> -->
+<!-- 			</hotrect> -->
+			<hotrect name="MM_NotesList">
+				<include src="list_box.xml"/>
+				<id> 8 </id>
+
+				<x> -15 </x>
+				<y> 75 </y>
+				<width> 400 </width>
+				<height> 468 </height>
+
+				<_enabled></_enabled>	<!-- Set in code -->
+				<visible>
+					<copy src="MM_Tabline" trait="_CurrentTab"/>
+					<eq> 3 </eq>
+				</visible>
+
+				<image name="MM_Notes_SelectedNoteHighlight">
+					<id> 9 </id>
+					<filename> square_filled.dds </filename>
+					<texatlas> Interface\InterfaceShared.tai </texatlas>
+					<x> 32 </x>
+					<width> 25 </width>
+					<height> 25 </height>
+
+					<y> 0 </y>							<!-- Set in code -->
+					<visible> &false; </visible>		<!-- Set in code -->
+				</image>
+			</hotrect>
+
+			<hotrect name="MM_RadioStationList">
+				<include src="list_box.xml"/>
+				<id> 10 </id>
+
+				<x> -15 </x>
+				<y> 75 </y>
+				<width> 400 </width>
+				<height> 468 </height>
+
+				<_enabled> <copy src="me()" trait="visible"/> </_enabled>
+				<visible>
+					<copy src="MM_Tabline" trait="_CurrentTab"/>
+					<eq> 4 </eq>
+				</visible>
+			</hotrect>
+			<!-- FONV -->
+			<!-- The current Challenge Type displayed -->
+			<text name="MM_Headline_ChallengeType">
+				<id> 21 </id>
+				<font> 2 </font>
+
+				<x> 365 </x>
+				<y>
+					<copy src="MM_Headline_Title" trait="y"/>
+					<add> 55 </add>
+				</y>
+				<width> 400 </width>
+				<string></string>
+				<!-- Set in code -->
+			</text>
+
+			<hotrect name="MM_ChallengeList">
+				<include src="list_box.xml"/>
+				<id> 19 </id>
+
+				<x> -15 </x>
+				<y> 75 </y>
+				<width> 400 </width>
+				<height> 468 </height>
+
+				<_enabled></_enabled>
+				<!-- Set in code -->
+				<visible>
+					<copy src="MM_Tabline" trait="_CurrentTab"/>
+					<eq> 3 </eq>
+				</visible>
+
+				<image name="MM_Challenge_SelectedHighlight">
+					<id> 20 </id>
+					<filename> square_filled.dds </filename>
+					<texatlas> Interface\InterfaceShared.tai </texatlas>
+					<width> 25 </width>
+					<height> 25 </height>
+
+					<y> 0 </y>
+					<!-- Set in code -->
+					<visible> &false; </visible>
+					<!-- Set in code -->
+				</image>
+			</hotrect>
+			<!-- ===== BUTTON RECT ===== -->
+			<rect name="MM_ButtonRect">
+				<x>
+					<copy src="parent()" trait="width"/>
+					<sub> 20 </sub> <!-- DarN add for shortcuts -->
+				</x>
+				<y> <copy src="sibling(MM_QuestsList)" trait="y"/> </y>
+				<height> 120 </height>
+				<locus> &true; </locus>
+
+				<image name="MM_ButtonA">
+					<id> 11 </id>
+					<include src="darn\text_box.xml"/>
+
+					<_horbuf> 20 </_horbuf>
+					<_verbuf> 15 </_verbuf>
+					<justify> &right; </justify>
+					<_line_alpha>
+						<copy> 127 </copy>
+						<add>
+							<copy> 128 </copy>
+							<onlyif src="me()" trait="target"/>
+						</add>
+					</_line_alpha>
+
+					<!-- Visible only on XBox if:
+						World Map: always
+						Quest Page: Player has at least one quest
+						Notes Page: Player is highlighting an audio note
+						Radio Page: Player has discovered at least one radio station -->
+					<!-- RG, NOTE: It's cumbersome to do all this condition-checking in XML, but doing so
+					prevents flickering caused by mis-timed visibility / text changes -->
+					<visible>
+						<copy> &xbox; </copy>
+						<and>
+							<copy src="MM_Tabline" trait="_CurrentTab"/>
+							<eq> 1 </eq>
+							<or>
+								<copy src="MM_Tabline" trait="_CurrentTab"/>
+								<eq> 2 </eq>
+								<and> <copy src="MM_QuestsList" trait="childcount"/><gt> 2 </gt> </and>
+							</or>
+							<or>
+								<copy src="MM_Tabline" trait="_CurrentTab"/>
+								<eq> 3 </eq>
+								<and> <copy src="MM_DataRect" trait="_ItemType"/><eq> 3 </eq> </and>
+							</or>
+							<or>
+								<copy src="MM_Tabline" trait="_CurrentTab"/>
+								<eq> 4 </eq>
+								<and> <copy src="MM_RadioStationList" trait="childcount"/><gt> 2 </gt> </and>
+							</or>
+						</and>
+					</visible>
+
+					<!-- Change button text based on page status -->
+					<string> <copy src="me()" trait="_Title"/> </string>
+					<_Title>
+						<copy src="MM_Tabline" trait="_CurrentTab"/>
+
+						<!-- #20984: Change "Play Audio" to "Stop Audio" when audio note is playing -->
+						<add>
+							<copy> 2 </copy>
+							<onlyif>
+								<copy src="MM_DataRect" trait="user0"/>
+								<and>
+									<copy src="MM_Tabline" trait="_CurrentTab"/>
+									<eq> 3 </eq>
+								</and>
+							</onlyif>
+						</add>
+						<copy src="me()" trait="_Title_"/>
+					</_Title>
+
+					<_Title_1> &-sTravel; </_Title_1>
+					<_Title_2> &-sMakeActiveQuest; </_Title_2>
+					<_Title_3> &-sPlayAudio; </_Title_3>
+					<_Title_4> &-sTune; </_Title_4>
+					<_Title_5> &-sStopAudio; </_Title_5>
+
+					<_xbox_button> &xbuttona; </_xbox_button>
+				</image>
+
+				<image name="MM_ButtonX">
+					<id> 12 </id>
+					<include src="darn\text_box.xml"/>
+
+					<_ShowingAllNotes> &true; </_ShowingAllNotes>	<!-- True if the Notes filter is off -->
+					<_y>
+						<copy src="sibling(MM_ButtonA)" trait="_y"/>
+						<add>
+							<copy src="sibling(MM_ButtonA)" trait="height"/>
+							<onlyif src="sibling(MM_ButtonA)" trait="visible"/>
+						</add>
+					</_y>
+					<_horbuf> 20 </_horbuf>
+					<_verbuf> 15 </_verbuf>
+					<justify> &right; </justify>
+					<_line_alpha>
+						<copy> 127 </copy>
+						<add>
+							<copy> 128 </copy>
+							<onlyif src="me()" trait="target"/>
+						</add>
+					</_line_alpha>
+
+					<!-- Visible if:
+						World / Local Map: On XBox
+						Quest Page: Player has at least one quest
+						Notes Page: Player has at least one note -->
+					<visible>
+						<copy src="MM_Tabline" trait="_CurrentTab"/>
+						<lte> 1 </lte>
+						<and> &xbox; </and>
+						<or>
+							<copy src="MM_Tabline" trait="_CurrentTab"/>
+							<eq> 2 </eq>
+							<and> <copy src="MM_QuestsList" trait="childcount"/><gt> 2 </gt> </and>
+						</or>
+						<or>
+							<copy src="MM_Tabline" trait="_CurrentTab"/>
+							<eq> 3 </eq>
+							<and> <copy src="MM_NotesList" trait="childcount"/><gt> 2 </gt> </and>
+						</or>
+					</visible>
+
+					<!-- Change button text based on page status -->
+					<string> <copy src="me()" trait="_Title"/> </string>
+					<_Title>
+						<copy src="MM_Tabline" trait="_CurrentTab"/>
+						<add>
+							<copy> 1 </copy>
+							<onlyif>
+								<copy src="MM_Tabline" trait="_CurrentTab"/>
+								<eq> 0 </eq>
+							</onlyif>
+						</add>
+						<add>
+							<copy> 1 </copy>
+							<onlyif>
+								<copy src="MM_Tabline" trait="_CurrentTab"/>
+								<eq> 3 </eq>
+								<and src="me()" trait="_ShowingAllNotes"/>
+								<and> <not src="MM_Headline_ChallengeType" trait="visible"/> </and>
+							</onlyif>
+						</add>
+						<add>
+							<copy> 2 </copy>
+							<onlyif>
+								<copy src="MM_Headline_ChallengeType" trait="visible"/>
+								<and>
+									<copy src="MM_Tabline" trait="_CurrentTab"/>
+									<eq> 3 </eq>
+								</and>
+							</onlyif>
+						</add>
+						<copy src="me()" trait="_Title_"/>
+					</_Title>
+
+					<_Title_1> &-sPlaceMarker; </_Title_1>
+					<_Title_2> &-sShowLocation; </_Title_2>
+					<_Title_3> &-sShowAllNotes; </_Title_3>
+					<_Title_4> &-sShowActiveNotes; </_Title_4>
+					<_Title_5> &-sNextChallenge; </_Title_5> <!-- FONV -->
+
+					<_xbox_button> &xbuttonx; </_xbox_button>
+				</image>
+				<image name="MM_ButtonY"> <!-- FONV -->
+					<id> 18 </id>
+					<include src="darn\text_box.xml"/>
+
+					<_ShowingAllNotes> &true; </_ShowingAllNotes>
+					<!-- True if the Notes filter is off -->
+					<_y>
+						<copy src="sibling(MM_ButtonX)" trait="_y"/>
+						<add>
+							<copy src="sibling(MM_ButtonX)" trait="height"/>
+							<onlyif src="sibling(MM_ButtonX)" trait="visible"/>
+						</add>
+					</_y>
+					<_horbuf> 20 </_horbuf>
+					<_verbuf> 15 </_verbuf>
+					<_line_alpha>
+						<copy> 127 </copy>
+						<add>
+							<copy> 128 </copy>
+							<onlyif src="me()" trait="target"/>
+						</add>
+					</_line_alpha>
+
+					<!-- Visible if:
+						Quest Page -->
+					<visible>
+						<copy src="MM_Tabline" trait="_CurrentTab"/>
+						<lte> 1 </lte>
+						<and> &xbox; </and>
+						<or>
+							<copy src="MM_Tabline" trait="_CurrentTab"/>
+							<eq> 3 </eq>
+						</or>
+					</visible>
+
+					<justify> &right; </justify>
+					<_xbox_button> &xbuttony; </_xbox_button>
+					<_PCButtonText> &-sPCMenuHintR; </_PCButtonText>
+					<string> &-sChallengeToggle; </string>
+				</image>
+			</rect>		<!-- end MM_ButtonRect -->
+
+
+
+			<!-- ===== LIST ITEM DATA RECT: Displays various data on the highlighted list item ===== -->
+			<rect name="MM_DataRect">
+				<id> 13 </id>
+				<x>
+					<copy src="parent()" trait="width"/>
+					<sub src="me()" trait="width"/>
+				</x>
+				<y>
+					<copy src="sibling(MM_ButtonRect)" trait="y"/>
+					<add>
+						<copy src="sibling(MM_ButtonRect)" trait="height"/>
+						<onlyif>
+							<copy src="MM_ButtonA" trait="visible"/>
+							<or src="MM_ButtonX" trait="visible"/>
+							<or src="MM_ButtonY" trait="visible"/>
+						</onlyif>
+					</add>
+					<sub>
+						<copy src="MM_ButtonA" trait="height"/>
+						<onlyif>
+							<copy src="MM_Tabline" trait="_CurrentTab"/>
+							<lte> 3 </lte>
+							<and> <not src="MM_ButtonA" trait="visible"/> </and>
+						</onlyif>
+					</sub>
+				</y>
+				<width> 400 </width>
+				<height> 400 </height>
+				<visible> &false; </visible>
+				<locus> &true; </locus>
+
+				<!-- User traits -->
+				<_ItemType></_ItemType>								<!-- Type of list item -->
+				<_ItemStringInfo></_ItemStringInfo>					<!-- String information: used differently based on context -->
+				<_AudioFileCompletion></_AudioFileCompletion>		<!-- Percent of completion of a playing audio note -->
+				<user0> &false; </user0>							<!-- True if we are highlighting a playing audio note -->
+				
+				<_duiItemType> <!-- DarN notes - quest switching override -->
+					<copy> 4 </copy>
+					<onlyif src="MM_QuestsList" trait="visible"/>
+					<add>
+						<copy> 1 </copy>
+						<onlyif>
+							<copy src="MM_NotesList" trait="visible"/>
+							<or src="MM_ChallengeList" trait="visible"/>
+						</onlyif>
+					</add>
+				</_duiItemType>
+			
+				<text name="DataDbg">
+					<font> 3 </font>
+					<string> <copy src="parent()" trait="_ItemType" /> </string>
+					<x> -20 </x>
+					<y> -20 </y>
+					<locus> &true; </locus>
+					<systemcolor> &hudalt; </systemcolor>
+					<visible> 0 </visible>
+				</text>
+				<text name="DataDbg2">
+					<font> 3 </font>
+					<string> <copy src="parent()" trait="_duiItemType" /> </string>
+					<x> -20 </x>
+					<y> -50 </y>
+					<locus> &true; </locus>
+					<systemcolor> &nosystemcolor; </systemcolor>
+					<visible> 0 </visible>
+				</text>
+
+				<rect name="notesWrap">
+					<clipwindow> &true; </clipwindow>
+					<target> &false; </target>
+					<x> -17 </x>
+					<y> 20 </y>
+					<width> <copy src="parent()" trait="width"/> </width>
+					<height>
+						<copy> 0 </copy>
+						<add>
+							<copy> 385 </copy> <!-- DarN 385 -->
+							<onlyifnot> &xbox; </onlyifnot>
+						</add>
+						<add>
+							<copy> 340 </copy>
+							<onlyif> &xbox; </onlyif>
+						</add>
+					</height>
+
+					<locus> &false; </locus>
+					<!-- Item's text -->
+					<hotrect name="MM_DataTextRect">
+						<id> 14 </id>
+						<wheelable> &true; </wheelable>
+						<clipwindow> &false; </clipwindow>
+
+						<visible>
+							<!-- <copy src="grandparent()" trait="_ItemType"/> -->
+							<copy src="grandparent()" trait="_duiItemType"/>
+							<eq> 1 </eq>
+							<and>
+								<copy src="grandparent()" trait="_ItemType"/>
+								<neq> 3 </neq>
+							</and>
+						</visible>
+						<target> <copy src="me()" trait="visible"/> </target>
+						<locus> &true; </locus>
+
+						<x> -17 </x>
+						<y> 20 </y>
+						<width> <copy src="parent()" trait="width"/> </width>
+						<height>
+							<copy> 365 </copy> <!-- DarN 385 -->
+							<sub>
+								<copy> 45 </copy>
+								<onlyif> &xbox; </onlyif>
+							</sub>
+						</height>
+
+						<hotrect name="MM_TextScrollbar">
+							<include src="scrollbar_vert.xml"/>
+
+							<_height> <copy src="parent()" trait="height"/> </_height>
+							<_x> <copy src="grandparent()" trait="width"/> </_x>
+							<_wheelmoved> <copy src="parent()" trait="wheelmoved"/> </_wheelmoved>
+							<_number_of_visible_items> 1 </_number_of_visible_items>
+							<visible>
+								<copy src="sibling(MM_DataText)" trait="height" />
+								<gt src="parent()" trait="height" />
+							</visible>
+
+							<_ScrollDelta>
+								<copy src="globals()" trait="_fontSize_1" />
+								<add> 8 </add>
+							</_ScrollDelta> <!-- DarN 20 -->
+						</hotrect>
+
+						<text name="MM_DataText">
+							<justify> &left; </justify>
+							<y>
+								<copy src="sibling(MM_TextScrollbar)" trait="_current_value"/>
+								<mul src="sibling(MM_TextScrollbar)" trait="_ScrollDelta"/>
+								<mul> -1 </mul>
+								<!-- <sub src="globals()" trait="_fontSize_1" /> -->
+							</y>
+							<wrapwidth>
+								<copy src="parent()" trait="width"/>
+								<sub> 10 </sub>
+							</wrapwidth>
+							<clips> &true; </clips>
+							<font> 1 </font>
+							<string></string>		<!-- Set in code -->
+						</text>
+					</hotrect>
+				</rect>
+
+				<!-- Item's image -->
+				<image name="MM_DataImage">
+					<x>
+						<copy src="parent()" trait="width"/>
+						<sub src="me()" trait="width"/>
+					</x>
+					<y> <copy src="sibling(MM_DataTextRect)" trait="y"/> </y>
+
+					<width> 360 </width>
+					<height> 360 </height>
+					<zoom> &scale; </zoom>
+
+					<filename></filename>		<!-- Set in code -->
+					<visible>
+						<copy src="parent()" trait="_ItemType"/>
+						<eq> 2 </eq>
+					</visible>
+				</image>
+
+				<!-- Item's audio file info -->
+				<rect name="MM_DataAudioInfo">
+					<y> <copy src="sibling(MM_DataTextRect)" trait="y"/> </y>
+					<locus> &true; </locus>
+
+					<width> <copy src="parent()" trait="width"/> </width>
+					<height> 200 </height>
+					<visible>
+						<copy src="parent()" trait="_ItemType"/>
+						<eq> 3 </eq>
+					</visible>
+
+					<!-- Time remaining display -->
+					<text name="MM_AudioTimeRemaining">
+						<justify> &right; </justify>
+						<x> <copy src="parent()" trait="width"/> </x>
+						<string> <copy src="grandparent()" trait="_ItemStringInfo"/> </string>
+					</text>
+
+					<!-- Audio meter -->
+					<rect name="MM_AudioMeterBorder">
+						<include src="bottom_bracket.xml"/>
+
+						<y>
+							<copy src="sibling(MM_AudioTimeRemaining)" trait="height"/>
+							<add src="me()" trait="height"/>
+						</y>
+						<width>
+							<copy src="parent()" trait="width"/>
+							<sub> 0 </sub>
+						</width>
+						<height> 30 </height>
+					</rect>
+
+					<image name="MM_AudioMeterImage">
+						<filename> Interface\Shared\Meter\tickmark_horiz.dds </filename>
+						<zoom> &scale; </zoom>
+
+						<y>
+							<copy src="sibling(MM_AudioMeterBorder)" trait="y"/>
+							<sub src="me()" trait="height"/>
+							<add> 2 </add>
+						</y>
+						<width> <copy src="sibling(MM_AudioMeterBorder)" trait="width"/> </width>
+						<height> 32 </height>
+						<cropy> 2 </cropy>
+					</image>
+
+					<image name="MM_AudioMeterMarker">
+						<filename> solid.dds </filename>
+						<texatlas> Interface\InterfaceShared.tai </texatlas>
+						<width> 8 </width>
+						<height> 32 </height>
+						<depth> 2 </depth>
+
+						<!-- Move the marker to the right as the audio file plays -->
+						<x>
+							<copy src="sibling(MM_AudioMeterImage)" trait="width"/>
+							<sub> 8 </sub>
+							<mul src="grandparent()" trait="_AudioFileCompletion"/>
+						</x>
+						<y>
+							<copy src="sibling(MM_AudioMeterImage)" trait="y"/>
+							<add>
+								<copy src="me()" trait="height"/>
+								<div> 4 </div>
+							</add>
+						</y>
+					</image>
+				</rect>
+
+				<!-- ===== QUEST OBJECTIVES LISTBOX ===== -->
+				<hotrect name="MM_QuestObjectivesList">
+					<include src="list_box.xml"/>
+					<id> 15 </id>
+
+					<x>
+						<copy src="parent()" trait="width"/>
+						<sub src="me()" trait="width"/>
+					</x>
+
+					<width> 400 </width>
+					<height>
+						<copy> 0 </copy>
+						<add>
+							<copy> 400 </copy>
+							<onlyifnot> &xbox; </onlyifnot>
+						</add>
+						<add>
+							<copy> 360 </copy>
+							<onlyif> &xbox; </onlyif>
+						</add>
+					</height>
+
+					<_enabled> &false; </_enabled>
+					<target> &true; </target>
+					<visible>
+						<!-- <copy src="parent()" trait="_ItemType"/> -->
+						<copy src="parent()" trait="_duiItemType"/>
+						<eq> 4 </eq>
+					</visible>
+					<_scrollbar_pos> &right; </_scrollbar_pos>
+				</hotrect>
+			</rect>		<!-- end MM_DataRect -->
+
+			<!-- ===== WAVEFORM RECT ===== -->
+			<rect name="MM_WaveformRect">
+				<visible>
+					<copy src="MM_Tabline" trait="_CurrentTab" />
+					<eq> 4 </eq>
+				</visible>
+
+				<x> 500 </x>
+				<y> 125 </y>
+				<width> 350 </width>
+				<height> 350 </height>
+				<locus> &true; </locus>
+
+				<!-- Horizontal tickmark meter -->
+				<image name="MM_WaveformMeterHoriz">
+					<filename> Interface\Shared\Meter\tickmark_horiz.dds </filename>
+
+					<zoom> &scale; </zoom>
+
+					<y>
+						<copy src="parent()" trait="height"/>
+						<sub src="me()" trait="height"/>
+						<add> 2 </add>
+					</y>
+					<width> <copy src="parent()" trait="width"/> </width>
+					<height> 32 </height>
+					<cropy> 2 </cropy>
+				</image>
+
+				 <!-- Vertical tickmark meter -->
+				<image name="MM_WaveformMeterVert">
+					<filename> Interface\Shared\Meter\tickmark_vert.dds </filename>
+					<zoom> &scale; </zoom>
+
+					<x>
+						<copy src="parent()" trait="width"/>
+						<sub src="me()" trait="width"/>
+						<add> 2 </add>
+					</x>
+					<height> <copy src="parent()" trait="height"/> </height>
+					<width> 32 </width>
+					<cropx> 2 </cropx>
+				</image>
+
+				 <!-- Waveform base line -->
+				<image name="MM_WaveformCenterLine">
+					<filename> Interface\Shared\solid.dds </filename>
+					<texatlas> Interface\InterfaceShared.tai </texatlas>
+
+					<y>
+						<copy src="parent()" trait="height"/>
+						<sub src="me()" trait="height"/>
+						<div> 2 </div>
+						<sub> 8 </sub>
+					</y>
+
+					<width>
+						<copy src="parent()" trait="width"/>
+						<sub> 5 </sub>
+					</width>
+					<height> 2 </height>
+					<visible><not src="MM_Waveform" trait="visible"/> </visible>
+				</image>
+
+				<!-- Waveform NIF -->
+				<image name="MM_Waveform">
+					<id> 16 </id>
+					<visible> &false; </visible>
+					<animation> Forward </animation>
+					<width> 350 </width>
+					<height> 400 </height>
+					<zoom> 175 </zoom>
+					<y> -40 </y>
+				</image>
+			</rect>		<!-- end MM_WaveformRect -->
+
+		</rect>		<!-- end MM_MainRect -->
+
+
+		<!-- ===== TABLINE ===== -->
+		<rect name="MM_Tabline">
+			<include src="darn\tabline.xml"/>
+			<id> 17 </id>
+
+			<x> <copy src="sibling(MM_MainRect)" trait="x"/> </x>
+			<y>
+				<copy src="sibling(MM_MainRect)" trait="y"/>
+				<add src="sibling(MM_MainRect)" trait="height"/>
+				<sub> 50 </sub>
+			</y>
+			<width> <copy src="sibling(MM_MainRect)" trait="width"/> </width>
+			<depth> 2 </depth>
+		</rect>
+	</rect>		<!-- end GLOW_BRANCH -->
+
+
+	<!--======================== LIST BOX TEMPLATE =========================-->
+	<template name="MM_ListTemplate">
+		<hotrect name="MM_ListItem">
+			<include src="list_box_template.xml"/>
+
+			<width> 400 </width>
+			<mouseoversound> &nosound; </mouseoversound>
+			<clicksound> &nosound; </clicksound>
+
+			<text name="ListItemText">
+				<font> 2 </font>
+				<string> <copy src="parent()" trait="string"/> </string>
+				<wrapwidth> 310 </wrapwidth>
+
+				<x> 15 </x>
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+			</text>
+		</hotrect>
+	</template>
+
+	<template name="MM_ListMarkerTemplate">
+		<hotrect name="MM_ListItem">
+			<include src="list_box_template.xml"/>
+
+			<!-- USER TRAITS -->
+			<_ShowEmptyMarker> &false; </_ShowEmptyMarker>		<!-- If true, a marker is also shown when unselected -->
+			<_TextAlpha> 255 </_TextAlpha>
+
+			<width> 400 </width>
+			<mouseoversound> &nosound; </mouseoversound>
+			<clicksound> UIMenuPrevNext </clicksound>		<!-- #38635: Re-added clicksound to template -->
+
+			<text name="ListItemText">
+				<font> 2 </font>
+				<string> <copy src="parent()" trait="string"/> </string>
+				<wrapwidth> 310 </wrapwidth>
+				<alpha> <copy src="parent()" trait="_TextAlpha"/> </alpha>
+
+				<x> 40 </x>
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+			</text>
+
+			<!-- Small square that denotes selection -->
+			<image name="MM_Template_ItemMarker">
+				<filename>
+					<copy src="parent()" trait="_selected"/>
+					<copy src="me()" trait="_Filename_"/>
+				</filename>
+				<!-- <texatlas> Interface\InterfaceShared.tai </texatlas> -->
+				<width> 14 </width>
+				<height> 14 </height> <!-- DarN 25 -->
+				<zoom> 67 </zoom>
+				<x> 15 </x>
+				<y> <!-- DarN 20 -->
+					<!-- <copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div> -->15
+				</y>
+				<visible>
+					<copy src="parent()" trait="_ShowEmptyMarker"/>
+					<or src="parent()" trait="_selected"/>
+				</visible>
+				<alpha> <copy src="parent()" trait="_TextAlpha"/> </alpha>
+
+				<_Filename_0> Interface\Shared\Marker\square.dds </_Filename_0>
+				<_Filename_1> Interface\Shared\Marker\square_filled.dds </_Filename_1>
+			</image>
+		</hotrect>
+	</template>
+
+	<!-- TAB BUTTON TEMPLATE: Used by tabline.xml -->
+	<template name="TabButtonTemplate">
+		<hotrect name="TabButton">
+			<include src="darn\tabline_template.xml"/>
+		</hotrect>
+	</template>
+
+	<!-- MAP MARKER TEMPLATE: Used by Local / World maps -->
+	<template name="MapMarkerTemplate">
+		<image name="MapMarker">
+			<_LocationName></_LocationName>	<!-- Name of marker's location -->
+			<_MarkerIndex></_MarkerIndex>			<!-- Index of marker in marker array; used for referencing -->
+			<_x></_x>										<!-- Position of marker in map texture coords [0, 1] -->
+			<_y></_y>
+
+			<_selected> &false; </_selected>
+			<filename></filename>		<!-- Set in code -->
+			<user0> &true; </user0>	<!-- True if this marker can be used for fast-traveling -->
+
+			<!-- Place on map proportional to the map's current dimensions; offset so that icon is centered on point -->
+			<x>
+				<copy src="me()" trait="_x"/>
+				<mul src="parent()" trait="width"/>
+				<sub>
+					<copy src="me()" trait="width"/>
+					<div> 2 </div>
+				</sub>
+			</x>
+			<y>
+				<copy src="me()" trait="_y"/>
+				<mul src="parent()" trait="height"/>
+				<sub>
+					<copy src="me()" trait="height"/>
+					<div> 2 </div>
+				</sub>
+			</y>
+
+			<!-- Retrieve marker size from parent -->
+			<width>
+				<copy src="parent()" trait="user0"/>
+				<mul>
+					<copy> 1 </copy>								<!-- Increase size if selected -->
+					<add>
+						<copy> 0.75 </copy>
+						<onlyif src="me()" trait="_selected"/>
+					</add>
+				</mul>
+			</width>
+			<height> <copy src="me()" trait="width"/> </height>
+			<zoom>
+				<copy src="me()" trait="width"/>
+				<div> 34 </div>
+				<mul> 100 </mul>
+			</zoom>
+			<cropx>
+				<copy src="me()" trait="zoom"/>
+				<div> 100 </div>
+				<mul> 14 </mul>
+			</cropx>
+			<cropy>
+				<copy src="me()" trait="zoom"/>
+				<div> 100 </div>
+				<mul> 14 </mul>
+			</cropy>
+
+			<brightness>
+				<copy> 220 </copy>
+				<add>
+					<copy> 35 </copy>
+					<onlyif src="me()" trait="_selected"/>
+				</add>
+			</brightness>
+			<depth>
+				<copy> 1 </copy>
+				<add>
+					<copy> 10 </copy>
+					<onlyif src="me()" trait="_selected"/>
+				</add>
+			</depth>
+			<clips> &true; </clips>
+			<target> &false; </target>		<!-- Markers themselves aren't clickable; DoClick() is manually called in code -->
+		</image>
+	</template>
+
+	<!-- Used for quest markers on the Local Map; these clamp their positions to the edge of the map view rectangle -->
+	<template name="LocalMapQuestMarkerTemplate">
+		<image name="LocalMapQuestMarker">
+			<filename></filename>
+			<texatlas> Interface\InterfaceShared.tai </texatlas>
+			<width> <copy src="parent()" trait="user1"/> </width>
+			<height>
+				<copy src="me()" trait="width"/>
+				<mul> 1.25 </mul>
+			</height>
+			<clips> &true; </clips>
+			<depth> 4 </depth>
+
+			<!-- Place on map proportional to the map's current dimensions; offset so that icon is centered on point -->
+			<!-- #32314: Icons on Local Map are clamped within the view rectangle -->
+			<x>
+				<copy src="me()" trait="_x"/>
+				<mul src="parent()" trait="width"/>
+				<sub>
+					<copy src="me()" trait="width"/>
+					<div> 2 </div>
+				</sub>
+				<add> 15 </add>		<!-- 39180: Offset to match the marker textures -->
+				<max>
+					<copy src="parent()" trait="x"/>
+					<mul> -1 </mul>
+				</max>
+				<min>
+					<copy src="parent()" trait="x"/>
+					<mul> -1 </mul>
+					<add src="grandparent()" trait="width"/>
+					<sub src="me()" trait="width"/>
+				</min>
+			</x>
+			<y>
+				<copy src="me()" trait="_y"/>
+				<mul src="parent()" trait="height"/>
+				<sub>
+					<copy src="me()" trait="height"/>
+					<div> 2 </div>
+				</sub>
+				<add> 5 </add>		<!-- 39180: Offset to match the marker textures -->
+				<max>
+					<copy src="parent()" trait="y"/>
+					<mul> -1 </mul>
+				</max>
+				<min>
+					<copy src="parent()" trait="y"/>
+					<mul> -1 </mul>
+					<add src="grandparent()" trait="height"/>
+					<sub>
+						<copy src="me()" trait="height"/>
+						<mul> 0.75 </mul>
+					</sub>
+				</min>
+			</y>
+		</image>
+	</template>
+
+	<!-- Quest markers on the World map -->
+	<template name="WorldMapQuestMarkerTemplate">
+		<image name="WorldMapQuestMarker">
+			<filename></filename>
+			<texatlas> Interface\InterfaceShared.tai </texatlas>
+			<width> <copy src="parent()" trait="user1"/> </width>
+			<height>
+				<copy src="me()" trait="width"/>
+				<mul> 1.25 </mul>
+			</height>
+			<clips> &true; </clips>
+			<depth> 4 </depth>
+
+			<!-- Place on map proportional to the map's current dimensions; offset so that icon is centered on point -->
+			<x>
+				<copy src="me()" trait="_x"/>
+				<mul src="parent()" trait="width"/>
+				<sub>
+					<copy src="me()" trait="width"/>
+					<div> 2 </div>
+				</sub>
+				<add> 15 </add>		<!-- 39180: Offset to match the marker textures -->
+			</x>
+			<y>
+				<copy src="me()" trait="_y"/>
+				<mul src="parent()" trait="height"/>
+				<sub>
+					<copy src="me()" trait="height"/>
+					<div> 2 </div>
+				</sub>
+				<add> 5 </add>		<!-- 39180: Offset to match the marker textures -->
+			</y>
+		</image>
+	</template>
+
+	<!-- Large node in a waypoint path -->
+	<template name="WaypointTemplate">
+		<image name="WaypointIcon">
+			<filename> Interface\Worldmap\waypoint_node.dds </filename>
+			<clips> &true; </clips>
+			<locus> &true; </locus>
+			<depth> 3 </depth>
+			<zoom> &scale; </zoom>
+
+			<!-- Place on map proportional to the map's current dimensions; offset so that icon is centered on point -->
+			<x>
+				<copy src="me()" trait="_x"/>
+				<mul src="parent()" trait="width"/>
+				<sub>
+					<copy src="me()" trait="width"/>
+					<div> 2 </div>
+				</sub>
+			</x>
+			<y>
+				<copy src="me()" trait="_y"/>
+				<mul src="parent()" trait="height"/>
+				<sub>
+					<copy src="me()" trait="height"/>
+					<div> 2 </div>
+				</sub>
+			</y>
+
+			<width> <copy src="parent()" trait="user0"/> <mul> 0.8 </mul></width>
+			<height> <copy src="parent()" trait="user0"/> <mul> 0.8 </mul> </height>
+			<brightness> <copy src="MM_WorldMapCursor" trait="brightness"/> </brightness>
+		</image>
+	</template>
+
+	<!-- Dotted line between nodes on waypoint path -->
+	<template name="PathLineTemplate">
+		<image name="PathLine">
+			<filename> Interface\Worldmap\waypoint_path.dds </filename>
+			<tile> &scale; </tile>
+			<clips> &true; </clips>
+			<depth> -1 </depth>
+
+			<user0></user0>		<!-- The length of the path at normal (100%) map magnification -->
+
+			<x>
+				<copy src="parent()" trait="width"/>
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy src="parent()" trait="height"/>
+				<sub src="me()" trait="height"/>
+				<div> 2 </div>
+			</y>
+			<height>
+				<copy src="parent()" trait="height"/>
+				<div> 3 </div>
+			</height>
+			<width>
+				<copy src="me()" trait="user0"/>
+				<sub> 4 </sub>
+				<mul src="grandparent()" trait="_Magnification"/>
+			</width>
+
+			<!-- Axis of rotation: leftmost-center point -->
+			<rotateaxisx> 0 </rotateaxisx>
+			<rotateaxisy>
+				<copy src="me()" trait="height"/>
+				<div> 2 </div>
+			</rotateaxisy>
+			<brightness> <copy src="MM_WorldMapCursor" trait="brightness"/> </brightness>
+		</image>
+	</template>
+</menu>

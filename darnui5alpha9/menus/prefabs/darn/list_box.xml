@@ -1,0 +1,148 @@
+<!-- list_box.xml -->
+
+<!-- NOTE:  This prefab defines the list box, scroll bar, and highlight box.
+	 Your rect which uses this prefab should also be the parent rect for template
+	 items to be placed in the list box.  Include list_box_template.xml prefab
+	 in your template definition for use in conjunction with this list box. -->
+	 
+<!--<hotrect name="list_box">-->
+		<locus> &true; </locus>
+		
+		<wheelable> &true; </wheelable>
+		<wheelmoved> 0 </wheelmoved>
+
+		<!-- INPUTS (override in XML) -->
+		<id> &generic; </id>	<!-- REQUIRED OVERRIDE (cpp must have a pointer to pass when initializing list box) -->
+		<x> 0 </x>				<!-- optional override -->
+		<y> 0 </y>				<!-- optional override -->
+		<width> 300 </width>			<!-- REQUIRED OVERRIDE -->
+		<height></height>		<!-- recommended override -->
+		<alpha> 0 </alpha>
+		<target> &false; </target>
+		
+		<clipwindow> &true; </clipwindow>
+
+		<!-- How far to offset the highlight box and template items from the scrollbar. -->
+		<_item_offset> 0 </_item_offset>	<!-- optional override -->
+
+		<!-- The number of visible items per screen.  If this trait is set, the <height> and <_scroll_delta>
+		traits will be overwritten in code to compensate -->
+		<_number_of_visible_items> 0 </_number_of_visible_items>
+
+		<!-- Enables/disables clickability of scroll bar, hides/unhides highlight box -->
+		<!-- IMPORTANT NOTE:  You do not ever want to have more than one list box enabled at a time per menu. -->
+		<_enabled> &true; </_enabled>		<!-- optional override -->
+
+		<!-- To force visibility of the scrollbar, override _scrollbar_vis as follows: -->
+		<!-- true = always shown -->
+		<!-- false = never shown -->
+		<!-- default = shown when list items' height exceed the list height -->
+		<_scrollbar_vis> -1 </_scrollbar_vis>
+		<_scrollbar_pos> &left; </_scrollbar_pos>
+
+		<!-- Override alpha values for highlight box -->
+		<_line_alpha> 255 </_line_alpha>	<!-- optional override -->
+		<_fill_alpha> 40 </_fill_alpha>		<!-- optional override -->
+
+		<!-- Automatically set in code:  Do not override! -->
+		<!-- Y-value of highlight box -->
+		<_highlight_y> -1 </_highlight_y>
+		<!-- number of filtered items -->
+		<_num_filtered> 0 </_num_filtered>
+		<!-- height of selected item -->
+		<_selected_height> 0 </_selected_height>
+		<!-- Height of one "scroll unit" -->
+		<_scroll_delta> 26 </_scroll_delta>
+
+		<hotrect name="lb_highlight_box">
+
+			<include src="darn\dialogtopicbox.xml"/>
+			
+			<_line_alpha> <copy src="parent()" trait="_line_alpha"/> </_line_alpha>
+			<alpha> <copy src="parent()" trait="_fill_alpha"/> </alpha>
+			<target> &false; </target>
+			<clips> <copy src="parent()" trait="clipwindow"/> </clips>
+			<visible>
+				<copy src="me()" trait="y"/>
+				<add src="parent()" trait="_selected_height"/>
+				<gte> 0 </gte>
+				<and src="parent()" trait="_enabled"/>
+				<and>
+					<copy src="sibling(lb_scrollbar)" trait="_number_of_items"/>
+					<gt> 0 </gt>
+				</and>
+			</visible>
+			<x>
+				<copy src="sibling(lb_scrollbar)" trait="x"/>
+				<add src="sibling(lb_scrollbar)" trait="width"/>
+				<onlyif>
+					<copy src="parent()" trait="_scrollbar_vis"/>
+					<neq> &false; </neq>	<!-- true(2) or -1(default) meaning visibility is calculated-->
+				</onlyif>
+				<add src="parent()" trait="_item_offset"/>
+				<onlyif>
+					<copy src="parent()" trait="_scrollbar_pos"/>
+					<eq> &left; </eq>		<!-- Position of highlight defaults to zero when scrollbar is on right. -->
+				</onlyif>					<!-- Item offset will instead be applied from left edge of scrollbar -->
+			</x>
+			<y> <copy src="parent()" trait="_highlight_y"/> </y>
+			<width>
+				<!-- <copy src="parent()" trait="width"/>
+				<sub src="me()" trait="x"/>
+				<sub>
+					<copy src="sibling(lb_scrollbar)" trait="width"/>
+					<add src="parent()" trait="_item_offset"/>
+					<onlyif>
+						<copy src="parent()" trait="_scrollbar_pos"/>
+						<eq> &right; </eq>
+					</onlyif>
+				</sub>
+				<sub> 150 </sub> --> <!-- DarN 5 -->
+				300
+			</width>
+
+			<!-- Subtract 1 from height to avoid clipping off the bottom of list -->
+			<height> <copy src="parent()" trait="_selected_height"/> <sub> 1 </sub></height>
+		</hotrect>
+
+		<image name="lb_scrollbar">
+			<include src="scrollbar_vert.xml"/>
+
+			<_x>
+				<copy src="parent()" trait="width"/>
+				<sub src="me()" trait="width"/>
+				<onlyif>
+					<copy src="parent()" trait="_scrollbar_pos"/>
+					<eq> &right; </eq>
+				</onlyif>
+			</_x>
+
+			<_height>		<copy src="parent()" trait="height"/>		</_height>
+			<_wheelmoved>	<copy src="parent()" trait="wheelmoved"/>	</_wheelmoved>
+			<_enabled>		<copy src="parent()" trait="_enabled"/>		</_enabled>
+			
+			<!-- # items / # visible items computed based on _total_list_height and _scroll_delta -->
+			<_number_of_items> 1 </_number_of_items>		<!-- Set in code -->
+			<_number_of_visible_items> 1 </_number_of_visible_items>
+			<!-- 36378: Jump size should be a "page" worth of items -->
+			<_jump_size>
+				<copy src="parent()" trait="height"/>
+				<div src="parent()" trait="_scroll_delta"/>
+				<floor> 0 </floor>
+			</_jump_size>
+			
+			<visible>
+				<copy src="me()" trait="_number_of_items"/>
+				<gt src="me()" trait="_number_of_visible_items"/>
+				<onlyif>
+					<copy src="parent()" trait="_scrollbar_vis"/>
+					<eq> -1 </eq>
+				</onlyif>
+				<or>
+					<copy src="parent()" trait="_scrollbar_vis"/>
+					<eq> 1 </eq>
+				</or>
+			</visible>
+			<_marker_alpha> <copy src="parent()" trait="_line_alpha"/> </_marker_alpha>
+		</image>
+<!--</hotrect>-->

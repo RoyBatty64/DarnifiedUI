@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="SCPT">
+  <Flags>0</Flags>
+  <FormID ID="0101274C">DUIF3SleepWaitScript</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">DUIF3SleepWaitScript</EditorID>
+    <Data>
+      <Data Tag="SCHR">
+        <ReferenceCount>1</ReferenceCount>
+        <CompiledSize>135</CompiledSize>
+        <VariableCount>1</VariableCount>
+        <Type>Quest</Type>
+        <Flags>Enabled</Flags>
+      </Data>
+      <CompiledScript Tag="SCDA">HQAAABAABgAAACQAAAAWAA0AAQAJACBzAQAgMCA9PRUABwBzAQACACAxGQAAABEAAAAQAA0AAQBEAAAAAQBu9AMAABYACAACAAQAIHMBAKUUIQACABcAU2xlZXBXYWl0TWVudVxfTWF4SG91cnNyAQBzVgAVAAcAcwEAAgAgMBkAAAARAAAA</CompiledScript>
+      <ScriptSource Tag="SCTX" External="DUIF3SleepWaitScript.fnvscript" />
+      <LocalVariables>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>1</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">doonce</Name>
+        </Variable>
+      </LocalVariables>
+      <References>
+        <Reference Tag="SCRO">
+          <Reference ID="01003001">DUIF3</Reference>
+        </Reference>
+      </References>
+    </Data>
+  </Subrecords>
+</Record>

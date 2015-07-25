@@ -1,0 +1,32 @@
+<!-- Start Menu HUD element copies -->
+<image name="right_bracket">
+	<depth> 1 </depth>
+	<visible> <copy src="io()" trait="_HUDShowAPBracket" /> </visible>
+	<width>
+		<copy> 512 </copy> <!-- DarN 512 -->
+		<mul src="io()" trait="_duiscale_65" /> <!-- DarN _duiscale -->
+	</width>
+	<height>
+		<copy> 256 </copy>
+		<mul src="io()" trait="_duiscale_65" /> <!-- DarN _duiscale -->
+	</height>
+	<filename> Interface\HUD\glow_hud_right_seperatorglow.dds </filename>
+	<texatlas> Interface\InterfaceShared.tai </texatlas>
+	<x>
+		<copy src="io()" trait="_HUDHPInfo_X" />
+	</x>
+	<y>
+		<copy src="screen()" trait="height" />
+		<sub>
+			<copy> 127 </copy>
+			<mul src="io()" trait="_duiscale_65" />
+		</sub>
+		<add src="io()" trait="_HUDHPInfo_Y" />
+	</y>
+	<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+	<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+	<red> <copy src="io()" trait="_HUDRed" /> </red>
+	<green> <copy src="io()" trait="_HUDGreen" /> </green>
+	<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+</image>
+

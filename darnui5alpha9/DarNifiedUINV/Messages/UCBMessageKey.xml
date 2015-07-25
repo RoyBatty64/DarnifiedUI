@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="MESG">
+  <Flags>0</Flags>
+  <FormID ID="01015520">UCBMessageKey</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">UCBMessageKey</EditorID>
+    <Content Tag="DESC">Press a button on your keyboard to set the Terminal Close Button hotkey.
+
+Currently: %k.
+Default: R</Content>
+    <Header Tag="FULL">Terminal Close Button</Header>
+    <Icon Tag="INAM">
+      <Reference ID="00000000">NullReference</Reference>
+    </Icon>
+    <MessageFlags Tag="DNAM">MessageBox</MessageFlags>
+  </Subrecords>
+</Record>

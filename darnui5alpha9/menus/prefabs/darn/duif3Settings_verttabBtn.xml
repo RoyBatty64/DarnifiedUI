@@ -1,0 +1,140 @@
+<!-- hotrect name='TabButton-->
+	<include src="darn\super_text_box.xml" />
+	
+	<clicksound> UIMenuMode </clicksound>
+	<_enabled>
+		<copy src="parent()" trait="_currentSubTab" />
+		<neq src="me()" trait="listindex" />
+	</_enabled>
+	<_selected> <not src="me()" trait="_enabled" /> </_selected>	
+	
+	<_State>
+		<copy src="child(marker)" trait="_value_scrolled_to" />
+		<add src="me()" trait="_selected" />
+		<sub> 1 </sub>
+	</_State>
+	
+	<user1> <!-- minimum range value -->
+		<copy src="me()" trait="user2" />
+		<sub> 1 </sub>
+	</user1>
+	<user2> <!-- maximum range value -->
+		<copy> 2 </copy>
+		<sub src="me()" trait="_selected" />
+	</user2>
+	<rect name="marker">
+		<visible> &false; </visible>
+		<_value_scrolled_to>
+			<!-- copy old value -->
+			<sub>
+				<copy src="parent()" trait="clicked" />
+				<onlyif src="parent()" trait="_selected" />
+			</sub>
+			<add>
+				<copy src="parent()" trait="clicked" />
+				<onlyifnot src="parent()" trait="_selected" />
+			</add>
+			<max src="parent()" trait="user1" />
+			<min src="parent()" trait="user2" />
+		</_value_scrolled_to>
+	</rect>
+
+	<!-- <font> <copy src="globals()" trait="_pb_TabFont" /> </font> -->
+	<font> 4 </font>
+
+<!-- These traits are inherited from the tabline -->
+	<_TopLineLength> <copy src="parent()" trait="_TopLineLength" /> </_TopLineLength>
+
+	<_line_alpha> <copy src="parent()" trait="alpha" /> </_line_alpha>
+
+	<_y>
+		<copy src="me()" trait="height" />
+		<div> -2 </div>
+	</_y>
+
+	<_horbuf> 20 </_horbuf>
+	<_verbuf> 10 </_verbuf>
+
+	<image name="LeftLine">
+		<include src="line.xml" />
+		<_length>
+			<copy> 10 </copy>
+			<!-- <mul src="screen()" trait="resolutionconverter" /> -->
+		</_length>
+		<alpha> 130 </alpha>
+		<x>
+			<copy src="parent()" trait="x" />
+			<sub src="me()" trait="_length" />
+		</x>
+		<y>
+			<copy src="parent()" trait="y" />
+			<add>
+				<copy src="parent()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+			</add>
+		</y>
+		<visible> <copy src="parent()" trait="_selected" /> </visible>
+	</image>
+	
+	<image name="LeftBottomLine">
+		<include src="line.xml" />
+		<_horizontal> &false; </_horizontal>
+		<_length>
+			<copy src="tabs" trait="y" />
+			<sub>
+				<copy> 10 </copy>
+				<!-- <mul src="screen()" trait="resolutionconverter" /> -->
+			</sub>
+			<sub> 151 </sub> <!-- 145 -->
+			<!-- <sub src="grandparent()" trait="height" /> -->
+			<!-- <sub> 40 </sub> -->
+			<!-- <sub src="me()" trait="y" /> -->
+			<sub src="parent()" trait="y" />
+			<sub>
+				<copy src="parent()" trait="height" />
+				<div> 2 </div>
+				<add>
+					<copy> 2 </copy>
+					<mul src="screen()" trait="resolutionconverter" />
+				</add>
+				<!-- <sub> 1 </sub> -->
+			</sub>
+		</_length>
+		<alpha> 130 </alpha>
+		<x>
+			<copy src="sibling(LeftLine)" trait="x" />
+			<sub src="sibling(LeftLine)" trait="height" />
+		</x>
+		<y> <copy src="sibling(LeftLine)" trait="y" /> </y>
+		<visible> <copy src="parent()" trait="_selected" /> </visible>
+	</image>
+	
+	<!-- Line in-between this tab button and the previous one -->
+	<image name="TopLine">
+		<include src="line.xml" />
+		<_horizontal> &false; </_horizontal>
+
+		<_length> <copy src="parent()" trait="_TopLineLength" /> </_length>
+		<alpha> 130 </alpha>
+		<x>
+			<copy src="parent()" trait="x" />
+			<add src="parent()" trait="width" />
+			<!-- <sub src="me()" trait="_length" /> -->
+			<!-- <div> 2 </div> -->
+			<sub> 20 </sub>
+		</x>
+		<y>
+			<copy src="parent()" trait="y" />
+			<sub src="me()" trait="_length" />
+			<!-- <add>
+				<copy src="parent()" trait="height" />
+				<div> 2 </div>
+			</add> -->
+		</y>
+		<visible>
+			<!-- <copy src="parent()" trait="listindex" />
+			<gt> 1 </gt> -->0
+		</visible>
+	</image>
+	<!--/hotrect-->

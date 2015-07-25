@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="SCPT">
+  <Flags>0</Flags>
+  <FormID ID="01004004">DUIF3LevelUpScript</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">DUIF3LevelUpScript</EditorID>
+    <Data>
+      <Data Tag="SCHR">
+        <ReferenceCount>2</ReferenceCount>
+        <CompiledSize>1241</CompiledSize>
+        <VariableCount>17</VariableCount>
+        <Type>Quest</Type>
+        <Flags>Enabled</Flags>
+      </Data>
+      <CompiledScript Tag="SCDA">HQAAABAABgAAACQAAAAWAA0AAQAJACBzEQAgMCA9PRUABwBzEQACACAxGQAAABEAAAAQAA0AAQCWBAAAAQBuAwQAABYACAA2AAQAIHMRAKUUIgACABgATGV2ZWxVcE1lbnVcX1NraWxsc1VuY2FwcgEAc1QAFQAYAHMQABMAIHICAFgOEAQAAQAgACAxMDAgLRYADAABAAgAIHMQACAwID6lFCAAAgAZAExldmVsVXBNZW51XF9iYXJ0ZXJBZGp1c3RzEAAZAAAAFQAYAHMQABMAIHICAFgOEAQAAQAiACAxMDAgLRYADAABAAgAIHMQACAwID6lFCAAAgAZAExldmVsVXBNZW51XF9lbmVyZ3lBZGp1c3RzEAAZAAAAFQAYAHMQABMAIHICAFgOEAQAAQAjACAxMDAgLRYADAABAAgAIHMQACAwID6lFCQAAgAdAExldmVsVXBNZW51XF9leHBsb3NpdmVzQWRqdXN0cxAAGQAAABUAGABzEAATACByAgBYDhAEAAEAKQAgMTAwIC0WAAwAAQAIACBzEAAgMCA+pRQjAAIAHABMZXZlbFVwTWVudVxfc21hbGxHdW5zQWRqdXN0cxAAGQAAABUAGABzEAATACByAgBYDhAEAAEAJAAgMTAwIC0WAAwAAQAIACBzEAAgMCA+pRQiAAIAGwBMZXZlbFVwTWVudVxfbG9ja3BpY2tBZGp1c3RzEAAZAAAAFQAYAHMQABMAIHICAFgOEAQAAQAlACAxMDAgLRYADAABAAgAIHMQACAwID6lFCIAAgAbAExldmVsVXBNZW51XF9tZWRpY2luZUFkanVzdHMQABkAAAAVABgAcxAAEwAgcgIAWA4QBAABACYAIDEwMCAtFgAMAAEACAAgcxAAIDAgPqUUHwACABgATGV2ZWxVcE1lbnVcX21lbGVlQWRqdXN0cxAAGQAAABUAGABzEAATACByAgBYDhAEAAEAJwAgMTAwIC0WAAwAAQAIACBzEAAgMCA+pRQgAAIAGQBMZXZlbFVwTWVudVxfcmVwYWlyQWRqdXN0cxAAGQAAABUAGABzEAATACByAgBYDhAEAAEAKAAgMTAwIC0WAAwAAQAIACBzEAAgMCA+pRQhAAIAGgBMZXZlbFVwTWVudVxfc2NpZW5jZUFkanVzdHMQABkAAAAVABgAcxAAEwAgcgIAWA4QBAABACoAIDEwMCAtFgAMAAEACAAgcxAAIDAgPqUUHwACABgATGV2ZWxVcE1lbnVcX3NuZWFrQWRqdXN0cxAAGQAAABUAGABzEAATACByAgBYDhAEAAEAKwAgMTAwIC0WAAwAAQAIACBzEAAgMCA+pRQgAAIAGQBMZXZlbFVwTWVudVxfc3BlZWNoQWRqdXN0cxAAGQAAABUAGABzEAATACByAgBYDhAEAAEALAAgMTAwIC0WAAwAAQAIACBzEAAgMCA+pRQiAAIAGwBMZXZlbFVwTWVudVxfc3Vydml2YWxBZGp1c3RzEAAZAAAAFQAYAHMQABMAIHICAFgOEAQAAQAtACAxMDAgLRYADAABAAgAIHMQACAwID6lFCEAAgAaAExldmVsVXBNZW51XF91bmFybWVkQWRqdXN0cxAAGQAAABUABwBzEQACACAwGQAAABEAAAA=</CompiledScript>
+      <ScriptSource Tag="SCTX" External="DUIF3LevelUpScript.fnvscript" />
+      <LocalVariables>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>16</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">skillAdj</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>17</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">doonce</Name>
+        </Variable>
+      </LocalVariables>
+      <References>
+        <Reference Tag="SCRO">
+          <Reference ID="01003001">DUIF3</Reference>
+        </Reference>
+        <Reference Tag="SCRO">
+          <Reference ID="00000014">UnfoundReference</Reference>
+        </Reference>
+      </References>
+    </Data>
+  </Subrecords>
+</Record>

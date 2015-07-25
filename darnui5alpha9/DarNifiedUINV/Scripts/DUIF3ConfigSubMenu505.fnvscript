@@ -1,0 +1,38 @@
+scn DUIF3ConfigSubMenu505
+
+int iMaster
+int iOption
+float fValue
+ref rList
+
+Begin GameMode
+	if GetGameRestarted
+		if IsModLoaded "The Mod Configuration Menu.esp"
+			set iMaster to GetModIndex "The Mod Configuration Menu.esp"
+			set rList to BuildRef iMaster 2790
+		endif
+	endif
+End
+
+Begin MenuMode 1013
+	if IsModLoaded "The Mod Configuration Menu.esp" && GetMCMFloat 0 0 "_ActiveSubMenu" == 9
+	else
+		Return
+	endif
+
+	if GetMCMFloat 0 0 "_ActiveMod" == GetModIndex "DarNifiedUINV.esp"
+		set iOption to GetMCMFloat 0 0 "_ActiveOption"
+		set fValue to GetMCMFloat 0 0 "_Value"
+		
+		if GetMCMFloat 0 0 "_Reset" == 1
+			SetMCMFloat 0 0 "_Reset" 0
+			SetMCMFloat 1 0 "_columns" 1
+
+			SetMCMFloat 1 1 "_enable" 1
+			SetMCMString 1 1 "_title" "505 Error - Version Not Supported"
+			SetMCMFloat 1 1 "_altFont" 5
+			SetMCMFloat 1 1 "_type" 0
+		endif
+	endif
+
+End

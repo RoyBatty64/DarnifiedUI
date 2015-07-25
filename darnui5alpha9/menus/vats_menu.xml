@@ -1,0 +1,825 @@
+<!-- VATS_menu.xml -->
+<menu name="VATSMenu">
+	<class> &VATSMenu; </class>
+	<stackingtype> &no_click_past; </stackingtype>
+	<alpha>	0 </alpha>
+	<explorefade> 0.25 </explorefade>
+	<locus> &true; </locus>
+	<_inVATS> &true; </_inVATS>
+
+	<user15> 0.25 </user15>
+
+	<_PCButton_B>	return_button </_PCButton_B>
+	<_PCButton_E>	accept_button </_PCButton_E>
+	<_PCButton_R>	special_attack_button </_PCButton_R>
+	<_PCButton_F>	special_attack_2_button </_PCButton_F>
+	<wheelable> &true; </wheelable>
+	
+	<!-- DarN HUD Imports -->
+	<_HUDRed> <copy src="sibling(HUDMainMenu)" trait="_HUDRed" /> </_HUDRed>						<!-- HUD Gfx Color	120							-->
+	<_HUDGreen> <copy src="sibling(HUDMainMenu)" trait="_HUDGreen" /> </_HUDGreen>
+	<_HUDBlue> <copy src="sibling(HUDMainMenu)" trait="_HUDBlue" /> </_HUDBlue>
+
+	<_HUDTxtRed> <copy src="sibling(HUDMainMenu)" trait="_HUDTxtRed" /> </_HUDTxtRed>					<!-- HUD Text Color								-->
+	<_HUDTxtGreen> <copy src="sibling(HUDMainMenu)" trait="_HUDTxtGreen" /> </_HUDTxtGreen>
+	<_HUDTxtBlue> <copy src="sibling(HUDMainMenu)" trait="_HUDTxtBlue" /> </_HUDTxtBlue>
+	<_MeterAlpha> <copy src="sibling(HUDMainMenu)" trait="_MeterAlpha" /> </_MeterAlpha>
+	<_HUDMeterFont> <copy src="sibling(HUDMainMenu)" trait="_HUDMeterFont" /> </_HUDMeterFont>
+	
+	<_HUDShowHPBracket> <copy src="sibling(HUDMainMenu)" trait="_HUDShowHPBracket" /> </_HUDShowHPBracket>
+	<_HUDShowAPBracket> <copy src="sibling(HUDMainMenu)" trait="_HUDShowAPBracket" /> </_HUDShowAPBracket>
+	<_HUDShowEHBracket> <copy src="sibling(HUDMainMenu)" trait="_HUDShowEHBracket" /> </_HUDShowEHBracket>
+	<_HUDShowCompass> <copy src="sibling(HUDMainMenu)" trait="_HUDShowCompass" /> </_HUDShowCompass>
+	
+	<_HUDShowQuestMarkers> <copy src="sibling(HUDMainMenu)" trait="_HUDShowQuestMarkers" /> </_HUDShowQuestMarkers>
+	<_HUDShowLandmarks> <copy src="sibling(HUDMainMenu)" trait="_HUDShowLandmarks" /> </_HUDShowLandmarks>
+	<_HUDShowNPC> <copy src="sibling(HUDMainMenu)" trait="_HUDShowNPC" /> </_HUDShowNPC>
+	<_HUDShowEnemies> <copy src="sibling(HUDMainMenu)" trait="_HUDShowEnemies" /> </_HUDShowEnemies>
+	<_HUDMarkEnemies> <copy src="sibling(HUDMainMenu)" trait="_HUDMarkEnemies" /> </_HUDMarkEnemies>
+
+	<_VQueueFont> <copy src="sibling(HUDMainMenu)" trait="_VQueueFont" /> </_VQueueFont>		
+	<_VLimbNameFont> <copy src="sibling(HUDMainMenu)" trait="_VLimbNameFont" /> </_VLimbNameFont>
+	<_VMeterFont> <copy src="sibling(HUDMainMenu)" trait="_VMeterFont" /> </_VMeterFont>		
+	<_VShowEH> <copy src="sibling(HUDMainMenu)" trait="_VShowEH" /> </_VShowEH>			
+	<_VShowAP> <copy src="sibling(HUDMainMenu)" trait="_VShowAP" /> </_VShowAP>			
+	<_VShowHI> <copy src="sibling(HUDMainMenu)" trait="_VShowHI" /> </_VShowHI>			
+	<_VShowBPI> <copy src="sibling(HUDMainMenu)" trait="_VShowBPI" /> </_VShowBPI>			
+	<_VAQLWidth> <copy src="sibling(HUDMainMenu)" trait="_VAQLWidth" /> </_VAQLWidth>	
+	
+	<_HUDAPInfo_X> <copy src="sibling(HUDMainMenu)" trait="_HUDAPInfo_X" /> </_HUDAPInfo_X>			
+	<_HUDAPInfo_Y> <copy src="sibling(HUDMainMenu)" trait="_HUDAPInfo_Y" /> </_HUDAPInfo_Y>
+	<_HUDHPInfo_X> <copy src="sibling(HUDMainMenu)" trait="_HUDHPInfo_X" /> </_HUDHPInfo_X> 			
+	<_HUDHPInfo_Y> <copy src="sibling(HUDMainMenu)" trait="_HUDHPInfo_Y" /> </_HUDHPInfo_Y>	
+	
+	<_duiHUDBrightness> <copy src="sibling(HUDMainMenu)" trait="_duiHUDBrightness" /> </_duiHUDBrightness>
+	<_duiHUDMtrBrightness> <copy src="sibling(HUDMainMenu)" trait="_duiHUDMtrBrightness" /> </_duiHUDMtrBrightness>
+	<_duiHUDSysColor> <copy src="sibling(HUDMainMenu)" trait="_duiHUDSysColor" /> </_duiHUDSysColor>
+	<_duiHUDMtrSysColor> <copy src="sibling(HUDMainMenu)" trait="_duiHUDMtrSysColor" /> </_duiHUDMtrSysColor>
+	<_duiHUDScale> <copy src="sibling(HUDMainMenu)" trait="_duiHUDScale" /> </_duiHUDScale>
+	<_duiscale_70> <copy src="sibling(HUDMainMenu)" trait="_duiscale_70" /> </_duiscale_70>
+	<_duiscale_65> <copy src="sibling(HUDMainMenu)" trait="_duiscale_65" /> </_duiscale_65>
+	<_duiCScale> <copy src="sibling(HUDMainMenu)" trait="_duiCScale" /> </_duiCScale>
+	
+	<!-- Needed for brackets =============================-->
+	<include src="darn\hudtemplates.xml" />
+
+	<rect name="GlowBranch">
+		<id> &noglow_branch; </id>
+		<!-- <systemcolor> &HUDMain; </systemcolor> -->
+		<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+
+		<!-- focus arrows ====================================-->
+		<image name="left_arrow">
+			<id> 2 </id>
+			<filename>
+				<copy src="me()" trait="mouseover" />
+				<copy src="me()" trait="_Filename_" />
+			</filename>
+			<_Filename_0> Interface\Barter\barter_arrow_sell.dds </_Filename_0>
+			<_Filename_1> Interface\Barter\barter_arrow_sell_on.dds </_Filename_1>
+			<visible> <not> &xbox; </not> </visible>
+			<target> &true; </target>
+			<width>
+				<copy> 86 </copy>
+				<mul src="me()" trait="zoom" />
+				<div> 100 </div>
+			</width>
+			<height>
+				<copy> 134 </copy>
+				<mul src="me()" trait="zoom" />
+				<div> 100 </div>
+			</height>
+			<zoom> 75 </zoom>
+			<x>
+				<copy src="screen()" trait="cropx" />
+				<mul> 2 </mul>
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<div> 5 </div> <!-- DarN 4 -->
+			</y>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		</image>
+		<image name="right_arrow">
+			<id> 3 </id>
+			<filename>
+				<copy src="me()" trait="mouseover" />
+				<copy src="me()" trait="_Filename_" />
+			</filename>
+			<_Filename_0> Interface\Barter\barter_arrow_buy.dds </_Filename_0>
+			<_Filename_1> Interface\Barter\barter_arrow_buy_on.dds </_Filename_1>
+			<visible> <not> &xbox; </not> </visible>
+			<target> &true; </target>
+			<width>
+				<copy> 86 </copy>
+				<mul src="me()" trait="zoom" />
+				<div> 100 </div>
+			</width>
+			<height>
+				<copy> 134 </copy>
+				<mul src="me()" trait="zoom" />
+				<div> 100 </div>
+			</height>
+			<x>
+				<copy src="screen()" trait="width" />
+				<sub>
+					<copy src="screen()" trait="cropx" />
+					<mul> 2 </mul>
+					<add src="me()" trait="width" />
+				</sub>
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<div> 5 </div> <!-- DarN 4 -->
+			</y>
+			<zoom> 75 </zoom>
+			<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<red> <copy src="io()" trait="_HUDRed" /> </red>
+			<green> <copy src="io()" trait="_HUDGreen" /> </green>
+			<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		</image>
+
+		<!-- Chance to hit text ===============================-->
+		<template name="body_part_percent">
+			<rect name="limb_percent">
+				<alpha> 0 </alpha>
+				<locus> &true; </locus>
+				<justify> &down; </justify>
+				<_MeterPercent> 1.0 </_MeterPercent>
+				<_filename_1> Interface\VATS\vats_right_divider.dds </_filename_1>
+				<_filename_2> Interface\VATS\vats_left_divider.dds </_filename_2>
+				<_filename_3> Interface\VATS\vats_chest_divider.dds </_filename_3>
+				<_filename_4> Interface\VATS\vats_head_divider.dds </_filename_4>
+				<_shadow_1> Interface\VATS\vats_right_divider_shadow.dds </_shadow_1>
+				<_shadow_2> Interface\VATS\vats_left_divider_shadow.dds </_shadow_2>
+				<_shadow_3> Interface\VATS\vats_chest_divider_shadow.dds </_shadow_3>
+				<_shadow_4> Interface\VATS\vats_head_divider_shadow.dds </_shadow_4>
+				<_justify_1> &left; </_justify_1>
+				<_justify_2> &right; </_justify_2>
+				<_justify_3> &center; </_justify_3>
+				<_justify_4> &center; </_justify_4>
+				<_chanceToHitType>
+					<copy> 2 </copy> <!-- DarN 0 -->
+					<add>
+						<copy> -1 </copy> <!-- DarN 1 -->
+						<onlyif> <copy src="me()" trait="justify" /> <eq> &right; </eq> </onlyif>
+					</add>
+					<add>
+						<copy> 1 </copy> <!-- DarN 3 -->
+						<onlyif> <copy src="me()" trait="justify" /> <eq> &down; </eq> </onlyif>
+					</add>
+					<add>
+						<copy> 2 </copy> <!-- DarN 4 -->
+						<onlyif> <copy src="me()" trait="justify" /> <eq> &up; </eq> </onlyif>
+					</add>
+				</_chanceToHitType>
+				
+				<image name="chance_bracket">
+					<depth> 2 </depth>
+					<filename>
+						<copy src="parent()" trait="_chanceToHitType" />
+						<copy src="parent()" trait="_filename_" />
+					</filename>
+					<x>
+						<copy> -75 </copy> <!-- DarN 0 -->
+						<add>
+							<copy> 30 </copy> <!-- DarN sub 45 -->
+							<onlyif> <copy src="parent()" trait="_chanceToHitType" /> <eq> 3 </eq> </onlyif>
+						</add>
+						<add>
+							<copy> 10 </copy> <!-- DarN sub 65 -->
+							<onlyif> <copy src="parent()" trait="_chanceToHitType" /> <eq> 4 </eq> </onlyif>
+						</add>
+						<add> <!-- DarN realign for scale diff -->
+							<copy> 256 </copy>
+							<div>
+								<copy> 2 </copy>
+								<onlyif>
+									<copy src="parent()" trait="_chanceToHitType" />
+									<gte> 3 </gte>
+								</onlyif>
+							</div>
+							<sub src="me()" trait="width" />
+							<div> 2 </div>
+							<onlyif>
+								<copy src="parent()" trait="_chanceToHitType" />
+								<neq> 1 </neq>
+							</onlyif>
+						</add>
+					</x>
+					<y>
+						<copy> -45 </copy>
+						<add>
+							<copy> 10 </copy>
+							<onlyif>
+								<copy src="parent()" trait="_chanceToHitType" />
+								<eq> 3 </eq>
+							</onlyif>
+						</add>
+					</y>
+					<width>
+						<copy> 256 </copy>
+						<mul src="io()" trait="_duiscale_70" />
+						<div>
+							<copy> 2 </copy>
+							<onlyif>
+								<copy src="parent()" trait="_chanceToHitType" />
+								<gte> 3 </gte>
+							</onlyif>
+						</div>
+					</width>
+					<height>
+						<copy> 128 </copy>
+						<mul src="io()" trait="_duiscale_70" />
+						<div>
+							<copy> 2 </copy>
+							<onlyif>
+								<copy src="parent()" trait="_chanceToHitType" />
+								<eq> 3 </eq>
+							</onlyif>
+						</div>
+					</height>
+					<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+					<visible> <copy src="io()" trait="_VShowBPI" /> </visible>
+					<zoom> &scale; </zoom>
+					<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+					<red> <copy src="io()" trait="_HUDRed" /> </red>
+					<green> <copy src="io()" trait="_HUDGreen" /> </green>
+					<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				</image>
+				<text name="limb_name">
+					<depth> 2 </depth>
+					<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+					<string> <copy src="parent()" trait="_LimbName" /> </string>
+					<visible> <copy src="parent()" trait="_LimbNameVisible" /> </visible>
+					<font> <copy src="io()" trait="_VLimbNameFont" /> </font>
+					<x>
+						<copy src="sibling(chance_bracket)" trait="x" />
+						<add>
+							<copy> 15 </copy> <!-- DarN 18 -->
+							<mul src="io()" trait="_duiscale_70" />
+							<onlyif> <copy src="parent()" trait="_chanceToHitType" /> <eq> 1 </eq> </onlyif>
+						</add>
+						<add>
+							<copy> 132 </copy> <!-- DarN 135 -->
+							<mul src="io()" trait="_duiscale_70" />
+							<sub src="me()" trait="width" />
+							<onlyif> <copy src="parent()" trait="_chanceToHitType" /> <eq> 2 </eq> </onlyif>
+						</add>
+						<add>
+							<copy> 40 </copy> <!-- DarN 43 -->
+							<mul src="io()" trait="_duiscale_70" />
+							<sub> <copy src="me()" trait="width" /> <div> 2 </div> </sub>
+							<onlyif> <copy src="parent()" trait="_chanceToHitType" /> <eq> 3 </eq> </onlyif>
+						</add>
+						<add>
+							<copy> 60 </copy> <!-- DarN 63 -->
+							<mul src="io()" trait="_duiscale_70" />
+							<sub> <copy src="me()" trait="width" /> <div> 2 </div> </sub>
+							<onlyif> <copy src="parent()" trait="_chanceToHitType" /> <eq> 4 </eq> </onlyif>
+						</add>
+					</x>
+					<y>
+						<copy src="chance_bracket" trait="y" />
+						<sub> 15 </sub>
+						<sub>
+							<copy> 20 </copy>
+							<mul src="io()" trait="_duiscale_70" />
+							<onlyif> <copy src="parent()" trait="justify" /> <eq> &down; </eq> </onlyif>
+						</sub>
+					</y>
+					<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+					<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+					<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+					<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+				</text>
+				<image name="chance_bracket_shadow">
+					<filename>
+						<copy src="parent()" trait="_chanceToHitType" />
+						<copy src="parent()" trait="_shadow_" />
+					</filename>
+					<brightness> &uselocalcolor; </brightness>
+					<x> <copy src="sibling(chance_bracket)" trait="x" /> </x>
+					<y> <copy src="sibling(chance_bracket)" trait="y" /> </y>
+					<width> <copy src="sibling(chance_bracket)" trait="width" /> </width>
+					<height> <copy src="sibling(chance_bracket)" trait="height" /> </height>
+					<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+					<visible> <copy src="io()" trait="_VShowBPI" /> </visible>
+					<zoom> &scale; </zoom>
+				</image>
+				<image name="shadow_background">
+					<brightness> &uselocalcolor; </brightness>
+					<red> 0 </red>
+					<green> 0 </green>
+					<blue> 0 </blue>
+					<width> <copy src="sibling(chance_bracket_shadow)" trait="width" /> </width>
+					<height> <copy src="sibling(chance_bracket_shadow)" trait="height" /> </height>
+					<x> <copy src="sibling(chance_bracket_shadow)" trait="x" /> </x>
+					<y> <copy src="sibling(chance_bracket_shadow)" trait="y" /> </y>
+					<alpha> 0 </alpha>
+					<visible> <copy src="io()" trait="_VShowBPI" /> </visible>
+					<zoom> &scale; </zoom>
+				</image>
+				<text name="chance_to_hit">
+					<depth> 2 </depth>
+					<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+					<visible> <copy src="io()" trait="_VShowBPI" /> </visible>
+					<string> <copy src="parent()" trait="string" /> </string>
+					<font> <copy src="io()" trait="_VMeterFont" /> </font>
+					<x>
+						<copy src="sibling(chance_bracket)" trait="x" />
+						<add>
+							<copy> 30 </copy>
+							<mul src="io()" trait="_duiscale_70" />
+							<onlyif> <copy src="parent()" trait="_chanceToHitType" /> <eq> 1 </eq> </onlyif>
+						</add>
+						<add>
+							<copy> 120 </copy>
+							<mul src="io()" trait="_duiscale_70" />
+							<sub src="me()" trait="width" />
+							<onlyif> <copy src="parent()" trait="_chanceToHitType" /> <eq> 2 </eq> </onlyif>
+						</add>
+						<add>
+							<copy> 43 </copy>
+							<mul src="io()" trait="_duiscale_70" />
+							<sub> <copy src="me()" trait="width" /> <div> 2 </div> </sub>
+							<onlyif> <copy src="parent()" trait="_chanceToHitType" /> <eq> 3 </eq> </onlyif>
+						</add>
+						<add>
+							<copy> 63 </copy>
+							<mul src="io()" trait="_duiscale_70" />
+							<sub> <copy src="me()" trait="width" /> <div> 2 </div> </sub>
+							<onlyif> <copy src="parent()" trait="_chanceToHitType" /> <eq> 4 </eq> </onlyif>
+						</add>
+					</x>
+					<y>
+						<copy src="sibling(chance_bracket)" trait="y" />
+						<add>
+							<copy> 48 </copy> <!-- DarN 45 -->
+							<mul src="io()" trait="_duiscale_70" />
+						</add>
+						<sub>
+							<copy> 20 </copy>
+							<mul src="io()" trait="_duiscale_70" />
+							<onlyif> <copy src="parent()" trait="justify" /> <eq> &down; </eq> </onlyif>
+						</sub>
+					</y>
+					<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+					<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+					<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+					<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+				</text>
+
+				<image name="meterClone">
+					<depth> 2 </depth>
+					<filename> solid.dds </filename>
+					<texatlas> Interface\InterfaceShared.tai </texatlas>
+					<_newWidth>
+						<copy> 70 </copy>
+						<mul src="io()" trait="_duiscale_70" />
+					</_newWidth>
+					<x>
+						<copy src="sibling(chance_bracket)" trait="x" />
+						<add>
+							<copy> 28 </copy> <!-- DarN 26 -->
+							<mul src="io()" trait="_duiscale_70" />
+						</add>
+						<add>
+							<copy> 96 </copy> <!-- DarN 98 -->
+							<mul src="io()" trait="_duiscale_70" />
+							<sub src="me()" trait="_newWidth" />
+							<onlyif> <copy src="me()" trait="justify" /> <eq> &right; </eq> </onlyif>
+						</add>
+						<add>
+							<copy> 35 </copy> <!-- DarN 37 -->
+							<mul src="io()" trait="_duiscale_70" />
+							<sub>
+								<copy src="me()" trait="_newWidth" />
+								<div> 2 </div>
+							</sub>
+							<onlyif> <copy src="me()" trait="justify" /> <eq> &center; </eq> </onlyif>
+						</add>
+						<sub>
+							<copy> 19 </copy> <!-- DarN 19 -->
+							<mul src="io()" trait="_duiscale_70" />
+							<onlyif> <copy src="parent()" trait="justify" /> <eq> &down; </eq> </onlyif>
+						</sub>
+					</x>
+					<y>
+						<copy src="sibling(chance_bracket)" trait="y" />
+						<add>
+							<copy> 25 </copy>
+							<mul src="io()" trait="_duiscale_70" />
+						</add>
+						<sub>
+							<copy> 19 </copy> <!-- DarN 20 -->
+							<mul src="io()" trait="_duiscale_70" />
+							<onlyif> <copy src="parent()" trait="justify" /> <eq> &down; </eq> </onlyif>
+						</sub>
+					</y>
+
+					<height>
+						<copy> 16 </copy>
+						<mul src="io()" trait="_duiscale_70" />
+					</height> <!-- DarN 16 -->
+					<width>
+						<copy src="me()" trait="_newWidth" />
+						<mul src="parent()" trait="_MeterPercent" />
+					</width>
+					<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+					<visible> <copy src="io()" trait="_VShowBPI" /> </visible>
+					<justify>
+						<copy src="parent()" trait="_chanceToHitType" />
+						<copy src="parent()" trait="_justify_" />
+					</justify>
+					<!-- <brightness> <copy src="io()" trait="_duiHUDMtrBrightness" /> </brightness> -->
+					<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+					<red> <copy src="io()" trait="_HUDRed" /> </red>
+					<green> <copy src="io()" trait="_HUDGreen" /> </green>
+					<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+				</image>
+			</rect>
+		</template>
+
+		<rect name="AP_Wrap">
+			<x>
+				<copy src="globals()" trait="_duiHUDOffset" />
+				<onlyif src="io()" trait="_VShowAP" />
+				<add src="screen()" trait="width" />
+				<sub>
+					<copy> 345 </copy>
+					<mul src="io()" trait="_duiscale_65" />
+				</sub>
+				<add src="io()" trait="_HUDAPInfo_X" />
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<sub>
+					<copy src="child(ActionPoints)" trait="height" />
+					<mul src="io()" trait="_duiscale_65" />
+				</sub>
+				<add src="io()" trait="_HUDAPInfo_Y" />
+			</y>
+			<locus> &true; </locus>
+
+			<rect name="ActionPoints">
+				<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+				<width> 386 </width>
+				<height> 127 </height>
+				<_isAPRect> &true; </_isAPRect>
+			</rect>
+		</rect>
+
+		<rect name="HP_Wrap">
+			<x>
+				<copy src="globals()" trait="_duiHUDOffset" />
+				<onlyif src="io()" trait="_VShowHI" />
+				<add src="io()" trait="_HUDHPInfo_X" />
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<sub>
+					<copy src="child(HitPoints)" trait="height" />
+					<mul src="io()" trait="_duiscale_65" />
+				</sub>
+				<add src="io()" trait="_HUDHPInfo_Y" />
+			</y>
+			<locus> &true; </locus>
+
+			<rect name="HitPoints">
+				<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+				<width> 369 </width>
+				<height> 127 </height>
+				<_isHPRect> &true; </_isHPRect>
+			</rect>
+		</rect>
+
+		<rect name="EH_Wrap">
+			<x>
+				<copy src="globals()" trait="_duiHUDOffset" />
+				<onlyif src="io()" trait="_VShowEH" />
+				<add>
+					<copy src="screen()" trait="width" />
+					<sub src="child(EnemyHealth)" trait="width" />
+					<div> 2 </div>
+				</add>
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<sub src="me()" trait="height" />
+				<sub> 65 </sub> <!-- DarN TODO - copy from HUD? -->
+			</y>
+			<width> 350 </width>
+			<height> 52 </height>
+			<locus> &true; </locus>
+			<rect name="EnemyHealth">
+				<width>
+					<copy> 350 </copy>
+					<mul src="io()" trait="_duiscale_65" />
+				</width>
+				<height>
+					<copy> 52 </copy>
+					<mul src="io()" trait="_duiscale_65" />
+				</height>
+				<_isVEHRect> &true; </_isVEHRect>
+			</rect>
+		</rect>
+
+		<!-- Command Buttons =================================-->
+		<hotrect name="Select_button">
+			<id> 7 </id>
+			<include src="darn\text_box_hudVATS.xml" />
+			<visible> &xbox; </visible>
+			<_glow> &true; </_glow>
+			<string> &-sVatsSelect; </string>
+			<_x> <copy src="sibling(return_button)" trait="_x" /> </_x>
+			<_y>
+				<copy src="screen()" trait="cropy" />
+				<mul> 2 </mul>
+				<add> 100 </add>
+				<add>
+					<copy> 200 </copy>
+					<onlyifnot> &xbox; </onlyifnot>
+				</add>
+			</_y>
+			<_horbuf> 20 </_horbuf>
+			<_verbuf> 8 </_verbuf> <!-- DarN 5 -->
+			<justify> &right; </justify>
+			<_xbox_button> &xbuttonrt; </_xbox_button>
+		</hotrect>
+		<hotrect name="accept_button">
+			<id> 4 </id>
+			<include src="darn\text_box_hudVATS.xml" />
+			<target> &false; </target>
+			<_glow> &true; </_glow>
+			<string> &-sAccept; </string>
+			<_x>
+				<copy src="screen()" trait="width" />
+				<sub src="screen()" trait="cropy" />
+				<sub src="me()" trait="width" />
+			</_x>
+			<_y>
+				<copy src="sibling(Select_button)" trait="y" />
+				<add>
+					<copy src="sibling(Select_button)" trait="height" />
+					<add> 5 </add>
+				</add>
+			</_y>
+			<_horbuf> 20 </_horbuf>
+			<_verbuf> 8 </_verbuf> <!-- DarN 5 -->
+			<justify> &right; </justify>
+			<_xbox_button> &xbuttona; </_xbox_button>
+			<_PCButtonText> &-sPCMenuHintE; </_PCButtonText>
+		</hotrect>
+
+		<hotrect name="return_button">
+			<id> 5 </id>
+			<include src="darn\text_box_hudVATS.xml" />
+			<target> &true; </target>
+			<_glow> &true; </_glow>
+			<string> &-sReturn; </string>
+			<_x> <copy src="sibling(accept_button)" trait="_x" /> </_x>
+			<_y>
+				<copy src="sibling(accept_button)" trait="y" />
+				<add>
+					<copy src="sibling(accept_button)" trait="height" />
+					<add> 5 </add>
+				</add>
+			</_y>
+			<_horbuf> 20 </_horbuf>
+			<_verbuf> 8 </_verbuf> <!-- DarN 5 -->
+			<justify> &right; </justify>
+			<_xbox_button> &xbuttonb; </_xbox_button>
+			<_PCButtonText> &-sPCMenuHintRMB; </_PCButtonText>
+		</hotrect>
+
+		<hotrect name="special_attack_button"> <!-- DarN FONV -->
+			<id> 30 </id>
+			<include src="darn\text_box_hudVATS.xml" />
+			<target> &true; </target>
+			<_glow> &true; </_glow>
+			<string> </string>
+			<_x> <copy src="sibling(return_button)" trait="_x"/> </_x>
+			<_y>
+				<copy src="return_button" trait="y"/>
+				<add>
+					<copy src="sibling(return_button)" trait="height" />
+					<add> 5 </add>
+				</add>
+			</_y>
+			<_horbuf> 20 </_horbuf>
+			<_verbuf> 8 </_verbuf>
+			<justify> &right; </justify>
+			<_xbox_button> &xbuttony; </_xbox_button>
+			<_PCButtonText> &-sPCMenuHintR; </_PCButtonText>
+		</hotrect>
+
+		<hotrect name="special_attack_2_button"> <!-- DarN FONV -->
+			<id> 31 </id>
+			<include src="darn\text_box_hudVATS.xml"/>
+			<target> &true; </target>
+			<_glow> &true; </_glow>
+			<string> </string>
+			<_x> <copy src="sibling(return_button)" trait="_x"/> </_x>
+			<_y>
+				<copy src="sibling(special_attack_button)" trait="y"/>
+				<add>
+					<copy src="sibling(special_attack_button)" trait="height" />
+					<add> 5 </add>
+				</add>
+			</_y>
+			<_horbuf> 20 </_horbuf>
+			<_verbuf> 8 </_verbuf>
+			<justify> &right; </justify>
+			<_xbox_button> &xbuttonx; </_xbox_button>
+			<_PCButtonText> &-sPCMenuHintF; </_PCButtonText>
+		</hotrect>
+
+		<hotrect name="BodyPart_button">
+			<id> 6 </id>
+			<include src="darn\text_box_hudVATS.xml" />
+			<visible> &xbox; </visible>
+			<_glow> &true; </_glow>
+			<string> &-sVatsBodyPart; </string>
+			<_x> <copy src="sibling(special_attack_button)" trait="_x"/> </_x>
+			<_y>
+				<copy src="sibling(Target_button)" trait="y" />
+				<add>
+					<copy src="sibling(Target_button)" trait="height" />
+					<add> 5 </add>
+				</add>
+			</_y>
+			<_horbuf> 20 </_horbuf>
+			<_verbuf> 8 </_verbuf> <!-- DarN 5 -->
+			<justify> &right; </justify>
+			<_xbox_button> &xbuttonl; </_xbox_button>
+		</hotrect>
+
+		<hotrect name="Target_button">
+			<include src="darn\text_box_hudVATS.xml" />
+			<visible> &xbox; </visible>
+			<_glow> &true; </_glow>
+			<string> &-sVatsTarget; </string>
+			<_x> <copy src="sibling(BodyPart_button)" trait="_x" /> </_x>
+			<_y>
+				<copy src="sibling(special_attack_2_button)" trait="y"/>
+				<add>
+					<copy src="sibling(return_button)" trait="height" />
+					<add> 5 </add>
+				</add>
+			</_y>
+			<_horbuf> 20 </_horbuf>
+			<_verbuf> 8 </_verbuf> <!-- DarN 5 -->
+			<justify> &right; </justify>
+			<_xbox_button> &xbuttonr; </_xbox_button>
+		</hotrect>
+
+	<!-- Aiming text =====================================-->
+		<template name="template_aiming_text">
+			<text name="aiming_text">
+				<visible> &false; </visible>
+				<string> &-sVatsAiming; </string>
+			</text>
+		</template>
+
+		<!-- action queue separator ==========================-->
+		<rect name="separator">
+			<locus> &true; </locus>
+			<width> 369 </width> <!-- DarN 512 -->
+			<width>
+				<copy src="sibling(queued_actions)" trait="width" />
+				<add> 19 </add>
+			</width>
+			<height> 64 </height>
+			<visible>
+				<copy src="sibling(queued_actions)" trait="childcount" />
+				<gt> 2 </gt>
+			</visible>
+			<x>
+				<copy src="screen()" trait="width" />
+				<sub>
+					<copy> 30 </copy>
+					<add src="me()" trait="width" />
+				</sub>
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<sub>
+					<copy src="screen()" trait="cropy" />
+					<mul> 2 </mul>
+					<add> <copy src="me()" trait="height" /> </add>
+				</sub>
+				<sub src="ActionPoints" trait="height" />
+				<add> 10 </add> <!-- DarN add -->
+			</y>
+
+			<image name="aqhoriz1">
+				<include src="line.xml" />
+				<_length>
+					<copy src="parent()" trait="width" />
+					<sub src="sibling(aqhoriz2)" trait="width" />
+				</_length>
+				<x>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="width" />
+				</x>
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+				</y>
+				<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+			</image>
+			<image name="aqhoriz2">
+				<filename> interface\shared\line\fade_to_left.dds </filename>
+				<width> 64 </width>
+				<height> 2 </height>
+				<zoom> &scale; </zoom>
+				<x> 0 </x>
+				<y> <copy src="sibling(aqhoriz1)" trait="y" /> </y>
+				<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+			</image>
+			<image name="aqvert">
+				<include src="vertical_fade_line.xml" />
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<height> <copy src="parent()" trait="height" /> </height>
+				<x> <copy src="parent()" trait="width" /> </x>
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+				</y>
+				<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+				<red> <copy src="io()" trait="_HUDRed" /> </red>
+				<green> <copy src="io()" trait="_HUDGreen" /> </green>
+				<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+			</image>
+		</rect>
+
+		<!-- Queued up action text ===========================-->
+		<hotrect name="queued_actions">
+			<include src="list_box.xml" />
+			<id> 1 </id>
+
+			<alpha> 0 </alpha>
+			<_number_of_visible_items> 6 </_number_of_visible_items>
+			<x>
+				<copy src="sibling(separator)" trait="x" />
+				<add src="me()" trait="width" />
+				<sub> 10 </sub>
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<sub>
+					<copy src="screen()" trait="cropy" />
+					<mul> 2 </mul>
+					<add> <copy src="me()" trait="height" /> </add>
+				</sub>
+				<sub src="ActionPoints" trait="height" />
+				<sub> 20 </sub>
+			</y>
+			<width> <copy src="io()" trait="_VAQLWidth" /> </width> <!-- DarN 350 -->
+
+			<_enabled> &false; </_enabled>
+			<_scrollbar_vis> &false; </_scrollbar_vis>
+		</hotrect>
+
+		<template name="queued_action">
+			<rect name="queued_action_list_container">
+				<include src="list_box_template.xml" />
+				<target> &false; </target>
+				<y>
+					<copy src="queued_actions" trait="height" />
+					<sub>
+						<copy src="queued_actions" trait="childcount" />
+						<sub> 1 </sub> <!--scroll bar-->
+						<sub src="me()" trait="listindex" />
+						<mult src="me()" trait="height" />
+					</sub>
+					<add src="me()" trait="height" />
+				</y>
+				<_VerticalSpacing> 0 </_VerticalSpacing>
+
+				<text name="ListItemText">
+					<font> <copy src="io()" trait="_VQueueFont" /> </font> <!-- DarN 7 -->
+					<string> <copy src="parent()" trait="string" /> </string>
+					<justify> &right; </justify>
+
+					<x> 15 </x>
+					<y> 20 </y>
+					<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+					<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+					<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+					<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+				</text>
+			</rect>
+		</template>
+	</rect>
+</menu>

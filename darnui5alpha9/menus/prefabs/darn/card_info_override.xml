@@ -1,0 +1,99 @@
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			card_info.xml
+// VERSION		2.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			February 13, 2006
+// INFO			Two text fields with an optional border on the upper right.
+-->
+<!--<rect name="card_info">-->
+	<_Title></_Title>				<!-- Title text -->
+	<_Value></_Value>			<!-- Value text -->
+	
+	<alpha> 255 </alpha>
+	<width> 80 </width> <!-- DarN 100 -->
+	<height> 50 </height> <!-- DarN 60 -->
+	<_line_alpha> 255 </_line_alpha> <!-- FONV -->
+	<_Font> <copy src="grandparent()" trait="font" /> </_Font>
+	
+	<_overrideX> 0 </_overrideX>
+	<_overrideY> 0 </_overrideY>
+	
+	<string></string>
+	<locus> &true; </locus>
+
+<!-- ===== BORDER ELEMENTS ===== -->
+	<image name="CI_TopLine">
+		<include src="line.xml"/>
+		<_length> <copy src="parent()" trait="width"/> </_length>
+		<alpha> <copy src="parent()" trait="_line_alpha"/> </alpha>
+	</image>
+
+	<image name="CI_RightVert">
+		<include src="vertical_fade_line.xml"/>
+		
+		<x> <copy src="parent()" trait="width"/> <sub src="me()" trait="width"/> </x>
+		<height> <copy src="parent()" trait="height"/> </height>
+		<alpha> <copy src="parent()" trait="_line_alpha"/> </alpha>
+	</image>
+
+	<!-- Left-hand title text -->
+	<text name="CI_TitleText">
+		<x> 0 </x>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y> <!-- DarN 20 -->
+		<font> <copy src="parent()" trait="_Font" /> </font> <!-- DarN 2 -->
+		<string> <copy src="parent()" trait="_Title"/> </string>
+		<alpha> 255 </alpha> <!-- DarN FONV, needed for fade effects override -->
+	</text>
+	
+	<!-- Right-hand value text -->
+	<text name="CI_ValueText">
+		<!-- Set the text within the two borders; done this way 
+		because we want to keep the text left-justified -->
+		<x>
+			<copy src="me()" trait="user2"/>
+			<sub src="me()" trait="width"/>
+			<max> <copy src="me()" trait="user1"/> </max>
+		</x>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y> <!-- DarN 20 -->
+		<font> <copy src="parent()" trait="_Font" /> </font> <!-- DarN 2 -->
+		<string> <copy src="parent()" trait="_Value"/> </string>
+		<wrapwidth>
+			<copy src="me()" trait="user2"/>
+			<sub src="me()" trait="user1"/>
+			<max> 50 </max>
+		</wrapwidth>
+		
+		<!-- The leftmost border of the value text -->
+		<user1>
+			<copy src="sibling(CI_TitleText)" trait="width"/>
+			<add> 10 </add>
+		</user1>
+		
+		<!-- The rightmost border of the value text -->
+		<user2>
+			<copy src="parent()" trait="width"/>
+			<sub> 8 </sub>
+		</user2>
+		<alpha> 255 </alpha> <!-- DarN FONV, needed for fade effects override -->
+	</text>
+<!--</rect>-->

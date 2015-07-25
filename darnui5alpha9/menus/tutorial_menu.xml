@@ -1,0 +1,379 @@
+<!-- tutorial_menu.xml -->
+<menu name="TutorialMenu">
+	<class> &TutorialMenu; </class>
+	<stackingtype> &no_click_past; </stackingtype>
+
+	<xbuttonrt>	<ref src="TM_next_button" trait="clicked" />		</xbuttonrt>
+	<xbuttonlt> <ref src="TM_prev_button" trait="clicked" />		</xbuttonlt>
+	<xup>		<ref src="scrollbar_vert_up" trait="clicked" />		</xup>
+	<xdown>		<ref src="scrollbar_vert_down" trait="clicked" />	</xdown>
+	<xbuttonrb> <ref src="scrollbar_vert_page_down" trait="clicked" /></xbuttonrb>
+	<xbuttonlb> <ref src="scrollbar_vert_page_up" trait="clicked" /></xbuttonlb>
+	
+	<_PCButton_A>	TM_next_button </_PCButton_A>
+	<_PCButton_S>	TM_prev_button </_PCButton_S>
+	<_PCButton_E>	TM_close_button </_PCButton_E>
+
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<systemcolor> &hudmain;<!--All menus now pipboy color--> </systemcolor>
+
+		<image name="TM_Background">
+			<filename> Interface\Shared\Background\solid_black.dds </filename>
+			<width>
+				<copy src="screen()" trait="width" />
+				<mul src="me()" trait="_scale" />
+			</width>
+			<height>
+				<copy src="screen()" trait="height" />
+				<mul src="me()" trait="_scale" />
+			</height>
+			<x>
+				<copy src="screen()" trait="width" />
+				<sub src="me()" trait="width" />
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+			</y>
+			<zoom> &scale; </zoom>
+
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha" /> </alpha>
+			<locus> &true; </locus>
+			<_scale> 0.7 </_scale> <!-- DarN 0.8 -->
+
+			<rect name="TM_depth_rect">
+				<locus> &true; </locus>
+				<depth> 3 </depth>
+				<_buffer> 10 </_buffer>
+
+				<image name="TM_ulcv">
+					<include src="vertical_fade_line.xml" />
+					<_x> 48 </_x>
+					<_y> 96 </_y>
+				</image>
+
+				<image name="TM_ulch">
+					<include src="line.xml" />
+					<_length> 50 </_length>
+					<x> <copy src="sibling(TM_ulcv)" trait="_x" /> </x>
+					<y>
+						<copy src="sibling(TM_ulcv)" trait="_y" />
+						<add> 0 </add>
+					</y>
+					<depth> 2 </depth>
+				</image>
+
+				<text name="TM_title">
+					<id> 4 </id>
+					<x>
+						<copy src="sibling(TM_ulcv)" trait="_x" />
+						<add src="sibling(TM_ulch)" trait="width" />
+						<add src="parent()" trait="_buffer" />
+					</x>
+					<y>
+						<copy src="sibling(TM_ulch)" trait="y" />
+						<add>
+							<copy src="sibling(TM_ulch)" trait="height" />
+							<sub src="me()" trait="height" />
+							<div> 2 </div>
+						</add>
+						<!-- <add> 5 </add> -->
+					</y>
+					<font> <copy src="globals()" trait="_gl_HeaderFont" /> </font>
+					<string> Title Text </string> <!-- Replaced in code -->
+					<brightness> 255 </brightness>
+				</text>
+
+				<image name="TM_umh">
+					<include src="line.xml" />
+					<x>
+						<copy src="sibling(TM_title)" trait="x" />
+						<add src="sibling(TM_title)" trait="width" />
+						<add src="parent()" trait="_buffer" />
+					</x>
+					<y> <copy src="sibling(TM_ulch)" trait="y" /> </y>
+					<_length>
+						<copy src="sibling(TM_page)" trait="x" />
+						<sub src="sibling(TM_page)" trait="width" />
+						<sub src="parent()" trait="_buffer" />
+						<sub src="me()" trait="x" />
+					</_length>
+				</image>
+
+				<text name="TM_page">
+					<id> 5 </id>
+					<justify> &right; </justify>
+					<x>
+						<copy src="sibling(TM_urch)" trait="x" />
+						<sub src="parent()" trait="_buffer" />
+					</x>
+					<y>
+						<copy src="sibling(TM_ulch)" trait="y" />
+						<add>
+							<copy src="sibling(TM_ulch)" trait="height" />
+							<sub src="me()" trait="height" />
+							<div> 2 </div>
+						</add>
+					</y>
+					<font> 6 </font>
+					<string> ??/?? </string> <!-- Replaced in code -->
+				</text>
+				
+				<image name="TM_fill_line">
+					<include src="line.xml" />
+					<visible> <not src="sibling(TM_page)" trait="visible" /> </visible>
+					<x>
+						<copy src="sibling(TM_umh)" trait="x" />
+						<add src="sibling(TM_umh)" trait="_length" />
+					</x>
+					<y> <copy src="sibling(TM_ulch)" trait="y" /> </y>
+					<_length>
+						<copy src="sibling(TM_urch)" trait="x" />
+						<sub src="me()" trait="x" />
+					</_length>
+				</image>
+
+				<image name="TM_urch">
+					<include src="line.xml" />
+					<_length> 50 </_length>
+					<x>
+						<copy src="grandparent()" trait="width" />
+						<sub src="me()" trait="width" />
+						<sub src="sibling(TM_ulcv)" trait="_x" />
+					</x>
+					<y> <copy src="sibling(TM_ulch)" trait="y" /> </y>
+					<depth> 2 </depth>
+				</image>
+
+				<image name="TM_urcv">
+					<include src="vertical_fade_line.xml" />
+					<_x>
+						<copy src="sibling(TM_urch)" trait="x" />
+						<add src="sibling(TM_urch)" trait="width" />
+						<sub>
+							<copy src="me()" trait="width" />
+							<onlyif> &xbox; </onlyif>
+						</sub>
+					</_x>
+					<_y> <copy src="sibling(TM_ulcv)" trait="_y" /> </_y>
+				</image>
+
+				<hotrect name="TM_scrollbar">
+					<id> 6 </id>
+					<include src="scrollbar_vert.xml" />
+					<repeatvertical> &true; </repeatvertical>
+					<xdefault> 1 </xdefault>
+					<_x>
+						<copy src="sibling(TM_ulcv)" trait="_x" />
+						<add>
+							<copy src="sibling(TM_ulcv)" trait="width" />
+							<sub src="me()" trait="width" />
+							<div> 2 </div>
+						</add>
+					</_x>
+					<_y>
+						<copy src="sibling(TM_ulcv)" trait="_y" />
+						<add src="sibling(TM_ulcv)" trait="height" />
+						globals(
+						
+					</_y>
+					<_height>
+						<copy src="sibling(TM_llcv)" trait="y" />
+						<sub src="me()" trait="_y" />
+					</_height>
+					<_number_of_items>
+						<copy src="sibling(TM_text_container)" trait="_text_height" />
+						<add src="me()" trait="_step_size" />
+					</_number_of_items>
+					<_number_of_visible_items>
+						<copy src="sibling(TM_text_container)" trait="height" />
+					</_number_of_visible_items>
+					<_step_size> 30 </_step_size>
+					<_jump_size>
+						<copy src="sibling(TM_text_container)" trait="height" />
+						<sub src="me()" trait="_step_size" />
+					</_jump_size>
+					<_wheelmoved>
+						<copy src="sibling(TM_text_container)" trait="wheelmoved" />
+					</_wheelmoved>
+				</hotrect>
+
+				<hotrect name="TM_text_container">
+					<alpha> 0 </alpha>
+					<clipwindow> &true; </clipwindow>
+					<locus> &true; </locus>
+					<wheelable> &true; </wheelable>
+					<x> <copy src="sibling(TM_title)" trait="x" /> </x>
+					<y> <copy src="sibling(TM_scrollbar)" trait="y" /> </y>
+					<width>
+						<copy src="sibling(TM_prev_button)" trait="x" />
+						<sub src="me()" trait="x" />
+						<sub> 64 </sub>
+					</width>
+					<height>
+						<copy src="sibling(TM_llcv)" trait="y" />
+						<sub src="me()" trait="y" />
+					</height>
+
+					<_text_height>
+						<copy src="child(TM_text)" trait="height" />
+					</_text_height>
+					<_text_y>
+						<copy> 0 </copy>
+						<sub src="sibling(TM_scrollbar)" trait="_current_value" />
+						<add> 21 </add> <!-- font adjustment -->
+					</_text_y>
+
+					<text name="TM_text">
+						<id> 0 </id>
+						<clips> &true; </clips>
+						<wrapwidth>
+							<copy src="parent()" trait="width" />
+							<sub> 10 </sub>
+						</wrapwidth>
+						<y> <copy src="parent()" trait="_text_y" /> </y>
+						<font> 1 </font>
+					</text>
+				</hotrect>
+
+				<hotrect name="TM_next_button">
+					<id> 1 </id>
+					<include src="darn\text_box.xml" />
+					<font> <copy src="globals()" trait="_gl_ButtonFont" /> </font>
+					<justify> &right; </justify>
+					<_x>
+						<copy src="grandparent()" trait="width" />
+						<sub> 81 </sub>
+					</_x>
+					<_y> <copy src="sibling(TM_text_container)" trait="y" /> </_y>
+					<string> &-sNext; </string>
+					<clicksound> UIMenuPrevNext </clicksound>
+					<_xbox_button> &xbuttonrt; </_xbox_button>
+					<_PCButtonText> &-sPCMenuHintA; </_PCButtonText>
+				</hotrect>
+
+				<hotrect name="TM_prev_button">
+					<id> 2 </id>
+					<include src="darn\text_box.xml" />
+					<font> <copy src="globals()" trait="_gl_ButtonFont" /> </font>
+					<justify> &right; </justify>
+					<_x> <copy src="TM_next_button" trait="_x" /> </_x>
+					<_y>
+						<copy src="TM_next_button" trait="y" />
+						<add src="TM_next_button" trait="height" />
+					</_y>
+					<string> &-sPrevious; </string>
+					<clicksound> UIMenuPrevNext</clicksound>
+					<_xbox_button> &xbuttonlt; </_xbox_button>
+					<_PCButtonText> &-sPCMenuHintS; </_PCButtonText>
+				</hotrect>
+
+				<hotrect name="TM_close_button">
+					<id> 3 </id>
+					<include src="darn\text_box.xml" />
+					<font> <copy src="globals()" trait="_gl_ButtonFont" /> </font>
+					<justify> &right; </justify>
+					<_x> <copy src="TM_next_button" trait="_x" /> </_x>
+					<_y>
+						<copy src="sibling(TM_lrcv)" trait="y" />
+						<sub src="me()" trait="height" />
+					</_y>
+					<string> &-sCloseButton; </string>
+					<_xbox_button> &xbuttonb; </_xbox_button>
+					<_PCButtonText> &-sPCMenuHintE; </_PCButtonText>
+					<systemcolor> &hudalt; </systemcolor>
+				</hotrect>
+
+				<image name="TM_llcv">
+					<include src="vertical_fade_line.xml" />
+					<_bottom_to_top> &true; </_bottom_to_top>
+					<_x> <copy src="sibling(TM_ulcv)" trait="_x" /> </_x>
+					<_y>
+						<copy src="grandparent()" trait="height" />
+						<sub src="sibling(TM_ulcv)" trait="_y" />
+					</_y>
+				</image>
+
+				<image name="TM_llch">
+					<include src="line.xml" />
+					<_length>
+						<copy src="sibling(TM_ulch)" trait="_length" />
+					</_length>
+					<x> <copy src="sibling(TM_ulcv)" trait="_x" /> </x>
+					<y>
+						<copy src="sibling(TM_llcv)" trait="_y" />
+						<sub src="me()" trait="height" />
+					</y>
+				</image>
+
+				<image name="TM_VDSG_symbol">
+					<filename> Interface\Loading\glow_loading_VDSGSymbol.dds </filename>
+					<x>
+						<copy src="sibling(TM_llch)" trait="x" />
+						<add src="sibling(TM_llch)" trait="width" />
+						<add src="parent()" trait="_buffer" />
+						<sub src="me()" trait="_dead_space" />
+					</x>
+					<y>
+						<copy src="sibling(TM_llch)" trait="y" />
+						<add>
+							<copy src="sibling(TM_llch)" trait="height" />
+							<sub src="me()" trait="height" />
+							<div> 2 </div>
+						</add>
+					</y>
+					<height> 64 </height>
+					<width>
+						<copy src="me()" trait="filewidth" />
+						<sub src="me()" trait="_dead_space" />
+					</width>
+					<_dead_space> 36 </_dead_space>
+				</image>
+
+				<text name="TM_VDSG_text">
+					<id> 7 </id>
+					<string> &-sVDSGManual; </string>
+					<x>
+						<copy src="sibling(TM_VDSG_symbol)" trait="x" />
+						<add src="sibling(TM_VDSG_symbol)" trait="width" />
+						<add src="parent()" trait="_buffer" />
+					</x>
+					<y>
+						<copy src="sibling(TM_VDSG_symbol)" trait="y" />
+						<add>
+							<copy src="sibling(TM_VDSG_symbol)" trait="height" />
+							<sub src="me()" trait="height" />
+							<div> 2 </div>
+							<!-- <add> 7 </add> -->
+						</add>
+					</y>
+				</text>
+
+				<image name="TM_lrch">
+					<include src="line.xml" />
+					<_length>
+						<copy src="sibling(TM_lrcv)" trait="_x" />
+						<sub src="me()" trait="x" />
+					</_length>
+					<x>
+						<copy src="sibling(TM_VDSG_text)" trait="x" />
+						<add src="sibling(TM_VDSG_text)" trait="width" />
+						<add src="parent()" trait="_buffer" />
+					</x>
+					<y> <copy src="sibling(TM_llch)" trait="y" /> </y>
+				</image>
+
+				<image name="TM_lrcv">
+					<include src="vertical_fade_line.xml" />
+					<_bottom_to_top> &true; </_bottom_to_top>
+					<_x> <copy src="sibling(TM_urcv)" trait="_x" /> </_x>
+					<_y> <copy src="sibling(TM_llcv)" trait="_y" /> </_y>
+				</image>
+			</rect> <!-- end depth rect -->
+		</image> <!-- end background -->
+	</rect> <!-- end NOGLOW branch -->
+</menu>

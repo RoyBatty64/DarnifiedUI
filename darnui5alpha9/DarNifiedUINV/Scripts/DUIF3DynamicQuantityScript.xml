@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="SCPT">
+  <Flags>0</Flags>
+  <FormID ID="01012A2B">DUIF3DynamicQuantityScript</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">DUIF3DynamicQuantityScript</EditorID>
+    <Data>
+      <Data Tag="SCHR">
+        <ReferenceCount>1</ReferenceCount>
+        <CompiledSize>764</CompiledSize>
+        <VariableCount>2</VariableCount>
+        <Type>Quest</Type>
+        <Flags>Enabled</Flags>
+      </Data>
+      <CompiledScript Tag="SCDA">HQAAABAACAABAOwCAAAAABYAMQAUAC0AIFgkEAcAAQBu8AMAACBYJBAHAAEAbuoDAAAgfHwgWCQQBwABAG4dBAAAIHx8FgAWAAEAEgAgWCQQBwABAG74AwAAIDAgPT3cEQ4AAgByAQB6mpmZmZmZuT8ZAAAAFgARAAIADQAgWFMUBwABAG4dAAAAmxQkAAIAFwBpSW52ZW50b3J5QXNrUXVhbnRpdHlBdHoAAAAA8Gn4QBUABwBzAgACACAwGAARAAUADQAgWFMUBwABAG4qAAAAmxQkAAIAFwBpSW52ZW50b3J5QXNrUXVhbnRpdHlBdHoAAAAAAADwPxYAEQAAAA0AIFgkEAcAAQBu+AMAABcAAgABABUABwBzAgACACAxGQAAABcAAgAGABYALAABACgAIHMBACBYmhQbAAEAFwBpSW52ZW50b3J5QXNrUXVhbnRpdHlBdCAhPZsUHgACABcAaUludmVudG9yeUFza1F1YW50aXR5QXRzAQAXAAIAAQCbFCQAAgAXAGlJbnZlbnRvcnlBc2tRdWFudGl0eUF0egAAAAAAABRAGQAAABUABwBzAgACACAwGQAAABcAAgAEABYADQACAAkAIHMBACAwIDw9FQAmAHMBACEAIFiaFBsAAQAXAGlJbnZlbnRvcnlBc2tRdWFudGl0eUF03BEOAAIAcgEAegAAAAAAAPA/GQAAABkAAAAWABEABgANACBYJBAHAAEAbvgDAAAWABEABAANACBYUxQHAAEAbioAAAAWAA0AAgAJACBzAgAgMSA9PV8UBwABAG4eAAAAFQAHAHMCAAIAIDAZAAAAGQAAABkAAAAWACEABwAdACBYJBAHAAEAbvgDAAAgWCQQBwABAG70AwAAIHx83BEOAAIAcgEAensUrkfheoQ/FgARAAEADQAgWFMUBwABAG4JAQAAXxQHAAEAbssAAAAZAAAAFgARAAEADQAgWFMUBwABAG4IAQAAXxQHAAEAbs0AAAAZAAAAGQAAABEAAAA=</CompiledScript>
+      <ScriptSource Tag="SCTX" External="DUIF3DynamicQuantityScript.fnvscript" />
+      <LocalVariables>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>1</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">BasePromptAmount</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>2</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">takeall</Name>
+        </Variable>
+      </LocalVariables>
+      <References>
+        <Reference Tag="SCRO">
+          <Reference ID="01012A2A">DUIF3DynamicQuantityQuest</Reference>
+        </Reference>
+      </References>
+    </Data>
+  </Subrecords>
+</Record>

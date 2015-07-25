@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="GLOB">
+  <Flags>BorderRegion_HasTreeLOD_Constant_HiddenFromLocalMap</Flags>
+  <FormID ID="0101551F">UCBrestarted</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">UCBrestarted</EditorID>
+    <Type Tag="FNAM">Short</Type>
+    <Value Tag="FLTV">1</Value>
+  </Subrecords>
+</Record>

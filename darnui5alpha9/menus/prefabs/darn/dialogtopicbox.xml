@@ -1,0 +1,80 @@
+<!-- box.xml -->
+<!--hotrect name="box"/-->
+	<width> <!-- <copy src="parent()" trait="width"/> --> 300</width>
+	<height> <copy src="parent()" trait="height"/> </height>
+	<alpha> <copy src="me()" trait="_fill_alpha"/> </alpha>
+	<locus> &true; </locus>
+	<brightness> <copy src="globals()" trait="_background_fill_brightness"/> </brightness>
+	<clips> &false; </clips>
+	
+	<_box_visible> &true; </_box_visible>
+	<_top_visible> <copy src="me()" trait="_box_visible"/> </_top_visible>
+	<_bottom_visible> <copy src="me()" trait="_box_visible"/> </_bottom_visible>
+	<_left_visible> <copy src="me()" trait="_box_visible"/> </_left_visible>
+	<_right_visible> <copy src="me()" trait="_box_visible"/> </_right_visible>
+	<_line_alpha> 255 </_line_alpha>
+	<_fill_alpha> 0 </_fill_alpha>
+	<_line_thickness> <copy src="globals()" trait="_line_thickness"/> </_line_thickness>
+
+	<image name="top">
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<visible> <copy src="parent()" trait="_top_visible"/> </visible>
+		<width> <copy src="parent()" trait="width"/> </width>
+		<height> <copy src="parent()" trait="_line_thickness"/> </height>
+		<brightness> <copy src="globals()" trait="_line_brightness"/> </brightness>
+		<alpha> <copy src="parent()" trait="_line_alpha"/> </alpha>
+		<clips> <copy src="parent()" trait="clips"/> </clips>
+	</image>
+
+	<image name="left">
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<visible> <copy src="parent()" trait="_left_visible"/> </visible>
+		<width> <copy src="parent()" trait="_line_thickness"/> </width>
+		<height>
+			<copy src="parent()" trait="height"/>
+			<sub src="sibling(top)" trait="height"/>
+			<sub src="sibling(top)" trait="height"/>
+		</height>
+		<y> <copy src="sibling(top)" trait="height"/> </y>
+		<brightness> <copy src="globals()" trait="_line_brightness"/> </brightness>
+		<alpha> <copy src="parent()" trait="_line_alpha"/> </alpha>
+		<clips> <copy src="parent()" trait="clips"/> </clips>
+	</image>
+
+	<image name="bottom">
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<visible> <copy src="parent()" trait="_bottom_visible"/> </visible>
+		<width> <copy src="parent()" trait="width"/> </width>
+		<height> <copy src="parent()" trait="_line_thickness"/> </height>
+		<y>
+			<copy src="parent()" trait="height"/>
+			<sub src="me()" trait="height"/>
+		</y>
+		<brightness> <copy src="globals()" trait="_line_brightness"/> </brightness>
+		<alpha> <copy src="parent()" trait="_line_alpha"/> </alpha>
+		<clips> <copy src="parent()" trait="clips"/> </clips>
+	</image>
+
+	<image name="right">
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<visible> <copy src="parent()" trait="_right_visible"/> </visible>
+		<width> <copy src="parent()" trait="_line_thickness"/> </width>
+		<height>
+			<copy src="parent()" trait="height"/>
+			<sub src="sibling(top)" trait="height"/>
+			<sub src="sibling(top)" trait="height"/>
+		</height>
+		<x>
+			<copy src="parent()" trait="width"/>
+			<sub src="me()" trait="width"/>
+		</x>
+		<y> <copy src="sibling(top)" trait="height"/> </y>
+		<brightness> <copy src="globals()" trait="_line_brightness"/> </brightness>
+		<alpha> <copy src="parent()" trait="_line_alpha"/> </alpha>
+		<clips> <copy src="parent()" trait="clips"/> </clips>
+	</image>
+<!--/rect-->

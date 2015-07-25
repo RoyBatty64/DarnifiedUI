@@ -1,0 +1,91 @@
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			meter.xml
+// VERSION		2.0
+// AUTHOR:		Chris Innanen, Ricardo Gonzalez
+// DATE			February 27, 2007
+// INFO			A meter for displaying progress - DUINV PipBoy HCMeters
+-->
+<!-- rect name="meter" -->
+	<!-- User traits -->
+	<_Value></_Value>												<!-- The meter value: ranges from 0.0 to 1.0 -->
+	<_SolidMeter> &true;</_SolidMeter>						<!-- If true, meter shows up as a solid bar; otherwise, uses tick-mark image -->
+	<_ShowBackground> &true; </_ShowBackground>		<!-- If true, a slightly dimmer background shows up behind the meter to denote how
+																				   wide the meter is when it's full. -->
+	<height> 12 </height>
+	<width> 40 </width>
+	<alpha> 255 </alpha>
+	<justify> &left; </justify>
+	<locus> &true; </locus>
+	
+	<!-- Meter background -->
+	<image name="MeterBackground">
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<height> <copy src="parent()" trait="height"/> </height>
+		<width> <copy src="parent()" trait="width"/> </width>
+		<depth> 1 </depth>
+		<systemcolor> &pipboy; </systemcolor>
+		<alpha>
+			<copy src="parent()" trait="alpha"/>
+			<div> 2 </div>
+		</alpha>
+		<x>
+			<copy> 0 </copy>
+			<sub>
+				<copy src="parent()" trait="width"/>
+				<div> 2 </div>
+				<onlyif> <copy src="parent()" trait="justify"/><eq> &center; </eq> </onlyif>
+			</sub>
+			<sub>
+				<copy src="parent()" trait="width"/>
+				<onlyif> <copy src="parent()" trait="justify"/><eq> &right; </eq> </onlyif>
+			</sub>
+		</x>
+		<clips> &true; </clips>
+		
+		<visible> <copy src="parent()" trait="_ShowBackground"/> </visible>	
+		<target> <copy src="parent()" trait="target"/> </target>
+	</image>
+	
+	<!-- Main meter image -->
+	<image name="MeterImage">
+		<height> <copy src="parent()" trait="height"/> </height>
+		<width>
+			<copy src="parent()" trait="width"/>
+			<mul src="parent()" trait="_Value"/>
+		</width>
+		<alpha> <copy src="parent()" trait="alpha"/></alpha>
+		<depth> 2 </depth>
+		<clips> &true; </clips>
+		<!-- <systemcolor> <copy src="io()" trait="_duiHUDMtrSysColor" /> </systemcolor> -->
+		<systemcolor> &pipboy; </systemcolor>
+		
+		<x> <copy src="sibling(MeterBackground)" trait="x"/> </x>
+		
+		<!-- Switch texture file based on _SolidMeter -->
+		<filename> 
+			<copy src="parent()" trait="_SolidMeter"/>
+			<copy src="me()" trait="_filename_"/>
+		</filename>
+		<!-- <texatlas> Interface\InterfaceShared.tai </texatlas> -->
+		
+		<_filename_0>Interface\HUD\hud_tick_mark.dds</_filename_0>
+		<_filename_1>Interface\Shared\solid.dds</_filename_1>
+		
+		<tile> <not src="parent()" trait="_SolidMeter"/> </tile>
+		<target> <copy src="parent()" trait="target"/> </target>
+		<zoom> &scale; </zoom>
+	</image>
+<!-- /rect -->

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="SCPT">
+  <Flags>0</Flags>
+  <FormID ID="0100400A">DUIF3ConfigSubMenuiHudA</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">DUIF3ConfigSubMenuiHudA</EditorID>
+    <Data>
+      <Data Tag="SCHR">
+        <ReferenceCount>1</ReferenceCount>
+        <CompiledSize>436</CompiledSize>
+        <VariableCount>4</VariableCount>
+        <Type>Quest</Type>
+        <Flags>Enabled</Flags>
+      </Data>
+      <CompiledScript Tag="SCDA">HQAAABAABgAAAJQAAAAWAAoABAAGACBYqBQAABYALAACACgAIFiuFCIAAQAeAFRoZSBNb2QgQ29uZmlndXJhdGlvbiBNZW51LmVzcBUALQBzAwAoACBYrxQiAAEAHgBUaGUgTW9kIENvbmZpZ3VyYXRpb24gTWVudS5lc3AVABUAZgQAEAAgWNkUCgACAHMDAG7mCgAAGQAAABkAAAARAAAAEAANAAEAAQEAAAEAbvUDAAAWAFYAAABSACBYrhQiAAEAHgBUaGUgTW9kIENvbmZpZ3VyYXRpb24gTWVudS5lc3AgWMIhHAADAG4AAAAAbgAAAAAOAF9BY3RpdmVTdWJNZW51IDUgPT0gJiYXAAIAAQAeAAAAGQAAABYAQAACADwAIFjCIRgAAwBuAAAAAG4AAAAACgBfQWN0aXZlTW9kIFivFBUAAQARAERhck5pZmllZFVJTlYuZXNwID09FQAmAHMBACEAIFjCIRsAAwBuAAAAAG4AAAAADQBfQWN0aXZlT3B0aW9uFQAfAGYCABoAIFjCIRQAAwBuAAAAAG4AAAAABgBfVmFsdWUZAAAAEQAAAA==</CompiledScript>
+      <ScriptSource Tag="SCTX" External="DUIF3ConfigSubMenuiHudA.fnvscript" />
+      <LocalVariables>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>3</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">iMaster</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>1</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">iOption</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>2</Index>
+            <Flags>0</Flags>
+          </Data>
+          <Name Tag="SCVR">fValue</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>4</Index>
+            <Flags>0</Flags>
+          </Data>
+          <Name Tag="SCVR">rList</Name>
+        </Variable>
+      </LocalVariables>
+      <References>
+        <Reference Tag="SCRV">4</Reference>
+      </References>
+    </Data>
+  </Subrecords>
+</Record>

@@ -1,0 +1,93 @@
+scn DUIF3ConfigSubMenuExtra
+
+int iMaster
+int iOption
+float fValue
+ref rList
+
+Begin GameMode
+	if GetGameRestarted
+		if IsModLoaded "The Mod Configuration Menu.esp"
+			set iMaster to GetModIndex "The Mod Configuration Menu.esp"
+			set rList to BuildRef iMaster 2790
+		endif
+	endif
+End
+
+Begin MenuMode 1013
+	if IsModLoaded "The Mod Configuration Menu.esp" && GetMCMFloat 0 0 "_ActiveSubMenu" == 10
+	else
+		Return
+	endif
+
+	if GetMCMFloat 0 0 "_ActiveMod" == GetModIndex "DarNifiedUINV.esp"
+		set iOption to GetMCMFloat 0 0 "_ActiveOption"
+		set fValue to GetMCMFloat 0 0 "_Value"
+
+		if GetMCMFloat 0 0 "_Reset" == 1
+			SetMCMFloat 0 0 "_Reset" 0
+			SetMCMFloat 1 0 "_columns" 2
+
+			SetMCMFloat 1 1 "_enable" 1
+			SetMCMString 1 1 "_title" "Extra HUD Indicators"
+			SetMCMFloat 1 1 "_type" 0
+		
+			SetMCMFloat 1 2 "_enable" 1
+			SetMCMString 1 2 "_title" "Vanilla HUD Indicators"
+			SetMCMFloat 1 2 "_type" 0
+
+			SetMCMFloat 1 3 "_enable" 1
+			SetMCMString 1 3 "_title" "  Armor Condition"
+			SetMCMFloat 1 3 "_RGB" 191137050
+			SetMCMFloat 1 3 "_type" 4
+			SetMCMFloat 1 3 "_value" DUIF3.xStatsArmorCND
+		
+			SetMCMFloat 1 4 "_enable" 1
+			SetMCMString 1 4 "_title" "  Thirst"
+			SetMCMFloat 1 4 "_RGB" 191137050
+			SetMCMFloat 1 4 "_type" 4
+		
+			SetMCMFloat 1 5 "_enable" 1
+			SetMCMString 1 5 "_title" "  Crippled Limb Indicator"
+			SetMCMFloat 1 5 "_RGB" 191137050
+			SetMCMFloat 1 5 "_type" 4
+			SetMCMFloat 1 5 "_value" DUIF3.HUDShowCLI
+		
+			SetMCMFloat 1 6 "_enable" 1
+			SetMCMString 1 6 "_title" "  Hunger"
+			SetMCMFloat 1 6 "_RGB" 191137050
+			SetMCMFloat 1 6 "_type" 4
+			
+			SetMCMFloat 1 7 "_enable" 1
+			SetMCMString 1 7 "_title" "  Combat Indicator"
+			SetMCMFloat 1 7 "_RGB" 191137050
+			SetMCMFloat 1 7 "_type" 4
+			SetMCMFloat 1 7 "_value" DUIF3.xShowCI
+		
+			SetMCMFloat 1 8 "_enable" 1
+			SetMCMString 1 8 "_title" "  Sleep"
+			SetMCMFloat 1 8 "_RGB" 191137050
+			SetMCMFloat 1 8 "_type" 4
+		
+			SetMCMFloat 1 10 "_enable" 1
+			SetMCMString 1 10 "_title" "  Limb"
+			SetMCMFloat 1 10 "_RGB" 191137050
+			SetMCMFloat 1 10 "_type" 4
+
+		elseif GetUIFloat "StartMenu/MCM/_NewValue" == 1
+			SetUIFloat "StartMenu/MCM/_NewValue" 0
+			SetUIFloat "StartMenu/MCM/_Reset" 1
+
+			if iOption == 3
+				set DUIF3.xStatsArmorCND to fValue
+				SetUIFloat "HUDMainMenu\_xStatsArmorCND" DUIF3.xStatsArmorCND
+			elseif iOption == 5
+				set DUIF3.HUDShowCLI to fValue
+				SetUIFloat "HUDMainMenu\_HUDShowCLI" DUIF3.HUDShowCLI
+			elseif iOption == 7
+				set DUIF3.xShowCI to fValue
+				SetUIFloat "HUDMainMenu\_HUDShowCI" DUIF3.xShowCI
+			endif
+		endif
+	endif
+End

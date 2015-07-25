@@ -1,0 +1,84 @@
+
+<!-- rect name="meter" -->
+	<!-- User traits -->
+	<_Value></_Value>												<!-- The meter value: ranges from 0.0 to 1.0 -->
+	<_SolidMeter> &false;</_SolidMeter>						<!-- If true, meter shows up as a solid bar; otherwise, uses tick-mark image -->
+	<_ShowBackground> &false; </_ShowBackground>		<!-- If true, a slightly dimmer background shows up behind the meter to denote how
+																				   wide the meter is when it's full. -->
+	<height> 24 </height>
+	<width> 600 </width>
+	<alpha> 255 </alpha>
+	<justify> &left; </justify>
+	<locus> &true; </locus>
+	
+	<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+	<brightness> <copy src="io()" trait="_duiHUDBrightness" />
+	
+	<!-- Meter background -->
+	<image name="MeterBackground">
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<height> <copy src="parent()" trait="height"/> </height>
+		<width> <copy src="parent()" trait="width"/> </width>
+		<depth> 1 </depth>
+		
+		<alpha>
+			<copy src="parent()" trait="alpha"/>
+			<div> 4 </div>
+		</alpha>
+		<x>
+			<copy> 0 </copy>
+			<sub>
+				<copy src="parent()" trait="width"/>
+				<div> 2 </div>
+				<onlyif> <copy src="parent()" trait="justify"/><eq> &center; </eq> </onlyif>
+			</sub>
+			<sub>
+				<copy src="parent()" trait="width"/>
+				<onlyif> <copy src="parent()" trait="justify"/><eq> &right; </eq> </onlyif>
+			</sub>
+		</x>
+		<clips> &true; </clips>
+		
+		<visible> <copy src="parent()" trait="_ShowBackground"/> </visible>	
+		<target> <copy src="parent()" trait="target"/> </target>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+			<systemcolor> <copy src="parent()" trait="systemcolor" /> </systemcolor>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+	</image>
+	
+	<!-- Main meter image -->
+	<image name="MeterImage">
+		<height> <copy src="parent()" trait="height"/> </height>
+		<width>
+			<copy src="parent()" trait="width"/>
+			<mul src="parent()" trait="_Value"/>
+		</width>
+		<alpha> <copy src="parent()" trait="alpha"/></alpha>
+		<depth> 2 </depth>
+		<clips> &true; </clips>
+		
+		<x> <copy src="sibling(MeterBackground)" trait="x"/> </x>
+		
+		<!-- Switch texture based on _SolidMeter -->
+		<filename> 
+			<copy src="parent()" trait="_SolidMeter"/>
+			<copy src="me()" trait="_filename_"/>
+		</filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		
+		<_filename_0>Interface\HUD\hud_tick_mark.dds</_filename_0>
+		<_filename_1>Interface\Shared\solid.dds</_filename_1>
+		
+		<tile> <not src="parent()" trait="_SolidMeter"/> </tile>
+		<target> <copy src="parent()" trait="target"/> </target>
+		<!-- <brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness> -->
+		<brightness> <copy src="parent()" trait="brightness" /> </brightness>
+		<systemcolor> <copy src="parent()" trait="systemcolor" /> </systemcolor>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+	</image>
+<!-- /rect -->

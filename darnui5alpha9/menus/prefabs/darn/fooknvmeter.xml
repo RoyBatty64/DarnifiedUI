@@ -1,0 +1,181 @@
+﻿<!-- DarNified Night Vision charge meter for FOOK2  -->
+<!-- v1.1 - fixed metertype visibility calcs -->
+
+<_NVMeterType> 0 </_NVMeterType>
+<_NVCharge> -1 </_NVCharge>
+
+<rect name="NVMeter">
+	<locus> &true; </locus>
+	<x>
+		<copy src="screen()" trait="width" />
+		<sub>
+			<copy> 382 </copy>
+			<mul src="globals()" trait="_duiscale_65" />
+		</sub>
+		<add src="globals()" trait="_HUDAPInfo_X" />
+		<add src="globals()" trait="_NVMeter_X" />
+	</x>
+	<y>
+		<copy src="ActionPoints" trait="y" />
+		<sub>
+			<copy> 54 </copy>
+			<mul src="globals()" trait="_duiscale_65" />
+		</sub>
+		<add src="globals()" trait="_NVMeter_y" />
+	</y>
+	<visible>
+		<copy src="io()" trait="_NVCharge" />
+		<gte> 0 </gte>
+		<and src="io()" trait="_HUDMode" />
+		<and>
+			<copy src="io()" trait="_NVMeterType" />
+			<eq> 1 </eq>
+		</and>
+	</visible>
+	<image name="NVMeterMeter">
+		<depth> -1 </depth>
+		<alpha> <copy src="io()" trait="_MeterAlpha" /> </alpha>
+		<width>
+			<copy> 152 </copy>
+			<mul src="globals()" trait="_duiscale_65" />
+			<mul src="me()" trait="_Value" />
+		</width>
+		<height>
+			<copy> 20 </copy>
+			<mul src="globals()" trait="_duiscale_65" />
+		</height>
+		<cropx>
+			<copy src="parent()" trait="width"/>
+			<mul src="me()" trait="_Value"/>
+			<div> -1 </div>
+		</cropx>
+		
+		<filename>
+			<copy src="globals()" trait="_HUDSolidMeters" />
+			<copy src="me()" trait="_filename_" />
+		</filename>
+		<_filename_0> Interface\HUD\hud_tick_mark.dds </_filename_0>
+		<_filename_1> Interface\Shared\solid.dds </_filename_1>
+		<zoom>
+			<copy src="globals()" trait="_duiscale_65" />
+			<mul> 100 </mul>
+		</zoom>
+		<tile> <not src="globals()" trait="_HUDSolidMeters" /> </tile>
+		<x>
+			<copy> 361 </copy>
+			<mul src="globals()" trait="_duiscale_65" />
+			<sub src="me()" trait="width"/>
+		</x>
+		<y>
+			<copy> 61 </copy>
+			<mul src="globals()" trait="_duiscale_65" />
+			<sub src="me()" trait="height"/>
+		</y>
+		<_Value> <copy src="io()" trait="_NVCharge"/> </_Value>
+		<systemcolor> <copy src="io()" trait="_duiHUDMtrSysColor" /> </systemcolor> <!-- DarN CHECK -->
+		<brightness> <copy src="io()" trait="_duiHUDMtrBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+	</image>
+	<image name="NVMeterMeterBG">
+		<visible> <copy src="globals()" trait="_HUDSolidMeters" /> </visible>
+		<depth> -2 </depth>
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<height> <copy src="sibling(NVMeterMeter)" trait="height" /> </height>
+		<width>
+			<copy> 152 </copy>
+			<mul src="globals()" trait="_duiscale_65" />
+		</width>
+		<x>
+			<copy src="sibling(NVMeterMeter)" trait="x" />
+			<add src="sibling(NVMeterMeter)" trait="width" />
+			<sub src="me()" trait="width" />
+		</x>
+		<y> <copy src="sibling(NVMeterMeter)" trait="y" /> </y>
+		<alpha>
+			<copy src="sibling(NVMeterMeter)" trait="alpha" />
+			<div> 2 </div>
+		</alpha>
+		<brightness> <copy src="sibling(NVMeterMeter)" trait="brightness" /> </brightness>
+		<systemcolor> <copy src="sibling(NVMeterMeter)" trait="systemcolor" /> </systemcolor> <!-- DarN CHECK -->
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+	</image>
+	<image name="NVBracket">
+		<height>
+			<copy> 76 </copy>
+			<mul src="globals()" trait="_duiscale_65" />
+		</height>
+		<width>
+			<copy> 512 </copy>
+			<mul src="globals()" trait="_duiscale_65" />
+		</width>
+		<filename> Interface\HUD\glow_hud_right_short_seperatorglow.dds </filename>
+		<zoom> &scale; </zoom>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+	</image>
+	<text name="NVLabel">
+		<font> <copy src="globals()" trait="_HUDMeterFont" /> </font>
+		<justify> &right; </justify>
+		<x>
+			<copy> 352 </copy>
+			<mul src="globals()" trait="_duiscale_65" />
+		</x>
+		<y>
+			<copy> 7 </copy>
+			<mul src="globals()" trait="_duiscale_65" />
+		</y>
+		<string> NV </string>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+		<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+	</text>
+</rect>
+
+<rect name="NVCrosshairMeter">
+	<include src="darn\meter.xml"/>
+
+	<visible>
+		<copy src="io()" trait="_NVCharge" />
+		<gte> 0 </gte>
+		<and src="io()" trait="_HUDMode" />
+		<and>
+			<copy src="io()" trait="_NVMeterType" />
+			<eq> 2 </eq>
+		</and>
+    </visible>
+	</visible>
+	<_SolidMeter> &true; </_SolidMeter>
+	<_ShowBackground> &true; </_ShowBackground>
+	<_Value> <copy src="io()" trait="_NVCharge"/> </_Value>
+	<height> 5 </height>
+	<width> 36 </width>
+	<x>
+		<copy src="screen()" trait="width" />
+		<sub src="me()" trait="width" />
+		<div> 2 </div>
+		<sub> 1 </sub>
+	</x>
+	<y>
+		<copy src="screen()" trait="height" />
+		<div> 2 </div>
+		<add> 16 </add>
+	</y>
+	<alpha>
+		<copy> 200 </copy>
+		<sub>
+			<copy> 136 </copy>
+			<onlyif>
+				<copy src="parent()" trait="_NVCharge"/>
+				<gte> 99 </gte>
+			</onlyif>
+		</sub>
+	</alpha>
+</rect>

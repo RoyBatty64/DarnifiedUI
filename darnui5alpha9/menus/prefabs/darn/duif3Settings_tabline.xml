@@ -1,0 +1,84 @@
+<!-- rect name="tabline"-->
+
+	<locus> &true; </locus>
+	<width>
+		<copy src="child(Button1)" trait="x" />
+		<add src="child(Button1)" trait="width" />
+		<add>
+			<copy src="child(Button2)" trait="width" />
+			<onlyif src="child(Button2)" trait="visible" />
+		</add>
+		<add>
+			<copy src="child(Button3)" trait="width" />
+			<onlyif src="child(Button3)" trait="visible" />
+		</add>
+		<add>
+			<copy src="child(Button4)" trait="width" />
+			<onlyif src="child(Button4)" trait="visible" />
+		</add>
+		<add>
+			<copy src="me()" trait="_LeftLineLength" />
+			<mul src="me()" trait="_ButtonCount" />
+		</add>
+	</width>
+	<height> 50 </height>
+	<alpha> 255 </alpha>
+
+	<_ButtonCount> 4 </_ButtonCount>			<!-- Total # tab buttons -->
+
+	<_LeftLineLength> 30 </_LeftLineLength>		<!-- The length of the in-between border lines -->
+
+	<_enabled> &true; </_enabled>
+
+	<hotrect name="Button1">
+		<include src="darn\duif3Settings_tabBtn.xml" />
+		<listindex> 1 </listindex>
+<!-- 		<visible>
+			<copy src="me()" trait="listindex" />
+			<lte src="parent()" trait="_ButtonCount" />
+		</visible> -->
+		<_x> <copy src="parent()" trait="_LeftLineLength" /> </_x>
+		 <string> HUD </string>
+	</hotrect>
+	<hotrect name="Button2">
+		<include src="darn\duif3Settings_tabBtn.xml" />
+		<listindex> 2 </listindex>
+		<_x>
+			<copy src="sibling(Button1)" trait="_x" />
+			<add src="sibling(Button1)" trait="width" />
+			<add src="parent()" trait="_LeftLineLength" />
+		</_x>
+		<string> Global </string>
+	</hotrect>
+	<hotrect name="Button3">
+		<include src="darn\duif3Settings_tabBtn.xml" />
+		<listindex> 3 </listindex>
+		<_x>
+			<copy src="sibling(Button2)" trait="_x" />
+			<add src="sibling(Button2)" trait="width" />
+			<add src="parent()" trait="_LeftLineLength" />
+		</_x>
+		<string> Menus </string>
+	</hotrect>
+	<hotrect name="Button4">
+		<include src="darn\duif3Settings_tabBtn.xml" />
+		<listindex> 4 </listindex>
+		<_x>
+			<copy src="sibling(Button3)" trait="_x" />
+			<add src="sibling(Button3)" trait="width" />
+			<add src="parent()" trait="_LeftLineLength" />
+		</_x>
+		<string> Help </string>
+	</hotrect>
+
+	<image name="RightHoriz">
+		<include src="line.xml"/>
+		
+		<_length> <copy src="parent()" trait="_LeftLineLength"/> </_length>
+		<alpha> <copy src="parent()" trait="alpha"/> </alpha>
+		
+		<x>
+			<copy src="parent()" trait="width"/>
+			<sub src="me()" trait="_length"/>
+		</x>
+	</image>

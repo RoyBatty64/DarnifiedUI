@@ -1,0 +1,68 @@
+scn UCBQuestScript
+
+float fTimer
+int iKeyPressed
+
+Begin Gamemode
+	if UCBrestarted
+		set UCBRestarted to 0
+		SetStage UCBQuest 0		; NVSE check
+	endif
+	setquestdelay UCBQuest 1
+	set fTimer to 0
+	set iKeyPressed to 0
+end
+
+Begin MenuMode 1001
+	if UCBhasNVSE == 0
+		return
+	endif
+	setquestdelay UCBQuest .1
+	;set UCBKey to GetKeyPress 1
+End
+
+Begin MenuMode 1055
+	if UCBhasNVSE == 0
+		return
+	endif
+	setquestdelay UCBQuest .1
+	if IsKeyPressed UCBKey
+		set iKeyPressed to 1
+		if menumode 3 || menumode 1007 || menumode 1001 || menumode 1009 || menumode 1013 || menumode 1027 || menumode 1036 || menumode 1047 || menumode 1048 || menumode 1051 || menumode 1060 || menumode 1074 || menumode 1076 || menumode 1077 || menumode 1080 || menumode 1081 || menumode 1082 || menumode 1083 || menumode 1084
+		else
+			set fTimer to fTimer + GetSecondsPassed			
+		endif
+	else
+		if iKeyPressed
+			set iKeyPressed to 0
+			;if fTimer >= 5
+			;	MessageBoxEx "Press a button on your keyboard to set the Terminal Close Button hotkey.%rCurrently: %k%rDefault: R" UCBKey
+			;else
+				con_CloseAllMenus
+			;endif	
+		endif
+	endif
+end
+
+Begin MenuMode 1057
+	if UCBhasNVSE == 0
+		return
+	endif
+	setquestdelay UCBQuest .1
+	if IsKeyPressed UCBKey
+		set iKeyPressed to 1
+		if menumode 3 || menumode 1007 || menumode 1001 || menumode 1009 || menumode 1013 || menumode 1027 || menumode 1036 || menumode 1047 || menumode 1048 || menumode 1051 || menumode 1060 || menumode 1074 || menumode 1076 || menumode 1077 || menumode 1080 || menumode 1081 || menumode 1082 || menumode 1083 || menumode 1084
+		else
+			set fTimer to fTimer + GetSecondsPassed			
+		endif
+	else
+		if iKeyPressed
+			set iKeyPressed to 0
+			;if fTimer >= 5
+			;	MessageBoxEx "Press a button on your keyboard to set the Terminal Close Button hotkey.%rCurrently: %k%rDefault: R" UCBKey
+			;else
+				con_CloseAllMenus
+			;endif	
+		endif
+	endif
+end

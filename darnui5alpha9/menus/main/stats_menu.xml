@@ -1,0 +1,2778 @@
+<!-- stats_menu.xml -->
+<menu name="StatsMenu">
+	<id> &pipboymenu; </id>
+	<class> &StatsMenu; </class>
+	<systemcolor> &pipboy; </systemcolor>
+	<user0> 0 </user0>	<!-- current visible tab page (0-4) -->
+	<user1></user1>		<!-- player rads -->
+	<user2></user2>		<!-- rad max -->
+	<user3> 0.1 </user3><!-- rad variance randomization frequency, in secs -->
+	<user4> 0.03 </user4><!-- rad variance range, as a pct of max rads -->
+	<user5></user5>		<!-- Hit Points Text -->
+	<user6></user6>		<!-- Action Points Text -->
+	<user7></user7>		<!-- Experience Points Text -->
+	<user8></user8>		<!-- Level value text -->
+
+	<user9> &-sStatsCrippled; </user9>
+	<user10> &-sStatsEFFAbbrev; </user10>
+	
+	<!-- <user11></user11> --> <!-- DarN h20 lvl -->
+
+	<!-- DarN a11 - xbutton assignments moved from 243, fixes some limbs/stimpack issues (shiholude) -->
+	<xbuttona> <ref src="stats_stimpak_button" trait="clicked"/> </xbuttona>
+	<xbuttonx> <ref src="stats_healing_mode" trait="clicked"/> </xbuttonx>
+	<xbuttony> <ref src="stats_radaway_button" trait="clicked"/> </xbuttony>
+	<xbuttonlb> <ref src="stats_radx_button" trait="clicked"/> </xbuttonlb>
+	<xbuttonrb> <ref src="stats_drbag_button" trait="clicked"/> </xbuttonrb>
+	<_PCButton_S>	stats_stimpak_button </_PCButton_S>
+	<_PCButton_A>	stats_radaway_button </_PCButton_A>
+	<_PCButton_X>	stats_radx_button </_PCButton_X>
+	<_PCButton_R>	stats_genrep_button </_PCButton_R> <!-- DarN FONV -->
+	<_PCButton_E> 	stats_drbag_button </_PCButton_E> <!-- DarN FONV -->
+	
+	<xup> <ref src="stats_effects_container" trait="clicked" /> </xup>
+	<xdown> <ref src="stats_effects_container" trait="clicked" /> </xdown>
+	
+	<_stats_zoom> 85 </_stats_zoom>
+	<_ragzoom>
+		<copy src="me()" trait="_stats_zoom" />
+		<add> 20 </add>
+	</_ragzoom>
+	<_meter_zoom>
+		<copy src="me()" trait="_ragzoom" />
+		<sub> 45 </sub>
+	</_meter_zoom>
+	
+	<_rag_scale_multiplier>
+		<copy src="me()" trait="_ragzoom" />
+		<div> 100 </div>
+	</_rag_scale_multiplier>
+	<_meter_scale_multiplier>
+		<copy src="me()" trait="_meter_zoom" />
+		<div> 100 </div>
+	</_meter_scale_multiplier>
+	<_scale_multiplier>
+		<copy src="me()" trait="_stats_zoom" />
+		<div> 100 </div>
+	</_scale_multiplier>
+	
+	<_meter_height>
+		<copy> 38 </copy>
+		<mul src="me()" trait="_meter_scale_multiplier" />
+	</_meter_height>
+
+	<_large>
+		<copy src="me()" trait="user0" />
+		<lt> 2 </lt>
+		<or>
+			<copy src="me()" trait="user0" />
+			<eq> 3 </eq>
+		</or>
+	</_large>
+	<_small>
+		<copy src="me()" trait="user0" />
+		<eq> 2 </eq>
+		<or>
+			<copy src="me()" trait="user0" />
+			<eq> 4 </eq>
+		</or>
+	</_small>
+	
+	<_listFont>
+		<copy src="globals()" trait="_pb_ListFont" />
+		<!-- <onlyif src="me()" trait="_small" />
+		<add>
+			<copy> 3 </copy>
+			<onlyif src="me()" trait="_large" />
+		</add> -->
+	</_listFont>
+
+	<_itemHeight>
+		<!-- <copy src="child(sizer_small)" trait="height" /> -->
+		<copy src="child(sizer_large)" trait="height" />
+		<add> 7 </add>
+	</_itemHeight>
+	<_itemHeight_S>
+		<copy src="child(sizer_small)" trait="height" />
+		<add> 7 </add>
+	</_itemHeight_S>
+	<_itemHeight_L>
+		<copy src="child(sizer_large)" trait="height" />
+		<add> 7 </add>
+	</_itemHeight_L>
+	<_itemCount>
+		<copy> 510 </copy> <!-- DarN max list height 550 -->
+		<div src="me()" trait="_itemHeight" />
+		<floor> 0 </floor>
+	</_itemCount>
+	<_listHeight>
+		<copy src="me()" trait="_itemCount" />
+		<mul src="me()" trait="_itemHeight" />
+	</_listHeight>
+	<text name="sizer_small">
+		<font> <copy src="globals()" trait="_pb_ListFont" /> </font>
+		<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+		<visible> &false; </visible>
+	</text>
+	<text name="sizer_large">
+		<font> 3 </font>
+		<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+		<visible> &false; </visible>
+	</text>
+
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<!-- NOT USED IN PIPBOY MENUS -->
+	</rect>
+
+<!--============================== HEADLINE ==============================-->
+
+	<rect name="GLOW_BRANCH">
+		<id> &glow_branch; </id>
+
+		<image name="background_layout">
+			<filename> Interface\Shared\Background\pipboy.dds </filename>
+			<width> <copy src="globals()" trait="_pipboy_width" /> </width>
+			<height> <copy src="globals()" trait="_pipboy_height" /> </height>
+			<zoom> &scale; </zoom>
+			<depth> -3 </depth>
+			<alpha> 255 </alpha>
+			<brightness> 90 </brightness>
+		</image>
+
+		<image name="stats_headline_h1">
+			<include src="line.xml" />
+
+			<_length> 50 </_length>
+			<x> 50 </x>			<!-- upper left corner x,y -->
+			<y> 50 </y>
+		</image>
+
+		<image name="stats_headline_v1">
+			<include src="vertical_fade_line.xml" />
+
+			<_x> 50 </_x>
+			<_y> 50 </_y>
+		</image>
+
+		<text name="stats_title">
+			<id> 39 </id>
+			<string> &-sStats; </string>
+			<x> 120 </x>
+			<y> <!-- DarN 50 -->
+				<copy> 50 </copy>
+				<add src="globals()" trait="_pb_HeaderVOffset" />
+			</y>
+			<font> <copy src="globals()" trait="_gl_HeaderFont" /> </font>
+		</text>
+
+		<image name="stats_headline_h2">
+			<include src="line.xml" />
+
+			<_length> <!-- DarN 60 -->
+				<copy src="sibling(stats_lvl_info)" trait="x" />
+				<sub src="me()" trait="x" />
+			</_length>
+			<x> <!-- DarN 250 -->
+				<copy> 120 </copy>
+				<add src="sibling(stats_title)" trait="width" />
+				<add> 20 </add>
+			</x>
+			<y> 50 </y>
+		</image>
+
+		<rect name="stats_lvl_info">
+			<id> 40 </id>
+			<include src="darn\card_info_barter.xml" />
+
+			<x> 270 </x>
+			<y> 50 </y>
+			<width> 100 </width>
+			<_Title> &-sStatsLVLAbbrev; </_Title>
+			<_Value> <copy src="io()" trait="user8" /> </_Value>		<!-- Widest possible value: LVL 13 -->
+		</rect>
+
+		<rect name="stats_hp_info">
+			<id> 41 </id>
+			<include src="darn\card_info_barter.xml" />
+
+			<x> 380 </x>
+			<y> 50 </y>
+			<width> 155 </width>
+			<_Title> &-sStatsHP; </_Title>
+			<_Value> <copy src="io()" trait="user5" /> </_Value>		<!-- Widest possible value: HP 333/333 -->
+		</rect>
+
+		<rect name="stats_ap_info">
+			<id> 42 </id>
+			<include src="darn\card_info_barter.xml" />
+
+			<x> 545 </x>
+			<y> 50 </y>
+			<width> 135 </width>
+			<_Title> &-sStatsAP; </_Title>
+			<_Value> <copy src="io()" trait="user6" /> </_Value>		<!-- Widest possible value: AP 99/99 -->
+		</rect>
+
+		<rect name="stats_xp_info">
+			<id> 43 </id>
+			<include src="darn\card_info_barter.xml" />
+
+			<x> 690 </x>
+			<y> 50 </y>
+			<width> 205 </width>
+			<_Title> &-sStatsXP; </_Title>
+			<_Value> <copy src="io()" trait="user7" /> </_Value>		<!-- Widest possible value: XP 13333/13333 -->
+		</rect>
+		<xup> <ref src="stats_effects_container" trait="clicked" /> </xup>
+	<xdown> <ref src="stats_effects_container" trait="clicked" /> </xdown>
+
+<!--============================== STATUS PAGE ==============================-->
+
+		<hotrect name="stats_status_container">
+			<id> 5 </id>
+			<locus> &true; </locus>
+			<target> &true; </target>
+			<alpha> 0 </alpha>
+			<visible>
+				<copy src="StatsMenu" trait="user0" />
+				<eq> 0 </eq>
+			</visible>
+			<x> 50 </x>
+			<y> 110 </y>
+			<width> 855 </width>
+			<height>
+				<copy src="stats_tailline" trait="y" />
+				<sub src="stats_tailline_vleft" trait="height" />
+				<sub src="me()" trait="y" />
+			</height>
+
+			<!-- Mode:  0=CND, 1=RAD, 2=EFF -->
+			<user0> 8 </user0> <!-- DarN long live RG :) -->
+
+
+			<!-- Status page subpage buttons -->
+			<rect name="stats_CND_button">
+				<id> 28 </id>
+				<target> &false; </target>
+			</rect>
+
+			<rect name="stats_RAD_button">
+				<id> 29 </id>
+				<target> &false; </target>
+				<visible> 0 </visible>
+			</rect>
+
+			<rect name="stats_EFF_button">
+				<id> 30 </id>
+				<target> &false; </target>
+				<visible> 0 </visible>
+			</rect>
+			
+			<!--- Deydration button --->
+			<hotrect name="stats_H20_button">
+				<id> 53 </id>
+				<target> &false; </target>
+				<visible> 0 </visible>
+			</hotrect>
+
+			<!--- Hunger button --->
+			<hotrect name="stats_FOD_button">
+				<id> 55 </id>
+				<target> &false; </target>
+				<visible> 0 </visible>
+			</hotrect>
+
+			<!--- Sleep Depreviation button --->
+			<hotrect name="stats_SLP_button">
+				<id> 57 </id>
+				<target> &false; </target>
+				<visible> 0 </visible>
+			</hotrect>
+
+			<!-- Action Buttons -->
+			<hotrect name="stats_stimpak_button">
+				<id> 10 </id>
+				<include src="darn\text_box.xml" />
+
+				<visible> &true; </visible>
+				<_x> 820 </_x> <!-- DarN 850/820 -->
+				<_y> -10 </_y> <!-- DarN 10/5 -->
+				<justify> &right; </justify>
+				<_xbox_button> &xbuttona; </_xbox_button>
+				<_PCButtonText> &-sPCMenuHintS; </_PCButtonText>
+				<listindex> 1 </listindex>		<!-- 14535: Used to signal a turn of the Pipboy knob -->
+				<user0></user0>		<!-- reserved -->
+			</hotrect>
+
+			<hotrect name="stats_healing_mode">
+				<id> 9 </id>
+				<include src="darn\text_box.xml" />
+
+				<visible>
+					<copy src="globals()" trait="_Has360Controller" /> <!-- DarN and -->
+				</visible>
+				<_x> <copy src="sibling(stats_stimpak_button)" trait="_x" /> </_x>
+				<_y>
+					<copy src="sibling(stats_stimpak_button)" trait="_y" />
+					<add src="sibling(stats_stimpak_button)" trait="height" />
+					<add> 2 </add>
+				</_y>
+				<justify> &right; </justify>
+				<listindex> 2 </listindex>
+				<!-- Set in code -->
+				<_xbox_button> &xbuttonx; </_xbox_button>
+				<string></string>
+			</hotrect>
+
+			<hotrect name="stats_radaway_button">
+				<id> 11 </id>
+				<include src="darn\text_box.xml" />
+
+				<visible> &true; </visible>
+				<_x> <copy src="sibling(stats_stimpak_button)" trait="_x" /> </_x>
+				<_y>
+					<copy src="sibling(stats_healing_mode)" trait="_y" />
+					<add src="sibling(stats_healing_mode)" trait="height" />
+					<add> 2 </add>
+				</_y>
+				<justify> &right; </justify>
+				<_xbox_button> &xbuttony; </_xbox_button> <!-- DarN &xbuttona; -->
+				<_PCButtonText> &-sPCMenuHintA; </_PCButtonText>
+				<listindex> 3 </listindex> <!-- DarN 1 -->
+				<user0></user0>		<!-- reserved -->
+			</hotrect>
+
+			<hotrect name="stats_radx_button">
+				<id> 31 </id>
+				<include src="darn\text_box.xml" />
+
+				<visible>
+					<!-- <copy src="parent()" trait="user0" />
+					<eq> 0 </eq> --> <!-- DarN 1 -->
+					&true;
+				</visible>
+				<_x> <copy src="sibling(stats_radaway_button)" trait="_x" /> </_x>
+				<_y>
+					<copy src="sibling(stats_radaway_button)" trait="_y" />
+					<add src="sibling(stats_radaway_button)" trait="height" />
+					<add> 2 </add>
+				</_y>
+				<justify> &right; </justify>
+				<_xbox_button> &xbuttonlb; </_xbox_button> <!-- DarN &xbuttonx; -->
+				<_PCButtonText> &-sPCMenuHintX; </_PCButtonText>
+				<listindex> 4 </listindex> <!-- DarN 2 -->
+				<user0></user0>		<!-- reserved -->
+			</hotrect>
+			
+			<hotrect name="stats_drbag_button">
+				<id> 59 </id>
+				<include src="darn\text_box.xml"/>
+
+				<visible>
+					<!-- <copy src="parent()" trait="user0"/>
+					<eq> 0 </eq> -->
+					&true;
+				</visible>
+				<_x>
+					<copy src="sibling(stats_healing_mode)" trait="_x"/>
+				</_x>
+				<_y>
+					<copy src="sibling(stats_radx_button)" trait="_y"/>
+					<add src="sibling(stats_radx_button)" trait="height"/>
+				</_y>
+				<justify> &right; </justify>
+				<!-- <_xbox_button> &xbuttony; </_xbox_button> -->
+				<_xbox_button> &xbuttonrb; </_xbox_button>
+				<_PCButtonText> &-sPCMenuHintE; </_PCButtonText>
+				<listindex> 5 </listindex>
+				<string></string>
+			</hotrect>
+
+			<!-- Status page:  Condition subpage -->
+
+			<!-- Vault Boy / Body part damage -->
+			<image name="stats_player_head">
+				<id> 12 </id>
+				<visible> &true; </visible>
+				<locus> &true; </locus>
+				<target>
+					<copy src="stats_player_head_pct_meter" trait="_Value" />
+					<lt> 1 </lt>
+				</target>
+				<zoom> <copy src="io()" trait="_ragzoom" /> </zoom> <!-- DarN 145 -->
+
+				<width>
+					<copy> 85 </copy>
+					<mul src="io()" trait="_rag_scale_multiplier" />
+				</width>
+				<height>
+					<copy> 92 </copy>
+					<mul src="io()" trait="_rag_scale_multiplier" />
+				</height>
+				<x>
+					<!-- <copy src="parent()" trait="width" />
+					<sub src="me()" trait="width" />
+					<div> 2 </div> -->
+					150
+				</x>
+				<y> 40 </y>
+
+				<image name="stats_player_face">
+					<id> 24 </id>
+					<zoom> <copy src="io()" trait="_ragzoom" /> </zoom>
+					<target> <copy src="parent()" trait="target" /> </target>
+					<width>
+						<copy> 48 </copy>
+						<mul src="io()" trait="_rag_scale_multiplier" />
+					</width>
+					<height>
+						<copy> 64 </copy>
+						<mul src="io()" trait="_rag_scale_multiplier" />
+					</height>
+					<x>
+						<copy> 16 </copy>
+						<mul src="io()" trait="_rag_scale_multiplier" />
+					</x>
+					<y>
+						<copy src="parent()" trait="height" />
+						<sub src="me()" trait="height" />
+						<div> 2 </div>
+						<add>
+							<copy> 16 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</add>
+					</y>
+				</image>
+
+				<image name="stats_player_torso">
+					<id> 14 </id>
+					<zoom> <copy src="io()" trait="_ragzoom" /> </zoom>
+					<locus> &true; </locus>
+					<target>
+						<copy src="stats_player_torso_pct_meter" trait="_Value" />
+						<lt> 1 </lt>
+					</target>
+					<width>
+						<copy> 102 </copy>
+						<mul src="io()" trait="_rag_scale_multiplier" />
+					</width>
+					<height>
+						<copy> 128 </copy>
+						<mul src="io()" trait="_rag_scale_multiplier" />
+					</height>
+					<x>
+						<copy> -14 </copy>
+						<mul src="io()" trait="_rag_scale_multiplier" />
+					</x>
+					<y>
+						<copy> 86 </copy>
+						<mul src="io()" trait="_rag_scale_multiplier" />
+					</y>
+
+					<image name="stats_player_leftarm">
+						<id> 16 </id>
+						<locus> &true; </locus>
+						<zoom> <copy src="io()" trait="_ragzoom" /> </zoom>
+						<target>
+							<copy src="stats_player_leftarm_pct_meter" trait="_Value" />
+							<lt> 1 </lt>
+						</target>
+						<width>
+							<copy> 100 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</width>
+						<height>
+							<copy> 52 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</height>
+						<x>
+							<copy> 90 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</x>
+						<y>
+							<copy> 0 </copy>
+							<!--<mul src="me()" trait="zoom" />
+							<div> 100 </div>-->
+						</y>
+					</image> <!-- stats_player_leftarm -->
+
+					<image name="stats_player_rightarm">
+						<id> 18 </id>
+						<locus> &true; </locus>
+						<target>
+							<copy src="stats_player_rightarm_pct_meter" trait="_Value" />
+							<lt> 1 </lt>
+						</target>
+						<zoom> <copy src="io()" trait="_ragzoom" /> </zoom>
+						<width>
+							<copy> 96 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</width>
+						<height>
+							<copy> 54 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</height>
+						<x>
+							<copy> -88 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</x>
+						<y>
+							<copy> -5 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</y>
+					</image> <!-- stats_player_rightarm -->
+
+					<image name="stats_player_leftleg">
+						<id> 20 </id>
+						<locus> &true; </locus>
+						<target>
+							<copy src="stats_player_leftleg_pct_meter" trait="_Value" />
+							<lt> 1 </lt>
+						</target>
+						<zoom> <copy src="io()" trait="_ragzoom" /> </zoom>
+						<width>
+							<copy> 72 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</width>
+						<height>
+							<copy> 112 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</height>
+						<x>
+							<copy> 47 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</x>
+						<y>
+							<copy> 86 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</y>
+					</image> <!-- stats_player_leftleg -->
+
+					<image name="stats_player_rightleg">
+						<id> 22 </id>
+						<locus> &true; </locus>
+						<target>
+							<copy src="stats_player_rightleg_pct_meter" trait="_Value" />
+							<lt> 1 </lt>
+						</target>
+						<zoom> <copy src="io()" trait="_ragzoom" /> </zoom>
+						<width>
+							<copy> 84 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</width>
+						<height>
+							<copy> 112 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</height>
+						<x>
+							<copy> -37 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</x>
+						<y>
+							<copy> 83 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</y>
+					</image> <!-- stats_player_rightleg -->
+				</image> <!-- stats_player_torso -->
+
+				<!-- Meters -->
+				<image name="stats_player_head_pct">
+					<locus> &true; </locus>
+					<filename> Interface\VATS\vats_head_divider.dds </filename>
+					<zoom> <copy src="io()" trait="_meter_zoom" /> </zoom>
+					<visible>
+						<copy src="child(stats_player_head_pct_meter)" trait="_Value" />
+						<gt> 0 </gt>
+					</visible>
+					<alpha> <copy src="child()" trait="alpha" /> </alpha>
+					<x>
+						<copy src="parent()" trait="width" />
+						<sub src="me()" trait="width" />
+						<div> 2 </div>
+					</x>
+					<y>
+						<sub src="me()" trait="height" />
+						<sub> 5 </sub>
+					</y>
+					<width>
+						<copy src="me()" trait="filewidth" />
+					</width>
+					<height>
+						<copy src="io()" trait="_meter_height" />
+					</height>
+
+					<rect name="stats_player_head_pct_meter">
+						<id> 13 </id>
+						<include src="meter.xml" />
+						<_SolidMeter> &true; </_SolidMeter>
+						<x>
+							<copy> 25 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</x>
+						<y>
+							<copy> 24 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</y>
+						<width>
+							<copy> 77 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</width>
+						<height>
+							<copy src="parent()" trait="height" />
+							<sub>
+								<copy> 24 </copy>
+								<mul src="io()" trait="_meter_scale_multiplier" />
+							</sub>
+						</height>
+					</rect>
+				</image>
+
+				<text name="stats_player_head_crippled">
+					<visible> <not src="sibling(stats_player_head_pct)" trait="visible" /> </visible>
+					<string> <copy src="io()" trait="user9" /> </string>
+					<font> 1 </font>
+					<justify> &center; </justify>
+					<x>
+						<copy src="sibling(stats_player_head_pct)" trait="x" />
+						<add> 34 </add> <!-- DarN 10 -->
+					</x>
+					<y>
+						<copy src="sibling(stats_player_head_pct)" trait="y" />
+						<add> 10 </add> <!-- DarN 24 -->
+					</y>
+				</text>
+
+				<image name="stats_player_torso_pct">
+					<locus> &true; </locus>
+					<filename> Interface\VATS\vats_head_divider.dds </filename>
+					<zoom> <copy src="io()" trait="_meter_zoom" /> </zoom>
+					<visible>
+						<copy src="child(stats_player_torso_pct_meter)" trait="_Value" />
+						<gt> 0 </gt>
+					</visible>
+					<x> <copy src="sibling(stats_player_head_pct)" trait="x" /><sub>5</sub></x>
+					<y> <copy src="parent()" trait="height" /> </y>
+					<width>
+						<copy src="me()" trait="filewidth" />
+					</width>
+					<height>
+						<copy src="io()" trait="_meter_height" />
+					</height>
+					<alpha> <copy src="child()" trait="alpha" /> </alpha>
+
+					<rect name="stats_player_torso_pct_meter">
+						<id> 15 </id>
+						<include src="meter.xml" />
+						<_SolidMeter> &true; </_SolidMeter>
+						<x>
+							<copy> 25 </copy>
+							<mul src="parent()" trait="zoom" />
+							<div> 100 </div>
+						</x>
+						<y>
+							<copy> 24 </copy>
+							<mul src="parent()" trait="zoom" />
+							<div> 100 </div>
+						</y>
+						<width>
+							<copy> 77 </copy>
+							<mul src="parent()" trait="zoom" />
+							<div> 100 </div>
+						</width>
+						<height>
+							<copy src="parent()" trait="height" />
+							<sub>
+								<copy> 24 </copy>
+								<mul src="parent()" trait="zoom" />
+								<div> 100 </div>
+							</sub>
+						</height>
+					</rect>
+				</image>
+
+				<text name="stats_player_torso_crippled">
+					<visible> <not src="sibling(stats_player_torso_pct)" trait="visible" /> </visible>
+					<string> <copy src="io()" trait="user9" /> </string>
+					<font> 1 </font>
+					<justify> &center; </justify>
+					<x>
+						<copy src="sibling(stats_player_torso_pct)" trait="x" />
+						<add> 35 </add> <!-- DarN 10 -->
+					</x>
+					<y>
+						<copy src="sibling(stats_player_torso_pct)" trait="y" />
+						<add> 10 </add>
+					</y>
+				</text>
+
+				<image name="stats_player_leftarm_pct">
+					<locus> &true; </locus>
+					<filename> Interface\VATS\vats_left_divider.dds </filename>
+					<zoom> <copy src="io()" trait="_meter_zoom" /> </zoom>
+					<visible>
+						<copy src="child(stats_player_leftarm_pct_meter)" trait="_Value" />
+						<gt> 0 </gt>
+					</visible>
+					<x>
+						<copy> 150 </copy> <!-- DarN 150 -->
+						<mul src="io()" trait="_meter_scale_multiplier" />
+					</x>
+					<y>
+						<copy> 64 </copy>
+						<mul src="io()" trait="_meter_scale_multiplier" />
+					</y>
+					<width>
+						<copy src="me()" trait="filewidth" />
+					</width>
+					<height> <copy src="StatsMenu" trait="_meter_height" /> </height>
+					<alpha> <copy src="child()" trait="alpha" /> </alpha>
+
+					<rect name="stats_player_leftarm_pct_meter">
+						<id> 17 </id>
+						<include src="meter.xml" />
+						<_SolidMeter> &true; </_SolidMeter>
+						<x>
+							<copy> 51 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</x>
+						<y>
+							<copy> 24 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</y>
+						<width>
+							<copy> 77 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</width>
+						<height>
+							<copy src="parent()" trait="height" />
+							<sub>
+								<copy> 24 </copy>
+								<mul src="io()" trait="_meter_scale_multiplier" />
+							</sub>
+						</height>
+					</rect>
+				</image>
+
+				<text name="stats_player_leftarm_crippled">
+					<visible> <not src="sibling(stats_player_leftarm_pct)" trait="visible" /> </visible>
+					<string> <copy src="io()" trait="user9" /> </string>
+					<font> 1 </font>
+					<x> <copy src="sibling(stats_player_leftarm_pct)" trait="x" />
+						<add> 10 </add>
+					</x>
+					<y> <copy src="sibling(stats_player_leftarm_pct)" trait="y" />
+						<add> 24 </add>
+					</y>
+				</text>
+
+				<image name="stats_player_rightarm_pct">
+					<locus> &true; </locus>
+					<filename> Interface\VATS\vats_right_divider.dds </filename>
+					<zoom> <copy src="io()" trait="_meter_zoom" /> </zoom>
+					<visible>
+						<copy src="child(stats_player_rightarm_pct_meter)" trait="_Value" />
+						<gt> 0 </gt>
+					</visible>
+					<x>
+						<copy src="sibling(stats_player_leftarm_pct)" trait="x" />
+						<mul> -1 </mul>
+						<sub>
+							<copy> 20 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</sub>
+					</x>
+					<y> <copy src="sibling(stats_player_leftarm_pct)" trait="y" /> </y>
+					<width>
+						<copy src="me()" trait="filewidth" />
+					</width>
+					<height> <copy src="StatsMenu" trait="_meter_height" /> </height>
+					<alpha> <copy src="child()" trait="alpha" /> </alpha>
+
+					<rect name="stats_player_rightarm_pct_meter">
+						<id> 19 </id>
+						<include src="meter.xml" />
+						<_SolidMeter> &true; </_SolidMeter>
+						<x>
+							<copy> 25 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</x>
+						<y>
+							<copy> 24 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</y>
+						<width>
+							<copy> 77 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</width>
+						<height>
+							<copy src="parent()" trait="height" />
+							<sub>
+								<copy> 24 </copy>
+								<mul src="io()" trait="_meter_scale_multiplier" />
+							</sub>
+						</height>
+					</rect>
+				</image>
+
+				<text name="stats_player_rightarm_crippled">
+					<visible> <not src="sibling(stats_player_rightarm_pct)" trait="visible" /> </visible>
+					<string> <copy src="io()" trait="user9" /> </string>
+					<font> 1 </font>
+					<x>
+						<copy src="sibling(stats_player_rightarm_pct)" trait="x" />
+					</x>
+					<y> <copy src="sibling(stats_player_rightarm_pct)" trait="y" />
+						<add>
+							<copy> 24 </copy>
+							<mul src="io()" trait="_rag_scale_multiplier" />
+						</add>
+					</y>
+				</text>
+
+				<image name="stats_player_leftleg_pct">
+					<locus> &true; </locus>
+					<filename> Interface\VATS\vats_left_divider.dds </filename>
+					<zoom> <copy src="io()" trait="_meter_zoom" /> </zoom>
+					<visible>
+						<copy src="child(stats_player_leftleg_pct_meter)" trait="_Value" />
+						<gt> 0 </gt>
+					</visible>
+					<x> <copy src="sibling(stats_player_leftarm_pct)" trait="x" /> </x>
+					<y>
+						<copy> 285 </copy>
+						<mul src="io()" trait="_scale_multiplier" />
+						<sub> 40 </sub> <!-- DarN CHECK -->
+					</y>
+					<width>
+						<copy src="me()" trait="filewidth" />
+					</width>
+					<height> <copy src="StatsMenu" trait="_meter_height" /> </height>
+					<alpha> <copy src="child()" trait="alpha" /> </alpha>
+
+					<rect name="stats_player_leftleg_pct_meter">
+						<id> 21 </id>
+						<include src="meter.xml" />
+						<_SolidMeter> &true; </_SolidMeter>
+						<x>
+							<copy> 51 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</x>
+						<y>
+							<copy> 24 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</y>
+						<width>
+							<copy> 77 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</width>
+						<height>
+							<copy src="parent()" trait="height" />
+							<sub>
+								<copy> 24 </copy>
+								<mul src="io()" trait="_meter_scale_multiplier" />
+							</sub>
+						</height>
+					</rect>
+				</image>
+
+				<text name="stats_player_leftleg_crippled">
+					<visible> <not src="sibling(stats_player_leftleg_pct)" trait="visible" /> </visible>
+					<string> <copy src="io()" trait="user9" /> </string>
+					<font> 1 </font>
+					<x>
+						<copy src="sibling(stats_player_leftarm_crippled)" trait="x" />
+					</x>
+					<y> <copy src="sibling(stats_player_leftleg_pct)" trait="y" /> </y>
+				</text>
+
+				<image name="stats_player_rightleg_pct">
+					<locus> &true; </locus>
+					<filename> Interface\VATS\vats_right_divider.dds </filename>
+					<zoom> <copy src="io()" trait="_meter_zoom" /> </zoom>
+					<visible>
+						<copy src="child(stats_player_rightleg_pct_meter)" trait="_Value" />
+						<gt> 0 </gt>
+					</visible>
+					<x> <copy src="sibling(stats_player_rightarm_pct)" trait="x" /> </x>
+					<y> <copy src="sibling(stats_player_leftleg_pct)" trait="y" /> </y>
+					<width>
+						<copy src="me()" trait="filewidth" />
+					</width>
+					<height> <copy src="StatsMenu" trait="_meter_height" /> </height>
+					<alpha> <copy src="child()" trait="alpha" /> </alpha>
+
+					<rect name="stats_player_rightleg_pct_meter">
+						<id> 23 </id>
+						<include src="meter.xml" />
+						<_SolidMeter> &true; </_SolidMeter>
+						<x>
+							<copy> 25 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</x>
+						<y>
+							<copy> 24 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</y>
+						<width>
+							<copy> 77 </copy>
+							<mul src="io()" trait="_meter_scale_multiplier" />
+						</width>
+						<height>
+							<copy src="parent()" trait="height" />
+							<sub>
+								<copy> 24 </copy>
+								<mul src="io()" trait="_meter_scale_multiplier" />
+							</sub>
+						</height>
+					</rect>
+				</image>
+
+				<text name="stats_player_rightleg_crippled">
+					<visible> <not src="sibling(stats_player_rightleg_pct)" trait="visible" /> </visible>
+					<string> <copy src="io()" trait="user9" /> </string>
+					<font> 1 </font>
+					<x> 
+						<copy src="sibling(stats_player_rightarm_crippled)" trait="x" />
+					</x>
+					<y> <copy src="sibling(stats_player_rightleg_pct)" trait="y" /> </y>
+				</text>
+			</image> <!-- stats_player_head -->
+
+			<text name="stats_player_name">
+				<id> 27 </id>
+				<visible> <copy src="sibling(stats_player_head)" trait="visible" /> </visible>
+				<string></string>	<!-- set in code -->
+				<font> 3 </font> <!-- DarN add -->
+				<x>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="width" />
+					<div> 2 </div>
+				</x>
+				<y> 0 </y>
+			</text>
+
+			<!-- Status page:  Radiation subpage -->
+			<rect name="stats_radiation_container">
+				<visible>
+					<!-- <copy src="parent()" trait="user0" />
+					<eq> 0 </eq> --> <!-- DarN 1 -->
+					&true;
+				</visible>
+				<zoom> <copy src="io()" trait="_stats_zoom" /> </zoom> <!-- DarN 130 -->
+				<_left_edge>
+					<copy> 83 </copy>
+					<mul src="io()" trait="_scale_multiplier" />
+				</_left_edge>
+				<width>
+					<copy src="child(stats_rad_effects_bracket)" trait="filewidth" />
+					<sub src="me()" trait="_left_edge" />
+				</width>
+				<x> -40 </x>
+				<y> 20 </y> <!-- DarN add NV -->
+				<locus> &true; </locus>
+<!-- DarN HERE -->
+				<image name="stats_rad_effects_left_line">
+					<include src="vertical_fade_line.xml" />
+					<height> 110 </height> <!-- DarN 90 -->
+					<x>
+						<copy src="sibling(stats_rad_effects_bracket)" trait="x" />
+						<add> 25 </add> <!-- DarN 60/40/25 -->
+					</x>
+					<y>
+						<copy src="sibling(stats_rad_effects_bracket)" trait="y" />
+						<!-- <add> 1 </add> -->
+						<sub> 42 </sub> <!-- DarN 24/21 -->
+					</y>
+					<brightness> <copy src="sibling(stats_rad_effects_bracket)" trait="brightness" /> </brightness>
+				</image>
+				<image name="stats_rad_effects_top_line">
+					<include src="line.xml" />
+					<_length>
+						<!-- <copy src="sibling(stats_rad_effects_bracket)" trait="width" /> -->
+						<copy src="stats_effects_container" trait="width" />
+						<sub> 36 </sub> <!-- DarN 36 -->
+					</_length>
+					<x>
+						<copy src="sibling(stats_rad_effects_bracket)" trait="x" />
+						<add> 40 </add> <!-- DarN 60 -->
+					</x>
+					<y> <copy src="sibling(stats_rad_effects_left_line)" trait="y" /> </y>
+					<!-- <brightness> <copy src="sibling(stats_rad_effects_bracket)" trait="brightness" /> </brightness> -->
+					<brightness> 200 </brightness>
+					<visible> 0 </visible>
+				</image>
+
+				<image name="stats_rad_effects_bracket">
+					<id> 32 </id>
+					<locus> &true; </locus>
+					<visible> &false; </visible>
+					<alpha> 0 </alpha>
+					<filename> Interface\stats\rad_effects_bracket.dds </filename>
+					<zoom> 90 </zoom>
+					<x> <copy src="stats_effects_container" trait="x" /> </x>
+					<y> 440 </y> <!-- DarN 220 -->
+					<width> <copy src="me()" trait="filewidth" /> </width>		<!-- filewidth/fileheight already -->
+					<height> <copy src="me()" trait="fileheight" /> </height>	<!-- adjusted for zoom. -->
+
+					<_tabstop_1>
+						<copy src="me()" trait="_tabstop_2" />
+						<sub> 120 </sub>
+					</_tabstop_1>
+					<_tabstop_2>
+						<copy src="me()" trait="_tabstop_3" />
+						<sub> 120 </sub>
+					</_tabstop_2>
+					<_tabstop_3>
+						<copy src="me()" trait="width" />
+						<sub> 70 </sub>
+					</_tabstop_3>
+
+					<!-- templated items are added here in code -->
+					<!-- DO NOT HARD-CODE ANY CHILDREN TO THIS TILE -->
+				</image>
+				
+				<text name="stats_rad_effects_label">
+					<visible> <copy src="sibling(stats_rad_effects_bracket)" trait="visible" /> </visible>
+					<string> <copy src="io()" trait="user10" /> </string>
+					<x>
+						<copy src="sibling(stats_rad_effects_bracket)" trait="x" />
+						<add src="parent()" trait="_left_edge" />
+					</x>
+					<y>
+						<copy src="sibling(stats_rad_effects_bracket)" trait="y" />
+						<add> 12 </add> <!-- DarN 20 -->
+					</y>
+				</text>
+
+				<hotrect name="stats_rad_resist">
+					<clipwindow> &true; </clipwindow>
+					<locus> &true; </locus>
+					<alpha> 0 </alpha>
+					<y> <!-- DarN 360 -->
+						<copy src="sibling(stats_rad_meter)" trait="y" />
+						<sub> 65 </sub> <!-- DarN 80 -->
+					</y>
+					<width>
+						<copy src="sibling(stats_rad_meter)" trait="width" />
+					</width>
+					<height> <copy src="child(stats_rad_resist_bracket)" trait="height" /> </height>
+
+					<image name="stats_rad_resist_bracket">
+						<filename> Interface\stats\rad_effects_bracket.dds </filename>
+						<clips> &true; </clips>
+						<zoom> <copy src="io()" trait="_stats_zoom" /> </zoom>
+						<x> 0 </x>
+						<width> <copy src="me()" trait="filewidth" /> </width>
+						<height> <copy src="me()" trait="fileheight" /> </height>
+					</image>
+					<text name="stats_rad_resist_label">
+						<id> 44 </id>
+						<x> <copy src="grandparent()" trait="_left_edge" /> </x>
+						<string> &-sStatsRadResist; </string>
+						<y> 12 </y> <!-- DarN 20 -->
+					</text>
+					<text name="stats_rad_resist_level">
+						<id> 38 </id>
+						<justify> &right; </justify>
+						<x>
+							<copy src="parent()" trait="width" />
+							<sub> 20 </sub>
+						</x>
+						<y> 12 </y> <!-- DarN 20 -->
+					</text>
+				</hotrect>
+
+				<image name="stats_rad_meter">
+					<locus> &true; </locus>
+					<filename> Interface\Stats\rad_meter_bracket.dds </filename>
+					<zoom> <copy src="io()" trait="_stats_zoom" /> </zoom>
+					<x> 0 </x>
+					<y> <copy src="sibling(stats_rad_effects_bracket)" trait="y" /> </y>
+					<width> <copy src="me()" trait="filewidth" /> </width>		<!-- filewidth/fileheight already -->
+					<height> <copy src="me()" trait="fileheight" /> </height>	<!-- adjusted for zoom. -->
+
+					<_zero_pos>
+						<copy> 186 </copy>
+						<mul src="me()" trait="zoom" />
+						<div> 100 </div>
+					</_zero_pos>
+					<_full_pos>
+						<copy> 482 </copy>
+						<mul src="me()" trait="zoom" />
+						<div> 100 </div>
+					</_full_pos>
+
+					<text name="stats_rads_label">
+						<string> <copy src="io()" trait="_rads" /> </string> <!-- set in code -->
+						<x> <copy src="grandparent()" trait="_left_edge" /> </x>
+						<y> 12 </y> <!-- DarN 20 -->
+					</text>
+					<text name="stats_rads_zero">
+						<string> <copy src="me()" trait="user0" /> </string>
+						<font> 4 </font>
+						<justify> &center; </justify>
+						<x> <copy src="parent()" trait="_zero_pos" /> </x>
+						<y> -20 </y> <!-- DarN -24 -->
+						<user0> .01 </user0>
+					</text>
+					<text name="stats_rads_mid">
+						<string>
+							<copy src="StatsMenu" trait="user2" />
+							<div> 2 </div>
+						</string>
+						<font> 4 </font>
+						<justify> &center; </justify>
+						<x>
+							<copy src="parent()" trait="_zero_pos" />
+							<add>
+								<copy src="parent()" trait="_full_pos" />
+								<sub src="parent()" trait="_zero_pos" />
+								<div> 2 </div>
+							</add>
+						</x>
+						<y> <copy src="sibling(stats_rads_zero)" trait="y" /> </y>
+					</text>
+					<text name="stats_rads_max">
+						<string> <copy src="StatsMenu" trait="user2" /> </string>
+						<font> 4 </font>
+						<justify> &right; </justify>
+						<x> <copy src="parent()" trait="width" /> </x>
+						<y> <copy src="sibling(stats_rads_zero)" trait="y" /> </y>
+					</text>
+					<image name="stats_rads_arrow">
+						<filename> Interface\Shared\Arrow\pointer_tail.dds </filename>
+						<zoom> 55 </zoom>
+						<width>
+							<copy> 22 </copy>
+							<mul src="me()" trait="zoom" />
+							<div> 100 </div>
+						</width>
+						<height>
+							<copy> 40 </copy>
+							<mul src="me()" trait="zoom" />
+							<div> 100 </div>
+						</height>
+						<x>
+							<copy src="parent()" trait="_zero_pos" />
+							<sub>
+								<copy src="me()" trait="width" />
+								<div> 2 </div>
+							</sub>
+							<add>
+								<copy src="parent()" trait="_full_pos" />
+								<sub src="parent()" trait="_zero_pos" />
+								<mul src="StatsMenu" trait="user1" />
+								<div src="StatsMenu" trait="user2" />
+							</add>
+						</x>
+						<y> 20 </y> <!-- DarN 30 -->
+					</image>
+					<text name="stats_player_rads">
+						<string> <copy src="StatsMenu" trait="user1" /> </string>
+						<!-- <font> 4 </font> -->
+						<justify> &right; </justify>
+						<x>
+							<copy src="sibling(stats_rads_arrow)" trait="x" />
+						</x>
+						<y>
+							<copy src="sibling(stats_rads_arrow)" trait="y" />
+							<add src="sibling(stats_rads_arrow)" trait="height" />
+							<sub> 20 </sub> <!-- DarN 24 -->
+						</y>
+					</text>
+				</image> <!-- stats_rad_meter -->
+			</rect> <!-- stats_radiation_container -->
+			
+			<!-------------------------------------------------------------------------------------
+			DEHYDRATION START HERE
+			--------------------------------------------------------------------------------------->
+			<!-- Status page:  Radiation subpage -->
+			<rect name="stats_dehydration_container">
+				<visible>
+					<!-- <copy src="parent()" trait="user0"/>
+					<eq> 3 </eq> -->
+					&false;
+				</visible>
+				<zoom> <copy src="io()" trait="_stats_zoom" /> </zoom> <!-- DarN 130 -->
+				<_left_edge>
+					<!-- <copy> 83 </copy>
+					<mul src="io()" trait="_scale_multiplier" /> -->
+					<copy src="parent()" trait="width" />
+					<sub src="child(stats_h20_meter)" trait="width" />
+					<div> 2 </div>
+				</_left_edge>
+				<image name="stats_h20_effects_bracket">
+					<id> 54 </id>
+					<locus> &true; </locus>
+					<visible> &false; </visible>
+					<alpha>0</alpha> <!-- DarN already covered in effects list -->
+					<!-- <filename> Interface\stats\rad_effects_bracket.dds </filename> -->
+					<filename> empty.dds </filename>
+					<zoom>
+						<copy src="parent()" trait="zoom"/>
+					</zoom>
+					<x>
+						<copy src="grandparent()" trait="width"/>
+						<sub src="me()" trait="filewidth"/>
+					</x>
+					<y> 20 </y> <!-- DarN 220 -->
+					<width>
+						<copy src="me()" trait="filewidth"/>
+					</width>
+					<!-- filewidth/fileheight already -->
+					<height>
+						<copy src="me()" trait="fileheight"/>
+					</height>
+					<!-- adjusted for zoom. -->
+
+					<_tabstop_1>
+						<copy src="me()" trait="_tabstop_2"/>
+						<sub> 120 </sub>
+					</_tabstop_1>
+					<_tabstop_2>
+						<copy src="me()" trait="_tabstop_3"/>
+						<sub> 120 </sub>
+					</_tabstop_2>
+					<_tabstop_3>
+						<copy src="me()" trait="width"/>
+						<sub> 70 </sub>
+					</_tabstop_3>
+
+					<!-- templated items are added here in code -->
+					<!-- DO NOT HARD-CODE ANY CHILDREN TO THIS TILE -->
+				</image>
+				<text name="stats_h20_effects_label">
+					<visible>
+						<!-- <copy src="sibling(stats_h20_effects_bracket)" trait="visible"/> -->
+						&false;
+					</visible>
+					<string>
+						<copy src="io()" trait="user10"/>
+					</string>
+					<x>
+						<copy src="sibling(stats_h20_effects_bracket)" trait="x"/>
+						<add src="parent()" trait="_left_edge"/>
+					</x>
+					<y>
+						<copy src="sibling(stats_h20_effects_bracket)" trait="y"/>
+						<add> 20 </add>
+					</y>
+				</text>
+
+				<hotrect name="stats_h20_resist">
+					<clipwindow> &true; </clipwindow>
+					<locus> &true; </locus>
+					<alpha> 0 </alpha>
+					<y> 360 </y>
+					<width>
+						<copy src="sibling(stats_h20_effects_label)" trait="x"/>
+						<sub> 10 </sub>
+					</width>
+					<height>
+						<copy src="child(stats_h20_resist_bracket)" trait="height"/>
+					</height>
+
+					<image name="stats_h20_resist_bracket">
+						<filename> Interface\stats\rad_effects_bracket.dds </filename>
+						<clips> &true; </clips>
+						<zoom>
+							<copy src="parent()" trait="zoom"/>
+						</zoom>
+						<x>
+							<copy src="parent()" trait="width"/>
+							<sub src="me()" trait="width"/>
+						</x>
+						<width>
+							<copy src="me()" trait="filewidth"/>
+						</width>
+						<height>
+							<copy src="me()" trait="fileheight"/>
+						</height>
+					</image>
+					<text name="stats_h20_resist_label">
+					<!---	<id> 44 </id> --->
+						<string> <!-- no string yet --> </string>
+						<y> 20 </y>
+						<visible> &false; </visible>
+					</text>
+					<text name="stats_h20_resist_level">
+						<!--<id> 38 </id> --->
+						<visible> &false; </visible>
+						<justify> &right; </justify>
+						<x>
+							<copy src="parent()" trait="width"/>
+							<sub> 20 </sub>
+						</x>
+						<y> 20 </y>
+					</text>
+				</hotrect>
+
+			</rect>
+			<image name="stats_h20_meter">
+				<include src="darn\hcmeter.xml" />
+				<_Value>
+					<copy src="io()" trait="user11" />
+					<div> 1000 </div>
+				</_Value>
+				<x>
+					<copy> 83 </copy>
+					<mul src="io()" trait="_scale_multiplier" />
+				</x>
+				<y>
+					<copy src="stats_rad_resist" trait="y" />
+					<!-- <sub src="me()" trait="height" /> -->
+					<sub> 5 </sub>
+				</y>
+				<_fullWidth>
+					<copy src="me()" trait="width" />
+					<add src="child(stats_h20_label)" trait="width" />
+					<add src="child(stats_player_h20)" trait="width" />
+					<add> 16 </add> <!-- DarN 2*4 -->
+				</_fullWidth>
+
+				<text name="stats_h20_label">
+				<!--	<string> <copy src="io()" trait="_h20"/> </string> -->
+					<string> THR </string>
+					<font> 4 </font>
+					<x>
+						<copy> 0 </copy>
+						<sub src="me()" trait="width"/>
+						<add> -4 </add>
+					</x>
+					<y> -3 </y>
+				</text>
+				<text name="stats_player_h20">
+					<string> <copy src="io()" trait="user11"/> </string>
+					<font> 4 </font>
+					<x>
+						<copy src="parent()" trait="width" />
+						<add> 4 </add>
+					</x>
+					<y> -3 </y>
+				</text>
+			</image>
+			<!-- stats_h20_meter -->
+			<!-------------------------------------------------------------------------------------
+			DEHYDRATION END HERE
+			--------------------------------------------------------------------------------------->
+
+			<!-------------------------------------------------------------------------------------
+			HUNGER START HERE
+			--------------------------------------------------------------------------------------->
+			<!-- Status page:  Radiation subpage -->
+			<rect name="stats_hunger_container">
+				<visible>
+					<!-- <copy src="parent()" trait="user0"/>
+					<eq> 4 </eq> -->
+					&false;
+				</visible>
+				<zoom> <copy src="io()" trait="_stats_zoom" /> </zoom> <!-- DarN 130 -->
+				<_left_edge>
+					<copy> 83 </copy>
+					<mul src="me()" trait="zoom"/>
+					<div> 100 </div>
+				</_left_edge>
+				<image name="stats_hunger_effects_bracket">
+					<id> 56 </id>
+					<locus> &true; </locus>
+					<visible> &false; </visible>
+					<filename> Interface\stats\rad_effects_bracket.dds </filename>
+					<zoom>
+						<copy src="parent()" trait="zoom"/>
+					</zoom>
+					<x>
+						<copy src="grandparent()" trait="width"/>
+						<sub src="me()" trait="filewidth"/>
+					</x>
+					<y> 220 </y>
+					<width>
+						<copy src="me()" trait="filewidth"/>
+					</width>
+					<!-- filewidth/fileheight already -->
+					<height>
+						<copy src="me()" trait="fileheight"/>
+					</height>
+					<!-- adjusted for zoom. -->
+
+					<_tabstop_1>
+						<copy src="me()" trait="_tabstop_2"/>
+						<sub> 120 </sub>
+					</_tabstop_1>
+					<_tabstop_2>
+						<copy src="me()" trait="_tabstop_3"/>
+						<sub> 120 </sub>
+					</_tabstop_2>
+					<_tabstop_3>
+						<copy src="me()" trait="width"/>
+						<sub> 70 </sub>
+					</_tabstop_3>
+
+					<!-- templated items are added here in code -->
+					<!-- DO NOT HARD-CODE ANY CHILDREN TO THIS TILE -->
+				</image>
+				<text name="stats_hunger_effects_label">
+					<visible>
+						<copy src="sibling(stats_hunger_effects_bracket)" trait="visible"/>
+					</visible>
+					<string>
+						<copy src="io()" trait="user10"/> 
+					</string>
+					<x>
+						<copy src="sibling(stats_hunger_effects_bracket)" trait="x"/>
+						<add src="parent()" trait="_left_edge"/>
+					</x>
+					<y>
+						<copy src="sibling(stats_hunger_effects_bracket)" trait="y"/>
+						<add> 20 </add>
+					</y>
+				</text>
+
+				<hotrect name="stats_hunger_resist">
+					<clipwindow> &true; </clipwindow>
+					<locus> &true; </locus>
+					<alpha> 0 </alpha>
+					<y> 360 </y>
+					<width>
+						<copy src="sibling(stats_hunger_effects_label)" trait="x"/>
+						<sub> 10 </sub>
+					</width>
+					<height>
+						<copy src="child(stats_hunger_resist_bracket)" trait="height"/>
+					</height>
+
+					<image name="stats_hunger_resist_bracket">
+						<filename> Interface\stats\rad_effects_bracket.dds </filename>
+						<clips> &true; </clips>
+						<zoom>
+							<copy src="parent()" trait="zoom"/>
+						</zoom>
+						<x>
+							<copy src="parent()" trait="width"/>
+							<sub src="me()" trait="width"/>
+						</x>
+						<width>
+							<copy src="me()" trait="filewidth"/>
+						</width>
+						<height>
+							<copy src="me()" trait="fileheight"/>
+						</height>
+					</image>
+					<text name="stats_hunger_resist_label">
+						<!---	<id> 44 </id> --->
+						<string>
+							<!-- no string yet -->
+						</string>
+						<y> 20 </y>
+						<visible> &false; </visible>
+					</text>
+					<text name="stats_hunger_resist_level">
+						<!--<id> 38 </id> --->
+						<visible> &false; </visible>
+						<justify> &right; </justify>
+						<x>
+							<copy src="parent()" trait="width"/>
+							<sub> 20 </sub>
+						</x>
+						<y> 20 </y>
+					</text>
+				</hotrect>
+				
+				<!-- stats_hunger_meter -->
+			</rect>
+			<image name="stats_hunger_meter">
+					<include src="darn\hcmeter.xml" />
+					<_Value>
+						<copy src="io()" trait="user12" />
+						<div> 1000 </div>
+					</_Value>
+					<x>
+						<copy src="stats_h20_meter" trait="x" />
+						<add src="stats_h20_meter" trait="_fullwidth" />
+						<add> 10 </add>
+					</x>
+					<y> <copy src="stats_h20_meter" trait="y" /> </y>
+					<_fullWidth>
+						<copy src="me()" trait="width" />
+						<add src="child(stats_hunger_label)" trait="width" />
+						<add src="child(stats_player_hunger)" trait="width" />
+						<add> 16 </add> <!-- DarN 2*4 -->
+					</_fullWidth>
+
+					<text name="stats_hunger_label">
+					<!--	<string> <copy src="io()" trait="_hunger"/> </string> -->
+						<string> HUN </string>
+						<font> 4 </font>
+						<x>
+							<copy> 0 </copy>
+							<sub src="me()" trait="width"/>
+							<add> -4 </add>
+						</x>
+						<y> -3 </y>
+					</text>
+					<text name="stats_player_hunger">
+						<string> <copy src="io()" trait="user12"/> </string>
+						<font> 4 </font>
+						<x>
+							<copy src="parent()" trait="width" />
+							<add> 4 </add>
+						</x>
+						<y> -3 </y>
+					</text>
+				</image>
+			<!-------------------------------------------------------------------------------------
+			HUNGER END HERE
+			--------------------------------------------------------------------------------------->
+
+			<!-------------------------------------------------------------------------------------
+			SLEEP START HERE
+			--------------------------------------------------------------------------------------->
+			<!-- Status page:  Radiation subpage -->
+			<rect name="stats_sleep_container">
+				<visible>
+					<!-- <copy src="parent()" trait="user0"/>
+					<eq> 5 </eq> -->
+					&false;
+		
+				</visible>
+				<zoom> <copy src="io()" trait="_stats_zoom" /> </zoom> <!-- DarN 130 -->
+				<_left_edge>
+					<copy> 83 </copy>
+					<mul src="me()" trait="zoom"/>
+					<div> 100 </div>
+				</_left_edge>
+				<image name="stats_sleep_effects_bracket">
+					<id> 58 </id>
+					<locus> &true; </locus>
+					<visible> &false; </visible>
+					<filename> Interface\stats\rad_effects_bracket.dds </filename>
+					<zoom>
+						<copy src="parent()" trait="zoom"/>
+					</zoom>
+					<x>
+						<copy src="grandparent()" trait="width"/>
+						<sub src="me()" trait="filewidth"/>
+					</x>
+					<y> 220 </y>
+					<width>
+						<copy src="me()" trait="filewidth"/>
+					</width>
+					<!-- filewidth/fileheight already -->
+					<height>
+						<copy src="me()" trait="fileheight"/>
+					</height>
+					<!-- adjusted for zoom. -->
+
+					<_tabstop_1>
+						<copy src="me()" trait="_tabstop_2"/>
+						<sub> 120 </sub>
+					</_tabstop_1>
+					<_tabstop_2>
+						<copy src="me()" trait="_tabstop_3"/>
+						<sub> 120 </sub>
+					</_tabstop_2>
+					<_tabstop_3>
+						<copy src="me()" trait="width"/>
+						<sub> 70 </sub>
+					</_tabstop_3>
+
+					<!-- templated items are added here in code -->
+					<!-- DO NOT HARD-CODE ANY CHILDREN TO THIS TILE -->
+				</image>
+				<text name="stats_sleep_effects_label">
+					<visible>
+						<copy src="sibling(stats_sleep_effects_bracket)" trait="visible"/>
+					</visible>
+					<string>
+						<copy src="io()" trait="user10"/>
+					</string>
+					<x>
+						<copy src="sibling(stats_sleep_effects_bracket)" trait="x"/>
+						<add src="parent()" trait="_left_edge"/>
+					</x>
+					<y>
+						<copy src="sibling(stats_sleep_effects_bracket)" trait="y"/>
+						<add> 20 </add>
+					</y>
+				</text>
+
+				<hotrect name="stats_sleep_resist">
+					<clipwindow> &true; </clipwindow>
+					<locus> &true; </locus>
+					<alpha> 0 </alpha>
+					<y> 360 </y>
+					<width>
+						<copy src="sibling(stats_sleep_effects_label)" trait="x"/>
+						<sub> 10 </sub>
+					</width>
+					<height>
+						<copy src="child(stats_sleep_resist_bracket)" trait="height"/>
+					</height>
+
+					<image name="stats_sleep_resist_bracket">
+						<filename> Interface\stats\rad_effects_bracket.dds </filename>
+						<clips> &true; </clips>
+						<zoom>
+							<copy src="parent()" trait="zoom"/>
+						</zoom>
+						<x>
+							<copy src="parent()" trait="width"/>
+							<sub src="me()" trait="width"/>
+						</x>
+						<width>
+							<copy src="me()" trait="filewidth"/>
+						</width>
+						<height>
+							<copy src="me()" trait="fileheight"/>
+						</height>
+					</image>
+					<text name="stats_sleep_resist_label">
+						<!---	<id> 44 </id> --->
+						<string>
+							<!-- no string yet -->
+						</string>
+						<y> 20 </y>
+						<visible> &false; </visible>
+					</text>
+					<text name="stats_sleep_resist_level">
+						<!--<id> 38 </id> --->
+						<visible> &false; </visible>
+						<justify> &right; </justify>
+						<x>
+							<copy src="parent()" trait="width"/>
+							<sub> 20 </sub>
+						</x>
+						<y> 20 </y>
+					</text>
+				</hotrect>
+
+				<!-- stats_sleep_meter -->
+			</rect>
+
+			<image name="stats_sleep_meter">
+				<include src="darn\hcmeter.xml" />
+				<_Value>
+					<copy src="io()" trait="user13" />
+					<div> 1000 </div>
+				</_Value>
+				<x>
+					<copy src="stats_hunger_meter" trait="x" />
+					<add src="stats_hunger_meter" trait="_fullwidth" />
+					<add> 10 </add>
+				</x>
+				<y> <copy src="stats_h20_meter" trait="y" /> </y>
+				<_fullWidth>
+					<copy src="me()" trait="width" />
+					<add src="child(stats_sleep_label)" trait="width" />
+					<add src="child(stats_player_sleep)" trait="width" />
+					<add> 16 </add> <!-- DarN 2*4 -->
+				</_fullWidth>
+
+				<text name="stats_sleep_label">
+				<!--	<string> <copy src="io()" trait="_sleep"/> </string> -->
+					<string> SLP </string>
+					<font> 4 </font>
+					<x>
+						<copy> 0 </copy>
+						<sub src="me()" trait="width"/>
+						<add> -4 </add>
+					</x>
+					<y> -3 </y>
+				</text>
+				<text name="stats_player_sleep">
+					<string> <copy src="io()" trait="user13"/> </string>
+					<font> 4 </font>
+					<x>
+						<copy src="parent()" trait="width" />
+						<add> 4 </add>
+					</x>
+					<y> -3 </y>
+				</text>
+			</image>	
+			<!-------------------------------------------------------------------------------------
+			SLEEP END HERE
+			--------------------------------------------------------------------------------------->
+
+
+			<!-- Status page:  Effects subpage -->
+			<hotrect name="stats_effects_container">
+				<include src="list_box.xml" />
+				<xlist> &xlist; </xlist>
+				<id> 33 </id>
+
+				<target> &true; </target>	<!-- For mouse wheel on PC since none of the children are enabled -->
+				<visible>
+					<!-- <copy src="parent()" trait="user0" />
+					<eq> 0 </eq> --> <!-- DarN 2 -->
+					&true;
+				</visible>
+				<x>
+					<copy src="parent()" trait="width" />
+					<div> 2 </div>
+				</x>
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<sub> 85 </sub> <!-- DarN 60 -->
+				</y>
+				<width> <!-- DarN 780 -->
+					<copy src="parent()" trait="width" />
+					<div> 2 </div>
+					<add> 10 </add>
+				</width>
+
+				<!-- Repeat rates for scrollbar -->
+				<user0> 50 </user0>
+				<user1> 500 </user1>
+
+				<_enabled>
+					<copy src="me()" trait="visible" />
+					<and>
+						<copy src="io()" trait="user0" />
+						<eq> 0 </eq>
+					</and>
+				</_enabled>
+				<_scrollbar_pos> &right; </_scrollbar_pos>
+				<!-- <_scrollbar_vis> -1 </_scrollbar_vis> -->
+				<_scrollbar_vis> 1 </_scrollbar_vis>
+				<_scroll_delta> 28 </_scroll_delta>
+
+				<rect name="eff_TopBracket">
+					<include src="top_bracket.xml" />
+					<x> -15 </x>
+					<y>	-20 </y>
+					<height> 40 </height>
+					<width> <copy src="parent()" trait="width" /> </width>
+					<text name="eff_lbl">
+						<font> 2 </font>
+						<x> 0 </x>
+						<y>
+							<copy> -6 </copy>
+							<sub src="me()" trait="height" />
+						</y>
+						<string> &-sStatsEFFAbbrev; </string>
+					</text>
+				</rect>
+
+				<rect name="eff_BottomBracket">
+					<include src="bottom_bracket.xml" />
+					<x> -15 </x>
+					<y>
+						<copy src="parent()" trait="height" />
+						<add> 18 </add>
+					</y>
+					<height> 40 </height>
+					<width> <copy src="parent()" trait="width" /> </width>
+				</rect>
+
+			</hotrect>
+
+			<text name="stats_no_effects">
+				<id> 45 </id>
+				<visible>
+					<!-- <copy src="parent()" trait="user0" />
+					<eq> 0 </eq>
+					<and>
+						<copy src="sibling()" trait="childcount" />
+						<eq> 4 </eq>
+					</and> -->
+					<copy src="sibling()" trait="childcount" />
+					<eq> 4 </eq>
+				</visible>
+				<string> &-sStatsNoEffects; </string>
+				<justify> &center; </justify>
+				<x>
+					<copy src="sibling(stats_effects_container)" trait="x" />
+					<add>
+						<copy src="sibling(stats_effects_container)" trait="width" />
+						<div> 2 </div>
+					</add>
+					<sub> 12 </sub>
+				</x>
+				<y>
+					<copy src="parent()" trait="height" />
+					<!-- <sub src="me()" trait="height" /> -->
+					<!-- <div> 2 </div>-->
+					<sub src="parent()" trait="y" />
+					<add> 16 </add>
+				</y>
+			</text>
+		</hotrect>	<!-- stats_status_container -->
+
+<!--========================= S.P.E.C.I.A.L. PAGE =========================-->
+
+		<!-- Parent rect for SPECIAL page.  Uses stats_list_template. -->
+		<hotrect name="stats_special_container">
+			<include src="list_box.xml" />
+			<id> 6 </id>
+			<visible> <copy src="me()" trait="_enabled" /> </visible>
+
+			<x>
+				<copy src="stats_headline_h1" trait="x" />
+				<sub>
+					<copy src="child(lb_scrollbar)" trait="width" />
+					<sub src="stats_headline_v1" trait="width" />
+					<div> 2 </div>
+				</sub>
+			</x>
+			<y>
+				<copy src="stats_headline_v1" trait="y" />
+				<add src="stats_headline_v1" trait="height" />
+			</y>
+			<width>
+				<copy> 325 </copy>
+				<add>
+					<copy> 25 </copy>
+					<onlyif src="me()" trait="user0" />
+				</add>
+			</width>
+			<height> <copy src="io()" trait="_listHeight" /> </height>
+
+			<user0> &false; </user0>	<!-- true if +/- is displayed for any children -->
+
+			<!-- <_number_of_visible_items> 9 </_number_of_visible_items> -->
+			<!-- <_item_offset> 0 </_item_offset> --> <!-- DarN 20 -->
+			<_right_buffer>
+				<copy> 20 </copy>
+				<add>
+					<copy> 35 </copy>
+					<onlyif src="me()" trait="user0" />
+				</add>
+			</_right_buffer>
+
+			<_enabled>
+				<copy src="StatsMenu" trait="user0" />
+				<eq> 1 </eq>
+			</_enabled>
+		</hotrect>
+
+<!--============================= SKILLS PAGE =============================-->
+
+		<!-- Parent rect for skills page.  Uses stats_list_template. -->
+		<hotrect name="stats_skills_container">
+			<include src="list_box.xml" />
+			<id> 7 </id>
+
+			<visible> <copy src="me()" trait="_enabled" /> </visible>
+			<x> <copy src="sibling(stats_special_container)" trait="x" /> </x>
+			<y> <copy src="sibling(stats_special_container)" trait="y" /> </y>
+			<width>
+				<copy> 350 </copy>
+				<add>
+					<copy> 50 </copy>
+					<onlyif src="me()" trait="user0" />
+				</add>
+			</width>
+
+			<user0> &false; </user0>	<!-- true if +/- is displayed for any children -->
+			<height> <copy src="io()" trait="_listHeight" /> </height>
+
+			<!-- <_number_of_visible_items>
+				<copy src="sibling(stats_special_container)" trait="_number_of_visible_items" />
+			</_number_of_visible_items> -->
+
+			<!-- <_item_offset> <copy src="sibling(stats_special_container)" trait="_item_offset" /> </_item_offset> -->
+			<_right_buffer>
+				<copy> 20 </copy>
+				<add>
+					<copy> 35 </copy>
+					<onlyif src="me()" trait="user0" />
+				</add>
+			</_right_buffer>
+
+			<_enabled>
+				<copy src="StatsMenu" trait="user0" />
+				<eq> 2 </eq>
+			</_enabled>
+		</hotrect>
+
+<!--============================= PERKS PAGE =============================-->
+
+		<!-- Parent rect for perks page.  Uses stats_list_template. -->
+		<hotrect name="stats_perks_container">
+			<include src="list_box.xml" />
+			<id> 34 </id>
+
+			<visible> <copy src="me()" trait="_enabled" /> </visible>
+			<x> <copy src="sibling(stats_special_container)" trait="x" /> </x>
+			<y> <copy src="sibling(stats_special_container)" trait="y" /> </y>
+			<width> 420 </width>
+			<height> <copy src="io()" trait="_listHeight" /> </height>
+
+			<!-- <_number_of_visible_items>
+				<copy src="sibling(stats_special_container)" trait="_number_of_visible_items" />
+			</_number_of_visible_items> -->
+			
+
+			<!-- <_item_offset> <copy src="sibling(stats_special_container)" trait="_item_offset" /> </_item_offset> -->
+			<_right_buffer> 20 </_right_buffer>
+
+			<_enabled>
+				<copy src="StatsMenu" trait="user0" />
+				<eq> 3 </eq>
+			</_enabled>
+		</hotrect>
+
+<!--============================= GENERAL PAGE =============================-->
+
+		<!-- Parent rect for general page.  Uses stats_list_template. -->
+		<hotrect name="stats_genrep_container">
+			<id> 50 </id>
+			<locus> &true; </locus>
+			<target> &true; </target>
+			<alpha> 0 </alpha>
+			<visible>
+				<copy src="StatsMenu" trait="user0"/>
+				<eq> 4 </eq>
+			</visible>
+			<x> 20 </x>
+			<y> 50 </y>
+			<width> 855 </width>
+			<height>
+				<copy src="stats_tailline" trait="y"/>
+				<sub src="stats_tailline_vleft" trait="height"/>
+				<sub src="me()" trait="y"/>
+			</height>
+
+			<user0> 1 </user0>
+			<!-- Mode:  0=General 1=Reputation -->
+			<_enabled>
+				<copy src="StatsMenu" trait="user0"/>
+				<eq> 4 </eq>
+			</_enabled>
+
+			<hotrect name="stats_general_container">
+				<include src="list_box.xml" />
+				<id> 8 </id>
+
+				<visible>
+					<copy src="parent()" trait="user0"/>
+					<eq>0</eq>
+				</visible>
+				<x>
+					<copy src="parent()" trait="x"/>
+				</x>
+				<y>
+					<copy src="parent()" trait="y"/>
+				</y>
+				<width> 500 </width>
+
+				<!-- <_number_of_visible_items>
+					<copy src="sibling(stats_special_container)" trait="_number_of_visible_items" />
+				</_number_of_visible_items> -->
+				<height> <copy src="io()" trait="_listHeight" /> </height>
+
+				<!-- <_item_offset> <copy src="sibling(stats_special_container)" trait="_item_offset" /> </_item_offset> -->
+				<_right_buffer> 20 </_right_buffer>
+				<_scroll_delta> 20 </_scroll_delta>
+
+				<_enabled>
+					<copy src="StatsMenu" trait="user0" />
+					<eq> 4 </eq>
+				</_enabled>
+			</hotrect>
+
+			<rect name="stats_karma_rect">
+				<visible> <copy src="sibling(stats_general_container)" trait="visible" /> </visible>
+				<locus> &true; </locus>
+				<x>
+					<copy src="sibling(stats_general_container)" trait="x" />
+					<add src="sibling(stats_general_container)" trait="width" />
+					<add src="me()" trait="_x_buffer" />
+				</x>
+				<y>
+					<copy src="sibling(stats_general_container)" trait="y" />
+					<add>
+						<copy src="sibling(stats_general_container)" trait="height" />
+						<sub src="me()" trait="height" />
+						<div> 2 </div>
+					</add>
+				</y>
+				<width>
+					<copy> 905 </copy>
+					<sub src="me()" trait="x" />
+					<sub src="me()" trait="_x_buffer" />
+				</width>
+				<height>
+					<copy src="child(stats_karma_title)" trait="y" />
+					<add src="child(stats_karma_title)" trait="height" />
+				</height>
+
+				<_x_buffer> 40 </_x_buffer>		<!-- Change this to affect the wrap width of the text below the karma image -->
+
+				<text name="stats_karma_alignment">
+					<id> 35 </id>
+					<font> 2 </font>
+					<wrapwidth> <copy src="parent()" trait="width" /> </wrapwidth>
+					<justify> &center; </justify>
+					<x>
+						<copy src="parent()" trait="width" />
+						<div> 2 </div>
+					</x>
+				</text>
+
+				<image name="stats_karma_image">
+					<id> 36 </id>
+					<zoom> 150 </zoom>
+					<x> -32 </x>
+					<y> -60 </y>
+					<width> <copy src="me()" trait="filewidth" /> </width>
+					<height> 310 </height>
+				</image>
+
+				<text name="stats_karma_title">
+					<id> 37 </id>
+					<font> 2 </font>
+					<wrapwidth> <copy src="parent()" trait="width" /> </wrapwidth>
+					<justify> &center; </justify>
+					<x> <copy src="sibling(stats_karma_alignment)" trait="x" /> </x>
+					<y>
+						<copy src="sibling(stats_karma_image)" trait="y" />
+						<add src="sibling(stats_karma_image)" trait="height" />
+						<add> 20 </add>
+					</y>
+				</text>
+			</rect>
+			<!-- Parent rect for reputation page.  Uses stats_list_template. -->
+			<hotrect name="stats_reputation_container">
+				<include src="list_box.xml"/>
+				<id> 46 </id>
+
+				<visible>
+					<copy src="parent()" trait="user0"/>
+					<eq>1</eq>
+				</visible>
+				<x>
+					<copy src="parent()" trait="x"/>
+				</x>
+				<y>
+					<copy src="parent()" trait="y"/>
+				</y>
+				<width> 500 </width>
+				<height>
+					<copy src="parent()" trait="height"/>
+				</height>
+<!--
+				<_number_of_visible_items>
+					<copy src="sibling(stats_special_container)" trait="_number_of_visible_items"/>
+				</_number_of_visible_items>
+
+				<_item_offset>
+					<copy src="sibling(stats_special_container)" trait="_item_offset"/>
+				</_item_offset>
+				<_right_buffer> 20 </_right_buffer>
+-->
+			</hotrect>
+
+			<rect name="stats_reptitle_rect">
+				<visible>
+					<copy src="sibling(stats_reputation_container)" trait="visible"/>
+				</visible>
+				<locus> &true; </locus>
+				<x>
+					<copy src="sibling(stats_reputation_container)" trait="x"/>
+					<add src="sibling(stats_reputation_container)" trait="width"/>
+					<add src="me()" trait="_x_buffer"/>
+				</x>
+				<y>
+					<copy src="sibling(stats_reputation_container)" trait="y"/>
+					<add>
+						<copy src="sibling(stats_reputation_container)" trait="height"/>
+						<sub src="me()" trait="height"/>
+						<div> 2 </div>
+					</add>
+				</y>
+				<width>
+					<copy> 905 </copy>
+					<sub src="me()" trait="x"/>
+					<sub src="me()" trait="_x_buffer"/>
+				</width>
+				<height>
+					<copy src="child(stats_reputation_title)" trait="y"/>
+					<add src="child(stats_reputation_title)" trait="height"/>
+				</height>
+
+				<_x_buffer> 40 </_x_buffer>
+				<!-- Change this to affect the wrap width of the text below the karma image -->
+			
+				<image name="stats_reputation_image">
+					<id> 47 </id>
+					<zoom> 150 </zoom>
+					<x> -32 </x>
+					<y> -80 </y>
+					<width>
+						<copy src="me()" trait="filewidth"/>
+					</width>
+					<height> 350 </height>
+					<filename>Interface\Shared\Background\solid_black.dds</filename>
+				</image>
+
+				<text name="stats_reputation_title">
+					<id> 48 </id>
+					<font> 2 </font>
+					<wrapwidth>
+						<copy src="parent()" trait="width"/>
+					</wrapwidth>
+					<justify> &center; </justify>
+					<x>
+						<copy src="parent()" trait="width"/>
+						<div>2</div>
+					</x>
+					<y>
+						<copy src="sibling(stats_reputation_image)" trait="y"/>
+						<add src="sibling(stats_reputation_image)" trait="height"/>
+						<add> 20 </add>
+					</y>
+				</text>
+				<text name="stats_reputation_rep_title">
+					<id> 51 </id>
+					<font> 2 </font>
+					<wrapwidth>
+						<copy src="parent()" trait="width"/>
+					</wrapwidth>
+					<justify> &center; </justify>
+					<x>
+						<copy src="parent()" trait="width"/>
+						<div>2</div>
+					</x>
+					<y>
+						<copy src="sibling(stats_reputation_image)" trait="y"/>
+						<add src="sibling(stats_reputation_image)" trait="height"/>
+						<add> 70 </add>
+					</y>
+				</text>
+			</rect>
+			<!-- Action Buttons -->
+			<hotrect name="stats_genrep_button">
+				<id> 49 </id>
+				<include src="darn\text_box.xml"/>
+
+				<visible> <copy src="parent()" trait="_enabled"/> </visible>
+				<_x> 850 </_x>
+				<_y> 50 </_y>
+				<justify> &right; </justify>
+				<_xbox_button> &xbuttonx; </_xbox_button>
+				<_PCButtonText> &-sPCMenuHintR; </_PCButtonText>
+				<string> &-sStatsGeneral; </string>
+				<listindex> 1 </listindex>
+			</hotrect>
+		</hotrect>
+<!--============================ USED BY ALL PAGES ============================-->
+
+		<!-- This template is rendered in code once for each page item -->
+		<!-- Parent rect is stats_special_container for page 2 -->
+		<!-- Parent rect is stats_skills_container for page 3 -->
+		<!-- Parent rect is stats_perks_container for page 4 -->
+		<template name="stats_list_template">
+			<hotrect name="stats_list_template_item">
+				<include src="list_box_template.xml" />
+
+				<user0> &false; </user0>	<!-- Extra text visible -->
+				<user1>-1</user1>			<!-- List item number (negative number means don't show) -->
+				<user2></user2>				<!-- Extra text -->
+
+				<clicksound> &nosound; </clicksound>			<!-- Handled by pipboy manager -->
+				<mouseoversound> &nosound; </mouseoversound>	<!-- Handled by pipboy manager -->
+				
+				<height>
+					<copy src="io()" trait="_itemHeight" />
+					<onlyif>
+						<copy src="io()" trait="user0" />
+						<eq> 4 </eq>
+					</onlyif>
+					<add>
+						<copy src="io()" trait="_itemHeight_L" />
+						<onlyif>
+							<copy src="io()" trait="user0" />
+							<neq> 4 </neq>
+						</onlyif>
+					</add>
+				</height>
+
+				<text name="ListItemText">
+					<font> <copy src="io()" trait="_listFont" /> </font> <!-- DarN 2 -->
+					<string> <copy src="parent()" trait="string" /> </string>
+
+					<x> 15 </x>
+					<y> <!-- DarN 20 -->
+						<copy src="parent()" trait="height" />
+						<sub src="me()" trait="height" />
+						<div> 2 </div>
+						<add> <!-- DarN - their no. 3 has the wrong YPOS -->
+							<copy> 7 </copy>
+							<onlyif>
+								<copy src="me()" trait="font" />
+								<gt> 2 </gt>
+							</onlyif>
+						</add>
+					</y>
+				</text>
+
+				<text name="stats_list_template_number">
+					<font> <copy src="sibling(ListItemText)" trait="font" /> </font> <!-- DarN 2 -->
+					<justify> &right; </justify>
+					<visible>
+						<copy src="parent()" trait="user1" />
+						<gte> 0 </gte>
+					</visible>
+					<x>
+						<copy src="parent()" trait="width" />
+						<sub src="grandparent()" trait="_right_buffer" />
+						<sub> 10 </sub> <!-- DarN FONV -->
+					</x>
+					<y> <copy src="sibling(ListItemText)" trait="y" /> </y>
+					<string> <copy src="parent()" trait="user1" /> </string>
+				</text>
+
+				<text name="stats_list_template_extra">
+					<font> <copy src="sibling(stats_list_template_number)" trait="font" /> </font> <!-- DarN 2 -->
+					<visible> <copy src="parent()" trait="user0" /> </visible>
+					<justify> &left; </justify>
+					<x>
+						<copy src="sibling(stats_list_template_number)" trait="x" />
+						<add> 10 </add>
+					</x>
+					<y> <copy src="sibling(stats_list_template_number)" trait="y" /> </y>
+					<string> <copy src="parent()" trait="user2" /> </string>
+				</text>
+			</hotrect>
+		</template>
+
+		<rect name="stats_display_rect">
+			<locus> &true; </locus>
+			<x>
+				<copy src="sibling(stats_special_container)" trait="x" />
+				<add>
+					<copy src="sibling(stats_special_container)" trait="width" />
+					<onlyif src="sibling(stats_special_container)" trait="visible" />
+				</add>
+				<add>
+					<copy src="sibling(stats_skills_container)" trait="width" />
+					<onlyif src="sibling(stats_skills_container)" trait="visible" />
+				</add>
+				<add>
+					<copy src="sibling(stats_perks_container)" trait="width" />
+					<onlyif src="sibling(stats_perks_container)" trait="visible" />
+				</add>
+			</x>
+			<y> <copy src="sibling(stats_special_container)" trait="y" /> </y>
+			<width>
+				<copy> 905 </copy>
+				<sub src="me()" trait="x" />
+			</width>
+			<height> <copy src="sibling(stats_special_container)" trait="height" /> </height>
+
+			<image name="stats_icon">
+				<id> 25 </id>
+				<visible> &false; </visible>
+				<zoom> 150 </zoom>
+				<filename></filename> <!-- set in code -->
+				<x>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="width" />
+					<div> 2 </div>
+				</x>
+				<y> -60 </y>
+				<width> 340 </width>
+				<height> 384 </height>
+			</image>
+			
+			 <image name="stats_icon_badge">
+				<id> 52 </id>
+				<visible> &false; </visible>
+				<zoom> &scale; </zoom>
+				<filename></filename>
+				<!-- set in code -->
+				<x> 30 </x>
+				<y> 235 </y>
+				<width> 64 </width>
+				<height> 64 </height>
+			  </image>
+
+			<image name="stats_icon_separator">
+				<include src="line.xml" />
+
+				<locus> &true; </locus>
+				<visible> <copy src="stats_icon" trait="visible" /> </visible>
+				<x> 22 </x>
+				<y> 319 </y>
+				<_length>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="x" />
+				</_length>
+
+				<image name="stats_icon_separator_vert">
+					<include src="vertical_fade_line.xml" />
+					<_x> <copy src="parent()" trait="width" /> </_x>
+				</image>
+			</image>
+
+			<hotrect name="stats_description_rect">
+				<id> 26 </id>
+				<x> <copy src="sibling(stats_icon_separator)" trait="x" /> </x>
+				<y> 333 </y>
+				<width>
+					<copy src="sibling(stats_icon_separator)" trait="_length" />
+					<sub>
+						<copy src="child(stats_description_scrollbar)" trait="width" />
+						<div> 2 </div>
+					</sub>
+				</width>
+				<height> 175 </height>
+				<locus> &true; </locus>
+				<wheelable> &true; </wheelable>
+				<clipwindow> &true; </clipwindow>
+				<visible> <copy src="stats_icon_separator" trait="visible" /> </visible>
+
+				<!-- 14633: Scrollbar for scrolling over-long description text -->
+				<hotrect name="stats_description_scrollbar">
+					<include src="scrollbar_vert.xml" />
+					<systemcolor> &pipboy; </systemcolor>
+					<_height> 130 </_height>
+					<_x> <copy src="parent()" trait="width" /> </_x>
+					<_y> 35 </_y>
+					<_wheelmoved> <copy src="parent()" trait="wheelmoved" /> </_wheelmoved>
+					<_number_of_visible_items> 1 </_number_of_visible_items>
+
+					<_ScrollDelta> 20 </_ScrollDelta>
+				</hotrect>
+
+				<text name="stats_description">
+					<font> <copy src="globals()" trait="_pb_ListFont" /> </font> <!-- DarN 2 -->
+					<string></string>		<!-- Set in code -->
+					<wrapwidth> <copy src="parent()" trait="width" /> <sub> 20 </sub></wrapwidth>
+					<clips> &true; </clips>
+					<y>
+						<copy src="sibling(stats_description_scrollbar)" trait="_current_value" />
+						<mul src="sibling(stats_description_scrollbar)" trait="_ScrollDelta" />
+						<mul> -1 </mul>
+						<add> 5 </add>
+					</y>
+				</text>
+			</hotrect>
+		</rect>
+
+<!--============================== TAILLINE ==============================-->
+
+		<rect name="stats_tailline">
+			<locus> &true; </locus>
+			<x> 50 </x>	<!-- lower left corner x,y -->
+			<y> 652 </y>
+			<width> 855 </width>
+			<_stretch> 75 </_stretch>
+
+			<!--=========== Buttons ===========-->
+			<hotrect name="stats_tailline_status">
+				<include src="darn\super_text_box.xml" />
+				<font> <copy src="globals()" trait="_gl_pipTabFont" /> </font>
+				<id> 0 </id>
+
+				<_x>
+					<copy src="me()" trait="_center_x" />
+					<sub src="parent()" trait="_stretch" />
+					<sub>
+						<copy src="me()" trait="width" />
+						<div> 2 </div>
+					</sub>
+				</_x>
+				<_y>
+					<copy> 0 </copy>
+					<sub>
+						<copy src="me()" trait="height" />
+						<div> 2 </div>
+					</sub>
+				</_y>
+				<string> &-sStatsStatus; </string>
+				<_selected>
+					<copy src="StatsMenu" trait="user0" />
+					<eq> 0 </eq>
+				</_selected>
+				<_center_x>
+					<copy src="parent()" trait="width" />
+					<add>
+						<copy src="parent()" trait="_stretch" />
+						<mul> 2 </mul>
+					</add>
+					<div> 6 </div>
+				</_center_x>
+			</hotrect>
+
+			<hotrect name="stats_tailline_SPECIAL">
+				<include src="darn\super_text_box.xml" />
+				<font> <copy src="globals()" trait="_gl_pipTabFont" /> </font>
+				<id> 1 </id>
+
+				<_x>
+					<copy src="me()" trait="_center_x" />
+					<sub src="parent()" trait="_stretch" />
+					<sub>
+						<copy src="me()" trait="width" />
+						<div> 2 </div>
+					</sub>
+				</_x>
+				<_y> <copy src="stats_tailline_status" trait="y" /> </_y>
+				<string> &-sStatsSpecial; </string>
+				<_selected>
+					<copy src="StatsMenu" trait="user0" />
+					<eq> 1 </eq>
+				</_selected>
+				<_center_x>
+					<copy src="parent()" trait="width" />
+					<add>
+						<copy src="parent()" trait="_stretch" />
+						<mul> 2 </mul>
+					</add>
+					<div> 6 </div>
+					<mul> 2 </mul>
+				</_center_x>
+			</hotrect>
+
+			<hotrect name="stats_tailline_skills">
+				<include src="darn\super_text_box.xml" />
+				<font> <copy src="globals()" trait="_gl_pipTabFont" /> </font>
+				<id> 2 </id>
+
+				<_x>
+					<copy src="me()" trait="_center_x" />
+					<sub src="parent()" trait="_stretch" />
+					<sub>
+						<copy src="me()" trait="width" />
+						<div> 2 </div>
+					</sub>
+				</_x>
+				<_y> <copy src="stats_tailline_status" trait="y" /> </_y>
+				<string> &-sStatsSkills; </string>
+				<_selected>
+					<copy src="StatsMenu" trait="user0" />
+					<eq> 2 </eq>
+				</_selected>
+				<_center_x>
+					<copy src="parent()" trait="width" />
+					<add>
+						<copy src="parent()" trait="_stretch" />
+						<mul> 2 </mul>
+					</add>
+					<div> 6 </div>
+					<mul> 3 </mul>
+				</_center_x>
+			</hotrect>
+
+			<hotrect name="stats_tailline_perks">
+				<include src="darn\super_text_box.xml" />
+				<font> <copy src="globals()" trait="_gl_pipTabFont" /> </font>
+				<id> 3 </id>
+
+				<_x>
+					<copy src="me()" trait="_center_x" />
+					<sub src="parent()" trait="_stretch" />
+					<sub>
+						<copy src="me()" trait="width" />
+						<div> 2 </div>
+					</sub>
+				</_x>
+				<_y> <copy src="stats_tailline_status" trait="y" /> </_y>
+				<string> &-sStatsPerks; </string>
+				<_selected>
+					<copy src="StatsMenu" trait="user0" />
+					<eq> 3 </eq>
+				</_selected>
+				<_center_x>
+					<copy src="parent()" trait="width" />
+					<add>
+						<copy src="parent()" trait="_stretch" />
+						<mul> 2 </mul>
+					</add>
+					<div> 6 </div>
+					<mul> 4 </mul>
+				</_center_x>
+			</hotrect>
+
+			<hotrect name="stats_tailline_general">
+				<include src="darn\super_text_box.xml" />
+				<font> <copy src="globals()" trait="_gl_pipTabFont" /> </font>
+				<id> 4 </id>
+
+				<_x>
+					<copy src="me()" trait="_center_x" />
+					<sub src="parent()" trait="_stretch" />
+					<sub>
+						<copy src="me()" trait="width" />
+						<div> 2 </div>
+					</sub>
+				</_x>
+				<_y> <copy src="stats_tailline_status" trait="y" /> </_y>
+				<string> &-sStatsGeneral; </string>
+				<_selected>
+					<copy src="StatsMenu" trait="user0" />
+					<eq> 4 </eq>
+				</_selected>
+				<_center_x>
+					<copy src="parent()" trait="width" />
+					<add>
+						<copy src="parent()" trait="_stretch" />
+						<mul> 2 </mul>
+					</add>
+					<div> 6 </div>
+					<mul> 5 </mul>
+				</_center_x>
+			</hotrect>
+
+			<!--=========== Filler Lines ===========-->
+			<image name="stats_tailline_vleft">
+				<include src="vertical_fade_line.xml" />
+
+				<_bottom_to_top> &true; </_bottom_to_top>
+			</image>
+
+			<image name="stats_tailline_h1">
+				<include src="line.xml" />
+
+				<_length> <copy src="stats_tailline_status" trait="x" /> </_length>
+			</image>
+
+			<image name="stats_tailline_h2">
+				<include src="line.xml" />
+
+				<x>
+					<copy src="stats_tailline_status" trait="x" />
+					<add src="stats_tailline_status" trait="width" />
+				</x>
+				<_length>
+					<copy src="stats_tailline_SPECIAL" trait="x" />
+					<sub src="me()" trait="x" />
+				</_length>
+			</image>
+
+			<image name="stats_tailline_h3">
+				<include src="line.xml" />
+
+				<x>
+					<copy src="stats_tailline_SPECIAL" trait="x" />
+					<add src="stats_tailline_SPECIAL" trait="width" />
+				</x>
+				<_length>
+					<copy src="stats_tailline_skills" trait="x" />
+					<sub src="me()" trait="x" />
+				</_length>
+			</image>
+
+			<image name="stats_tailline_h4">
+				<include src="line.xml" />
+
+				<x>
+					<copy src="stats_tailline_skills" trait="x" />
+					<add src="stats_tailline_skills" trait="width" />
+				</x>
+				<_length>
+					<copy src="stats_tailline_perks" trait="x" />
+					<sub src="me()" trait="x" />
+				</_length>
+			</image>
+
+			<image name="stats_tailline_h5">
+				<include src="line.xml" />
+
+				<x>
+					<copy src="stats_tailline_perks" trait="x" />
+					<add src="stats_tailline_perks" trait="width" />
+				</x>
+				<_length>
+					<copy src="stats_tailline_general" trait="x" />
+					<sub src="me()" trait="x" />
+				</_length>
+			</image>
+
+			<image name="stats_tailline_h6">
+				<include src="line.xml" />
+
+				<x>
+					<copy src="stats_tailline_general" trait="x" />
+					<add src="stats_tailline_general" trait="width" />
+				</x>
+				<_length>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="x" />
+				</_length>
+			</image>
+
+			<image name="stats_tailline_vright">
+				<include src="vertical_fade_line.xml" />
+
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<_x>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="width" />
+				</_x>
+			</image>
+		</rect><!-- End tailline -->
+	</rect><!-- End Glow Branch-->
+
+	<template name="stats_rad_effects_template">
+		<rect name="stats_rad_effects_template_item">
+			<locus> &true; </locus>
+			<x>
+				<copy src="me()" trait="listindex" />
+				<mod> 3 </mod>
+				<add> 1 </add>
+				<copy src="parent()" trait="_tabstop_" />
+				<add> 10 </add>
+			</x>
+			<y>
+				<copy> 40 </copy>
+				<mul src="io()" trait="_scale_multiplier" />
+				<onlyif>
+					<copy src="me()" trait="listindex" />
+					<gt> 2 </gt>
+				</onlyif>
+			</y>
+
+			<user1></user1>		<!-- actor val abbrev -->
+
+			<text name="stats_rad_effect_magnitude">
+				<y> 12 </y> <!-- DarN 20 -->
+				<justify> &right; </justify>
+				<string> <copy src="parent()" trait="string" /> </string>
+			</text>
+
+			<text name="stats_rad_effect_abbrev">
+				<x> 10 </x>
+				<y> 12 </y> <!-- DarN 20 -->
+				<string> <copy src="parent()" trait="user1" /> </string>
+			</text>
+		</rect>
+	</template>
+
+	<template name="stats_effects_template">
+		<hotrect name="stats_effects_template_item">
+		
+			<include src="list_box_template.xml" />
+			<user0></user0>			<!-- Effect Name -->
+			<user1></user1>			<!-- Effect String -->
+			<user2> &true; </user2>	<!-- Divider Line -->
+
+			<_enabled> &true; </_enabled>
+
+			<clicksound> &nosound; </clicksound>
+			<!-- <mouseoversound> UIMenuFocus </mouseoversound> -->
+			<x> 0 </x>
+
+			<height> 28 </height>
+
+			<_offY> <copy src="parent()" trait="y" /> </_offY>
+			
+			<xlist> &xitem; </xlist> <!-- DarN some Oblivion leftovers for good measure -->
+			<xup> &prev; </xup>
+			<xdown> &next; </xdown>
+
+			<rect name="hover_rect">
+				<x> 0 </x>
+				<y>
+					<copy src="grandparent()" trait="height" />
+					<sub src="parent()" trait="y" />
+					<add> 30 </add>
+				</y>
+				<height> 100 </height>
+				<width>
+					<copy src="parent()" trait="width" />
+					<add> 10 </add>
+				</width>
+				<locus> &true; </locus>
+				<visible>
+					<copy src="parent()" trait="mouseover" />
+					<or src="parent()" trait="_selected" />
+				</visible>
+				
+				<image name="hover_background">
+					<filename> Interface\Shared\Background\pipboy.dds </filename>
+					<depth> 0 </depth>
+					<x> 0 </x>
+					<y> 0 </y>
+					<width> <copy src="parent()" trait="width"/> </width>
+					<height> <copy src="parent()" trait="height"/> </height>
+					<brightness> 90 </brightness>
+					<cropx>							<!-- DarN rather crappy... -->
+						<copy> 1024 </copy>
+						<sub src="me()" trait="width" />
+						<sub> 100 </sub>
+					</cropx>
+					<cropy>
+						<copy> 1024 </copy>
+						<sub src="me()" trait="height" />
+						<sub src="grandparent()" trait="_offY" />
+					</cropy>
+					<zoom> 200 </zoom>
+				</image>
+				
+				<image name="generic">
+					<filename> Interface\stats\rad_icon.dds </filename>
+					<depth> 1 </depth>
+					<x> -4 </x>
+					<y> 0 </y>
+					<width> 32 </width>
+					<height> 32 </height>
+				</image>
+				
+				<text name="stats_effect_name_clone">
+					<string> <copy src="grandparent()" trait="user0" /> </string>
+					<depth> 1 </depth>
+					<font> 2 </font>
+					<x> 32 </x>
+					<y> 0 </y>
+				</text>
+				
+				<text name="stats_effect_string_clone">
+					<string> <copy src="grandparent()" trait="user1" /> </string>
+					<depth> 1 </depth>
+					<justify> &left; </justify>
+					<wrapwidth>
+						<copy src="parent()" trait="width" />
+					</wrapwidth>
+					<font> 1 </font>
+					<x> 0 </x>
+					<y> 34 </y>
+				</text>
+			</rect>
+
+			<text name="stats_effect_string">
+				<string> <copy src="parent()" trait="user1" /> </string>
+				<justify> &right; </justify>
+				<x> <!-- DarN 300 -->
+					<copy src="parent()" trait="width" />
+				</x>
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<visible> 0 </visible>
+			</text>
+
+			<text name="stats_effect_name">
+				<string> <copy src="parent()" trait="user0" /> </string>
+				<x> 10 </x> <!-- DarN 0 -->
+				<y> <!-- DarN 16 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<wrapwidth>
+					<copy src="parent()" trait="width" />
+				</wrapwidth>
+			</text>
+			
+			<image name="stats_effects_divider">
+				<include src="line.xml" />
+				<alpha> 140 </alpha>
+
+				<visible> <!-- <copy src="parent()" trait="user2" /> --> 0 </visible>
+
+				<_length> <copy src="parent()" trait="width" /> </_length>
+				<height> 1 </height>
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+				</y>
+			</image>
+		</hotrect>
+	</template> <!-- stats_effect_template -->
+</menu>

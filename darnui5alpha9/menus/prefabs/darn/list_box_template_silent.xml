@@ -1,0 +1,48 @@
+<!-- list_box_template.xml -->
+
+<!-- NOTE:  This template is to be used in conjunction with list_box.xml.  Include this prefab
+	 in the template you create to be the children of your list box. -->
+
+<!--<template name="list_box_template">-->
+<!--	<hotrect name="list_box_template_item"> -->
+			<height>	 0 </height>
+			<width> <copy src="sibling(lb_highlight_box)" trait="width"/> </width>
+			
+			<!-- The Y-value of the item when the scrollbar value is 0; set in code -->
+			<_y></_y>
+			
+			<!-- Final y-position is based on inital y-position minus the amount of scrolling -->
+			<y>
+				<copy src="me()" trait="_y"/>
+				<sub>
+					<copy src="sibling(lb_scrollbar)" trait="_current_value"/>
+					<mul src="parent()" trait="_scroll_delta"/>
+				</sub>
+			</y>
+
+			<!-- Amount of extra height to add to text height; only used if <height> == 0 -->
+			<_VerticalSpacing> 20 </_VerticalSpacing>
+
+			<locus> &true; </locus>
+			<clips> &true; </clips>
+			<target>
+				<copy src="parent()" trait="_enabled"/>
+				<and src="me()" trait="_enabled"/>
+			</target>
+			<depth> 3 </depth>
+			<alpha> 0 </alpha>
+			<x> <copy src="sibling(lb_highlight_box)" trait="x"/> </x>
+			
+			<visible>
+				<copy src="me()" trait="listindex"/>
+				<gte> 0 </gte>
+			</visible>
+			<repeatvertical> &true; </repeatvertical>
+			<_selected> &false; </_selected>
+			<_enabled> &true; </_enabled>
+			<clicksound> &noSound; </clicksound>
+			<!-- <mouseoversound>UIMenuFocus</mouseoversound> -->
+			<mouseoversound> &noSound; </mouseoversound>
+			<xdefault> 1 </xdefault>
+<!--	</hotrect> -->
+<!--</template>-->

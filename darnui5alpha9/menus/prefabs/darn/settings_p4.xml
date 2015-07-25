@@ -1,0 +1,270 @@
+﻿<locus> &true; </locus>
+<x>
+	<copy src="sibling(DUI_ulcv)" trait="_x" />
+	<add> 30 </add>
+</x>
+<y>
+	<copy src="sibling(DUI_ulch)" trait="y" />
+	<add> 60 </add>
+</y>
+<width>
+	<copy src="sibling(DUI_urcv)" trait="_x" />
+	<sub src="sibling(DUI_ulcv)" trait="_x" />
+	<sub src="me()" trait="x" />
+</width>
+<height> 588 </height>
+<visible>
+	<copy src="io()" trait="_CurrentTab" />
+	<eq> 4 </eq>
+</visible>
+<depth> 1 </depth>
+<clipwindow> &true; </clipwindow>
+<_helpFont> 1 </_helpFont>
+
+<hotrect name="DUI_HlpScrollbar">
+	<include src="scrollbar_vert.xml" />
+
+	<_height> <copy src="parent()" trait="height" /> </_height>
+	<_x> <copy src="parent()" trait="width" /> </_x>
+	<_wheelmoved> <copy src="sibling(scroller)" trait="wheelmoved" /> </_wheelmoved>
+
+	<_number_of_items>
+		<copy src="sibling(hlp)" trait="height" />
+		<add src="me()" trait="_step_size" />
+	</_number_of_items>
+	<_number_of_visible_items> <copy src="parent()" trait="height" /> </_number_of_visible_items>
+	<_jump_size>
+		<copy src="parent()" trait="height" />
+		<sub src="me()" trait="_step_size" />
+	</_jump_size>
+	<_step_size>
+		<copy src="parent()" trait="height" />
+		<div src="globals()" trait="_fontSize_1" /> <!-- DarN ~ 1 line -->
+		<floor> 0 </floor>
+	</_step_size>
+	<visible>
+		<copy src="sibling(hlp)" trait="height" />
+		<gt src="parent()" trait="height" />
+	</visible>
+</hotrect>
+
+<hotrect name="scroller">
+	<_dbgString2> <copy src="sibling(DUI_HlpScrollbar)" trait="_current_value" /> </_dbgString2>
+	<locus> &true; </locus>
+	<depth> 3 </depth>
+	<wheelable> <copy src="sibling(DUI_HlpScrollbar)" trait="visible" /> </wheelable>
+	<width> <copy src="parent()" trait="width" /> </width>
+	<height> <copy src="parent()" trait="height" /> </height>
+	<text name="cvDbg">
+		<font> 4 </font>
+		<alpha> 255 </alpha>
+		<brightness> 255 </brightness>
+		<locus> &false; </locus>
+		<string> <copy src="parent()" trait="_dbgString2" /> </string>
+		<x> <copy src="parent()" trait="width" /> <sub> 60 </sub></x>
+		<y> <copy src="parent()" trait="height" /> <sub> 40 </sub></y>
+		<systemcolor> &nosystemcolor; </systemcolor>
+		<depth> 4 </depth>
+		<visible> 0 </visible>
+	</text>
+</hotrect>
+
+<hotrect name="hlp">
+	<x> 0 </x>
+	<y>
+		<copy> 0 </copy>
+		<sub src="sibling(DUI_HlpScrollbar)" trait="_current_value" />
+	</y>
+	<clips> &true; </clips>
+	<width> <copy src="parent()" trait="width" /> </width>
+	<height>
+		<copy src="child(DUIImage)" trait="y" />
+		<add src="child(DUIImage)" trait="height" /> <!-- DarN update when adding paragraphs... -->
+	</height>
+	<locus> &true; </locus>
+	<depth> 2 </depth>
+
+	<image name="DUIImage2">
+		<x>
+			<copy src="parent()" trait="width" />
+			<sub src="me()" trait="width" />
+			<div> 2 </div>
+		</x>
+		<width> 200 </width>
+		<height> 100 </height>
+		<locus> &true; </locus>
+		<systemcolor> &nosystemcolor; </systemcolor>
+		<filename> darn\dui_f3_logo.dds </filename>
+	</image>
+	
+	<text name="para1">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(DUIImage2)" trait="y" />
+			<add src="sibling(DUIImage2)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth>
+			<copy src="parent()" trait="width" />
+			<sub>
+				<copy src="parent()" trait="x" />
+				<add> 10 </add>
+			</sub>
+		</wrapwidth>
+		<string> Settings are applied in real time as you change them. </string>
+	</text>
+	<text name="para2">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para1)" trait="y" />
+			<add src="sibling(para1)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string>
+			Once you're happy, just hit "Back" to go back to the Pause Menu, or hit Escape to return to the game, then save your game to have them persist.
+		</string>
+	</text>
+	<text name="para3">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para2)" trait="y" />
+			<add src="sibling(para2)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string> You can navigate the menu with the arrow keys/DPad; Up/Down jumps to the previous/next control. </string>
+	</text>
+	<text name="para4">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para3)" trait="y" />
+			<add src="sibling(para3)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string> Toggle controls are toggled with Enter/LMB, or the "A" button on your controller. </string>
+	</text>
+	<text name="para5">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para4)" trait="y" />
+			<add src="sibling(para4)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string>
+			Position controls can be adjusted with Left/Right, clicking the two arrows, clicking the LMB in the control somewhere outside the arrows and dragging, or by using the scroll wheel.
+		</string>
+	</text>
+	<text name="para6">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para5)" trait="y" />
+			<add src="sibling(para5)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string>
+			Change current page with XBUTTONRB z/x, change current sub-page (if any) with XBUTTONLB a/s.
+		</string>
+	</text>
+	<text name="para7">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para6)" trait="y" />
+			<add src="sibling(para6)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string> The "Reset" button will load and apply the settings from the config file. </string>
+	</text>
+	<text name="para8">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para7)" trait="y" />
+			<add src="sibling(para7)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string>
+			Values are updated in GameMode, so if the values aren't there or shows the wrong values, return to the game, and open the menu again.
+		</string>
+	</text>
+	<text name="para9">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para8)" trait="y" />
+			<add src="sibling(para8)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string>
+			Have a look at the config file (Data\menus\prefabs\DUIF3Settings.xml) to find out more about each setting and set your own defaults.
+		</string>
+	</text>
+	<text name="para10">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para9)" trait="y" />
+			<add src="sibling(para9)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string> Enjoy your UI!	</string>
+	</text>
+	<text name="para11">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para10)" trait="y" />
+			<add src="sibling(para10)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string> - DarN </string>
+	</text>	<text name="para12">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para11)" trait="y" />
+			<add src="sibling(para11)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string> - DarN </string>
+	</text>	<text name="para13">
+		<locus> &true; </locus>
+		<font> <copy src="grandparent()" trait="_helpFont" /> </font>
+		<y>
+			<copy src="sibling(para12)" trait="y" />
+			<add src="sibling(para12)" trait="height" />
+			<add src="globals()" trait="_fontSize_1" />
+		</y>
+		<wrapwidth> <copy src="sibling(para1)" trait="wrapwidth" /> </wrapwidth>
+		<string> - DarN </string>
+	</text>
+	<image name="DUIImage">
+		<x>	40 </x>
+		<y>
+			<copy src="sibling(para13)" trait="y" />
+			<add src="sibling(para13)" trait="height" />
+		</y>
+		<width> 512 </width>
+		<height> 256 </height>
+		<zoom> &scale; </zoom>
+		<systemcolor> &nosystemcolor; </systemcolor>
+		<filename> interface\main\main_background.dds </filename>		<!-- Set in code -->
+	</image>
+</hotrect>

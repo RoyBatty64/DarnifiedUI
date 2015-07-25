@@ -1,0 +1,219 @@
+<!-- sleep_wait_menu.xml -->
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			SleepWaitMenu.xml
+// VERSION		2.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			November 1, 2006
+// INFO			XML file for the Sleep / Wait menu
+-->
+<menu name="SleepWaitMenu">
+    <class> &SleepWaitMenu; </class>
+    <stackingtype> &no_click_past; </stackingtype>
+
+	<_MaxHours> 24 </_MaxHours>
+	
+	<!-- XBox 360 control bindings -->
+	<xbuttona>	<ref src="SWM_WaitButton" trait="clicked"/></xbuttona>
+	<xbuttonb>	<ref src="SWM_CancelButton" trait="clicked"/></xbuttonb>
+	<xleft>	<ref src="scrollbar_horiz_left" trait="clicked"/></xleft>
+	<xright>	<ref src="scrollbar_horiz_right" trait="clicked"/></xright>
+	<xbuttonlt>	<ref src="scrollbar_horiz_page_left" trait="clicked"/></xbuttonlt>
+	<xbuttonrt><ref src="scrollbar_horiz_page_right" trait="clicked"/></xbuttonrt>
+	
+	<_PCButton_W>	SWM_WaitButton </_PCButton_W>
+	<_PCButton_E>	SWM_CancelButton </_PCButton_E>
+
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<systemcolor> &hudmain; </systemcolor> 
+
+		<!-- Menu background -->
+		<image name="SWM_Background">
+			<x>
+				<copy src="sibling(SWM_MainRect)" trait="x"/>
+				<sub> 40 </sub>
+			</x>
+			<y>
+				<copy src="sibling(SWM_MainRect)" trait="y"/>
+				<sub> 60 </sub>
+			</y>
+			<!-- <width> 940 </width>
+			<height> 520 </height> -->
+			<width> 700 </width> <!-- DarN 940 -->
+			<height> 470 </height> <!-- DarN 520 -->
+
+			<filename> Interface\Shared\background\solid_black.dds </filename>
+			<zoom> &scale; </zoom>
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha"/> </alpha>
+			<depth> 1 </depth>
+		</image>
+		
+		<hotrect name="SWM_MainRect">
+			<locus> &true; </locus>
+			<id> &generic; </id>
+			<target> &true; </target>
+			<wheelable> &true; </wheelable>
+			<depth> 2 </depth>
+
+			<x>
+				<copy src="screen()" trait="width"/>
+				<sub src="me()" trait="width"/>
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy src="screen()" trait="height"/>
+				<sub src="me()" trait="height"/>
+				<div> 2 </div>
+			</y>
+			<width> <!-- DarN 860 -->
+				<copy src="sibling(SWM_Background)" trait="width" />
+				<sub> 80 </sub>
+			</width>
+			<height> <!-- DarN 400 -->
+					<copy src="sibling(SWM_Background)" trait="height" />
+					<sub> 120 </sub>
+			</height>
+
+			<!-- Top-most bracket -->
+			<rect name="SWM_TopBracket">
+				<include src="darn\top_bracket.xml"/>
+				<width> <copy src="parent()" trait="width" /> </width>
+			</rect>
+
+			<!-- Bottom-most bracket -->
+			<rect name="SWM_BottomBracket">
+				<include src="bottom_bracket.xml"/>
+				<y> <copy src="parent()" trait="height" /> </y>
+				<width> <copy src="parent()" trait="width" /> </width>
+			</rect>
+
+			<!-- The "How many hours..." prompt at top of screen -->
+			<text name="SWM_HowManyText">
+				<id> 0 </id>
+				<x> <!-- DarN 430 -->
+					<copy src="parent()" trait="width" />
+					<div> 2 </div>
+				</x>
+				<y> 50 </y> <!-- DarN 70 -->
+
+				<font> 2 </font> <!-- DarN 1 -->
+				<string></string> <!-- Set in code -->
+				<justify> &center; </justify>
+			</text>
+
+			<image name="SWM_MeterImage">
+				<filename> Interface\Wait\wait_meter.dds </filename>
+				<x> 50 </x>
+				<y> 145 </y> <!-- DarN 165 -->
+				<width> 512 </width> <!-- DarN 765 100% = 512 -->
+				<height> 64 </height> <!-- DarN 96.625 100% = 64 -->
+				<zoom> &scale; </zoom>
+			</image>
+
+			<!-- The Hours meter scrollbar -->
+			<hotrect name="SWM_Scrollbar">
+				<include src="scrollbar_horiz.xml"/>
+				<id> 1 </id>
+				<xdefault> 1 </xdefault>
+				<repeathorizontal> &true; </repeathorizontal>
+
+				<!--INPUTS-->
+				<_x> 92 </_x> <!-- DarN 112,5 -->
+				<_y> 130 </_y> <!-- DarN 145 -->
+				<_width> 428 </_width> <!-- DarN 640 -->
+				<_height> 48 </_height> <!-- DarN 64 -->
+				<!-- <_number_of_items> 24 </_number_of_items> --> <!-- DarN 24 -->
+				<_number_of_items> <copy src="io()" trait="_MaxHours" /> </_number_of_items>
+				<_number_of_visible_items> 1 </_number_of_visible_items>
+				<_wheelmoved> <copy src="parent()" trait="wheelmoved" /> </_wheelmoved>
+				<_show_always> &true; </_show_always>
+				<_has_arrows> &false; </_has_arrows>
+				<_step_size> 1 </_step_size>
+				<_jump_size> 7 </_jump_size>
+
+				<_scale_marker_image> &false; </_scale_marker_image>
+				<_marker_image> Interface\Wait\wait_pointer.dds </_marker_image>
+				<_marker_width> 32 </_marker_width>
+				<_marker_height> 32 </_marker_height>
+			</hotrect>
+
+			<!-- The number of hours -->
+			<text name="SWM_HoursChosen">
+				<id> 2 </id>
+				<x> <!-- DarN 430 -->
+					<copy src="parent()" trait="width" />
+					<div> 2 </div>
+				</x>
+				<y> 190 </y> <!-- DarN 210 -->
+				<font> 6 </font>
+				<justify> &center; </justify>
+				<string></string>		<!-- Set in code -->
+			</text>
+
+			<!-- The time text at bottom left-->
+			<text name="SWM_CurrentTime">
+				<id> 3 </id>
+
+				<x> <!-- DarN 430 -->
+					<copy src="parent()" trait="width" />
+					<div> 2 </div>
+				</x>
+				<y> 250 </y> <!-- DarN 330 -->
+				<font> 1 </font> <!-- DarN 2 -->
+				<justify> &center; </justify>
+				<string></string>		<!-- Set in code -->
+			</text>
+
+			<!-- The Wait / Sleep button: Begins the Wait / Sleep process-->
+			<hotrect name="SWM_WaitButton">
+				<include src="darn\text_box.xml"/>
+				<id> 4 </id>
+
+				<_x> 105 </_x> <!-- DarN 838 -->
+				<_y> 290 </_y> <!-- DarN 265 -->
+				<_line_alpha>
+					<copy> 127 </copy>
+					<add>
+						<copy> 128 </copy>
+						<onlyif src="me()" trait="target"/>
+					</add>
+				</_line_alpha>
+
+				<justify> &right; </justify>
+				<string> </string>		<!-- Set in code -->
+			
+				<_xbox_button> &xbuttona; </_xbox_button>
+				<_PCButtonText> &-sPCMenuHintW; </_PCButtonText>
+			</hotrect>
+
+			<!-- The Cancel button: Exits the menu-->
+			<hotrect name="SWM_CancelButton">
+				<include src="darn/text_box.xml"/>
+				<id> 5 </id>
+
+				<_x> 565 </_x> <!-- DarN 600 -->
+				<_y> 290 </_y> <!-- DarN 310 -->
+				<systemcolor> &hudalt; </systemcolor>
+
+				<justify> &right; </justify>
+				<string> &-sCancel; </string>
+				<_xbox_button> &xbuttonb; </_xbox_button>
+				<_PCButtonText> &-sPCMenuHintE; </_PCButtonText>
+			</hotrect>
+
+		</hotrect>	<!-- end SWM_MainRect -->
+	</rect>	<!-- end NOGLOW_BRANCH-->
+</menu>

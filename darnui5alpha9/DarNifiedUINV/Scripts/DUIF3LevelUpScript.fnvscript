@@ -1,0 +1,77 @@
+scn DUIF3LevelUpScript
+
+short skillAdj
+short doonce
+
+Begin GameMode
+
+	if doonce == 0
+		set doonce To 1
+	endif
+
+End
+
+Begin MenuMode 1027
+
+	if doonce
+		SetUIFloat "LevelUpMenu\_SkillsUncap" DUIF3.xSkillFix
+		set skillAdj To Player.GetAV barter - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_barterAdjust" skillAdj
+		endif
+;		set skillAdj To Player.GetAV bigguns - 100
+;		if skillAdj > 0
+;			SetUIFloat "LevelUpMenu\_bigGunsAdjust" skillAdj
+;		endif
+		set skillAdj To Player.GetAV energyweapons - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_energyAdjust" skillAdj
+		endif
+		set skillAdj To Player.GetAV explosives - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_explosivesAdjust" skillAdj
+		endif
+		set skillAdj To Player.GetAV guns - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_smallGunsAdjust" skillAdj
+		endif
+		set skillAdj To Player.GetAV lockpick - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_lockpickAdjust" skillAdj
+		endif
+		set skillAdj To Player.GetAV medicine - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_medicineAdjust" skillAdj
+		endif
+		set skillAdj To Player.GetAV meleeweapons - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_meleeAdjust" skillAdj
+		endif
+		set skillAdj To Player.GetAV repair - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_repairAdjust" skillAdj
+		endif
+		set skillAdj To Player.GetAV science - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_scienceAdjust" skillAdj
+		endif
+		set skillAdj To Player.GetAV sneak - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_sneakAdjust" skillAdj
+		endif
+		set skillAdj To Player.GetAV speech - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_speechAdjust" skillAdj
+		endif
+		set skillAdj To Player.GetAV survival - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_survivalAdjust" skillAdj
+		endif
+		set skillAdj To Player.GetAV unarmed - 100
+		if skillAdj > 0
+			SetUIFloat "LevelUpMenu\_unarmedAdjust" skillAdj
+		endif
+		set doonce to 0
+	endif
+
+End

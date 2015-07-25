@@ -1,0 +1,79 @@
+scn DUIF3ConfigScript
+
+short iMaster
+short iOption
+short iSubMenu
+float fValue
+reference rList
+string_var stNVSEMinorV
+
+Begin GameMode
+	if GetGameRestarted
+		if IsModLoaded "The Mod Configuration Menu.esp"
+			set iMaster to GetModIndex "The Mod Configuration Menu.esp"
+			set rList to BuildRef iMaster 2790
+			ListAddForm rList "DUIF3MCMMenu"
+		endif
+	endif
+End
+
+Begin MenuMode 1013
+	if IsModLoaded "The Mod Configuration Menu.esp"
+	else
+		Return
+	endif
+	
+	SetUIFloat "StartMenu\_NVSE_MajorV" DUIF3.NVSEVersion
+	let stNVSEMinorV := "." + $DUIF3.NVSERevision
+	SetUIStringEx "StartMenu\_NVSE_MinorV" "$stNVSEMinorV"
+	SetUIFloat "StartMenu\_NVSE_BetaV" DUIF3.NVSEBeta
+	sv_destruct stNVSEMinorV
+
+	if GetMCMFloat 0 0 "_ActiveMod" == GetModIndex "DarNifiedUINV.esp"
+		
+		if GetMCMFloat 5 0 "SubMenu1/_enable" == 0
+			SetMCMFloat 0 0 "_ActiveSubMenu" 1
+
+			SetMCMFloat 5 0 "SubMenu1/_enable" 1
+			SetMCMString 5 0 "SubMenu1/text/string" "Main Settings"
+			SetUIString "StartMenu/MCM/*:8/SubTitle1/string" "Main Settings"
+			
+			SetMCMFloat 5 0 "SubMenu2/_enable" 1
+			SetMCMString 5 0 "SubMenu2/text/string" "Meter Settings"
+			SetUIString "StartMenu/MCM/*:8/SubTitle2/string" "Meter Settings"
+			
+			SetMCMFloat 5 0 "SubMenu3/_enable" 1
+			SetMCMString 5 0 "SubMenu3/text/string" "Statistic Settings"
+			SetUIString "StartMenu/MCM/*:8/SubTitle3/string" "Statistics Settings"
+			
+			SetMCMFloat 5 0 "SubMenu4/_enable" 1
+			SetMCMString 5 0 "SubMenu4/text/string" "HUD Settings"
+			SetUIString "StartMenu/MCM/*:8/SubTitle4/string" "HUD Settings"
+			
+			SetMCMFloat 5 0 "SubMenu5/_enable" 1
+			SetMCMString 5 0 "SubMenu5/text/string" "iHUD Settings A"
+			SetUIString "StartMenu/MCM/*:8/SubTitle5/string" "iHUD Compass Settings"
+			
+			SetMCMFloat 5 0 "SubMenu6/_enable" 1
+			SetMCMString 5 0 "SubMenu6/text/string" "iHUD Settings B"
+			SetUIString "StartMenu/MCM/*:8/SubTitle6/string" "iHUD Action Points and Health Settings"
+			
+			SetMCMFloat 5 0 "SubMenu7/_enable" 1
+			SetMCMString 5 0 "SubMenu7/text/string" "iHUD Settings C"
+			SetUIString "StartMenu/MCM/*:8/SubTitle7/string" "iHUD Condition, Ammo and Crosshair Settings"
+			
+			SetMCMFloat 5 0 "SubMenu8/_enable" 1
+			SetMCMString 5 0 "SubMenu8/text/string" "iHUD Settings D"
+			SetUIString "StartMenu/MCM/*:8/SubTitle8/string" "iHUD Project Nevada Settings"
+			
+			SetMCMFloat 5 0 "SubMenu9/_enable" 1
+			SetMCMString 5 0 "SubMenu9/text/string" "505"
+			SetUIString "StartMenu/MCM/*:8/SubTitle9/string" "505"
+			
+			SetMCMFloat 5 0 "SubMenu10/_enable" 1
+			SetMCMString 5 0 "SubMenu10/text/string" "Extra Settings"
+			SetUIString "StartMenu/MCM/*:8/SubTitle10/string" "Extra Settings"
+			
+		endif
+	endif
+End

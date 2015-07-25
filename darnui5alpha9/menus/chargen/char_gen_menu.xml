@@ -1,0 +1,497 @@
+<!-- char_gen_menu.xml -->
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			char_gen_menu.xml
+// VERSION		2.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			9-27-2007
+-->
+<menu name="CharGenMenu">
+	<class> &CharGenMenu; </class>
+	<stackingtype> &no_click_past; </stackingtype>
+
+	<!-- User traits -->
+	<_CurrPoints></_CurrPoints>				<!-- # points that have been assigned for this page -->
+	<_MaxPoints></_MaxPoints>				<!-- Max # points that may be assigned for this page -->
+	<_OnlyAdd> &false; </_OnlyAdd>	<!-- If true, don't allow player to decrease attributes past base value -->
+
+	<!-- XBox 360 control bindings -->
+	<xbuttony><ref src="CGM_ResetButton" trait="clicked"/></xbuttony>
+	
+	<_PCButton_R>	CGM_ResetButton </_PCButton_R>
+	<_PCButton_A>	CGM_DoneButton </_PCButton_A>
+	
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<systemcolor> &hudmain; </systemcolor>
+
+		<!-- ===== BACKGROUND TEXTURE ===== -->
+		<image name="CGM_Background">
+			<filename> Interface\Shared\Background\solid_black.dds </filename>
+			<zoom> &scale; </zoom>
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha"/> </alpha>
+			<depth> 1 </depth>
+
+			<width> 994 </width> <!-- DarN 1144 -->
+			<height> 780 </height> <!-- DarN 1070 -->
+			<x>
+				<copy src="sibling(CGM_MainRect)" trait="x"/>
+				<sub> 50 </sub>
+			</x>
+			<y>
+				<copy src="sibling(CGM_MainRect)" trait="y"/>
+				<sub> 125 </sub>
+			</y>
+		</image>
+		
+		<!-- ===== MAIN POSITIONING RECT ===== -->
+		<rect name="CGM_MainRect">
+			<width> 874 </width> <!-- DarN 1024 -->
+			<height> 510 </height> <!-- DarN 800 -->
+			<!-- Centered on screen-->
+			<x>
+				<copy src="screen()" trait="width"/>
+				<sub src="me()" trait="width"/>
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy src="screen()" trait="height"/>
+				<sub src="me()" trait="height"/>
+				<div> 2 </div>
+			</y>
+			
+			<locus> &true; </locus>
+			<depth> 2 </depth>
+
+			<!-- ===== HEADLINE BRACKET AND TITLE =====  -->
+			<rect name="CGM_HeadlineRect">
+				<width> <copy src="parent()" trait="width" /> </width> <!-- DarN 1024 -->
+				<locus> &true; </locus>
+				
+				<image name="CGM_Headline_h1">
+					<include src="line.xml"/>
+					<_length> 50 </_length>
+				</image>
+
+				<image name="CGM_Headline_v1">
+					<include src="vertical_fade_line.xml"/>
+					<height> 40 </height> <!-- DarN add -->
+				</image>
+
+				<text name="CGM_Headline_Title">
+					<id> 0 </id>
+
+					<x> 70 </x>
+					<y> -14 </y> <!-- DarN -10 -->
+					<font> <copy src="globals()" trait="_gl_HeaderFont" /> </font> <!-- DarN 6 -->
+				</text>
+
+				<image name="CGM_Headline_h2">
+					<include src="line.xml"/>
+					<_length>
+						<copy src="parent()" trait="width" /> <!-- DarN 1024 -->
+						<sub src="me()" trait="x"/>
+					</_length>
+					<x>
+						<copy> 90 </copy>
+						<add src="sibling(CGM_Headline_Title)" trait="width"/>
+					</x>
+				</image>
+
+				<image name="CGM_Headline_v2">
+					<include src="vertical_fade_line.xml"/>
+					<height> 40 </height> <!-- DarN add -->
+					<_x>
+						<copy src="sibling(CGM_Headline_h2)" trait="x"/>
+						<add src="sibling(CGM_Headline_h2)" trait="width"/>
+					</_x>
+				</image>
+			</rect>			<!-- end CGM_HeadlineRect -->
+
+			<!-- ===== LIST BOXES ===== -->
+			<hotrect name="CGM_ItemList">
+				<include src="list_box.xml"/>
+				<id> 1 </id>
+
+				<x> -15 </x>
+				<y> 0 </y>		<!-- Set in code -->
+				<width> 400 </width> <!-- DarN 450 -->
+				<_number_of_visible_items> 14 </_number_of_visible_items>
+			</hotrect>
+
+			<!-- ===== SELECTION ICON ===== -->
+			<image name="CGM_SelectionIcon">
+				<id> 2 </id>
+
+				<x> <!-- DarN 500 -->
+					<copy src="parent()" trait="width" />
+					<sub>
+						<copy src="sibling(CGM_SelectionInfoRect)" trait="width" />
+						<add src="me()" trait="width" />
+						<div> 2 </div>
+					</sub>
+					<sub> 40 </sub>
+				</x>
+				<y> -10 </y> <!-- DarN 20 -->
+				<width> 320 </width> <!-- DarN 400 -->
+				<height> 320 </height> <!-- DarN 400 -->
+
+				<zoom> &scale; </zoom>
+				<visible> &false; </visible>
+			</image>
+
+			<!-- ===== SELECTION INFO RECT ===== -->
+			<rect name="CGM_SelectionInfoRect">
+				<x> <!-- DarN 445 -->
+					<copy src="sibling(CGM_ItemList)" trait="x" />
+					<add src="sibling(CGM_ItemList)" trait="width" />
+					<add> 10 </add>
+				</x>
+				<y> 320 </y> <!-- DarN 420 -->
+				<width> <!-- DarN 580 -->
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="x" />
+				</width>
+				<height> 160 </height> <!-- DarN 300 -->
+				<locus> &true; </locus>
+
+				<!-- Divider lines -->
+				<image name="CGM_DividerA">
+					<include src="line.xml"/>
+					<_length> <!-- DarN 560 -->
+						<copy src="parent()" trait="width" />
+						<sub> 1 </sub>
+					</_length>
+				</image>
+				<image name="CGM_DividerA_v1">
+					<include src="vertical_fade_line.xml" />
+					<x>
+						<copy src="parent()" trait="width" />
+						<sub src="me()" trait="width" />
+					</x>
+				</image>
+
+				<image name="CGM_DividerB">
+					<include src="line.xml"/>
+					<y>
+						<copy src="parent()" trait="height" /> <!-- DarN 300 -->
+						<sub src="me()" trait="height" />
+						<sub> 20 </sub>
+					</y>
+					<_length> <!-- DarN 560 -->
+						<copy src="parent()" trait="width" />
+						<!-- <sub> 2 </sub> -->
+					</_length>
+				</image>
+				<image name="CGM_DividerB_v1">
+					<include src="vertical_fade_line.xml" />
+					<x>
+						<copy src="parent()" trait="width" />
+						<sub src="me()" trait="width" />
+					</x>
+					<y> <copy src="sibling(CGM_DividerB)" trait="y" /> </y>
+					<height> 40 </height>
+				</image>
+
+				<!-- Selection text: displays info about selection -->
+				<text name="CGM_SelectionText">
+					<id> 3 </id>
+
+					<x> 20 </x>
+					<y> 20 </y>
+
+					<font> 1 </font> <!-- DarN 2 -->
+					<wrapwidth> <!-- DarN 540 -->
+						<copy src="parent()" trait="width" />
+						<sub> 40 </sub>
+					</wrapwidth>
+				</text>
+
+				<!-- Point counter: displays number of points left to distribute -->
+				<text name="CGM_PointCounter">
+					<id> 4 </id>
+
+					<x> 20 </x>
+					<y>
+						<copy src="sibling(CGM_DividerB)" trait="y"/>
+						<add> 10 </add> <!-- DarN 20 -->
+					</y>
+					<font> 6 </font> <!-- DarN 2 -->
+				</text>
+			</rect>			<!-- end CGM_SelectionInfoRect -->
+
+			<!-- ===== BUTTON POSITIONING RECT ===== -->
+			<rect name="CGM_ButtonRect">
+				<x>
+					 <!-- DarN 1014 -->
+					<copy src="parent()" trait="width" />
+					<sub> 40 </sub>
+					<sub>
+						<copy> 30 </copy>
+						<onlyif> &xbox; </onlyif>
+					</sub>
+				</x>
+				<y> 60 </y>
+				<locus> &true; </locus>
+
+				<!-- Reset button: Resets all distributed points-->
+				<hotrect name="CGM_ResetButton">
+					<include src="darn\text_box.xml"/>
+					<id> 5 </id>
+
+					<justify> &right; </justify>
+					
+					<_xbox_button> &xbuttony; </_xbox_button>
+					<_PCButtonText> &-sPCMenuHintR; </_PCButtonText>
+					<string> &-sReset; </string>
+				</hotrect>
+
+				<!-- Done button: exits menu if player has assigned all points -->
+				<hotrect name="CGM_DoneButton">
+					<include src="darn\text_box.xml"/>
+					<id> 6 </id>
+					
+					<justify> &right; </justify>
+					<target>
+						<copy src="io()" trait="_CurrPoints"/>
+						<eq src="io()" trait="_MaxPoints"/>
+					</target>
+					<_line_alpha>
+						<copy> 127 </copy>
+						<add>
+							<copy> 128 </copy>
+							<onlyif src="me()" trait="target"/>
+						</add>
+					</_line_alpha>
+					
+					<_y> 40 </_y> <!-- DarN 52 -->
+					<_xbox_button> &xbuttonx; </_xbox_button>
+					<_PCButtonText> &-sPCMenuHintA; </_PCButtonText>
+					<string> &-sDone; </string>
+					<clicksound> UIMenuOK </clicksound>
+				</hotrect>
+			</rect>			<!-- end CGM_ButtonRect -->
+
+			<!-- ===== TAILLINE BRACKET ===== -->
+			<rect name="CGM_BottomBracket">
+				<include src="bottom_bracket.xml"/>
+
+				<y> <copy src="parent()" trait="height" /> </y> <!-- DarN 800 -->
+				<width> <copy src="parent()" trait="width" /> </width> <!-- DarN 1024 -->
+				<height> 40 </height> <!-- DarN add -->
+			</rect>
+			
+		</rect>		<!-- end CGM_MainRect -->
+	</rect>
+
+	<rect name="GLOW_BRANCH">
+		<id> &glow_branch; </id>
+	</rect>	<!-- end GLOW_BRANCH-->
+
+	<!-- ===== ATTRIBUTE TEMPLATE ===== -->
+	<template name="CGM_AttributeTemplate">
+		<hotrect name="CGM_Attribute">
+			<include src="list_box_template.xml"/>
+
+			<_MinValue> 1 </_MinValue>				<!-- The min value for a stat -->
+			<_MaxValue> 10 </_MaxValue>			<!-- The max value for a stat -->
+			<_BaseValue></_BaseValue>				<!-- The base value of this stat -->
+			<_ExtraValue></_ExtraValue>				<!-- Any value added by perks, chems, or other modifiers -->
+			<_AddedValue></_AddedValue>			<!-- Any stat points added by this menu-->
+			<_ValueString></_ValueString>			<!-- The string to display for the value -->
+
+			<repeathorizontal> &true; </repeathorizontal>
+			<clicksound> &nosound; </clicksound>
+			<mouseoversound> &nosound; </mouseoversound>
+			
+			<height> 30 </height>
+
+			<text name="ListItemText">
+				<font> 1 </font>
+				<string> <copy src="parent()" trait="string"/> </string>
+				
+				<x> 15 </x>
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+			</text>
+
+			<!-- Item value text -->
+			<text name="CGM_Template_ItemValue">
+				<font> 1 </font> <!-- DarN 2 -->
+				<justify> &center; </justify>
+
+				<x> <!-- DarN 325 -->
+					<copy src="parent()" trait="width" />
+					<sub> 80 </sub>
+				</x>
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				
+				<string> <copy src="parent()" trait="_ValueString"/> </string>
+			</text>
+			
+			<!-- Arrow buttons: Used to increment / decrement value -->
+			<image name="CGM_Template_LeftArrow">
+				<id> 10 </id>
+				<!-- Use highlight icon upon mouseover -->
+				<filename>
+					<copy src="me()" trait="mouseover"/>
+					<add> 1 </add>
+					<copy src="me()" trait="_Filename_"/>
+				</filename>
+				<x> <!-- DarN 230 -->
+					<copy src="sibling(CGM_Template_RightArrow)" trait="x" />
+					<sub> 80 </sub>
+				</x>
+				<y> <!-- DarN -5 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<width> 48 </width> <!-- DarN 64 -->
+				<height> 48 </height> <!-- DarN 64 -->
+				<zoom> 75 </zoom>
+				<depth> 2 </depth>
+				<target> &true; </target>
+				<clicksound> UIMenuPrevNext </clicksound>
+				
+				<!-- Only visible if total value is > min value and added value is 0 ( can't decrease stats to less than starting value ) -->
+				<visible>
+					<copy src="parent()" trait="_BaseValue"/>
+					<add src="parent()" trait="_ExtraValue"/>
+					<add src="parent()" trait="_AddedValue"/>
+					<gt src="parent()" trait="_MinValue"/>
+					<and>
+						<copy src="parent()" trait="_AddedValue"/>
+						<gt> 0 </gt>
+						<or> <not src="io()" trait="_OnlyAdd"/> </or>
+					</and>
+				</visible>
+				
+				<_Filename_1> Interface\Shared\Arrow\adjust_decrease.dds </_Filename_1>
+				<_Filename_2> Interface\Shared\Arrow\adjust_decrease_over.dds</_Filename_2>
+			</image>
+			
+			<image name="CGM_Template_RightArrow">
+				<id> 11 </id>
+				<filename>
+					<copy src="me()" trait="mouseover"/>
+					<add> 1 </add>
+					<copy src="me()" trait="_Filename_"/>
+				</filename>
+				<x> <!-- DarN 355 -->
+					<copy src="sibling(CGM_Template_ItemValue)" trait="x" />
+					<add> 15 </add>
+				</x>
+				<y> <!-- DarN -5 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<width> 48 </width> <!-- DarN 64 -->
+				<height> 48 </height> <!-- DarN 64 -->
+				<zoom> 75 </zoom>
+				<depth> 2 </depth>
+				<target> &true; </target>
+				<clicksound>UIMenuPrevNext</clicksound>
+				
+				<!-- Only visible if total value < max value and if we haven't already used up our stat points -->
+				<visible>
+					<copy src="parent()" trait="_BaseValue"/>
+					<add src="parent()" trait="_ExtraValue"/>
+					<add src="parent()" trait="_AddedValue"/>
+					<lt src="parent()" trait="_MaxValue"/>
+					<and>
+						<copy src="io()" trait="_CurrPoints"/>
+						<lt src="io()" trait="_MaxPoints"/>
+					</and>
+				</visible>
+				
+				<_Filename_1> Interface\Shared\Arrow\adjust_increase.dds </_Filename_1>
+				<_Filename_2> Interface\Shared\Arrow\adjust_increase_over.dds</_Filename_2>
+			</image>
+		</hotrect>
+	</template>
+	
+	<!-- ===== SELECTION ITEM TEMPLATE ===== -->
+	<template name="CGM_SelectItemTemplate">
+		<hotrect name="CGM_SelectItem">
+			<include src="list_box_template.xml"/>
+			
+			<_MinValue> 0 </_MinValue>
+			<_MaxValue> 100 </_MaxValue>
+			<_BaseValue></_BaseValue>				<!-- The base value of this stat -->
+			<_ExtraValue></_ExtraValue>				<!-- Any value added by perks, chems, or other modifiers -->
+			<_AddedValue></_AddedValue>			<!-- Any stat points added by this menu-->
+			<_ValueString></_ValueString>			<!-- The string to display for the value -->
+			<_selected> &false; </_selected>
+			
+			<clicksound> &nosound; </clicksound>
+			<mouseoversound> &nosound; </mouseoversound>
+			
+			<height> 30 </height>
+			
+			<text name="ListItemText">
+				<font> 1 </font> <!-- DarN 2 -->
+				<string> <copy src="parent()" trait="string"/> </string>
+				<wrapwidth> 390 </wrapwidth>
+				
+				<x> 40 </x>
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+			</text>
+			
+			<text name="CGM_Template_ItemValue">
+				<font> 1 </font> <!-- DarN 2 -->
+				<justify> &center; </justify>
+
+				<x> 300 </x> <!-- DarN 360 -->
+				<y> <!-- DarN 20 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				
+				<string> <copy src="parent()" trait="_ValueString"/> </string>
+			</text>
+			
+			<!-- Small square that denotes selection -->
+			<image name="CGM_Template_ItemMarker">
+				<filename> Interface\Shared\Marker\square_filled.dds </filename>
+				<!-- <texatlas> Interface\InterfaceShared.tai </texatlas> -->
+				<width> 14 </width> <!-- DarN 25 -->
+				<height> 14 </height> <!-- DarN 25 -->
+				<zoom> 67 </zoom>
+				
+				<x> 12 </x> <!-- DarN 15 -->
+				<y> <!-- DarN 17.5 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+				<visible> <copy src="parent()" trait="_selected"/> </visible>
+			</image>			
+		</hotrect>
+	</template>
+</menu>

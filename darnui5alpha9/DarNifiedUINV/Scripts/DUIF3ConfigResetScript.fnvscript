@@ -1,0 +1,74 @@
+scn DUIF3ConfigResetScript
+
+Begin Function {}
+
+	Set DUIF3.xPanels To GetUIFloat "HUDMainMenu\_HUDxPanels"
+	Set DUIF3.xPanelsX To GetUIFloat "HUDMainMenu\_HUDxPanelsX"
+	Set DUIF3.xPanelsY To GetUIFloat "HUDMainMenu\_HUDxPanelsY"
+	Set DUIF3.xBrackets To GetUIFloat "HUDMainMenu\_HUDxBrackets"
+	Set DUIF3.xStatsArmorCND to GetUIFloat "HUDMainMenu\_HUDxStatsArmorCND"
+	Set DUIF3.xTime To GetUIFloat "HUDMainMenu\_HUDxTime"
+	Set DUIF3.xTimeClock To GetUIFloat "HUDMainMenu\_HUDxTimeClock"
+	Set DUIF3.xTimeDate To GetUIFloat "HUDMainMenu\_HUDxTimeDate"
+	Set DUIF3.xTimeSDF To GetUIFloat "HUDMainMenu\_HUDxTimeSDF"
+	Set DUIF3.xTimeScale To GetUIFloat "HUDMainMenu\_HUDxTimeScale"
+	Set DUIF3.xKarma To GetUIFloat "HUDMainMenu\_HUDxKarma"
+	Set DUIF3.xKarmaMeter To GetUIFloat "HUDMainMenu\_HUDxKarmaMeter"
+	Set DUIF3.xKarmaAlignment To GetUIFloat "HUDMainMenu\_HUDxKarmaAlignment"
+	Set DUIF3.xXP To GetUIFloat "HUDMainMenu\_HUDxXP"
+	Set DUIF3.xXPMeter To GetUIFloat "HUDMainMenu\_HUDxXPMeter"
+	Set DUIF3.xRad To GetUIFloat "HUDMainMenu\_HUDxRad"
+	Set DUIF3.xRadMeter To GetUIFloat "HUDMainMenu\_HUDxRadMeter"
+	Set DUIF3.xRadCurrent To GetUIFloat "HUDMainMenu\_HUDxRadCurrent"
+	Set DUIF3.xStats To GetUIFloat "HUDMainMenu\_HUDxStats"
+	Set DUIF3.xStatsDM To GetUIFloat "HUDMainMenu\_HUDxStatsDM"
+	Set DUIF3.xStatsEN To GetUIFloat "HUDMainMenu\_HUDxStatsEN"
+	Set DUIF3.xStatsCC To GetUIFloat "HUDMainMenu\_HUDxStatsCC"
+	Set DUIF3.xStatsDR To GetUIFloat "HUDMainMenu\_HUDxStatsDR"
+	Set DUIF3.xStatsDT To GetUIFloat "HUDMainMenu\_HUDxStatsDT"
+	Set DUIF3.xStatsPR To GetUIFloat "HUDMainMenu\_HUDxStatsPR"
+	Set DUIF3.xStatsFR To GetUIFloat "HUDMainMenu\_HUDxStatsFR"
+	Set DUIF3.xStatsFO to GetUIFloat "HUDMainMenu\_HUDxStatsFO"
+	Set DUIF3.xStatsEL To GetUIFloat "HUDMainMenu\_HUDxStatsEL"
+	Set DUIF3.xStatsEM To GetUIFloat "HUDMainMenu\_HUDxStatsEM"
+	Set DUIF3.xStatsER To GetUIFloat "HUDMainMenu\_HUDxStatsER"
+	Set DUIF3.xStatsRR To GetUIFloat "HUDMainMenu\_HUDxStatsRR"
+	Set DUIF3.xStatsThirst To GetUIFloat "HUDMainMenu\_HUDxStatsThirst"
+	Set DUIF3.xStatsHunger To GetUIFloat "HUDMainMenu\_HUDxStatsHunger"
+	Set DUIF3.xStatsSleep To GetUIFloat "HUDMainMenu\_HUDxStatsSleep"
+	SetUIFloat "HUDMainMenu\_xPanels" DUIF3.xPanels
+	SetUIFloat "HUDMainMenu\_xPanelsX" DUIF3.xPanelsX
+	SetUIFloat "HUDMainMenu\_xPanelsY" DUIF3.xPanelsY
+	SetUIFloat "HUDMainMenu\_xBrackets" DUIF3.xBrackets
+	SetUIFloat "HUDMainMenu\_xStatsArmorCND" DUIF3.xStatsArmorCND
+	SetUIFloat "HUDMainMenu\_xTime" DUIF3.xTime
+	SetUIFloat "HUDMainMenu\_xTimeClock" DUIF3.xTimeClock
+	SetUIFloat "HUDMainMenu\_xTimeDate" DUIF3.xTimeDate
+	SetUIFloat "HUDMainMenu\_xTimeSDF" DUIF3.xTimeSDF
+	SetUIFloat "HUDMainMenu\_xTimeScale" DUIF3.xTimeScale
+	SetUIFloat "HUDMainMenu\_xKarma" DUIF3.xKarma
+	SetUIFloat "HUDMainMenu\_xKarmaMeter" DUIF3.xKarmaMeter
+	SetUIFloat "HUDMainMenu\_xKarmaAlignment" DUIF3.xKarmaAlignment
+	SetUIFloat "HUDMainMenu\_xXP" DUIF3.xXP
+	SetUIFloat "HUDMainMenu\_xXPMeter" DUIF3.xXPMeter
+	SetUIFloat "HUDMainMenu\_xRad" DUIF3.xRad
+	SetUIFloat "HUDMainMenu\_xRadCurrent" DUIF3.xRadCurrent
+	SetUIFloat "HUDMainMenu\_xRadMeter" DUIF3.xRadMeter
+	SetUIFloat "HUDMainMenu\_xStats" DUIF3.xStats
+	SetUIFloat "HUDMainMenu\_xStatsDM" DUIF3.xStatsDM
+	SetUIFloat "HUDMainMenu\_xStatsEN" DUIF3.xStatsEN
+	SetUIFloat "HUDMainMenu\_xStatsCC" DUIF3.xStatsCC
+	SetUIFloat "HUDMainMenu\_xStatsDR" DUIF3.xStatsDR
+	SetUIFloat "HUDMainMenu\_xStatsDT" DUIF3.xStatsDT
+	SetUIFloat "HUDMainMenu\_xStatsPR" DUIF3.xStatsPR
+	SetUIFloat "HUDMainMenu\_xStatsFR" DUIF3.xStatsFR
+	SetUIFloat "HUDMainMenu\_xStatsFO" DUIF3.xStatsFO
+	SetUIFloat "HUDMainMenu\_xStatsEL" DUIF3.xStatsEL
+	SetUIFloat "HUDMainMenu\_xStatsEM" DUIF3.xStatsEM
+	SetUIFloat "HUDMainMenu\_xStatsER" DUIF3.xStatsER
+	SetUIFloat "HUDMainMenu\_xStatsRR" DUIF3.xStatsRR
+	SetUIFloat "HUDMainMenu\_xStatsThirst" DUIF3.xStatsThirst
+	SetUIFloat "HUDMainMenu\_xStatsHunger" DUIF3.xStatsHunger
+	SetUIFloat "HUDMainMenu\_xStatsSleep" DUIF3.xStatsSleep
+
+End

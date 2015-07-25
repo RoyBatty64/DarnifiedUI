@@ -1,0 +1,116 @@
+; DUIF3 :: Settings Container
+;
+; Holds variables used in other scripts
+
+scn DUIF3SettingsScript
+
+float qd				; Quest delay
+int settingsMode		; 0 = none, 1 = DUIF3 Page 1, n = Page n
+int updateMode			; 0 = idle, 1 = get, 2 = set, 3 = reset
+
+; NVSE
+int NVSEVersion			; Major version
+int NVSERevision		; Minor version
+int NVSEBeta			; Beta version
+
+; LevelUp
+int xSkillFix			; uncap skills
+
+; INI
+
+int SaveToINI			; 1 time trigger
+int LoadFromINI			; 1 time trigger
+int AlwaysSaveToINI		; check box
+int AlwaysLoadFromINI	; check box
+
+; HUD
+
+int HUDScale			; Overall HUD Scale
+int HUDSolidMeters		; Solid Tick Marks
+int swMaxHours			; sleep/wait max hours
+int HUDShowGuides		; Alignment Guides
+int xStatsArmorCND		; Armor Condition
+int xShowCI				; Combat Indicator
+int HUDShowAPInfo		; Action Points
+int HUDShowHPInfo		; Hit Points
+int HUDShowSneak		; Sneak Indicator
+int HUDShowEH			; Enemy Health
+int HUDShowQR			; Quest Reminders
+int HUDShowQuestAdded	; Quest Added
+int HUDShowMessages		; Messages
+int HUDShowSubtitles	; Subtitles
+int HUDShowInfo			; Info (under crosshair)
+int HUDShowLoc			; Location Text
+int HUDShowXP			; XP Meter (on XP gain)
+int HUDShowRadiation	; Radiation Meter (when being irradiated)
+int HUDShowBM			; Breath Meter (when underwater)
+int HudShowEI			; Explosive Indicator?
+int HUDShowCLI			; Crippled Limb Indicator
+
+; HUD Colors
+
+int HUDOverrideColor
+int HUDDynamicColors
+
+int HUDWarnLevel
+int HUDAlertLevel
+
+int HUDRed
+int HUDGreen
+int HUDBlue
+int HUDTxtRed
+int HUDTxtGreen
+int HUDTxtBlue
+int HUDWarnRed
+int HUDWarnGreen
+int HUDWarnBlue
+int HUDAlertRed
+int HUDAlertGreen
+int HUDAlertBlue
+
+; Global Extras
+int xPanels				; panels enabled
+int xPanelsX			; panels x position
+int xPanelsY			; panels y position
+int xBrackets			; brackets displayed
+int xBracketStyle		; bracket style NV/F3
+int xAlignment			; brackets left/right
+
+; HUDTime
+int xTime				; show time panel
+int xTimeClock			; 0 = off, 1 = 24hr, 2 = 12hr
+int xTimeDate			; 0 = off, 1 = euro, 2 = us
+int xTimeSDF			; 0 = normal, 1 = int
+int xTimeScale			; shows timescale in TimePanel
+
+; HUDKarma
+int xKarma				; Karma panel enabled
+int xKarmaMeter			; show meter
+int xKarmaAlignment		; show alignment
+
+; HUDXP
+int xXP					; XP panel&values enabled
+int xXPMeter			; show meter
+
+; HUDRad
+int xRad				; rad panel enabled
+int xRadCurrent			; current rads
+int xRadMeter			; show meter
+
+; HUDStats
+int xStats				; misc stats panel enabled
+int xStatsDM			; displaymode - 0 = %, 1 = meter, 2 = both
+int xStatsEN			; Encumbrance
+int xStatsCC			; CritChance
+int xStatsDR			; DamageResist
+int xStatsDT			; DamageThreshold
+int xStatsPR			; PoisionResist
+int xStatsFR			; FireResist
+int xStatsFO			; FrostResist
+int xStatsEL			; ElectricResist
+int xStatsER			; EnergyResist
+int xStatsEM			; EMPResist
+int xStatsRR			; RadResist
+int xStatsThirst		; Dehydration
+int xStatsHunger		; Hunger
+int xStatsSleep			; SleepDeprevation

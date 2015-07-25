@@ -1,0 +1,327 @@
+<!--	
+	DarNified UI F3
+		Version 0.1b, 03 Nov. 2008
+-->
+<!-- dialog_menu.xml -->
+<menu name="DialogMenu">
+	<class> &DialogMenu; </class>
+	<stackingtype> &no_click_past; </stackingtype>
+
+	<!-- User traits -->
+	<_DialogVisible> &false; </_DialogVisible>	<!-- Controls overall dialog visibility -->
+	<_ShowingText> &true; </_ShowingText>		<!-- True if speaker text is being shown, false if topic list is shown -->
+	<_ShowSubtitles> &true; </_ShowSubtitles>	<!-- True if the game setting for Dialogue Subtitles is ON -->
+	<_MinListHeight> 110 </_MinListHeight>		<!-- The minimum height of the topic list -->
+
+	<_itemHeight>
+		<copy src="child(sizer)" trait="height" />
+		<add> 7 </add> <!-- DarN TODO: _gl_vertspace -->
+	</_itemHeight>
+	<_itemCount>
+		<copy> 310 </copy> <!-- DarN max list height -->
+		<div src="me()" trait="_itemHeight" />
+		<floor> 0 </floor>
+	</_itemCount>
+	<_listHeight>
+		<copy src="me()" trait="_itemCount" />
+		<mul src="me()" trait="_itemHeight" />
+	</_listHeight>
+	<text name="sizer">
+		<font> <copy src="globals()" trait="_dlg_TopicFont" /> </font> <!-- DarN TODO: _gl_listfont -->
+		<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+		<visible> &false; </visible>
+	</text>
+	<_duiMinListHeight>
+		<copy src="me()" trait="_itemHeight" />
+		<mul> 4 </mul>
+	</_duiMinListHeight>
+	
+	<!-- The height of the scrollbar == the space between the two brackets -->
+	<_ScrollbarHeight>
+		<copy src="DM_BottomBracket" trait="y" />
+		<sub src="DM_BottomBracket" trait="height" />
+		<sub src="DM_TopBracket" trait="height" />
+		<sub src="DM_TopBracket" trait="y" />
+	</_ScrollbarHeight>
+
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<systemcolor> &hudmain;<!--All menus now pipboy color--> </systemcolor>
+
+<!-- ===== TEXT BACKGROUND TEXTURE ===== -->
+		<image name="DM_TextBackground">
+			<filename> Interface\Shared\Background\solid_black.dds </filename>
+			<width> 1080 </width>
+			<x>
+				<copy src="screen()" trait="width" />
+				<sub src="me()" trait="width" />
+				<div> 2 </div>
+			</x>
+			<!-- Y / height traits change based on whether text or topic list is showing-->
+			<y>
+				<copy> 0 </copy>
+				<add>
+					<copy src="DM_SpeakerText" trait="y" />
+					<add> 5 </add>
+					<onlyif src="io()" trait="_ShowingText" />
+				</add>
+				<add>
+					<copy src="DM_TopBracket" trait="y" />
+					<add> 20 </add>
+					<onlyifnot src="io()" trait="_ShowingText" />
+				</add>
+				<sub> 50 </sub>
+			</y>
+			<height>
+				<copy> 0 </copy>
+				<add>
+					<copy src="DM_SpeakerText" trait="height" />
+					<add> 80 </add>
+					<onlyif src="io()" trait="_ShowingText" />
+				</add>
+				<add>
+					<copy src="DM_BottomBracket" trait="y" />
+					<sub src="DM_TopBracket" trait="y" />
+					<add> 60 </add>
+					<onlyifnot src="io()" trait="_ShowingText" />
+				</add>
+			</height>
+			<depth> 1 </depth>
+
+			<visible>
+				<copy src="io()" trait="_DialogVisible" />
+				<and>
+					<copy src="io()" trait="_ShowingText" />
+					<and src="io()" trait="_ShowSubtitles" />
+					<or> <not src="io()" trait="_ShowingText" /> </or>
+				</and>
+			</visible>
+
+			<zoom> &scale; </zoom>
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha" /> </alpha>
+		</image>
+
+<!-- ===== CLICK RECT: Covers whole screen; if clicked on while text is showing, menu will skip to next dialogue screen===== -->
+		<hotrect name="DM_ClickRect">
+			<id> 0 </id>
+			<depth> 5 </depth>
+			<target> <copy src="io()" trait="_ShowingText" /> </target>
+			<height> <copy src="screen()" trait="height" /> </height>
+			<width> <copy src="screen()" trait="width" /> </width>
+			<alpha> 0 </alpha>
+		</hotrect>
+
+		<!-- NPC NAME ============================================================== -->
+		<text name="DM_SpeakerNameLabel">
+			<id> 1 </id>
+			<depth> 2 </depth>
+			<font> <copy src="globals()" trait="_gl_HeaderFont" /> </font>
+			<justify> &left; </justify> <!-- DarN right -->
+			<x>
+				<copy src="DM_TopBracket" trait="x" />
+				<sub> 10 </sub>
+				<onlyif src="io()" trait="_ShowSubtitles" />
+				<add>
+					<copy src="screen()" trait="width" />
+					<sub src="me()" trait="width" />
+					<div> 2 </div>
+					<onlyifnot src="io()" trait="_ShowSubtitles" />
+				</add>
+			</x>
+			<y>
+				<copy src="sibling(DM_SpeakerText)" trait="y" />
+				<onlyif>
+					<copy src="io()" trait="_ShowingText" />
+					<and src="io()" trait="_ShowSubtitles" />
+				</onlyif>
+				<add>
+					<copy src="DM_TopicList" trait="y" />
+					<onlyif>
+						<not src="io()" trait="_ShowingText" />
+						<and src="io()" trait="_ShowSubtitles" />
+					</onlyif>
+				</add>
+				<add>
+					<copy src="sibling(DM_CenterHeight)" trait="y" />
+					<add src="me()" trait="height" />
+					<add> 10 </add>
+					<onlyifnot src="io()" trait="_ShowSubtitles" />
+				</add>
+				<sub src="me()" trait="height" />
+				<sub> 25 </sub>
+			</y>
+			<visible>
+				<copy src="io()" trait="_DialogVisible" />
+			</visible>
+		</text>
+
+		<!-- ===== CENTERING LINE FOR TEXT / TOPIC LIST ===== -->
+		<rect name="DM_CenterHeight">
+			<y>
+				<copy src="screen()" trait="height" />
+				<sub src="screen()" trait="cropy" />
+				<sub src="screen()" trait="cropy" />
+				<!-- <mul> 0.8 </mul> --> <!-- DarN 0.8 -->
+			</y>
+		</rect>
+
+		<!-- ===== SPEAKER TEXT ===== -->
+		<text name="DM_SpeakerText">
+			<id> 2 </id>
+
+			<depth> 2 </depth>
+			<font> <copy src="globals()" trait="_dlg_SubTitleFont" /> </font> <!-- DarN 6 -->
+			<wrapwidth>
+				<copy src="DM_TextBackground" trait="width" />
+				<sub> 120 </sub>
+			</wrapwidth>
+
+			<x>
+				<copy src="DM_TextBackground" trait="x" />
+				<add> 60 </add>
+			</x>
+
+			<!-- Center on the centering line, but stay within the safe zone -->
+			<y>
+				<copy src="sibling(DM_CenterHeight)" trait="y" />
+				<sub>
+					<copy src="me()" trait="height" />
+					<div> 2 </div>
+				</sub>
+				<min>
+					<copy src="screen()" trait="height" />
+					<sub src="screen()" trait="cropy" />
+					<sub src="screen()" trait="cropy" />
+					<sub src="me()" trait="height" />
+					<sub> 40 </sub> <!-- DarN 40 -->
+				</min>
+			</y>
+
+			<visible>
+				<copy src="io()" trait="_ShowingText" />
+				<and src="io()" trait="_DialogVisible" />
+				<and src="io()" trait="_ShowSubtitles" />
+			</visible>
+			<target> &true; </target>
+		</text>
+
+
+			<!-- ===== TOPICS LIST ===== -->
+			<hotrect name="DM_TopicList">
+				<include src="list_box.xml" />
+				<_fill_alpha> 40 </_fill_alpha>
+				<id> 3 </id>
+				<width>
+					<copy src="DM_TextBackground" trait="width" />
+					<sub> 70 </sub> <!-- DarN 70 -->
+				</width>
+				<height>
+					<copy src="io()" trait="_itemHeight" />
+					<mul>
+						<copy src="me()" trait="childcount" />
+						<sub> 1 </sub> <!-- DarN 2 make an extra to alleviate -->
+					</mul>
+					<max src="io()" trait="_duiMinListHeight" />
+					<min> <!-- DarN a9 -->
+						<copy src="screen()" trait="height" />
+						<mul> .82 </mul>
+					</min>
+				</height>
+				<x>
+					<copy src="DM_TextBackground" trait="x" />
+					<add> 20 </add>
+				</x>
+				<!-- Center on the centering line, but stay within the safe zone -->
+				<y>
+					<copy src="sibling(DM_CenterHeight)" trait="y" />
+					<sub>
+						<copy src="me()" trait="height" />
+						<div> 2 </div>
+					</sub>
+					<min>
+						<copy src="screen()" trait="height" />
+						<sub src="screen()" trait="cropy" />
+						<sub src="screen()" trait="cropy" />
+						<sub src="me()" trait="height" />
+						<sub> 40 </sub>
+					</min>
+				</y>
+
+				<depth> 2 </depth>
+				<visible>
+					<not src="io()" trait="_ShowingText" />
+					<and src="io()" trait="_DialogVisible" />
+				</visible>
+
+				<_enabled> <copy src="me()" trait="visible" /> </_enabled>
+			</hotrect>
+
+		<!-- Enclosing brackets -->
+		<rect name="DM_TopBracket">
+			<include src="top_bracket.xml" />
+
+			<depth> 2 </depth>
+
+			<x>
+				<copy src="sibling(DM_TopicList)" trait="x" />
+				<add> 15 </add>
+			</x>
+			<y>
+				<copy src="sibling(DM_TopicList)" trait="y" />
+				<sub> 20 </sub>
+			</y>
+			<height> 40 </height>
+			<width> <copy src="sibling(DM_TopicList)" trait="width" /> </width>
+			<visible> <copy src="sibling(DM_TopicList)" trait="visible" /> </visible>
+		</rect>
+
+		<rect name="DM_BottomBracket">
+			<include src="bottom_bracket.xml" />
+			<depth> 2 </depth>
+			<x> <copy src="sibling(DM_TopBracket)" trait="x" /> </x>
+			<y>
+				<copy src="sibling(DM_TopicList)" trait="y" />
+				<add src="sibling(DM_TopicList)" trait="height" />
+				<add> 14 </add> <!-- DarN 10 -->
+			</y>
+			<height> <copy src="sibling(DM_TopBracket)" trait="height" /> </height>
+			<width> <copy src="sibling(DM_TopBracket)" trait="width" /> </width>
+			<visible> <copy src="sibling(DM_TopicList)" trait="visible" /> </visible>
+		</rect>
+	</rect>
+
+	<!-- ===== END GLOW_BRANCH ===== -->
+
+	<!-- ===== TOPICS LIST TEMPLATE ===== -->
+	<template name="DM_TopicTemplate">
+		<hotrect name="DM_Topic">
+			<include src="list_box_template.xml" />
+
+			<!-- USER TRAITS -->
+			<_line_alpha></_line_alpha>	<!-- The text's alpha -->
+			<_VerticalSpacing> 7 </_VerticalSpacing> <!-- DarN 20 -->
+
+			<clicksound> &nosound; </clicksound>
+
+			<text name="ListItemText">
+				<font> <copy src="globals()" trait="_dlg_TopicFont" /> </font> <!-- DarN 6 -->
+				<string> <copy src="parent()" trait="string" /> </string>
+				<wrapwidth>
+					<copy src="parent()" trait="width" />
+					<sub> 40 </sub> <!-- DarN 40 -->
+				</wrapwidth>
+				<alpha> <copy src="parent()" trait="_line_alpha" /> </alpha>
+
+				<x> 25 </x>
+				<y> <!-- DarN 15/10 -->
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y>
+			</text>
+
+		</hotrect>
+	</template>
+</menu>
+<!-- ===== END DIALOG_MENU===== -->

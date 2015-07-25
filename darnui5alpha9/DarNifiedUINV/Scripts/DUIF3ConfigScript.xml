@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="SCPT">
+  <Flags>0</Flags>
+  <FormID ID="01004003">DUIF3ConfigScript</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">DUIF3ConfigScript</EditorID>
+    <Data>
+      <Data Tag="SCHR">
+        <ReferenceCount>3</ReferenceCount>
+        <CompiledSize>2190</CompiledSize>
+        <VariableCount>50</VariableCount>
+        <Type>Quest</Type>
+        <Flags>Enabled</Flags>
+      </Data>
+      <CompiledScript Tag="SCDA">HQAAABAABgAAAKAAAAAWAAoABQAGACBYqBQAABYALAADACgAIFiuFCIAAQAeAFRoZSBNb2QgQ29uZmlndXJhdGlvbiBNZW51LmVzcBUALQBzIAAoACBYrxQiAAEAHgBUaGUgTW9kIENvbmZpZ3VyYXRpb24gTWVudS5lc3AVABUAZiYAEAAgWNkUCgACAHMgAG7mCgAAQhQIAAIAcgEAcgIAGQAAABkAAAARAAAAEAANAAEAzwcAAAEAbvUDAAAWACwAAAAoACBYrhQiAAEAHgBUaGUgTW9kIENvbmZpZ3VyYXRpb24gTWVudS5lc3AXAAIAAQAeAAAAGQAAAKUUIAACABYAU3RhcnRNZW51XF9OVlNFX01ham9yVnIDAHMpADkVFgABFQBWAgAAMgBTAQAuVgEDACoAGw4A4hQpAAIAFgBTdGFydE1lbnVcX05WU0VfTWlub3JWDQAkc3ROVlNFTWlub3JWpRQfAAIAFQBTdGFydE1lbnVcX05WU0VfQmV0YVZyAwBzKwBqFQkAAQgAVgIAADIAFgBAACEAPAAgWMIhGAADAG4AAAAAbgAAAAAKAF9BY3RpdmVNb2QgWK8UFQABABEARGFyTmlmaWVkVUlOVi5lc3AgPT0WAC0AHwApACBYwiEeAAMAbgUAAABuAAAAABAAU3ViTWVudTEvX2VuYWJsZSAwID09wyElAAQAbgAAAABuAAAAAA4AX0FjdGl2ZVN1Yk1lbnV6AAAAAAAA8D/DIScABABuBQAAAG4AAAAAEABTdWJNZW51MS9fZW5hYmxlegAAAAAAAPA/xCExAAQAbgUAAABuAAAAABQAU3ViTWVudTEvdGV4dC9zdHJpbmcNAE1haW4gU2V0dGluZ3OmFDUAAgAiAFN0YXJ0TWVudS9NQ00vKjo4L1N1YlRpdGxlMS9zdHJpbmcNAE1haW4gU2V0dGluZ3PDIScABABuBQAAAG4AAAAAEABTdWJNZW51Mi9fZW5hYmxlegAAAAAAAPA/xCEyAAQAbgUAAABuAAAAABQAU3ViTWVudTIvdGV4dC9zdHJpbmcOAE1ldGVyIFNldHRpbmdzphQ2AAIAIgBTdGFydE1lbnUvTUNNLyo6OC9TdWJUaXRsZTIvc3RyaW5nDgBNZXRlciBTZXR0aW5nc8MhJwAEAG4FAAAAbgAAAAAQAFN1Yk1lbnUzL19lbmFibGV6AAAAAAAA8D/EITYABABuBQAAAG4AAAAAFABTdWJNZW51My90ZXh0L3N0cmluZxIAU3RhdGlzdGljIFNldHRpbmdzphQ7AAIAIgBTdGFydE1lbnUvTUNNLyo6OC9TdWJUaXRsZTMvc3RyaW5nEwBTdGF0aXN0aWNzIFNldHRpbmdzwyEnAAQAbgUAAABuAAAAABAAU3ViTWVudTQvX2VuYWJsZXoAAAAAAADwP8QhMAAEAG4FAAAAbgAAAAAUAFN1Yk1lbnU0L3RleHQvc3RyaW5nDABIVUQgU2V0dGluZ3OmFDQAAgAiAFN0YXJ0TWVudS9NQ00vKjo4L1N1YlRpdGxlNC9zdHJpbmcMAEhVRCBTZXR0aW5nc8MhJwAEAG4FAAAAbgAAAAAQAFN1Yk1lbnU1L19lbmFibGV6AAAAAAAA8D/EITMABABuBQAAAG4AAAAAFABTdWJNZW51NS90ZXh0L3N0cmluZw8AaUhVRCBTZXR0aW5ncyBBphQ9AAIAIgBTdGFydE1lbnUvTUNNLyo6OC9TdWJUaXRsZTUvc3RyaW5nFQBpSFVEIENvbXBhc3MgU2V0dGluZ3PDIScABABuBQAAAG4AAAAAEABTdWJNZW51Ni9fZW5hYmxlegAAAAAAAPA/xCEzAAQAbgUAAABuAAAAABQAU3ViTWVudTYvdGV4dC9zdHJpbmcPAGlIVUQgU2V0dGluZ3MgQqYUTgACACIAU3RhcnRNZW51L01DTS8qOjgvU3ViVGl0bGU2L3N0cmluZyYAaUhVRCBBY3Rpb24gUG9pbnRzIGFuZCBIZWFsdGggU2V0dGluZ3PDIScABABuBQAAAG4AAAAAEABTdWJNZW51Ny9fZW5hYmxlegAAAAAAAPA/xCEzAAQAbgUAAABuAAAAABQAU3ViTWVudTcvdGV4dC9zdHJpbmcPAGlIVUQgU2V0dGluZ3MgQ6YUUwACACIAU3RhcnRNZW51L01DTS8qOjgvU3ViVGl0bGU3L3N0cmluZysAaUhVRCBDb25kaXRpb24sIEFtbW8gYW5kIENyb3NzaGFpciBTZXR0aW5nc8MhJwAEAG4FAAAAbgAAAAAQAFN1Yk1lbnU4L19lbmFibGV6AAAAAAAA8D/EITMABABuBQAAAG4AAAAAFABTdWJNZW51OC90ZXh0L3N0cmluZw8AaUhVRCBTZXR0aW5ncyBEphREAAIAIgBTdGFydE1lbnUvTUNNLyo6OC9TdWJUaXRsZTgvc3RyaW5nHABpSFVEIFByb2plY3QgTmV2YWRhIFNldHRpbmdzwyEnAAQAbgUAAABuAAAAABAAU3ViTWVudTkvX2VuYWJsZXoAAAAAAADwP8QhJwAEAG4FAAAAbgAAAAAUAFN1Yk1lbnU5L3RleHQvc3RyaW5nAwA1MDWmFCsAAgAiAFN0YXJ0TWVudS9NQ00vKjo4L1N1YlRpdGxlOS9zdHJpbmcDADUwNcMhKAAEAG4FAAAAbgAAAAARAFN1Yk1lbnUxMC9fZW5hYmxlegAAAAAAAPA/xCEzAAQAbgUAAABuAAAAABUAU3ViTWVudTEwL3RleHQvc3RyaW5nDgBFeHRyYSBTZXR0aW5nc6YUNwACACMAU3RhcnRNZW51L01DTS8qOjgvU3ViVGl0bGUxMC9zdHJpbmcOAEV4dHJhIFNldHRpbmdzGQAAABkAAAARAAAA</CompiledScript>
+      <ScriptSource Tag="SCTX" External="DUIF3ConfigScript.fnvscript" />
+      <LocalVariables>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>32</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">iMaster</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>34</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">iOption</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>37</Index>
+            <Flags>0</Flags>
+          </Data>
+          <Name Tag="SCVR">fValue</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>38</Index>
+            <Flags>0</Flags>
+          </Data>
+          <Name Tag="SCVR">rList</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>40</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">iSubMenu</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>50</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">stNVSEMinorV</Name>
+        </Variable>
+      </LocalVariables>
+      <References>
+        <Reference Tag="SCRV">38</Reference>
+        <Reference Tag="SCRO">
+          <Reference ID="01002000">DUIF3MCMMenu</Reference>
+        </Reference>
+        <Reference Tag="SCRO">
+          <Reference ID="01003001">DUIF3</Reference>
+        </Reference>
+      </References>
+    </Data>
+  </Subrecords>
+</Record>

@@ -1,0 +1,604 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="SCPT">
+  <Flags>0</Flags>
+  <FormID ID="01004001">DUIF3SettingsScript</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">DUIF3SettingsScript</EditorID>
+    <Data>
+      <Data Tag="SCHR">
+        <ReferenceCount>0</ReferenceCount>
+        <CompiledSize>4</CompiledSize>
+        <VariableCount>105</VariableCount>
+        <Type>Quest</Type>
+        <Flags>Enabled</Flags>
+      </Data>
+      <CompiledScript Tag="SCDA">HQAAAA==</CompiledScript>
+      <ScriptSource Tag="SCTX" External="DUIF3SettingsScript.fnvscript" />
+      <LocalVariables>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>31</Index>
+            <Flags>0</Flags>
+          </Data>
+          <Name Tag="SCVR">qd</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>34</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">settingsMode</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>39</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">updateMode</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>41</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">NVSEVersion</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>42</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">NVSERevision</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>43</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">NVSEBeta</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>84</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xSkillFix</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>50</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">SaveToINI</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>51</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">LoadFromINI</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>52</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">AlwaysSaveToINI</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>53</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">AlwaysLoadFromINI</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>54</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDScale</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>58</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDSolidMeters</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>86</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">swMaxHours</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>62</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowGuides</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>48</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsArmorCND</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>85</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xShowCI</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>87</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowAPInfo</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>88</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowHPInfo</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>89</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowSneak</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>90</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowEH</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>91</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowQR</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>92</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowQuestAdded</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>93</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowMessages</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>94</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowSubtitles</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>95</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowInfo</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>96</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowLoc</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>97</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowXP</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>98</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowRadiation</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>99</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowBM</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>100</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HudShowEI</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>101</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDShowCLI</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>57</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDOverrideColor</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>59</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDDynamicColors</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>55</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDWarnLevel</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>56</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDAlertLevel</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>63</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDRed</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>64</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDGreen</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>65</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDBlue</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>103</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDTxtRed</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>104</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDTxtGreen</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>105</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDTxtBlue</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>69</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDWarnRed</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>70</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDWarnGreen</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>71</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDWarnBlue</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>72</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDAlertRed</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>73</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDAlertGreen</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>74</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">HUDAlertBlue</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>8</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xPanels</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>32</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xPanelsX</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>33</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xPanelsY</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>9</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xBrackets</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>102</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xBracketStyle</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>75</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xAlignment</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>10</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xTime</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>11</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xTimeClock</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>12</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xTimeDate</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>13</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xTimeSDF</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>14</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xTimeScale</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>15</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xKarma</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>16</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xKarmaMeter</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>17</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xKarmaAlignment</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>18</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xXP</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>19</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xXPMeter</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>20</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xRad</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>29</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xRadCurrent</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>21</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xRadMeter</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>22</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStats</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>23</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsDM</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>24</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsEN</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>25</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsCC</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>26</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsDR</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>44</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsDT</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>27</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsPR</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>28</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsFR</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>37</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsFO</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>38</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsEL</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>35</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsER</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>36</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsEM</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>30</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsRR</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>45</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsThirst</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>46</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsHunger</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>76</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">xStatsSleep</Name>
+        </Variable>
+      </LocalVariables>
+    </Data>
+  </Subrecords>
+</Record>

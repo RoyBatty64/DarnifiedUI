@@ -1,0 +1,741 @@
+<!-- barter_menu.xml -->
+<!--
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			barter_menu.xml
+// VERSION		2.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			12-19-2007
+-->
+
+<menu name="BarterMenu">
+	<class> &BarterMenu; </class>
+	<stackingtype> &no_click_past; </stackingtype>
+
+	<!-- User traits: Set in code-->
+	<_IsContainerListSelected> -1 </_IsContainerListSelected>		<!-- True when container list is selected -->
+	<_ArrowDirection></_ArrowDirection>									<!-- Determines which direction the caps flow arrow faces; set in code-->
+
+	<!-- XBox 360 control bindings -->
+	<xbuttonx> <ref src="BM_ButtonX" trait="clicked"/></xbuttonx>
+	<xbuttonb><ref src="BM_ButtonB" trait="clicked"/></xbuttonb>
+	<_PCButton_A>	BM_ButtonX </_PCButton_A>
+	<_PCButton_X>	BM_ButtonB </_PCButton_X>
+
+	<user0> 0 </user0>		<!-- 1 if on PS3 -->
+
+	<_itemHeight>
+		<copy src="child(sizer)" trait="height" />
+		<add> 7 </add>
+	</_itemHeight>
+	<_itemCount>
+		<copy> 570 </copy> <!-- DarN max list height 550/600 -->
+		<div src="me()" trait="_itemHeight" />
+		<floor> 0 </floor>
+	</_itemCount>
+	<_listHeight>
+		<copy src="me()" trait="_itemCount" />
+		<mul src="me()" trait="_itemHeight" />
+	</_listHeight>
+	<text name="sizer">
+		<font> <copy src="globals()" trait="_gl_listFont" /> </font> <!-- DarN TODO: _gl_listfont -->
+		<string> ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 </string>
+		<visible> &false; </visible>
+	</text>
+
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<systemcolor> &hudmain;<!--All menus now pipboy color--> </systemcolor>
+
+<!-- ===== MAIN POSITIONING RECT ===== -->
+		<rect name="BM_MainRect">
+			<width> 1024 </width>
+			<height> 950 </height> <!-- DarN 800 -->
+
+			<!-- Centered on screen-->
+			<x>
+				<copy src="screen()" trait="width" />
+				<sub src="me()" trait="width" />
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+			</y>
+		</rect>
+
+		<!-- ===== BACKGROUND TEXTURE ===== -->
+		<image name="BM_Background">
+			<width> 1144 </width>
+			<height> 1110 </height> <!-- DarN 970 -->
+			<x>
+				<copy src="sibling(BM_MainRect)" trait="x" />
+				<sub> 40 </sub>
+			</x>
+			<y>
+				<copy src="sibling(BM_MainRect)" trait="y" />
+				<sub> 105 </sub>
+			</y>
+			<depth> 1 </depth>
+
+			<filename> Interface\Shared\Background\solid_black.dds </filename>
+			<zoom> &scale; </zoom>
+			<systemcolor> &nosystemcolor; </systemcolor>
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha" /> </alpha>
+		</image>
+
+		<!-- ===== FOCUS RECTS: These each cover one-half of the menu. Mousing over them switches the focus to either side. =====-->
+		<hotrect name="BM_Items_FocusRect">
+			<id> 0 </id>
+			<target> <copy src="io()" trait="_IsContainerListSelected" /> </target>
+			<depth> 5 </depth>
+			<alpha> 0 </alpha>
+
+			<width> 464 </width>
+			<height> 630 </height> <!-- DarN 480/copy -->
+			<x> <copy src="BM_ItemsRect" trait="x" /> </x>
+			<y> <copy src="BM_ItemsRect" trait="y" /> </y>
+		</hotrect>
+
+		<hotrect name="BM_Container_FocusRect">
+			<id> 1 </id>
+			<target> <not src="io()" trait="_IsContainerListSelected" /> </target>
+			<depth> 5 </depth>
+			<alpha> 0 </alpha>
+
+			<width> 464 </width>
+			<height> 630  </height> <!-- DarN 480 -->
+			<x> <copy src="sibling(BM_ContainerRect)" trait="x" /> </x>
+			<y> <copy src="sibling(BM_ContainerRect)" trait="y" /> </y>
+		</hotrect>
+
+<!-- ===== START ITEMS (LEFT) SIDE ===== -->
+		<rect name="BM_ItemsRect">
+			<depth> 2 </depth>
+			<locus> &true; </locus>
+
+			<width> 464 </width>
+			<height> 600 </height> <!-- DarN 480/630 -->
+			<x>
+				<copy src="BM_MainRect" trait="x" />
+				<add> 20 </add>
+			</x>
+			<y>
+				<copy src="BM_MainRect" trait="y" />
+				<add> 20 </add>
+			</y>
+
+<!--============================== HEADLINE ==============================-->
+			<image name="BM_Items_headline_v1">
+				<include src="vertical_fade_line.xml" />
+				<height> 40 </height>
+			</image>
+
+			<image name="BM_Items_headline_h1">
+				<include src="line.xml" />
+				<_length> 25 </_length>
+			</image>
+
+			<image name="BM_Items_LeftFilterArrow">
+				<id> 2 </id>
+				<filename> Interface\Main\main_arrow_left.dds </filename>
+				<x> 30 </x>
+				<y> -10 </y>
+				<width> 17.5 </width>
+				<height> 35 </height>
+				<zoom> &scale; </zoom>
+				<target> &true; </target>
+			</image>
+
+			<text name="BM_ItemsTitle">
+				<id> 3 </id>
+				<font> 3 </font> <!-- DarN 6 -->
+				<string> &-sInventoryItems; </string>
+				<x> 50 </x>
+				<y> -5 </y> <!-- DarN -10 -->
+				<target> &true; </target>
+				<wheelable> &true; </wheelable>
+			</text>
+
+			<image name="BM_Items_RightFilterArrow">
+				<id> 4 </id>
+				<filename> Interface\Main\main_arrow_right.dds </filename>
+				<x>
+					<copy> 60 </copy>
+					<add src="sibling(BM_ItemsTitle)" trait="width" />
+				</x>
+				<y> -10 </y>
+				<width> 17.5 </width>
+				<height> 35 </height>
+				<zoom> &scale; </zoom>
+				<target> &true; </target>
+			</image>
+
+			<image name="BM_Items_headline_h2">
+				<include src="line.xml" />
+				<_length>
+					<copy> 464 </copy>
+					<sub src="me()" trait="x" />
+					<max> 0 </max>
+				</_length>
+
+				<x>
+					<copy src="sibling(BM_Items_RightFilterArrow)" trait="x" />
+					<add> 20 </add>
+				</x>
+			</image>
+
+			<!-- Player caps info -->
+			<text name="BM_Items_CapsLabel">
+				<id> 5 </id>
+				<string></string>
+				<font> <copy src="globals()" trait="_gl_listFont" /> </font> <!-- DarN 2 -->
+				<justify> &right; </justify>
+				<red> 200 </red> <!-- DarN TODO -->
+				<green> 210 </green>
+				<blue> 0 </blue>
+				<!-- <brightness> &uselocalcolor; </brightness> -->
+				<x> 449 </x>
+				<y> 16 </y> <!-- DarN 20 -->
+			</text>
+
+			<image name="BM_Items_headline_v2">
+				<include src="vertical_fade_line.xml" />
+				<height> 40 </height>
+				<x> 461 </x>
+			</image>
+
+<!--======================= PLAYER'S INVENTORY =======================-->
+			<hotrect name="BM_Items_InventoryList">
+				<include src="list_box.xml" />
+				<id> 6 </id>
+
+				<x> -15 </x>
+				<y> 46 </y> <!-- DarN 60/46 -->
+				<width> 462 </width>
+				<height> <copy src="io()" trait="_listHeight" /> </height> <!-- DarN 365/505 -->
+
+				<_enabled> <not src="io()" trait="_IsContainerListSelected" /> </_enabled>
+			</hotrect>
+
+			<image name="BM_Items_footer_v1">
+				<include src="vertical_fade_line.xml" />
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<height> 30 </height>
+				<y> 610 </y> <!-- DarN 440/640 -->
+			</image>
+
+			<image name="BM_Items_footer_h1">
+				<include src="line.xml" />
+				<_length> 25 </_length>
+				<y> 640 </y> <!-- DarN 480/670 -->
+			</image>
+			
+			<image name="BM_Items_TitleButton">
+				<filename>
+					<copy src="io()" trait="user0"/>
+					<add> 1 </add>
+					<copy src="me()" trait="_filename_"/>
+				</filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<visible> &xbox; </visible>
+				
+				<width> 65 </width> <!-- DarN 85 -->
+				<height> 65 </height> <!-- DarN 85 -->
+
+				<x> 15 </x>
+				<y> 610 </y> <!-- DarN 440/640 -->
+				
+				<_filename_1> general_button_lt.dds </_filename_1>
+				<_filename_2> general_button_lb.dds </_filename_2>
+			</image>
+
+			<image name="BM_Items_footer_h2">
+				<include src="line.xml" />
+				<_length>
+					<copy src="parent()" trait="width" />
+					<add src="BM_Items_footer_v2" trait="width" />
+					<sub src="me()" trait="x" />
+				</_length>
+				<x>
+					<copy> 25 </copy>
+					<add>
+						<copy> 50 </copy>
+						<onlyif> &xbox; </onlyif>
+					</add>
+				</x>
+				<y> 640 </y> <!-- DarN 480/670 -->
+			</image>
+
+			<image name="BM_Items_footer_v2">
+				<include src="vertical_fade_line.xml" />
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<height> 30 </height> <!-- DarN 40 -->
+				<x> <copy src="parent()" trait="width" /> </x>
+				<y> 610 </y> <!-- DarN 440/640 -->
+			</image>
+		</rect>		<!-- end BM_ItemsRect -->
+
+<!-- ============= BEGIN CONTAINER (RIGHT) SIDE ============ -->
+		<rect name="BM_ContainerRect">
+			<depth> 2 </depth>
+			<locus> &true; </locus>
+
+			<width> 464 </width>
+			<height> 600 </height> <!-- DarN 480/630 -->
+			<x>
+				<copy src="BM_BottomBracket" trait="x" />
+				<add> 560 </add>
+			</x>
+			<y> <copy src="sibling(BM_ItemsRect)" trait="y" /> </y>
+
+			<!-- ===== HEADLINE ===== -->
+			<image name="BM_Container_headline_v1">
+				<include src="vertical_fade_line.xml" />
+				<height> 40 </height>
+			</image>
+
+			<image name="BM_Container_headline_h1">
+				<include src="line.xml" />
+				<_length> 25 </_length>
+			</image>
+
+			<image name="BM_Container_LeftFilterArrow">
+				<id> 7 </id>
+				<filename> Interface\Main\main_arrow_left.dds </filename>
+				<x> 30 </x>
+				<y> -10 </y>
+				<width> 17.5 </width>
+				<height> 35 </height>
+				<zoom> &scale; </zoom>
+				<target> &true; </target>
+			</image>
+
+			<text name="BM_ContainerTitle">
+				<id> 8 </id>
+				<font> 3 </font> <!-- DarN 6 -->
+				<string></string>		<!-- Set in code -->
+				<x> 50 </x>
+				<y> -5 </y> <!-- DarN -10 -->
+				<target> &true; </target>
+				<wheelable> &true; </wheelable>
+			</text>
+
+			<image name="BM_Container_RightFilterArrow">
+				<id> 9 </id>
+				<filename> Interface\Main\main_arrow_right.dds </filename>
+				<x>
+					<copy> 60 </copy>
+					<add src="sibling(BM_ContainerTitle)" trait="width" />
+				</x>
+				<y> -10 </y>
+				<width> 17.5 </width>
+				<height> 35 </height>
+				<zoom> &scale; </zoom>
+				<target> &true; </target>
+			</image>
+
+			<image name="BM_Container_headline_h2">
+				<include src="line.xml" />
+
+				<x>
+					<copy src="sibling(BM_Container_RightFilterArrow)" trait="x" />
+					<add> 20 </add>
+				</x>
+				<_length>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="x" />
+				</_length>
+			</image>
+
+			<text name="BM_Container_CapsLabel">
+				<id> 10 </id>
+				<string></string>
+				<font> <copy src="globals()" trait="_gl_listFont" /> </font> <!-- DarN 2 -->
+				<justify> &right; </justify>
+
+				<x> 449 </x>
+				<y> 16 </y> <!-- DarN 20 -->
+			</text>
+
+			<image name="BM_Container_headline_v2">
+				<include src="vertical_fade_line.xml" />
+				<height> 40 </height>
+				<x> 461 </x>
+			</image>
+
+			<!--======================= CONTAINER'S INVENTORY =======================-->
+			<hotrect name="BM_Container_InventoryList">
+				<include src="list_box.xml" />
+				<id> 11 </id>
+
+				<x> -15 </x>
+				<y> 46 </y> <!-- DarN 60/46 -->
+
+				<width> 464 </width>
+				<height> <copy src="io()" trait="_listHeight" /> </height> <!-- DarN 365/505 -->
+
+				<_enabled> <copy src="io()" trait="_IsContainerListSelected" /> </_enabled>
+			</hotrect>
+
+			<image name="BM_Container_footer_v1">
+				<include src="vertical_fade_line.xml" />
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<height> 30 </height>
+				<y> 610 </y> <!-- DarN 440/590 -->
+			</image>
+
+			<image name="BM_Container_footer_h1">
+				<include src="line.xml" />
+				<_length>
+					<copy src="parent()" trait="width"/>
+					<sub> 25 </sub>
+					<sub>
+						<copy> 50 </copy>
+						<onlyif> &xbox; </onlyif>
+					</sub>
+				</_length>
+				<y> 640 </y> <!-- DarN 480 -->
+			</image>
+			
+			<image name="BM_Container_TitleButton">
+				<filename>
+					<copy src="io()" trait="user0"/>
+					<add> 1 </add>
+					<copy src="me()" trait="_filename_"/>
+				</filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<visible> &xbox; </visible>
+				
+				<width> 65 </width>
+				<height> 65 </height>
+
+				<x>
+					<copy src="parent()" trait="width"/>
+					<sub> 80 </sub> <!-- DarN 100 -->
+				</x>
+				<y> 610 </y>
+				
+				<_filename_1> general_button_rt.dds </_filename_1>
+				<_filename_2> general_button_rb.dds </_filename_2>
+			</image>
+
+			<image name="BM_Container_footer_h2">
+				<include src="line.xml" />
+				<_length>
+					<copy> 25 </copy>
+					<add src="BM_Container_footer_v2" trait="width" />
+				</_length>
+				<x>
+					<copy src="parent()" trait="width" />
+					<sub> 25 </sub>
+				</x>
+				<y> 640 </y> <!-- DarN 480 -->
+			</image>
+
+			<image name="BM_Container_footer_v2">
+				<include src="vertical_fade_line.xml" />
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<height> 30 </height>
+				<x> <copy src="parent()" trait="width" /> </x>
+				<y> 610 </y> <!-- DarN 440 -->
+			</image>
+		</rect>		<!-- end BM_ContainerRect -->
+
+<!-- ===== CAPS FLOW ARROW RECT ===== -->
+		<rect name="BM_CapsFlow">
+			<id> 12 </id>
+			<x>
+				<copy src="sibling(BM_ItemsRect)" trait="x" />
+				<add> 449 </add>
+				<add>
+					<copy> 20 </copy>
+					<onlyif>
+						<copy src="io()" trait="_ArrowDirection" />
+						<eq> 2 </eq>
+					</onlyif>
+				</add>
+			</x>
+			<y> 310 </y> <!-- DarN 260 -->
+			<depth> 2 </depth>
+			<locus> &true; </locus>
+			<alpha> 255 </alpha>		<!-- Set in code -->
+
+			<_Value></_Value>
+
+			<!-- Visibility set in code -->
+			<visible> &false; </visible>
+
+			<!-- The arrow image-->
+			<image name="BM_CapsFlowIcon">
+				<!-- Switch arrow direction based on caps flow -->
+				<filename>
+					<copy src="io()" trait="_ArrowDirection" />
+					<copy src="me()" trait="_filename_" />
+				</filename>
+				<height> 300 </height> <!-- DarN 360 -->
+				<width> 150 </width> <!-- DarN 120 -->
+				<zoom> &scale; </zoom>
+				<visible> &true; </visible>
+				<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+				<x>
+					<copy> 10 </copy>
+					<sub>
+						<copy> 25 </copy>
+						<onlyif><copy src="io()" trait="_ArrowDirection" /><eq>2</eq></onlyif>
+					</sub>
+				</x>
+				<y> -15 </y>
+				<_filename_1> Interface\Barter\barter_arrow_buy.dds </_filename_1>
+				<_filename_2> Interface\Barter\barter_arrow_sell.dds </_filename_2>
+			</image>
+
+			<!-- The caps amount text -->
+			<text name="BM_TransactionAmount">
+
+				<!-- Crazy positioning wizardry that basically keeps text "somewhat" centered -->
+				 <!-- DarN right = 1, left = 2 -->
+				<x>
+					<copy> 47.5 </copy> <!-- DarN 32.5 -->
+					<add>
+						<copy> -7.5 </copy> <!-- DarN 7.5 -->
+						<onlyif>
+							<copy src="io()" trait="_ArrowDirection" />
+							<eq> 2 </eq>
+						</onlyif>
+					</add>
+					<sub>
+						<copy src="me()" trait="width" />
+						<sub> 70 </sub> <!-- DarN 70 -->
+						<onlyif>
+							<copy src="me()" trait="width" />
+							<gt> 70 </gt>
+						</onlyif>
+						<mul>
+							<copy> 1 </copy>
+							<add>
+								<copy> -2 </copy>
+								<onlyif>
+									<copy src="io()" trait="_ArrowDirection" />
+									<eq> 2 </eq>
+								</onlyif>
+							</add>
+						</mul>
+					</sub>
+				</x>
+				<y> 42 </y> <!-- DarN 50 -->
+				<justify> &center; </justify>
+				<font> 3 </font> <!-- DarN 6 -->
+				<string> <copy src="parent()" trait="_Value" /> </string>
+				<visible> &true; </visible>
+				<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			</text>
+
+			<text name="BM_CapsLabel">
+				<string> &-sInventoryCaps; </string>
+				<justify> &center; </justify>
+				<font> <copy src="globals()" trait="_gl_listFont" /> </font> <!-- DarN 2 -->
+
+				<x> <copy src="sibling(BM_TransactionAmount)" trait="x" /> <add> 2.5 </add> </x>
+				<y> 72 </y> <!-- DarN 93.5/78 -->
+				<visible> &true; </visible>
+				<alpha> <copy src="parent()" trait="alpha" /> </alpha>
+			</text>
+		</rect>
+
+<!-- ===== BUTTON RECT ===== -->
+		<rect name="BM_ButtonRect">
+			<x>
+				<copy src="BM_ContainerRect" trait="x" />
+				<add src="BM_ContainerRect" trait="width" />
+				<sub> 55 </sub> <!-- DarN 10/40 -->
+			</x>
+			<y> 810 </y> <!-- DarN 670/800 -->
+			<locus> &true; </locus>
+			<depth> 6 </depth>
+
+<!-- ===== X BUTTON =====-->
+			<image name="BM_ButtonX">
+				<id> 13 </id>
+				<include src="darn\text_box.xml" />
+
+				<!-- Dims if button is not targetable-->
+				<_line_alpha>
+					<copy> 128 </copy>
+					<add>
+						<copy> 127 </copy>
+						<onlyif src="me()" trait="target" />
+					</add>
+				</_line_alpha>
+
+				<_verbuf> 6 </_verbuf> <!-- DarN 15 -->
+				<justify> &right; </justify>
+				<target> &false; </target>
+				<_xbox_button> &xbuttonx; </_xbox_button>
+				<_PCButtonText> &-sPCMenuHintA; </_PCButtonText>
+				<string> &-sAccept; </string>
+			</image>
+
+<!-- ===== B BUTTON =====-->
+			<image name="BM_ButtonB">
+				<id> 19 </id>
+				<include src="darn\text_box.xml" />
+				<_verbuf> 6 </_verbuf> <!-- DarN 15 -->
+				<_y>
+					<copy src="sibling(BM_ButtonX)" trait="_y" />
+					<add>
+						<copy src="me()" trait="height" />
+						<onlyif src="sibling(BM_ButtonX)" trait="visible" />
+					</add>
+				</_y>
+				<systemcolor> &hudalt; </systemcolor>
+
+				<justify> &right; </justify>
+				<string> &-sExit; </string>
+
+				<_xbox_button> &xbuttonb; </_xbox_button>
+				<_PCButtonText> &-sPCMenuHintX; </_PCButtonText>
+			</image>
+		</rect>
+<!-- ===== END BM_BUTTONRECT ===== -->
+
+<!-- ===== ITEM ICON ===== -->
+		<image name="BM_ItemIcon">
+			<id> 20 </id>
+			<depth> 2 </depth>
+
+			<x>
+				<copy src="sibling(BM_ItemsRect)" trait="x" />
+				<add> 22 </add>
+			</x>
+			<y>
+				<copy src="sibling(BM_ItemsRect)" trait="y" />
+				<add> 637 </add> <!-- DarN 472/612/657 -->
+			</y>
+			<width> 192 </width> <!-- DarN 256 -->
+			<height> 192 </height> <!-- DarN 256 -->
+			<zoom> &scale; </zoom>
+			<visible> &false; </visible>
+		</image>
+
+<!--================================= ITEM DATA ==================================-->
+		<rect name="BM_ItemData">
+			<!-- <include src="item_stats_display.xml" /> -->
+			<!-- <include src="darn\item_stats_display_barter.xml" /> -->
+			<include src="darn\item_stats_display_inventory.xml" />
+			<id> 21 </id>
+			<x>
+				<!-- <copy src="BM_MainRect" trait="x" /> -->
+				<copy src="BM_MainRect" trait="width" />
+				<!-- <add> 287 </add> -->
+				<sub src="me()" trait="width" />
+				<div> 2 </div>
+				<add src="BM_MainRect" trait="x" />
+			</x>
+			<y>
+				<copy src="BM_ContainerRect" trait="y" />
+				<add> 700 </add> <!-- DarN 515/655/690 -->
+			</y>
+			<font> 4 </font>
+		</rect>
+
+<!-- ===== BOTTOM BRACKET ===== -->
+		<rect name="BM_BottomBracket">
+			<include src="bottom_bracket.xml" />
+
+			<width> 1024 </width>
+			<height> 40 </height>
+			<x> <copy src="BM_ItemsRect" trait="x" /> </x>
+			<y> 900 </y> <!-- DarN 820 -->
+
+			<depth> 2 </depth>
+		</rect>
+	</rect>	<!-- end NOGLOW_BRANCH -->
+
+<!--======================== LIST BOX TEMPLATE =========================-->
+	<template name="BM_list_template">
+		<hotrect name="BM_list_template_container">
+			<include src="list_box_template.xml" />
+			<id> 23 </id>		<!-- 40503: Setting ID directly so that it's set at creation time and not later; an empty ID trait can cause certain event handlers to get skipped -->
+
+			<_Value></_Value>									<!-- The value of the item in caps -->
+			<_NumBartered></_NumBartered>						<!-- # items in this stack that are up for barter -->
+			<_IsEquipped> &false; </_IsEquipped>				<!-- True if this item is equipped -->
+			<_IsBarterSelected> &false; </_IsBarterSelected>	<!-- True if this item has been selected for transaction -->
+
+			<height> <copy src="io()" trait="_itemHeight" /> </height>
+			<_VerticalSpacing> 7 </_VerticalSpacing>
+			<text name="ListItemText">
+				<font> <copy src="globals()" trait="_gl_listFont" /> </font> <!-- DarN 2 -->
+				<string> <copy src="parent()" trait="string" /> </string>
+				<wrapwidth> 300 </wrapwidth>
+				<x> 40 </x>
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y> <!-- DarN 20 -->
+			</text>
+
+			<!-- Item sorting value -->
+			<text name="BM_list_template_ItemValue">
+				<font> <copy src="globals()" trait="_gl_listFont" /> </font> <!-- DarN 2 -->
+				<justify> &right; </justify>
+				<string> <copy src="parent()" trait="_Value" /> </string>
+
+				<x> 403 </x>
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y> <!-- DarN 20 -->
+			</text>
+
+			<!-- Small square denotes an equipped item -->
+			<image name="BM_list_template_ItemMarker">
+				<filename>
+					<copy> 0 </copy>
+					<add>
+						<copy> 1 </copy>
+						<onlyif src="parent()" trait="_IsEquipped" />
+					</add>
+					<add>
+						<copy> 2 </copy>
+						<onlyif src="parent()" trait="_IsBarterSelected" />
+					</add>
+					<copy src="me()" trait="_Filename_" />
+				</filename>
+				<!-- <texatlas> Interface\InterfaceShared.tai </texatlas> -->
+				<width> 14 </width> <!-- DarN 25 -->
+				<height> 14 </height> <!-- DarN 25 -->
+
+				<x> 12 </x> <!-- DarN 15 -->
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub src="me()" trait="height" />
+					<div> 2 </div>
+				</y> <!-- DarN 15 -->
+				<visible>
+					<copy src="parent()" trait="_IsEquipped" />
+					<or src="parent()" trait="_IsBarterSelected" />
+				</visible>
+				<zoom> 67 </zoom>
+
+				<_Filename_1> interface\shared\marker\square_filled.dds </_Filename_1>
+				<_Filename_2> interface\shared\marker\square.dds </_Filename_2>
+			</image>
+		</hotrect>
+	</template>
+</menu>

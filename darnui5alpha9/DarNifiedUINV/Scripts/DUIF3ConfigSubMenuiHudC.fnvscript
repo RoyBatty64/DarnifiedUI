@@ -1,0 +1,29 @@
+scn DUIF3ConfigSubMenuiHudC
+
+int iMaster
+int iOption
+float fValue
+ref rList
+
+Begin GameMode
+	if GetGameRestarted
+		if IsModLoaded "The Mod Configuration Menu.esp"
+			set iMaster to GetModIndex "The Mod Configuration Menu.esp"
+			set rList to BuildRef iMaster 2790
+		endif
+	endif
+End
+
+Begin MenuMode 1013
+	if IsModLoaded "The Mod Configuration Menu.esp" && GetMCMFloat 0 0 "_ActiveSubMenu" == 7
+	else
+		Return
+	endif
+
+	if GetMCMFloat 0 0 "_ActiveMod" == GetModIndex "DarNifiedUINV.esp"
+		set iOption to GetMCMFloat 0 0 "_ActiveOption"
+		set fValue to GetMCMFloat 0 0 "_Value"
+		
+	endif
+
+End

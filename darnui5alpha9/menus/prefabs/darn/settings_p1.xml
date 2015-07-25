@@ -1,0 +1,1995 @@
+﻿<locus> &true; </locus>
+<x>
+	<copy src="sibling(DUI_ulcv)" trait="_x" />
+	<add> 30 </add>
+</x>
+<y>
+	<copy src="sibling(DUI_ulch)" trait="y" />
+	<add> 40 </add>
+</y>
+<visible>
+	<copy src="io()" trait="_CurrentTab" />
+	<eq> 1 </eq>
+</visible>
+<depth> 1 </depth>
+<_hasVTabs>
+		<copy> 1 </copy>
+		<onlyif src="me()" trait="visible" />
+</_hasVTabs>
+<_pageOffset>
+	<copy src="child(vtabs)" trait="width" />
+	<add> 40 </add>
+</_pageOffset>
+
+<rect name="vtabs">
+	<include src="darn\duif3Settings_verttabline.xml" />
+	<_subButtonCount> 4 </_subButtonCount>
+	<_Tab1Caption> General </_Tab1Caption>
+	<_Tab2Caption> Elements </_Tab2Caption>
+	<_Tab3Caption> Colors </_Tab3Caption>
+	<_Tab4Caption> xPanels </_Tab4Caption>
+	<x> 0 </x>
+	<y> 0 </y>
+</rect>
+
+<rect name="content1"> <!-- DarN general page -->
+	<locus> &true; </locus>
+	<_alpha> 200 </_alpha>
+
+	<visible>
+		<copy src="sibling(vtabs)" trait="_currentSubTab" />
+		<eq> 1 </eq>
+	</visible>
+	<x> <copy src="parent()" trait="_pageOffset" /> </x>
+	<y> 0 </y>
+	<width> <copy src="sibling(content4)" trait="width" /> </width>
+	<height> <copy src="sibling(content4)" trait="height" /> </height>
+
+	<hotrect name="HUDScaleBtn">
+		<include src="darn\scrubCtrl.xml" />
+		<!-- <xup> <ref src="sibling(xPanelsBtn)" trait="mouseover" /> </xup>  -->
+		<xdown> <ref src="sibling(HUDSolidMetersBtn)" trait="mouseover" /> </xdown>
+
+		<width> 240 </width>
+		<_Caption> HUD Scale: </_Caption>
+		<_Min> 40 </_Min>
+		<_Max> 100 </_Max>
+		<_Value> <copy src="DUIF3SettingsMain" trait="_HUDScaleState" /> </_Value>
+		<_Start> <copy src="io()" trait="_HUDScale" /> </_Start>
+		<_enabled> 1 </_enabled>
+	</hotrect>
+
+	<hotrect name="HUDSolidMetersBtn">
+		<include src="darn\toggleBtn.xml" />
+		<y>
+			<copy src="sibling(HUDScaleBtn)" trait="y" />
+			<add src="me()" trait="height" />
+		</y>
+		<width> 240 </width>
+		<xup> <ref src="sibling(HUDScaleBtn)" trait="mouseover" /> </xup>
+		<!-- <xdown> <ref src="sibling(xPanelsYBtn)" trait="mouseover" /> </xdown> -->
+
+		<_Caption> Solid meters: </_Caption>
+		<_Start> <copy src="io()" trait="_HUDSolidMeters" /> </_Start>
+		<_enabled> 1 </_enabled>
+	</hotrect>
+
+	<hotrect name="HUDMeterFntBtn">
+		<include src="darn\toggleFntMultiBtn.xml" />
+		<x> <copy src="sibling(HUDSolidMetersBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(HUDSolidMetersBtn)" trait="y" />
+			<add src="sibling(HUDSolidMetersBtn)" trait="height" />
+		</y>
+		<xup> <ref src="sibling(HUDSolidMetersBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(HUDScaleBtn)" trait="mouseover" /> </xdown>
+
+		<_States> 7 </_States>
+		<_State_0> 1 </_State_0>
+		<_State_1> 2 </_State_1>
+		<_State_2> 3 </_State_2>
+		<_State_3> 4 </_State_3>
+		<_State_4> 5 </_State_4>
+		<_State_5> 6 </_State_5>
+		<_State_6> 7 </_State_6>
+		<_Start> <copy src="io()" trait="_HUDMeterFontStart" /> </_Start>
+		<_Value> <copy src="io()" trait="_HUDMeterFont" /><sub>1</sub> </_Value>
+		<_Caption> Meter font: </_Caption>
+		<width> 240 </width>
+		<_enabled> 1 </_enabled>
+		<_noOffState> 1 </_noOffState>
+	</hotrect>
+
+	<text name="dbgMisc">
+		<font> 6 </font>
+		<x>
+			<copy src="parent()" trait="width" />
+			<sub src="me()" trait="width" />
+			<div> 2 </div>
+		</x>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+		<string> DUIF3 :: Sub Page 1 </string>
+		<visible> 0 </visible>
+	</text>
+</rect>
+
+<rect name="content2"> <!-- Elements Page -->
+	<locus> &true; </locus>
+	<visible>
+		<copy src="sibling(vtabs)" trait="_currentSubTab" />
+		<eq> 2 </eq>
+	</visible>
+	<x> <copy src="parent()" trait="_pageOffset" /> </x>
+	<y> 0 </y>
+	<width> <copy src="sibling(content1)" trait="width" /> </width>
+	<height> <copy src="sibling(content1)" trait="height" /> </height>
+
+ 	<rect name="ElLeftSide">
+		<locus> &true; </locus>
+		<x> 0 </x>
+		<y> 0 </y>
+		<width>
+			<copy src="parent()" trait="width" />
+			<div> 2 </div>
+		</width>
+		<height>
+			<copy src="me()" trait="childcount" />
+			<mul src="child(HPArea)" trait="height" />
+		</height>
+		<_alpha> 200 </_alpha>
+		<_buttonHeight>
+			<copy src="child(HPArea)" trait="height" />
+			<sub> 4 </sub>
+		</_buttonHeight>
+
+		<hotrect name="HPArea">
+			<include src="darn\toggleHeaderBtn.xml" />
+
+			<xup> <ref src="sibling(xStatsRRBtn)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPAreaX)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDHPArea" /> </_Start>
+			<_Caption> HPArea: </_Caption>
+			<width> 250 </width>
+			<_enabled> 1 </_enabled>
+		</hotrect>
+
+		<hotrect name="HPAreaX">
+			<include src="darn\scrubCtrl.xml" />
+			<x> <copy src="sibling(HPArea)" trait="x" /> </x>
+			<y>
+				<copy src="sibling(HPArea)" trait="y" />
+				<add src="sibling(HPArea)" trait="height" />
+			</y>
+			<width> 250 </width>
+			<xup> <ref src="sibling(HPArea)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPAreaY)" trait="mouseover" /> </xdown>
+
+			<_Caption> HPAreaX: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDHPAreaXState" /> </_Value>
+			<_Start> <copy src="io()" trait="_HUDHPAreaX" /> </_Start>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HPAreaY">
+			<include src="darn\scrubCtrl.xml" />
+			<x> <copy src="sibling(HPArea)" trait="x" /> </x>
+			<y>
+				<copy src="sibling(HPAreaX)" trait="y" />
+				<add src="me()" trait="height" />
+			</y>
+			<xup> <ref src="sibling(HPAreaX)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDHPAreaY" /> </_Start>
+			<_Caption> HPAreaY: </_Caption>
+			<_Min>
+				<copy src="screen()" trait="height" />
+				<mul> -1 </mul>
+			</_Min>
+			<_Max> 0 </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDHPAreaYState" /> </_Value>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HPCompass">
+			<include src="darn\toggleHeaderBtn.xml" />
+			<y>
+				<copy src="sibling(HPAreaY)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HPAreaY)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPDetachCompass)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDCompass" /> </_Start>
+			<_Caption> Compass: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HPDetachCompass">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(HPCompass)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HPCompass)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompass_X)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDDetachCompass" /> </_Start>
+			<_Caption> Detach Compass: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HPCompass_X">
+			<include src="darn\scrubCtrl.xml" />
+			<x> <copy src="sibling(HPArea)" trait="x" /> </x>
+			<y>
+				<copy src="sibling(HPDetachCompass)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HPDetachCompass)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompass_Y)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDCompass_X" /> </_Start>
+			<_Caption> Compass X: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_Compass_XState" /> </_Value>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HPCompass_Y">
+			<include src="darn\scrubCtrl.xml" />
+			<x> <copy src="sibling(HPArea)" trait="x" /> </x>
+			<y>
+				<copy src="sibling(HPCompass_X)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HPAreaX)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDCompass_Y" /> </_Start>
+			<_Caption> Compass Y: </_Caption>
+			<_Min>
+				<copy src="screen()" trait="height" />
+				<mul> -1 </mul>
+			</_Min>
+			<_Max> 0 </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_Compass_YState" /> </_Value>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HPCompassFrame">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(HPCompass_Y)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HPCompass_Y)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPShowQuestMarkers)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDCompassFrame" /> </_Start>
+			<_Caption> Compass Frame: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HPShowQuestMarkers">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(HPCompassFrame)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPShowLandmarks)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowQuestMarkers" /> </_Start>
+			<_Caption> Show Quest Markers: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HPShowLandmarks">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(HPShowQuestMarkers)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HPShowQuestMarkers)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPShowNPC)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowLandmarks" /> </_Start>
+			<_Caption> Show Landmarks: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HPShowNPC">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(HPShowLandmarks)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HPShowLandmarks)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPShowEnemies)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowNPC" /> </_Start>
+			<_Caption> Show NPC's: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HPShowEnemies">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(HPShowNPC)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HPShowNPC)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPMarkEnemies)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowEnemies" /> </_Start>
+			<_Caption> Show Enemies: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HPMarkEnemies">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(HPShowEnemies)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HPShowEnemies)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDMarkEnemies" /> </_Start>
+			<_Caption> Mark Enemies: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(HPArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="APArea">
+			<include src="darn\toggleHeaderBtn.xml" />
+			<y>
+				<copy src="sibling(HPMarkEnemies)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HPMarkEnemies)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowAPInfo" /> </_Start>
+			<_Caption> AP Area: </_Caption>
+			<width> 250 </width>
+			<_enabled> 1 </_enabled>
+		</hotrect>
+
+		<hotrect name="APArea_X">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(APArea)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(APArea)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDAPInfo_X" /> </_Start>
+			<_Caption> AP Area X: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDAPInfo_XState" /> </_Value>
+			<_enabled> <copy src="sibling(APArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="APArea_Y">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(APArea_X)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(APArea_X)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDAPInfo_Y" /> </_Start>
+			<_Caption> AP Area Y: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="height" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDAPInfo_YState" /> </_Value>
+			<_enabled> <copy src="sibling(APArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="APAreaBracket">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(APArea_Y)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(APArea_Y)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowAPBracket" /> </_Start>
+			<_Caption> AP Bracket: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(APArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="EnemyHealth">
+			<include src="darn\toggleHeaderBtn.xml" />
+			<y>
+				<copy src="sibling(APAreaBracket)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(APAreaBracket)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowEH" /> </_Start>
+			<_Caption> Enemy Health: </_Caption>
+			<width> 250 </width>
+			<_enabled> 1 </_enabled>
+		</hotrect>
+
+		<hotrect name="EH_X">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(EnemyHealth)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(EnemyHealth)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDEH_X" /> </_Start>
+			<_Caption> Enemy Health X: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDEH_XState" /> </_Value>
+			<_enabled> <copy src="sibling(EnemyHealth)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="EH_Y">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(EH_X)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(EH_X)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDEH_Y" /> </_Start>
+			<_Caption> Enemy Health Y: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDEH_YState" /> </_Value>
+			<_enabled> <copy src="sibling(EnemyHealth)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="EHBracket">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(EH_Y)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(EH_Y)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowEHBracket" /> </_Start>
+			<_Caption> EH Bracket: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(EnemyHealth)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="HK_X">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(EHBracket)" trait="y" />
+				<add src="me()" trait="height" />
+
+				<add> 4 </add>
+			</y>
+			<xup> <ref src="sibling(EHBracket)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDHotKeys_X" /> </_Start>
+			<_Caption> HotKeys X: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDHK_XState" /> </_Value>
+			<_enabled> 1 </_enabled>
+		</hotrect>
+
+		<hotrect name="HK_Y">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(HK_X)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(HK_X)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDHotKeys_Y" /> </_Start>
+			<_Caption> HotKeys Y: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDHK_YState" /> </_Value>
+			<_enabled> 1 </_enabled>
+		</hotrect>
+
+	</rect>
+
+	<rect name="ElRightSide">
+		<locus> &true; </locus>
+		<x>
+			<copy src="sibling(ElLeftSide)" trait="x" />
+			<add src="sibling(ElLeftSide)" trait="width" />
+		</x>
+		<y> 0 </y>
+		<width>
+			<copy src="parent()" trait="width" />
+			<div> 2 </div>
+		</width>
+		<height>
+			<copy src="me()" trait="childcount" />
+			<mul src="child(BreathMeter)" trait="height" />
+		</height>
+		<_alpha> 200 </_alpha>
+		<_buttonHeight>
+			<copy src="child(BreathMeter)" trait="height" />
+			<sub> 4 </sub>
+		</_buttonHeight>
+
+		<hotrect name="BreathMeter">
+			<include src="darn\toggleHeaderBtn.xml" />
+			<y> 0 </y>
+			<xup> <ref src="EHBracket" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowBM" /> </_Start>
+			<_Caption> BreathMeter: </_Caption>
+			<width> 250 </width>
+			<_enabled> 1 </_enabled>
+		</hotrect>
+
+		<hotrect name="BM_X">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(BreathMeter)" trait="y" />
+				<add src="sibling(BreathMeter)" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(BreathMeter)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDBM_X" /> </_Start>
+			<_Caption> BreathMeter X: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDBM_XState" /> </_Value>
+			<_enabled> <copy src="sibling(BreathMeter)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="BM_Y">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(BM_X)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(BM_X)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDBM_Y" /> </_Start>
+			<_Caption> BreathMeter Y: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDBM_YState" /> </_Value>
+			<_enabled> <copy src="sibling(BreathMeter)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="SneakMeter">
+			<include src="darn\toggleHeaderBtn.xml" />
+			<y>
+				<copy src="sibling(BM_Y)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(BM_Y)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowSneak" /> </_Start>
+			<_Caption> SneakMeter: </_Caption>
+			<width> 250 </width>
+			<_enabled> 1 </_enabled>
+		</hotrect>
+
+		<hotrect name="SM_X">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(SneakMeter)" trait="y" />
+				<add src="sibling(SneakMeter)" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(SneakMeter)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDBM_X" /> </_Start>
+			<_Caption> SneakMeter X: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDSM_XState" /> </_Value>
+			<_enabled> <copy src="sibling(SneakMeter)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="SM_Y">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(SM_X)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(SM_X)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDSM_Y" /> </_Start>
+			<_Caption> SneakMeter Y: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDSM_YState" /> </_Value>
+			<_enabled> <copy src="sibling(SneakMeter)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="Messages">
+			<include src="darn\toggleHeaderBtn.xml" />
+			<y>
+				<copy src="sibling(SM_Y)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(SM_Y)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowMessages" /> </_Start>
+			<_Caption> Messages: </_Caption>
+			<width> 250 </width>
+			<_enabled> 1 </_enabled>
+		</hotrect>
+
+		<hotrect name="Msg_X">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(Messages)" trait="y" />
+				<add src="sibling(Messages)" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(Messages)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDMsg_X" /> </_Start>
+			<_Caption> Messages X: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDMsg_XState" /> </_Value>
+			<_enabled> <copy src="sibling(Messages)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="Msg_Y">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(Msg_X)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(Msg_X)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDMsg_Y" /> </_Start>
+			<_Caption> Messages Y: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDMsg_YState" /> </_Value>
+			<_enabled> <copy src="sibling(Messages)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="MsgBracket">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(Msg_Y)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(Msg_Y)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowMsgBracket" /> </_Start>
+			<_Caption> Messages Bracket: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(Messages)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="MsgIcon">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(MsgBracket)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(MsgBracket)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowMsgIcon" /> </_Start>
+			<_Caption> Messages Icon: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(Messages)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="InfoArea">
+			<include src="darn\toggleHeaderBtn.xml" />
+			<y>
+				<copy src="sibling(MsgIcon)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(MsgIcon)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowInfo" /> </_Start>
+			<_Caption> Info Area: </_Caption>
+			<width> 250 </width>
+			<_enabled> 1 </_enabled>
+		</hotrect>
+
+		<hotrect name="InfoArea_X">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(InfoArea)" trait="y" />
+				<add src="sibling(InfoArea)" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(InfoArea)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDMsg_X" /> </_Start>
+			<_Caption> InfoArea X: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDInfo_XState" /> </_Value>
+			<_enabled> <copy src="sibling(InfoArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="InfoArea_Y">
+			<include src="darn\scrubCtrl.xml" />
+			<y>
+				<copy src="sibling(InfoArea_X)" trait="y" />
+				<add src="sibling(InfoArea_X)" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(InfoArea_X)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPCompassFrame)" trait="mouseover" /> </xdown>
+
+			<width> 250 </width>
+
+			<_Start> <copy src="io()" trait="_HUDMsg_X" /> </_Start>
+			<_Caption> InfoArea Y: </_Caption>
+			<_Min> 0 </_Min>
+			<_Max> <copy src="screen()" trait="width" /> </_Max>
+
+			<_Value> <copy src="DUIF3SettingsMain" trait="_HUDInfo_YState" /> </_Value>
+			<_enabled> <copy src="sibling(InfoArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+		<hotrect name="InfoAreaBracket">
+			<include src="darn\toggleBtn.xml" />
+			<y>
+				<copy src="sibling(InfoArea_Y)" trait="y" />
+				<add src="me()" trait="height" />
+
+			</y>
+			<xup> <ref src="sibling(InfoArea_Y)" trait="mouseover" /> </xup>
+			<xdown> <ref src="sibling(HPArea)" trait="mouseover" /> </xdown>
+
+			<_Start> <copy src="io()" trait="_HUDShowIBracket" /> </_Start>
+			<_Caption> InfoArea Bracket: </_Caption>
+			<width> 250 </width>
+			<_enabled> <copy src="sibling(InfoArea)" trait="_State" /> </_enabled>
+		</hotrect>
+
+	</rect>
+</rect>
+
+<rect name="content3"> <!-- DarN Colors page -->
+	<visible>
+		<copy src="sibling(vtabs)" trait="_currentSubTab" />
+		<eq> 3 </eq>
+	</visible>
+	<x> <copy src="parent()" trait="_pageOffset" /> </x>
+	<y> 0 </y>
+	<width> <copy src="sibling(content1)" trait="width" /> </width>
+	<height> <copy src="sibling(content1)" trait="height" /> </height>
+	<_alpha> 255 </_alpha>
+	<_buttonHeight>
+		<copy src="child(OverrideColorBtn)" trait="height" />
+	</_buttonHeight>
+	<locus> &true; </locus>
+
+ 	<hotrect name="OverrideColorBtn">
+		<include src="darn\toggleBtn.xml" />
+		<xup> <ref src="sibling(AlertLvlScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(ACRedScrub)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_OColor" /> </_Start>
+		<_Caption> Use custom colors: </_Caption>
+		<_State_0> &-sNo; </_State_0>
+		<_State_1> &-sYes; </_State_1>
+		<width> 250 </width>
+		<_enabled> 1 </_enabled>
+	</hotrect>
+
+	<text name="ACLbl">
+
+		<alpha>
+			<copy src="parent()" trait="_alpha" />
+			<sub>
+				<copy> 100 </copy>
+				<onlyifnot src="sibling(OverrideColorBtn)" trait="_State" />
+			</sub>
+		</alpha>
+		<y>
+			<copy src="sibling(OverrideColorBtn)" trait="y" />
+			<add src="sibling(OverrideColorBtn)" trait="height" />
+			<add> 20 </add>
+		</y>
+		<string> Art color </string>
+	</text>
+
+	<rect name="ACView">
+		<include src="darn\colorview.xml" />
+		<alpha> <copy src="sibling(ACLbl)" trait="alpha" /> </alpha>
+		<x>
+			<copy src="sibling(ACRedScrub)" trait="x" />
+			<add src="sibling(ACRedScrub)" trait="width" />
+			<add> 20 </add>
+		</x>
+		<y> <copy src="sibling(ACRedScrub)" trait="y" /> </y>
+		<width>
+			<copy src="sibling(ACRedScrub)" trait="height" />
+			<mul> 3 </mul>
+		</width>
+		<height> <copy src="me()" trait="width" /> </height>
+		<red> <copy src="sibling(ACRedScrub)" trait="_Value" /> </red>
+		<green> <copy src="sibling(ACGreenScrub)" trait="_Value" /> </green>
+		<blue> <copy src="sibling(ACBlueScrub)" trait="_Value" /> </blue>
+	</rect>
+
+	<hotrect name="ACRedScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x>
+			<copy src="sibling(ACLbl)" trait="x" />
+			<add> 20 </add>
+		</x>
+		<xup> <ref src="sibling(OverrideColorBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(ACGreenScrub)" trait="mouseover" /> </xdown>
+
+		<y>
+			<copy src="sibling(ACLbl)" trait="y" />
+			<add src="sibling(ACLbl)" trait="height" />
+			<add> 10 </add>
+		</y>
+		<width> 190 </width>
+
+
+		<_Caption> Red: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_cHUDRed" /> </_Value>
+		<_Start> <copy src="io()" trait="_HUDRed" /> </_Start>
+		<_enabled> <copy src="sibling(OverrideColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+	<hotrect name="ACGreenScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(ACRedScrub)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(ACRedScrub)" trait="y" />
+			<add src="sibling(ACRedScrub)" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(ACRedScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(ACBlueScrub)" trait="mouseover" /> </xdown>
+
+		<width> 190 </width>
+
+
+		<_Caption> Green: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_cHUDGreen" /> </_Value>
+		<_Start> <copy src="io()" trait="_HUDGreen" /> </_Start>
+		<_enabled> <copy src="sibling(OverrideColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+	<hotrect name="ACBlueScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(ACLbl)" trait="x" /> <add> 20 </add></x>
+		<y>
+			<copy src="sibling(ACGreenScrub)" trait="y" />
+			<add src="sibling(ACGreenScrub)" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(ACGreenScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(TCRedScrub)" trait="mouseover" /> </xdown>
+
+		<width> 190 </width>
+
+
+		<_Caption> Blue: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_cHUDBlue" /> </_Value>
+		<_Start> <copy src="io()" trait="_HUDBlue" /> </_Start>
+		<_enabled> <copy src="sibling(OverrideColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<text name="TCLbl">
+
+		<alpha> <copy src="sibling(ACLbl)" trait="alpha" /> </alpha>
+		<y>
+			<copy src="sibling(ACBlueScrub)" trait="y" />
+			<add src="sibling(ACBlueScrub)" trait="height" />
+			<add> 20 </add>
+		</y>
+		<string> Text color </string>
+	</text>
+
+	<rect name="TCView">
+		<include src="darn\colorview.xml" />
+		<alpha> <copy src="sibling(ACLbl)" trait="alpha" /> </alpha>
+		<x>
+			<copy src="sibling(TCRedScrub)" trait="x" />
+			<add src="sibling(TCRedScrub)" trait="width" />
+			<add> 20 </add>
+		</x>
+		<y> <copy src="sibling(TCRedScrub)" trait="y" /> </y>
+		<width>
+			<copy src="sibling(TCRedScrub)" trait="height" />
+			<mul> 3 </mul>
+		</width>
+		<height> <copy src="me()" trait="width" /> </height>
+		<red> <copy src="sibling(TCRedScrub)" trait="_Value" /> </red>
+		<green> <copy src="sibling(TCGreenScrub)" trait="_Value" /> </green>
+		<blue> <copy src="sibling(TCBlueScrub)" trait="_Value" /> </blue>
+	</rect>
+
+	<hotrect name="TCRedScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(ACLbl)" trait="x" /> <add> 20 </add></x>
+		<y>
+			<copy src="sibling(TCLbl)" trait="y" />
+			<add src="sibling(TCLbl)" trait="height" />
+			<add> 10 </add>
+		</y>
+		<xup> <ref src="sibling(ACBlueScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(TCGreenScrub)" trait="mouseover" /> </xdown>
+
+		<width> 190 </width>
+
+
+		<_Caption> Red: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_cHUDTxtRed" /> </_Value>
+		<_Start> <copy src="io()" trait="_HUDTxtRed" /> </_Start>
+		<_enabled> <copy src="sibling(OverrideColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+	<hotrect name="TCGreenScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(ACLbl)" trait="x" /> <add> 20 </add></x>
+		<y>
+			<copy src="sibling(TCRedScrub)" trait="y" />
+			<add src="sibling(TCRedScrub)" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(TCRedScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(TCBlueScrub)" trait="mouseover" /> </xdown>
+
+		<width> 190 </width>
+
+
+		<_Caption> Green: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_cHUDTxtGreen" /> </_Value>
+		<_Start> <copy src="io()" trait="_HUDTxtGreen" /> </_Start>
+		<_enabled> <copy src="sibling(OverrideColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+	<hotrect name="TCBlueScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(ACLbl)" trait="x" /> <add> 20 </add></x>
+		<y>
+			<copy src="sibling(TCGreenScrub)" trait="y" />
+			<add src="sibling(TCGreenScrub)" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(TCGreenScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(DynamicColorBtn)" trait="mouseover" /> </xdown>
+
+		<width> 190 </width>
+
+
+		<_Caption> Blue: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_cHUDTxtBlue" /> </_Value>
+		<_Start> <copy src="io()" trait="_HUDTxtBlue" /> </_Start>
+		<_enabled> <copy src="sibling(OverrideColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+
+	<hotrect name="DynamicColorBtn">
+		<include src="darn\toggleBtn.xml" />
+		<y>
+			<copy src="sibling(TCBlueScrub)" trait="y" />
+			<add src="sibling(TCBlueScrub)" trait="height" />
+			<add> 30 </add>
+		</y>
+		<xup> <ref src="sibling(TCBlueScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(DCWRedScrub)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_DColor" /> </_Start>
+		<_Caption> Dynamic meter colors: </_Caption>
+		<_State_0> &-sNo; </_State_0>
+		<_State_1> &-sYes; </_State_1>
+		<width> 250 </width>
+		<_enabled> 1 </_enabled>
+	</hotrect>
+
+	<text name="DCWarnLbl">
+
+		<alpha>
+			<copy src="parent()" trait="_alpha" />
+			<sub>
+				<copy> 100 </copy>
+				<onlyifnot src="sibling(DynamicColorBtn)" trait="_State" />
+			</sub>
+		</alpha>
+		<y>
+			<copy src="sibling(DynamicColorBtn)" trait="y" />
+			<add src="sibling(DynamicColorBtn)" trait="height" />
+			<add> 20 </add>
+		</y>
+		<string> Warning color </string>
+	</text>
+
+	<rect name="WarnView">
+		<include src="darn\colorview.xml" />
+		<alpha> <copy src="sibling(DCWarnLbl)" trait="alpha" /> </alpha>
+		<x>
+			<copy src="sibling(DCWRedScrub)" trait="x" />
+			<add src="sibling(DCWRedScrub)" trait="width" />
+			<add> 20 </add>
+		</x>
+		<y> <copy src="sibling(DCWRedScrub)" trait="y" /> </y>
+		<width>
+			<copy src="sibling(DCWRedScrub)" trait="height" />
+			<mul> 3 </mul>
+		</width>
+		<height> <copy src="me()" trait="width" /> </height>
+		<red> <copy src="sibling(DCWRedScrub)" trait="_Value" /> </red>
+		<green> <copy src="sibling(DCWGreenScrub)" trait="_Value" /> </green>
+		<blue> <copy src="sibling(DCWBlueScrub)" trait="_Value" /> </blue>
+	</rect>
+
+	<hotrect name="DCWRedScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x>
+			<copy src="sibling(DCWarnLbl)" trait="x" />
+			<add> 20 </add>
+		</x>
+		<xup> <ref src="sibling(DynamicColorBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(DCWGreenScrub)" trait="mouseover" /> </xdown>
+
+		<y>
+			<copy src="sibling(DCWarnLbl)" trait="y" />
+			<add src="sibling(DCWarnLbl)" trait="height" />
+			<add> 10 </add>
+		</y>
+		<width> 190 </width>
+
+
+		<_Caption> Red: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_cwRedState" /> </_Value>
+		<_Start> <copy src="io()" trait="_cwRed" /> </_Start>
+		<_enabled> <copy src="sibling(DynamicColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="DCWGreenScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(DCWRedScrub)" trait="x" /> </x>
+		<xup> <ref src="sibling(DCWRedScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(DCWBlueScrub)" trait="mouseover" /> </xdown>
+
+		<y>
+			<copy src="sibling(DCWRedScrub)" trait="y" />
+			<add src="sibling(DCWRedScrub)" trait="height" />
+
+		</y>
+		<width> 190 </width>
+
+
+		<_Caption> Green: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_cwGreenState" /> </_Value>
+		<_Start> <copy src="io()" trait="_cwGreen" /> </_Start>
+		<_enabled> <copy src="sibling(DynamicColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="DCWBlueScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(DCWRedScrub)" trait="x" /> </x>
+		<xup> <ref src="sibling(DCWGreenScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(DCARedScrub)" trait="mouseover" /> </xdown>
+
+		<y>
+			<copy src="sibling(DCWGreenScrub)" trait="y" />
+			<add src="sibling(DCWGreenScrub)" trait="height" />
+
+		</y>
+		<width> 190 </width>
+
+
+		<_Caption> Blue: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_cwBlueState" /> </_Value>
+		<_Start> <copy src="io()" trait="_cwBlue" /> </_Start>
+		<_enabled> <copy src="sibling(DynamicColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+
+	<text name="DCAlertLbl">
+
+		<alpha> <copy src="sibling(DCWarnLbl)" trait="alpha" /> </alpha>
+		<y>
+			<copy src="sibling(DCWBlueScrub)" trait="y" />
+			<add src="sibling(DCWBlueScrub)" trait="height" />
+			<add> 20 </add>
+		</y>
+		<string> Alert color </string>
+	</text>
+
+	<rect name="AlertView">
+		<include src="darn\colorview.xml" />
+		<alpha> <copy src="sibling(DCAlertLbl)" trait="alpha" /> </alpha>
+		<x>
+			<copy src="sibling(DCARedScrub)" trait="x" />
+			<add src="sibling(DCARedScrub)" trait="width" />
+			<add> 20 </add>
+		</x>
+		<y> <copy src="sibling(DCARedScrub)" trait="y" /> </y>
+		<width>
+			<copy src="sibling(DCARedScrub)" trait="height" />
+			<mul> 3 </mul>
+		</width>
+		<height> <copy src="me()" trait="width" /> </height>
+		<red> <copy src="sibling(DCARedScrub)" trait="_Value" /> </red>
+		<green> <copy src="sibling(DCAGreenScrub)" trait="_Value" /> </green>
+		<blue> <copy src="sibling(DCABlueScrub)" trait="_Value" /> </blue>
+	</rect>
+
+	<hotrect name="DCARedScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(ACLbl)" trait="x" /> <add> 20 </add></x>
+		<y>
+			<copy src="sibling(DCAlertLbl)" trait="y" />
+			<add src="sibling(DCAlertLbl)" trait="height" />
+			<add> 10 </add>
+		</y>
+		<xup> <ref src="sibling(DCWBlueScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(DCAGreenScrub)" trait="mouseover" /> </xdown>
+
+		<width> 190 </width>
+
+
+		<_Caption> Red: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_caRedState" /> </_Value>
+		<_Start> <copy src="io()" trait="_caRed" /> </_Start>
+		<_enabled> <copy src="sibling(DynamicColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="DCAGreenScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(ACLbl)" trait="x" /> <add> 20 </add></x>
+		<y>
+			<copy src="sibling(DCARedScrub)" trait="y" />
+			<add src="sibling(DCARedScrub)" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(DCARedScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(DCABlueScrub)" trait="mouseover" /> </xdown>
+
+		<width> 190 </width>
+
+
+		<_Caption> Green: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_caGreenState" /> </_Value>
+		<_Start> <copy src="io()" trait="_caGreen" /> </_Start>
+		<_enabled> <copy src="sibling(DynamicColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+	<hotrect name="DCABlueScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(ACLbl)" trait="x" /> <add> 20 </add></x>
+		<y>
+			<copy src="sibling(DCAGreenScrub)" trait="y" />
+			<add src="sibling(DCAGreenScrub)" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(DCAGreenScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(WarnLvlScrub)" trait="mouseover" /> </xdown>
+
+		<width> 190 </width>
+
+
+		<_Caption> Blue: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> 255 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_caBlueState" /> </_Value>
+		<_Start> <copy src="io()" trait="_caBlue" /> </_Start>
+		<_enabled> <copy src="sibling(DynamicColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="WarnLvlScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x>
+			<copy src="sibling(AlertView)" trait="x" />
+			<add src="sibling(AlertView)" trait="width" />
+			<add> 30 </add>
+		</x>
+		<y>
+			<copy src="sibling(DCWarnLbl)" trait="y" />
+		</y>
+		<xup> <ref src="sibling(DCABlueScrub)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(AlertLvlScrub)" trait="mouseover" /> </xdown>
+
+		<width> 250 </width>
+
+
+		<_Caption> Warning level: </_Caption>
+		<_Min> <copy src="sibling(AlertLvlScrub)" trait="_State" /> </_Min>
+		<_Max> 100 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_cWarnLvlState" /> </_Value>
+		<_Start> <copy src="io()" trait="_dcWarnLvl" /> </_Start>
+		<_enabled> <copy src="sibling(DynamicColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="AlertLvlScrub">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(WarnLvlScrub)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(DCAlertLbl)" trait="y" />
+		</y>
+		<xup> <ref src="sibling(WarnLvlScrub)" trait="mouseover" /> </xup>
+
+		<width> 250 </width>
+
+
+		<_Caption> Alert level: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max> <copy src="sibling(WarnLvlScrub)" trait="_State" /> </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_cAlertLvlState" /> </_Value>
+		<_Start> <copy src="io()" trait="_dcAlertLvl" /> </_Start>
+		<_enabled> <copy src="sibling(DynamicColorBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+</rect>
+
+<rect name="content4"> <!-- DarN xPanels page -->
+	<_alpha> 200 </_alpha>
+	<_buttonHeight>
+		<copy src="child(xPanelsBtn)" trait="height" />
+		<sub> 4 </sub>
+	</_buttonHeight>
+
+	<locus> &true; </locus>
+	<visible>
+		<copy src="sibling(vtabs)" trait="_currentSubTab" />
+		<eq> 4 </eq>
+	</visible>
+	<x>
+		<copy src="sibling(vtabs)" trait="width" />
+		<add> 40 </add>
+	</x>
+	<y> 0 </y>
+	<width>
+		<copy src="child(xStatsBtn)" trait="x" />
+		<add src="child(xStatsBtn)" trait="width" />
+		<!-- <sub src="me()" trait="x" /> -->
+		<!-- <sub src="tabs" trait="width" /> -->
+	</width>
+	<height>
+		<copy src="child(xRadCurrentBtn)" trait="y" />
+		<add src="child(xRadCurrentBtn)" trait="height" />
+	</height>
+
+	<hotrect name="xPanelsBtn">
+		<include src="darn\toggleHeaderBtn.xml" />
+
+		<xup> <ref src="sibling(xStatsRRBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xPanelsXBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xPanels" /> </_Start>
+		<_Caption> xPanels: </_Caption>
+		<width> 250 </width>
+		<_enabled> 1 </_enabled>
+	</hotrect>
+
+	<hotrect name="xPanelsXBtn">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<xup> <ref src="sibling(xPanelsBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xPanelsYBtn)" trait="mouseover" /> </xdown>
+
+		<y>
+			<copy src="sibling(xPanelsBtn)" trait="y" />
+			<add src="sibling(xPanelsBtn)" trait="height" />
+
+		</y>
+		<width> 250 </width>
+
+
+		<_Caption> xPanelsX: </_Caption>
+		<_Min>
+			<copy src="screen()" trait="width" />
+			<mul> -1 </mul>
+			<add src="io()" trait="_PanelWidth" />
+		</_Min>
+		<_Max> 0 </_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_xPanelXState" /> </_Value>
+		<_Start> <copy src="io()" trait="_xPanelsX" /> </_Start>
+		<_enabled> <copy src="sibling(xPanelsBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="xPanelsYBtn">
+		<include src="darn\scrubCtrl.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<xup> <ref src="sibling(xPanelsXBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xBracketsBtn)" trait="mouseover" /> </xdown>
+
+		<y>
+			<copy src="sibling(xPanelsXBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<width> 250 </width>
+
+		<_Start> <copy src="io()" trait="_xPanelsY" /> </_Start>
+		<_Caption> xPanelsY: </_Caption>
+		<_Min> 0 </_Min>
+		<_Max>
+			<!-- <copy src="screen()" trait="height" />
+			<sub src="io()" trait="_PanelHeight" /> -->
+			<!-- <copy src="io()" trait="_PanelHeight" /> -->
+			<copy src="screen()" trait="height" />
+		</_Max>
+
+		<_Value> <copy src="DUIF3SettingsMain" trait="_xPanelYState" /> </_Value>
+		<_enabled> <copy src="sibling(xPanelsBtn)" trait="_State" /> </_enabled>
+
+		<!-- <width> 200 </width> -->
+	</hotrect>
+
+	<hotrect name="xBracketsBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xPanelsYBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xPanelsYBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xTimeBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xBrackets" /> </_Start>
+		<_Caption> Brackets: </_Caption>
+		<width> 250 </width>
+		<_enabled> <copy src="sibling(xPanelsBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="xTimeBtn">
+		<include src="darn\toggleHeaderBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xBracketsBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xBracketsBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xTimeClockBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xTime" /> </_Start>
+		<_Caption> Time: </_Caption>
+		<width> 250 </width>
+		<_enabled> <copy src="sibling(xPanelsBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="xTimeClockBtn">
+		<include src="darn\toggleMultiBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xTimeBtn)" trait="y" />
+			<add src="sibling(xTimeBtn)" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xTimeBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xTimeDateBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xTimeClock" /> </_Start>
+		<_Value> <copy src="io()" trait="_xHUDTimeClock" /> </_Value>
+		<_Caption> Clock: </_Caption>
+		<_States> 3 </_States>
+		<_State_0> &-sOff; </_State_0>
+		<_State_1> 24hr </_State_1>
+		<_State_2> 12hr </_State_2>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xTimeBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xTimeDateBtn">
+		<include src="darn\toggleMultiBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xTimeClockBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xTimeClockBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xTimeSDFBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xTimeDate" /> </_Start>
+		<_Value> <copy src="io()" trait="_xHUDTimeDate" /> </_Value>
+		<_Caption> Date: </_Caption>
+		<_States> 3 </_States>
+		<_State_0> &-sOff; </_State_0>
+		<_State_1> Euro </_State_1>
+		<_State_2> US </_State_2>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xTimeBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xTimeSDFBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xTimeDateBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xTimeDateBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xTimeScaleBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xTimeSDF" /> </_Start>
+		<_Caption> Short Date Format: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xTimeBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xTimeScaleBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xTimeSDFBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xTimeSDFBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xKarmaBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xTimeScale" /> </_Start>
+		<_Caption> TimeScale: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xTimeBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xKarmaBtn">
+		<include src="darn\toggleHeaderBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xTimeScaleBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xTimeScaleBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xKarmaMeterBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xKarma" /> </_Start>
+		<_Caption> Karma: </_Caption>
+		<width> 250 </width>
+		<_enabled> <copy src="sibling(xPanelsBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="xKarmaMeterBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xKarmaBtn)" trait="y" />
+			<add src="sibling(xKarmaBtn)" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xKarmaBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xKarmaAlignmentBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xKarmaMeter" /> </_Start>
+		<_Caption> Meter: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xKarmaBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xKarmaAlignmentBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xKarmaMeterBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xKarmaMeterBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xXPBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xKarmaAlignment" /> </_Start>
+		<_Caption> Alignment: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xKarmaBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xXPBtn">
+		<include src="darn\toggleHeaderBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xKarmaAlignmentBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xKarmaAlignmentBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xXPMeterBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xXP" /> </_Start>
+		<_Caption> XP: </_Caption>
+		<width> 250 </width>
+		<_enabled> <copy src="sibling(xPanelsBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="xXPMeterBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xXPBtn)" trait="y" />
+			<add src="sibling(xXPBtn)" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xXPBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xRadBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xXPMeter" /> </_Start>
+		<_Caption> Meter: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xXPBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xRadBtn">
+		<include src="darn\toggleHeaderBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xXPMeterBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xXPMeterBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xRadMeterBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xRad" /> </_Start>
+		<_Caption> Radiation: </_Caption>
+		<width> 250 </width>
+		<_enabled> <copy src="sibling(xPanelsBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="xRadMeterBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xRadBtn)" trait="y" />
+			<add src="sibling(xRadBtn)" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xRadBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xRadCurrentBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xRadMeter" /> </_Start>
+		<_Caption> Meter: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xRadBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xRadCurrentBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xPanelsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xRadMeterBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xRadMeterBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xRadCurrent" /> </_Start>
+		<_Caption> Current: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xRadBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xStatsBtn">
+		<include src="darn\toggleHeaderBtn.xml" />
+		<x>
+			<copy src="sibling(xPanelsBtn)" trait="x" />
+			<add src="sibling(xPanelsBtn)" trait="width" />
+			<add> 10 </add>
+		</x>
+		<y>
+			<!-- <copy src="sibling(xRadCurrentBtn)" trait="y" />
+			<add src="me()" trait="height" />
+ -->
+			<copy src="sibling(xPanelsBtn)" trait="y" />
+		</y>
+		<xup> <ref src="sibling(xRadCurrentBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsDMBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xStats" /> </_Start>
+		<_Caption> Stats: </_Caption>
+		<width> 250 </width>
+		<_enabled> <copy src="sibling(xPanelsBtn)" trait="_State" /> </_enabled>
+	</hotrect>
+
+	<hotrect name="xStatsDMBtn">
+		<include src="darn\toggleMultiBtn.xml" />
+		<x> <copy src="sibling(xStatsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xStatsBtn)" trait="y" />
+			<add src="sibling(xStatsBtn)" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xStatsBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsENBtn)" trait="mouseover" /> </xdown>
+
+		<_States> 3 </_States>
+		<_State_0> Pct </_State_0>
+		<_State_1> Meter & Pct </_State_1>
+		<_State_2> Meter </_State_2>
+		<_Start> <copy src="io()" trait="_xStatsDM" /> </_Start>
+		<_Value> <copy src="io()" trait="_xHUDStatsDM" /> </_Value>
+		<_Caption> Display mode: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xStatsBtn)" trait="_State" />
+		</_enabled>
+		<_noOffState> 1 </_noOffState>
+	</hotrect>
+
+	<hotrect name="xStatsENBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xStatsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xStatsDMBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xStatsDMBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsCCBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xStatsEN" /> </_Start>
+		<_Caption> Encumbrance: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xStatsBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xStatsCCBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xStatsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xStatsENBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xStatsENBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsDRBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xStatsCC" /> </_Start>
+		<_Caption> CritChance: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xStatsBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xStatsDRBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xStatsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xStatsCCBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xStatsCCBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsPRBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xStatsDR" /> </_Start>
+		<_Caption> DamageResist: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xStatsBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xStatsPRBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xStatsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xStatsDRBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xStatsDRBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsFRBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xStatsPR" /> </_Start>
+		<_Caption> PoisionResist: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xStatsBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xStatsFRBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xStatsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xStatsPRBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xStatsPRBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsFOBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xStatsFR" /> </_Start>
+		<_Caption> FireResist: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xStatsBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xStatsFOBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xStatsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xStatsFRBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xStatsFRBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsELBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xStatsFO" /> </_Start>
+		<_Caption> FrostResist: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xStatsBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xStatsELBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xStatsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xStatsFOBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xStatsFOBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsERBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xStatsEL" /> </_Start>
+		<_Caption> ElectricResist: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xStatsBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xStatsERBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xStatsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xStatsELBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xStatsELBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsEMBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xStatsER" /> </_Start>
+		<_Caption> EnergyResist: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xStatsBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xStatsEMBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xStatsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xStatsERBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xStatsERBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xStatsRRBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xStatsEM" /> </_Start>
+		<_Caption> EMPResist: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xStatsBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+
+	<hotrect name="xStatsRRBtn">
+		<include src="darn\toggleBtn.xml" />
+		<x> <copy src="sibling(xStatsBtn)" trait="x" /> </x>
+		<y>
+			<copy src="sibling(xStatsEMBtn)" trait="y" />
+			<add src="me()" trait="height" />
+
+		</y>
+		<xup> <ref src="sibling(xStatsEMBtn)" trait="mouseover" /> </xup>
+		<xdown> <ref src="sibling(xPanelsBtn)" trait="mouseover" /> </xdown>
+
+		<_Start> <copy src="io()" trait="_xStatsRR" /> </_Start>
+		<_Caption> RadiationResist: </_Caption>
+		<width> 250 </width>
+		<_enabled>
+			<copy src="sibling(xPanelsBtn)" trait="_State" />
+			<and src="sibling(xStatsBtn)" trait="_State" />
+		</_enabled>
+	</hotrect>
+</rect>

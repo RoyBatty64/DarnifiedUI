@@ -1,0 +1,412 @@
+﻿		<image name="DUIF3SettingsMain">
+		
+			<_Initialized> 0 </_Initialized> <!-- DarN set by FOSE -->
+			
+<!--	These control states are polled by the config script and in-game values are changed accordingly
+		Poll from here to avoid long strings - Geck bug -->
+			<_HUDScaleState> <copy src="child(HUDScaleBtn)" trait="_State" /> </_HUDScaleState>
+			<_HUDSolidMetersState> <copy src="child(HUDSolidMetersBtn)" trait="_State" /> </_HUDSolidMetersState>
+			<_HUDMeterFontState> <copy src="child(HUDMeterFntBtn)" trait="_State" /> </_HUDMeterFontState>
+			
+			<_HUDHPAreaState> <copy src="child(HPArea)" trait="_State" /> </_HUDHPAreaState>
+			<_HUDHPAreaXState> <copy src="child(HPAreaX)" trait="_State" /> </_HUDHPAreaXState>
+			<_HUDHPAreaYState> <copy src="child(HPAreaY)" trait="_State" /> </_HUDHPAreaYState>
+			
+			<_CompassState> <copy src="child(HPCompass)" trait="_State" /> </_CompassState>
+			<_DetachCompassState> <copy src="child(HPDetachCompass)" trait="_State" /> </_DetachCompassState>
+			<_Compass_XState> <copy src="child(HPCompass_X)" trait="_State" /> </_Compass_XState>
+			<_Compass_YState> <copy src="child(HPCompass_Y)" trait="_State" /> </_Compass_YState>
+			<_CompassFrameState> <copy src="child(HPCompassFrame)" trait="_State" /> </_CompassFrameState>
+			<_ShowQuestMarkersState> <copy src="child(HPShowQuestMarkers)" trait="_State" /> </_ShowQuestMarkersState>
+			<_ShowLandmarksState> <copy src="child(HPShowLandmarks)" trait="_State" /> </_ShowLandmarksState>
+			<_ShowNPCState> <copy src="child(HPShowNPC)" trait="_State" /> </_ShowNPCState>
+			<_ShowEnemiesState> <copy src="child(HPShowEnemies)" trait="_State" /> </_ShowEnemiesState>
+			<_MarkEnemiesState> <copy src="child(HPMarkEnemies)" trait="_State" /> </_MarkEnemiesState>
+			
+			<_cHUDRed> <copy src="child(ACRedScrub)" trait="_State" /> </_cHUDRed>
+			<_cHUDGreen> <copy src="child(ACGreenScrub)" trait="_State" /> </_cHUDGreen>
+			<_cHUDBlue> <copy src="child(ACBlueScrub)" trait="_State" /> </_cHUDBlue>
+			<_cHUDTxtRed> <copy src="child(TCRedScrub)" trait="_State" /> </_cHUDTxtRed>
+			<_cHUDTxtGreen> <copy src="child(TCGreenScrub)" trait="_State" /> </_cHUDTxtGreen>
+			<_cHUDTxtBlue> <copy src="child(TCBlueScrub)" trait="_State" /> </_cHUDTxtBlue>
+			
+			<_cwRedState> <copy src="child(DCWRedScrub)" trait="_State" /> </_cwRedState>
+			<_cwGreenState> <copy src="child(DCWGreenScrub)" trait="_State" /> </_cwGreenState>
+			<_cwBlueState> <copy src="child(DCWBlueScrub)" trait="_State" /> </_cwBlueState>
+			<_caRedState> <copy src="child(DCARedScrub)" trait="_State" /> </_caRedState>
+			<_caGreenState> <copy src="child(DCAGreenScrub)" trait="_State" /> </_caGreenState>
+			<_caBlueState> <copy src="child(DCABlueScrub)" trait="_State" /> </_caBlueState>
+			<_cWarnLvlState> <copy src="child(WarnLvlScrub)" trait="_State" /> </_cWarnLvlState>
+			<_cAlertLvlState> <copy src="child(AlertLvlScrub)" trait="_State" /> </_cAlertLvlState>
+			
+			<_xPanelState> <copy src="child(xPanelsBtn)" trait="_State" /> </_xPanelState>
+			<_xPanelXState> <copy src="child(xPanelsXBtn)" trait="_State" /> </_xPanelXState>
+			<_xPanelYState> <copy src="child(xPanelsYBtn)" trait="_State" /> </_xPanelYState>
+			<_xBracketState> <copy src="child(xBracketsBtn)" trait="_State" /> </_xBracketState>
+			<_xTimeState> <copy src="child(xTimeBtn)" trait="_State" /> </_xTimeState>
+			<_xTimeClockState> <copy src="child(xTimeClockBtn)" trait="_State" /> </_xTimeClockState>
+			<_xTimeDateState> <copy src="child(xTimeDateBtn)" trait="_State" /> </_xTimeDateState>
+			<_xTimeSDFState> <copy src="child(xTimeSDFBtn)" trait="_State" /> </_xTimeSDFState>
+			<_xTimeScaleState> <copy src="child(xTimeScaleBtn)" trait="_State" /> </_xTimeScaleState>
+			<_xKarmaState> <copy src="child(xKarmaBtn)" trait="_State" /> </_xKarmaState>
+			<_xKarmaMeterState> <copy src="child(xKarmaMeterBtn)" trait="_State" /> </_xKarmaMeterState>
+			<_xKarmaAlignmentState> <copy src="child(xKarmaAlignmentBtn)" trait="_State" /> </_xKarmaAlignmentState>
+			<_xXPState> <copy src="child(xXPBtn)" trait="_State" /> </_xXPState>
+			<_xXPMeterState> <copy src="child(xXPMeterBtn)" trait="_State" /> </_xXPMeterState>
+			<_xRadState> <copy src="child(xRadBtn)" trait="_State" /> </_xRadState>
+			<_xRadMeterState> <copy src="child(xRadMeterBtn)" trait="_State" /> </_xRadMeterState>
+			<_xRadCurrentState> <copy src="child(xRadCurrentBtn)" trait="_State" /> </_xRadCurrentState>
+			<_xStatsState> <copy src="child(xStatsBtn)" trait="_State" /> </_xStatsState>
+			<_xStatsDMState> <copy src="child(xStatsDMBtn)" trait="_State" /></_xStatsDMState>
+			<_xStatsENState> <copy src="child(xStatsENBtn)" trait="_State" /> </_xStatsENState>
+			<_xStatsCCState> <copy src="child(xStatsCCBtn)" trait="_State" /> </_xStatsCCState>
+			<_xStatsDRState> <copy src="child(xStatsDRBtn)" trait="_State" /> </_xStatsDRState>
+			<_xStatsPRState> <copy src="child(xStatsPRBtn)" trait="_State" /> </_xStatsPRState>
+			<_xStatsFRState> <copy src="child(xStatsFRBtn)" trait="_State" /> </_xStatsFRState>
+			<_xStatsFOState> <copy src="child(xStatsFOBtn)" trait="_State" /> </_xStatsFOState>
+			<_xStatsELState> <copy src="child(xStatsELBtn)" trait="_State" /> </_xStatsELState>
+			<_xStatsERState> <copy src="child(xStatsERBtn)" trait="_State" /> </_xStatsERState>
+			<_xStatsEMState> <copy src="child(xStatsEMBtn)" trait="_State" /> </_xStatsEMState>
+			<_xStatsRRState> <copy src="child(xStatsRRBtn)" trait="_State" /> </_xStatsRRState>
+		
+			<filename> Interface\Shared\Background\solid_black.dds </filename>
+			<width>
+				<!-- <copy src="screen()" trait="width" /> -->
+				<!-- <mul src="me()" trait="_scale" /> -->
+				<!-- <mul> .7 </mul> -->
+				<copy> 900 </copy>
+				<min>
+					<copy> 1536 </copy>
+					<sub> 336 </sub> <!-- DarN TODO -->
+				</min>
+			</width>
+			<height>
+				<copy src="screen()" trait="height" />
+				<!-- <mul src="me()" trait="_scale" /> -->
+				<!-- <mul> .94 </mul> -->
+			</height>
+			<x>
+				<copy src="screen()" trait="width" />
+				<sub src="me()" trait="width" />
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy src="screen()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+				<add> 40 </add> <!-- DarN add -->
+			</y>
+			<zoom> &scale; </zoom>
+			<!-- <visible> <copy src="DUIF3Btn" trait="_State" /> </visible> -->
+
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha" /> </alpha>
+			<locus> &true; </locus>
+			<depth> -1 </depth>
+			<_buffer> 10 </_buffer>
+			
+			<visible>
+				<not src="main_back_button" trait="visible" />
+				<and src="me()" trait="_Initialized" />
+				<and>
+					<copy src="io()" trait="_DUIF3SettingsMode" />
+					<gt> 0 </gt>
+				</and>
+			</visible>
+
+			<image name="DUI_ulcv">
+				<include src="vertical_fade_line.xml" />
+				<_x> 48 </_x>
+				<_y> 96 </_y>
+			</image>
+
+			<image name="DUI_ulch">
+				<include src="line.xml" />
+				<_length> 50 </_length>
+				<x> <copy src="sibling(DUI_ulcv)" trait="_x" /> </x>
+				<y>
+					<copy src="sibling(DUI_ulcv)" trait="_y" />
+					<add> 0 </add>
+				</y>
+				<depth> 2 </depth>
+			</image>
+
+			<text name="DUI_title">
+				<x>
+					<copy src="sibling(DUI_ulcv)" trait="_x" />
+					<add src="sibling(DUI_ulch)" trait="width" />
+					<add src="parent()" trait="_buffer" />
+				</x>
+				<y>
+					<copy src="sibling(DUI_ulch)" trait="y" />
+					<add>
+						<copy src="sibling(DUI_ulch)" trait="height" />
+						<sub src="me()" trait="height" />
+						<div> 2 </div>
+					</add>
+				</y>
+				<depth> 1 </depth>
+				<font> <copy src="globals()" trait="_gl_HeaderFont" /> </font>
+				<string> DarNified UI F3 </string>
+				<brightness> 255 </brightness>
+			</text>
+
+			<image name="DUI_umh">
+				<include src="line.xml" />
+				<x>
+					<copy src="sibling(DUI_title)" trait="x" />
+					<add src="sibling(DUI_title)" trait="width" />
+					<add src="parent()" trait="_buffer" />
+				</x>
+				<y> <copy src="sibling(DUI_ulch)" trait="y" /> </y>
+				<_length>
+					<copy src="sibling(DUI_VDSG_symbol)" trait="x" />
+					<add src="parent()" trait="_buffer" />
+					<sub src="me()" trait="x" />
+				</_length>
+			</image>
+			
+			<image name="DUI_VDSG_symbol">
+				<filename> Interface\Loading\glow_loading_VDSGSymbol.dds </filename>
+				<x>
+					<copy src="sibling(ModVersion)" trait="x" />
+					<sub src="sibling(ModVersion)" trait="width" />
+					<sub src="me()" trait="width" />
+					<sub src="parent()" trait="_buffer" />
+				</x>
+				<y>
+					<copy src="sibling(DUI_ulch)" trait="y" />
+					<add>
+						<sub src="sibling(DUI_ulch)" trait="height" />
+						<sub src="me()" trait="height" />
+						<div> 2 </div>
+					</add>
+				</y>
+				<height> 48 </height>
+				
+				<width>
+					<!-- <copy src="me()" trait="filewidth" /> -->
+					<copy> 69 </copy>
+					<!-- <sub src="me()" trait="_dead_space" /> -->
+				</width>
+				<_dead_space> 27 </_dead_space> <!-- DarN 36 -->
+				<zoom> 75 </zoom>
+			</image>
+
+			<text name="ModVersion">
+				<justify> &right; </justify>
+				<depth> 1 </depth>
+				<x>
+					<copy src="sibling(DUI_urch)" trait="x" />
+					<sub src="parent()" trait="_buffer" />
+				</x>
+				<y>
+					<copy src="sibling(DUI_ulch)" trait="y" />
+					<add>
+						<sub src="sibling(DUI_ulch)" trait="height" />
+						<sub src="me()" trait="height" />
+						<div> 2 </div>
+					</add>
+				</y>
+				<font> 6 </font>
+				<string> <copy src="io()" trait="_duiVersion" /> </string> 
+			</text>
+			
+			<image name="DUI_fill_line">
+				<include src="line.xml" />
+				<visible> <not src="sibling(ModVersion)" trait="visible" /> </visible>
+				<x>
+					<copy src="sibling(DUI_umh)" trait="x" />
+					<add src="sibling(DUI_umh)" trait="_length" />
+				</x>
+				<y> <copy src="sibling(DUI_ulch)" trait="y" /> </y>
+				<_length>
+					<copy src="sibling(DUI_urch)" trait="x" />
+					<sub src="me()" trait="x" />
+				</_length>
+			</image>
+
+			<image name="DUI_urch">
+				<include src="line.xml" />
+				<_length> 50 </_length>
+				<x>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="width" />
+					<sub src="sibling(DUI_ulcv)" trait="_x" />
+				</x>
+				<y> <copy src="sibling(DUI_ulch)" trait="y" /> </y>
+				<depth> 2 </depth>
+			</image>
+
+			<image name="DUI_urcv">
+				<include src="vertical_fade_line.xml" />
+				<_x>
+					<copy src="sibling(DUI_urch)" trait="x" />
+					<add src="sibling(DUI_urch)" trait="width" />
+					<sub>
+						<copy src="me()" trait="width" />
+						<onlyif> &xbox; </onlyif>
+					</sub>
+				</_x>
+				<_y> <copy src="sibling(DUI_ulcv)" trait="_y" /> </_y>
+			</image>
+			<_multiPage>
+				<copy src="child(p1)" trait="_hasVTabs" />
+				<or src="child(p2)" trait="_hasVTabs" />
+				<or src="child(p3)" trait="_hasVTabs" />
+				<or src="child(p4)" trait="_hasVTabs" />
+			</_multiPage>
+			
+			<rect name="p1">
+				<include src="darn\settings_p1.xml" />
+			</rect>
+			<rect name="p2">
+				<include src="darn\settings_p2.xml" />
+			</rect>
+			<rect name="p3">
+				<include src="darn\settings_p3.xml" />
+			</rect>
+			<rect name="p4">
+				<include src="darn\settings_p4.xml" />
+			</rect>
+			<!--
+			<rect name="p5">
+				<include src="darn\settings_p5.xml" />
+			</rect>
+			<rect name="p6">
+				<include src="darn\settings_p6.xml" />
+			</rect> -->
+			<rect name="tabs">
+				<include src="darn\duif3Settings_tabline.xml" />
+				<x>
+					<copy src="me()" trait="_LeftLineLength" />
+					<add src="parent()" trait="_buffer" />
+					<add src="parent()" trait="_buffer" />
+				</x>
+				<y>
+					<copy src="parent()" trait="height" />
+					<sub> 108 </sub>
+					<sub src="me()" trait="height" />
+				</y>
+			</rect>
+
+			<image name="DUI_llcv">
+				<include src="vertical_fade_line.xml" />
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<_x> <copy src="sibling(DUI_ulcv)" trait="_x" /> </_x>
+				<_y>
+					<copy src="parent()" trait="height" />
+					<sub src="sibling(DUI_ulcv)" trait="_y" />
+					<sub> 60 </sub> <!-- DarN add -->
+				</_y>
+			</image>
+
+			<image name="DUI_llch">
+				<include src="line.xml" />
+				<_length>
+					<copy src="sibling(DUI_ulch)" trait="_length" />
+				</_length>
+				<x> <copy src="sibling(DUI_ulcv)" trait="_x" /> </x>
+				<y>
+					<copy src="sibling(DUI_llcv)" trait="_y" />
+					<sub src="me()" trait="height" />
+				</y>
+				<alpha> 0 </alpha>
+			</image>
+
+			<image name="DUI_lrch">
+				<include src="line.xml" />
+				<_length>
+					<copy src="sibling(DUI_lrcv)" trait="_x" />
+					<sub src="me()" trait="x" />
+				</_length>
+				<x>
+					<copy src="sibling(tabs)" trait="x" />
+					<add src="sibling(tabs)" trait="width" />
+					<!-- <add src="parent()" trait="_buffer" /> -->
+				</x>
+				<y> <copy src="sibling(DUI_llch)" trait="y" /> </y>
+			</image>
+
+			<image name="DUI_lrcv">
+				<include src="vertical_fade_line.xml" />
+				<_bottom_to_top> &true; </_bottom_to_top>
+				<_x> <copy src="sibling(DUI_urcv)" trait="_x" /> </_x>
+				<_y> <copy src="sibling(DUI_llcv)" trait="_y" /> </_y>
+			</image>
+
+			
+			<hotrect name="resetBtn">
+				<_PCButtonText> &-sPCMenuHintR; </_PCButtonText> <!-- DarN before include -->
+				<_xbox_button> &xbuttonx; </_xbox_button>
+				<include src="darn\darnBtn.xml" />
+
+				<_Caption> Reset </_Caption>
+				<clicksound> UIHealthChemsWearOff </clicksound>
+
+				<depth> 3 </depth>
+				<font> 6 </font>
+				<systemcolor> &hudmain; </systemcolor>
+
+				<alpha>
+					<copy> 40 </copy>
+					<onlyif src="me()" trait="_box_visible" />
+				</alpha>
+				<_x>
+					<copy src="parent()" trait="width" />
+					<sub src="me()" trait="width" />
+					<sub src="DUIF3Btn" trait="width" />
+					<sub> 40 </sub>
+					<!-- <copy src="DUIF3SettingsMain" trait="x" />
+					<add src="DUIF3SettingsMain" trait="width" />
+					<sub src="me()" trait="width" />
+					<sub> 150 </sub> -->
+				</_x>
+				<_y>
+					<copy src="parent()" trait="height" />
+					<sub src="DUI_ulcv" trait="_y" />
+					<!-- <add> 20 </add> -->
+					<sub> 50 </sub>
+					<!-- <sub src="me()" trait="height" />
+					<sub> 30 </sub> -->
+				</_y>
+				<_glow> &true; </_glow>
+
+				<user0> &true; </user0>	<!-- additional visibility check -->
+				<justify> &right; </justify>
+			</hotrect>
+			
+			<text name="FOSEHelp">
+				<font> 6 </font>
+				<depth> 2 </depth>
+				<x> 80 </x>
+				<y>
+					<copy src="sibling(resetBtn)" trait="_y" />
+					<add>
+						<copy src="sibling(resetBtn)" trait="_verbuf" />
+						<div> 2 </div>
+					</add>
+				</y>
+				<string></string>
+				<alpha> 0 </alpha>
+				<visible>
+					<copy src="me()" trait="alpha" />
+					<gt> 0 </gt>
+				</visible>
+			</text>
+			
+			<rect name="settingsToggle">
+				<alpha> 0 </alpha>
+				<width> 1 </width>
+				<height> 1 </height>
+				<visible> <copy src="DUIF3Btn" trait="_State" /> </visible>
+			</rect>
+
+			<rect name="resetToggle">
+				<alpha> 0 </alpha>
+				<width> 1 </width>
+				<height> 1 </height>
+				<visible> <copy src="resetBtn" trait="_State" /> </visible>
+			</rect>
+			
+		</image> <!-- end background -->

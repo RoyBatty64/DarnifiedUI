@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="QUST">
+  <Flags>0</Flags>
+  <FormID ID="01015521">UCBQuest</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">UCBQuest</EditorID>
+    <Script Tag="SCRI">
+      <Reference ID="01015522">UCBQuestScript</Reference>
+    </Script>
+    <Data Tag="DATA">
+      <Flags>17</Flags>
+      <Priority>0</Priority>
+      <QuestDelay>0.100000001</QuestDelay>
+    </Data>
+    <Stages>
+      <Stage>
+        <Index Tag="INDX">0</Index>
+        <LogEntries>
+          <Entry>
+            <StageFlags Tag="QSDT">0</StageFlags>
+            <LogEntry Tag="CNAM">; NVSE check</LogEntry>
+            <Script>
+              <Data Tag="SCHR">
+                <ReferenceCount>1</ReferenceCount>
+                <CompiledSize>30</CompiledSize>
+                <VariableCount>0</VariableCount>
+                <Type>Object</Type>
+                <Flags>Enabled</Flags>
+              </Data>
+              <CompiledScript Tag="SCDA">FQAHAEcBAAIAIDAVAA8ARwEACgAgWAAUAAAgMCA+</CompiledScript>
+              <ScriptSource Tag="SCTX">set UCBhasNVSE to 0
+set UCBhasNVSE to (getNVSEVersion &gt; 0)</ScriptSource>
+              <References>
+                <Reference Tag="SCRO">
+                  <Reference ID="0101551E">UCBhasNVSE</Reference>
+                </Reference>
+              </References>
+            </Script>
+          </Entry>
+        </LogEntries>
+      </Stage>
+    </Stages>
+  </Subrecords>
+</Record>

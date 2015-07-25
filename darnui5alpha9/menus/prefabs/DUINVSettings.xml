@@ -1,0 +1,339 @@
+<!--
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|								   	DARNIFIED UI FONV SETTINGS	 								  |
+|										v0.5.0 - 08.30.2014										  |
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|	Best edited on resolutions >= 1024, with an editor supporting syntax highlighting			  |
+|	(eg. Notepad++, Notepad2, Programmer's Notepad), with a monospace font size 9/10.			  |
+|																								  |
+|	Defaults are enclosed in square brackets "[]" in the comments.								  |
+|																								  |
+|	Valid values:																				  |
+|		・Toggles:	0/1. 1 = on/yes, and 0 = off/no.											  |
+|		・Alpha:	0 - 255. 0 is invisible, and 255 is fully visible.								  |
+|		・Fonts:	1 - 9. These correspond directly to the values in the ini (sFontFile_[1-9])		  |
+|		・Colors:	0 - 255. Normal RGB (red, green, blue) values.								  |
+|		・Position: min - max. Note that these are some times relative to their initial positions, |
+|					so be careful not to move them off-screen in those cases.					  |
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+-------------------------------------------- !!! WIP !!! 	---------------------------------------
+-- Do not expect all of these to work - they get hooked up as FONV menus are completed. Enjoy :) --
+---------------------------------------------------------------------------------------------------
+
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= GLOBAL =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|									Settings shared between menus								  |
+`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+-->
+<_gl_listFont> 1 </_gl_listFont>			<!-- [1] Font to use in lists (eg. Barter Menu)		-->
+<_gl_HeaderFont> 7 </_gl_HeaderFont>		<!-- [7] Font to use in the headers/window titles	-->
+<_gl_ButtonFont> 6 </_gl_ButtonFont>		<!-- [6] Font to use in the buttons					-->
+<_gl_vertSpace> 7 </_gl_vertSpace>			<!-- [7] Space to add between list items	WIP		-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Scrollbars =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_gl_customSB> 1 </_gl_customSB>			<!-- [0] Use custom values for ScrollBars?			-->
+<_gl_SBWidth> 8 </_gl_SBWidth>				<!-- [12] Marker Width								-->
+<_gl_SBHeight> 32 </_gl_SBHeight>			<!-- [48] Marker Height								-->
+<_gl_SBAlpha> 255 </_gl_SBAlpha>			<!-- [255] Marker Alpha								-->
+<_gl_SBFx> 1 </_gl_SBFx>					<!-- [1] Marker fx - scale/color change on hover	-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Eyefinity/Triple Head =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- This settings lets you specify an offset to add/subtract from the left and right screen edges
+for elements positioned relative to these. Use this if you'd like the elements to be positioned
+on your center monitor, as opposed to the far left and right of the others. 					-->
+<_gl_efX> 0 </_gl_efX>						<!-- [0] X offset to add/subtract					-->
+
+<!--
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= SYSTEM MENUS =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|			  	Settings for the Start, Pause, Options, Save, Load, and Crew Menus				  |
+`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+-->
+
+<!--
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= PIPBOY =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|					   Settings for the PipBoy Menus - Stats, Inventory and Map 				  |
+`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+-->
+<_pb_HeaderVOffset> -10 </_pb_HeaderVOffset><!-- [-10] Vertical offset for the PipBoy headers	-->
+<_pb_ListFont> 1 </_pb_ListFont>			<!-- [2] Font to use in Pipboy lists				-->
+<_pb_TabFont> 6 </_pb_TabFont>				<!-- [6] Font to use for the lower Pipboy tabs		-->
+
+<!--
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= LEVELUP MENU =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|									Settings for the LevelUp Menu								  |
+`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+-->
+<_lvlSkillsUncap> 0 </_lvlSkillsUncap>		<!-- [0] Allow for skills > 100?					-->
+
+<!--
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= MESSAGE MENU =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|									Settings for the Message Menu								  |
+`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+-->
+<_msg_textFont> 1 </_msg_textFont>		<!-- [1] Font to use for message text					-->
+
+<!--
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= SLEEP/WAIT MENU =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|								 Settings for the Sleep/Wait Menu								  |
+`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+-->
+<_swmaxHours> 24 </_swmaxHours>		<!-- [24] Max hours to wait (4 days = 96, 9 days = 216)	-->
+<!--
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= HUD =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|								  Settings for the Heads Up Display								  |
+`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+-->
+<_HUDScale> 65 </_HUDScale>					<!-- [60] Global scale for HUD elements (40 - 100)	-->
+<_HUDOverrideColor> 0 </_HUDOverrideColor>	<!-- [0] Override color from game options?			-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Meters =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDSolidMeters> 0 </_HUDSolidMeters>		<!-- [0] Solid or tickmark meters					-->
+<_HUDMeterFont> 4 </_HUDMeterFont>			<!-- [4] Font to use in the HUD's meters			-->
+<_HUDMeterTextAdjust> 0 </_HUDMeterTextAdjust>	<!-- [0] Adjustment for vert. alignment (AP/HP) -->
+<_HUDDynamicColors> 0 </_HUDDynamicColors>	<!-- [0] Use warning colors in meters?				-->
+<_HUDWarnLevel> 50 </_HUDWarnLevel>			<!-- [50] At which % meter should use warning color	-->
+<_HUDAlertLevel> 25 </_HUDAlertLevel>		<!-- [25] At which % meter should use alert color	-->
+<_HUDBracketStyle> 1 </_HUDBracketStyle>	<!-- [1] NV or F3 style Compass/CND brackets		-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Guides =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- ・HUDShowGuides will enable two guide lines for centering elements to the screen.
+
+	The number is the line thickness. If you want something positioned 100px from the center of the
+	screen, you can set this to 200, and start moving stuff around until you get it aligned with
+	the guide. 2 works well with centering the Crosshair.
+-->
+<_HUDShowGuides> 0 </_HUDShowGuides>			<!-- [0] 0 = off, > 1 = on						-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Colors =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- The colors for gfx and text can be configured separately. Used if _HUDOverrideColor = 1	-->
+<_HUDRed> 20 </_HUDRed>							<!-- HUD Gfx Color	120							-->
+<_HUDGreen> 250 </_HUDGreen>
+<_HUDBlue> 255 </_HUDBlue>
+
+<_HUDTxtRed> 200 </_HUDTxtRed>				<!-- [197] HUD Text Color						-->
+<_HUDTxtGreen> 245 </_HUDTxtGreen>			<!-- [255]										-->
+<_HUDTxtBlue> 255 </_HUDTxtBlue>				<!-- [255]										-->
+
+<!-- These colors are used as warning/alert colors for the meters when _HUDDynamicColors = 1	-->
+<_HUDWarnRed> 190 </_HUDWarnRed>				<!-- [190] Warning, red component				-->
+<_HUDWarnGreen> 140 </_HUDWarnGreen>			<!-- [140] Warning, green component				-->
+<_HUDWarnBlue> 0 </_HUDWarnBlue>				<!-- [0]   Warning, blue component				-->
+
+<_HUDAlertRed> 200 </_HUDAlertRed>				<!-- [200] Alert, red component					-->
+<_HUDAlertGreen> 10 </_HUDAlertGreen>			<!-- [10]  Alert, green component				-->
+<_HUDAlertBlue> 0 </_HUDAlertBlue>				<!-- [0]   Alert, blue component				-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= HitPoints =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowHPInfo> 1 </_HUDShowHPInfo>			<!-- [1]										-->
+<_HUDHPInfo_X> 20 </_HUDHPInfo_X> 				<!-- [20] Hitpoints Info position				-->
+<_HUDHPInfo_Y> -15 </_HUDHPInfo_Y>				<!-- [-15] Rel. bottom left						-->
+<_HUDShowHPBracket> 1 </_HUDShowHPBracket>		<!-- [1] Show bracket art?						-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Compass =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowCompass> 1 </_HUDShowCompass>			<!-- [1] Show compass?							-->
+<_HUDDetachCompass> 0 </_HUDDetachCompass>		<!-- [0] Detach compass from HP Info?			-->
+<_HUDCompass_X> 649 </_HUDCompass_X>			<!-- [649]  Compass position when detached	-	-->
+<_HUDCompass_Y> -900 </_HUDCompass_Y>			<!-- [-900] Rel. HPInfo position				-->
+<_HUDCompassFrame> 1 </_HUDCompassFrame>		<!-- [1] Draw compass frame when detached?		-->
+<_HUDShowQuestMarkers> 1 </_HUDShowQuestMarkers><!-- [1] Show Quest and Player markers?			-->
+<_HUDShowLandmarks> 1 </_HUDShowLandmarks>		<!-- [1] Show landmarks/locations?				-->
+<_HUDShowNPC> 1 </_HUDShowNPC>					<!-- [1] Show friendly npc's?					-->
+<_HUDShowEnemies> 1 </_HUDShowEnemies>			<!-- [1] Show hostile npc's?					-->
+<_HUDMarkEnemies> 1 </_HUDMarkEnemies>			<!-- [1] Differentiate between enemy/friendlies?-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= ActionPoints =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowAPInfo> 1 </_HUDShowAPInfo>			<!-- [1]										-->
+<_HUDAPInfo_X> -20 </_HUDAPInfo_X>				<!-- [-20] Action Points Info position			-->
+<_HUDAPInfo_Y> -15 </_HUDAPInfo_Y>				<!-- [-15] Rel. bottom right					-->
+<_HUDShowAPBracket> 1 </_HUDShowAPBracket>		<!-- [1] Show bracket art?						-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Armor Info =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowAI> 1 </_HUDShowAI>					<!-- [1]										-->
+<_HUDAI_X> 0 </_HUDAI_X>						<!-- [0] Rel. original position					-->
+<_HUDAI_Y> 10 </_HUDAI_Y>						<!-- [0] 										-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Enemy Health =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowEH> 1 </_HUDShowEH>					<!-- [1]										-->
+<_HUDEH_X> 0 </_HUDEH_X>						<!-- [0] Rel. original position					-->
+<_HUDEH_Y> 10 </_HUDEH_Y>						<!-- [0] 										-->
+<_HUDShowEHBracket> 1 </_HUDShowEHBracket>		<!-- [1] Show bracket art?						-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= SneakMeter =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowSneak> 1 </_HUDShowSneak>				<!-- [1]										-->
+<_HUDSneak_X> 0 </_HUDSneak_X>					<!-- [0] Rel. original position					-->
+<_HUDSneak_Y> 10 </_HUDSneak_Y>					<!-- [10]										-->
+<_HUDSneakFont> 6 </_HUDSneakFont>				<!-- [6]										-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= BreathMeter =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowBM> 1 </_HUDShowBM>					<!-- [1]										-->
+<_HUDBM_X> 0 </_HUDBM_X>						<!-- [0] Rel. original position					-->
+<_HUDBM_Y> 0 </_HUDBM_Y>						<!-- [0]										-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Messages =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowMessages> 1 </_HUDShowMessages>		<!-- [1]										-->
+<_HUDMsg_X> 0 </_HUDMsg_X>						<!-- [0] Rel. original position					-->
+<_HUDMsg_Y> -15 </_HUDMsg_Y>					<!-- [-15]										-->
+<_HUDShowMsgBracket> 1 </_HUDShowMsgBracket>	<!-- [1] Show bracket art?						-->
+<_HUDShowMsgIcon> 1 </_HUDShowMsgIcon>			<!-- [1] Show message icon?						-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Info =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowInfo> 1 </_HUDShowInfo>				<!-- [1]										-->
+<_HUDInfo_X> 0 </_HUDInfo_X>					<!-- [0] Rel. original position					-->
+<_HUDInfo_Y> 0 </_HUDInfo_Y>					<!-- [0]										-->
+<_HUDShowIBracket> 1 </_HUDShowIBracket>		<!-- [1] Show bracket art?						-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Crosshair =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowCrosshair> 1 </_HUDShowCrosshair>		<!-- [1]										-->
+<!-- Use these to nudge the crosshair if it's off-center (see _HUDShowGuides)					-->
+<_HUDCrosshair_X> 0.5 </_HUDCrosshair_X>		<!-- [0.5]										-->
+<_HUDCrosshair_Y> 1.0 </_HUDCrosshair_Y>		<!-- [1.0]										-->
+<!-- Enable _HUDCHAlphaOverride if you have trouble seeing the Crosshair with a low HUD alpha	-->
+<_HUDCHAlphaOverride> 0 </_HUDCHAlphaOverride>	<!-- [0] 0 = HUD alpha,   1 = Full alpha		-->
+<!-- Set _HUDCHScaleOverride if you have trouble seeing the Crosshair with a low HUD scale/
+	 custom	crosshairs. Values are clamped. -->
+<_HUDCHScaleOverride> 0 </_HUDCHScaleOverride>	<!-- [0] <= 0 = HUD scale, 40-100 = Custom 		-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Subtitles =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowSubtitles> 1 </_HUDShowSubtitles>		<!-- [1]										-->
+<_HUDSubtitles_X> 0 </_HUDSubtitles_X>			<!-- [0] Rel. original position					-->
+<_HUDSubtitles_Y> 0 </_HUDSubtitles_Y>			<!-- [0]										-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Quest Reminders =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowQR> 1 </_HUDShowQR>					<!-- [1]										-->
+<_HUDQR_X> 0 </_HUDQR_X>						<!-- [0] Rel. original position					-->
+<_HUDQR_Y> 0 </_HUDQR_Y>						<!-- [0]										-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Quest Added =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowQuestAdded> 1 </_HUDShowQuestAdded>	<!-- [1]										-->
+<_HUDQA_X> 0 </_HUDQA_X>						<!-- [0] Rel. original position					-->
+<_HUDQA_Y> 0 </_HUDQA_Y>						<!-- [0]										-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Radiation Meter =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowRadiation> 1 </_HUDShowRadiation>		<!-- [1]										-->
+<_HUDRad_X> -25 </_HUDRad_X> 					<!-- [-25] Rel. top right						-->
+<_HUDRad_Y> 25 </_HUDRad_Y>						<!-- [25]										-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= XP Meter =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowXP> 1 </_HUDShowXP>					<!-- [1]										-->
+<_HUDXP_X> -20 </_HUDXP_X>						<!-- [-20] Rel. original position				-->
+<_HUDXP_Y> 0 </_HUDXP_Y>						<!-- [0]										-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Location Text =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowLoc> 1 </_HUDShowLoc>					<!-- [1]										-->
+<_HUDLoc_X> 0 </_HUDLoc_X>						<!-- [0] Rel. original position					-->
+<_HUDLoc_Y> 0 </_HUDLoc_Y>						<!-- [0]										-->
+<_HUDLocFont> 7 </_HUDLocFont>					<!-- [7]										-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Crippled Limb Indicator =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowCLI> 1 </_HUDShowCLI>					<!-- [1] Show Crippled Limb Indicator 			-->
+<_HUDCLI_X> -80 </_HUDCLI_X>					<!-- [-80] Rel. orig. pos.						-->
+<_HUDCIL_Y> 0 </_HUDCLI_Y>						<!-- [0] 										-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= HotKeys PopUp =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDHotKeys_X> -150 </_HUDHotKeys_X>			<!-- [-150] Rel. orig. pos.						-->
+<_HUDHotKeys_Y> 50 </_HUDHotKeys_Y>				<!-- [50] 										-->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= Combat Indicator =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_HUDShowCI> 1 </_HUDShowCI>					<!-- [0] Show Combat Indicator (FOSE)			-->
+<_HUDCI_X> 0 </_HUDCI_X>						<!-- [0] Rel. center screen						-->
+<_HUDCI_Y> 5 </_HUDCI_Y>						<!-- [5] 										-->
+
+<!--
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= V.A.T.S =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|						  Settings for the Vault-Tec Assisted Targeting System					  |
+`=~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+-->
+<_VQueueFont> 6 </_VQueueFont>					<!-- [6] Font to use in the action queue list	-->
+<_VLimbNameFont> 6 </_VLimbNameFont>			<!-- [6] Font for the limb name in the meters	-->
+<_VMeterFont> 4 </_VMeterFont>					<!-- [4] Font for the hit chance % values		-->
+<_VShowEH> 1 </_VShowEH>						<!-- [1] Show enemy health in V.A.T.S?			-->
+<_VShowAP> 1 </_VShowAP>						<!-- [1] Show Action Points in V.A.T.S?			-->
+<_VShowHI> 1 </_VShowHI>						<!-- [1] Show Health Info in V.A.T.S?			-->
+<_VShowBPI> 1 </_VShowBPI>						<!-- [1] Show BodyPart info?					-->
+<_VAQLWidth> 300 </_VAQLWidth>					<!-- [300] Action queue list width				-->
+
+<!--
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= DIALOG =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|									Settings for the Dialog menu								  |
+`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+-->
+<_dlg_NPCNameFont> 7 </_dlg_NPCNameFont>		<!-- [7] Font for NPC name						-->
+<_dlg_TopicFont> 6 </_dlg_TopicFont>			<!-- [6] Font for the topic choices				-->
+<_dlg_SubTitleFont> 6 </_dlg_SubTitleFont>		<!-- [6] Font for npc subtitle text				-->
+
+<!--
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~= DUIF3EXTRAS =~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|  DarNifiedUINV.esp must be active, and NVSE v4.2b4+ must be running for these settings to work  |
+| 									NVSE: http://nvse.silverlock.org/ 							  |
+.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+|																								  |
+| These are the default settings, and will be used when											  |
+|	- starting a new game																		  |
+|	- loading an old save that didn't have DarNifiedUINV.esp active								  |
+|	- using the mod for the first time															  |
+|	- clicking the "Default" button in the DUI NV settings menu									  |
+|																								  |
+| You may configure these in-game from the PauseMenu - they will be saved with your game.		  |
+`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ All Panels ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_xPanels> 1 </_xPanels>				<!-- [1] Enable panels									-->
+<_xPanelsX> -30 </_xPanelsX>			<!-- [-30] Panels horiz. position - relative top right	-->
+<_xPanelsY> 25 </_xPanelsY>				<!-- [25] Panels vert. position - relative top right	-->
+<_xBrackets> 1 </_xBrackets>			<!-- [0] Show bracket art for panels					-->
+<_xAlignment> 0 </_xAlignment>			<!-- [0] 0 = orient left, 1 = orient right				-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Armor Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_xStatsArmorCND> 1 </_xStatsArmorCND>	<!-- [1] Show Armor Condition							-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Time Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_xTime> 1 </_xTime>					<!-- [1] Show Time Panel								-->
+<_xTimeClock> 1 </_xTimeClock>			<!-- [2] 0 = off, 1 = 24hr mode, 2 = 12hr mode			-->
+<_xTimeDate> 1 </_xTimeDate>			<!-- [2] 0 = off, 1 = Euro mode, 2 = US mode			-->
+<_xTimeSDF> 1 </_xTimeSDF>				<!-- [1] Use short date format? (Sun, 12/01/77)			-->
+<_xTimeScale> 0 </_xTimeScale>			<!-- [0] Show the current Timescale?					-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Karma panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_xKarma> 1 </_xKarma>					<!-- [0] Show current Karma?							-->
+<_xKarmaMeter> 1 </_xKarmaMeter>		<!-- [0] 												-->
+<_xKarmaAlignment> 1 </_xKarmaAlignment><!-- [1] Shows current alignment (Very Evil)			-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ XP/Lvl panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Note: Replaces the default meter -->
+<_xXP> 1 </_xXP>						<!-- [0] Show current XP/XP Needed? (also toggles panel)-->
+<_xXPMeter> 1 </_xXPMeter>				<!-- [0] Show Lvl meter?								-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Rad panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Note: Replaces the default meter -->
+<_xRad> 1 </_xRad>						<!-- [0] Show Rad Panel									-->
+<_xRadMeter> 1 </_xRadMeter>			<!-- [0] Show Rad meter									-->
+<_xRadCurrent> 1 </_xRadCurrent>		<!-- [1] Show current radiation effects					-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Stats panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_xStats> 1 </_xStats>					<!-- [0] Show Stats Panel								-->
+<_xStatsDM> 1 </_xStatsDM>				<!-- [0] DisplayMode: 0 = %, 1 = meter & %, 2 = meter	-->
+<_xStatsEN> 1 </_xStatsEN>				<!-- [1] Show Encumbrance								-->
+<!-- Note: Critical Chance and resistances will only show if any are applied					-->
+<_xStatsCC> 1 </_xStatsCC>				<!-- [1] Show Critical Chance							-->
+
+<_xStatsDR> 1 </_xStatsDR>				<!-- [1] Show Damage Resistance							-->
+<_xStatsDT> 1 </_xStatsDT>				<!-- [1] Show Damage Threshold							-->
+<_xStatsPR> 1 </_xStatsPR>				<!-- [1] Show Poison Resistance							-->
+<_xStatsFR> 1 </_xStatsFR>				<!-- [1] Show Fire Resistance							-->
+<_xStatsFO> 1 </_xStatsFO>				<!-- [1] Show Frost Resistance							-->
+<_xStatsEL> 1 </_xStatsEL>				<!-- [1] Show Electric Resistance						-->
+<_xStatsER> 1 </_xStatsER>				<!-- [1] Show Energy Resistance							-->
+<_xStatsEM> 1 </_xStatsEM>				<!-- [1] Show EMP Resistance							-->
+<_xStatsRR> 1 </_xStatsRR>				<!-- [1] Show Rad Resistance							-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Primary Needs panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<_xStatsThirst> 1 </xStatsThirst>		<!-- [1] Show Thirst									-->
+<_xStatsHunger> 1 </xStatsHunger>		<!-- [1] Show Hunger									-->
+<_xStatsSleep> 1 </xStatsSleep>			<!-- [1] Show Sleep										-->
+<!-- NOTE: Requires FOSE and FWE running --- Deprecated in TTW Version							-->
+<_xPNShowHunger> 1 </_xPNShowHunger>	<!-- [1] Show Hunger									-->
+<_xPNShowThirst> 1 </_xPNShowThirst>	<!-- [1] Show Thirst									-->
+<_xPNShowSleep> 1 </_xPNShowSleep>		<!-- [1] Show Sleep										-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Active Grenade Icon ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- NOTE: Requires FOSE and FWE running --- Deprecated in TTW Version							-->
+<_xHUDShowGren> 1 </_xHUDShowGren>		<!-- [1] Show Icon - pos. rel. to AP area				-->
+<_xHUDGrenXPos> 10 </_xHUDGrenXPos>		<!-- [10] Icon horizontal position adjustment			-->
+<_xHUDGrenYPos> 0 </_xHUDGrenYPos>		<!-- [0] Icon vertical position adjustment				-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Night Vision Recharge Meter ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- NOTE: Requires FOSE and FOOK2 running - further customization through the FOOK menu 		-->
+<!-- Deprecated in TTW Version																	-->
+<_NVMeter_X> 0 </_NVMeter_X>			<!-- [0] Relative to AP Meter							-->
+<_NVMeter_Y> 0 </_NVMeter_Y>			<!-- [0]												-->
+

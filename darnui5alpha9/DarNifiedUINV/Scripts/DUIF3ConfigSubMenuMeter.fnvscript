@@ -1,0 +1,231 @@
+scn DUIF3ConfigSubMenuMeter
+
+int iMaster
+int iOption
+float fValue
+ref rList
+
+Begin GameMode
+	if GetGameRestarted
+		if IsModLoaded "The Mod Configuration Menu.esp"
+			set iMaster to GetModIndex "The Mod Configuration Menu.esp"
+			set rList to BuildRef iMaster 2790
+		endif
+	endif
+End
+
+Begin MenuMode 1013
+	if IsModLoaded "The Mod Configuration Menu.esp" && GetMCMFloat 0 0 "_ActiveSubMenu" == 2
+	else
+		Return
+	endif
+
+	if GetMCMFloat 0 0 "_ActiveMod" == GetModIndex "DarNifiedUINV.esp"
+		set iOption to GetMCMFloat 0 0 "_ActiveOption"
+		set fValue to GetMCMFloat 0 0 "_Value"
+
+		if GetMCMFLoat 0 0 "_Reset" == 1
+			SetMCMFloat 0 0 "_Reset" 0
+			SetMCMFloat 1 0 "_columns" 2
+
+			SetMCMFloat 1 1 "_enable" 1
+			SetMCMString 1 1 "_title" "General Settings"
+			SetMCMFloat 1 1 "_type" 0
+
+			SetMCMFloat 1 2 "_enable" 1
+			SetMCMString 1 2 "_title" "Clock & Calendar"
+			SetMCMFloat 1 2 "_type" 0
+
+			SetMCMFloat 1 3 "_enable" 1
+			SetMCMString 1 3 "_title" "  Brackets"
+			SetMCMFloat 1 3 "_RGB" 191137050
+			SetMCMFloat 1 3 "_type" 4
+			SetMCMFloat 1 3 "_value" DUIF3.xBrackets
+
+			SetMCMFloat 1 4 "_enable" 1
+			SetMCMString 1 4 "_title" "  Time"
+			SetMCMFloat 1 4 "_RGB" 191137050
+			SetMCMFloat 1 4 "_type" 4
+			SetMCMFloat 1 4 "_value" DUIF3.xTime
+
+			SetMCMFloat 1 5 "_enable" 1
+			SetMCMString 1 5 "_title" "  Alignment"
+			SetMCMFloat 1 5 "_RGB" 191137050
+			SetMCMString 1 5 "_textOff" "Left"
+			SetMCMString 1 5 "_textOn" "Right"
+			SetMCMFloat 1 5 "_type" 6
+			SetMCMFloat 1 5 "_value" DUIF3.xAlignment
+
+			SetMCMFloat 1 6 "_enable" 1
+			SetMCMString 1 6 "_title" "  Time Scale"
+			SetMCMFloat 1 6 "_RGB" 191137050
+			SetMCMFloat 1 6 "_type" 4
+			SetMCMFloat 1 6 "_value" DUIF3.xTimeScale
+
+			SetMCMFloat 1 8 "_enable" 1
+			SetMCMString 1 8 "_title" "  Time Format"
+			SetMCMFloat 1 8 "_RGB" 191137050
+			SetMCMFloat 1 8 "_type" 1
+
+			if DUIF3.xTimeClock == 0
+				SetMCMString 1 8 "value/*:1/string" "OFF"
+			elseif DUIF3.xTimeClock == 1
+				SetMCMString 1 8 "value/*:1/string" "24 HOUR"
+			elseif DUIF3.XTimeClock == 2
+				SetMCMString 1 8 "value/*:1/string" "12 HOUR"
+			endif
+
+			SetMCMFloat 1 9 "_enable" 1
+			SetMCMString 1 9 "_title" "Radiation Settings"
+			SetMCMFloat 1 9 "_type" 0
+
+			SetMCMFloat 1 10 "_enable" 1
+			SetMCMString 1 10 "_title" "  Date Format"
+			SetMCMFloat 1 10 "_RGB" 191137050
+			SetMCMFloat 1 10 "_type" 1
+
+			if DUIF3.xTimeDate == 0
+				SetMCMString 1 10 "value/*:1/string" "OFF"
+			elseif DUIF3.xTimeDate == 1
+				SetMCMString 1 10 "value/*:1/string" "MM:DD:YYYY"
+			elseif DUIF3.xTimeDate == 2
+				SetMCMString 1 10 "value/*:1/string" "DD:MM:YYYY"
+			endif
+
+			SetMCMFloat 1 11 "_enable" 1
+			SetMCMString 1 11 "_title" "  Radiation Value"
+			SetMCMFloat 1 11 "_RGB" 191137050
+			SetMCMFloat 1 11 "_type" 4
+			SetMCMFloat 1 11 "_value" DUIF3.xRad
+
+			SetMCMFloat 1 12 "_enable" 1
+			SetMCMString 1 12 "_title" "  Short Date Format"
+			SetMCMFloat 1 12 "_RGB" 191137050
+			SetMCMFloat 1 12 "_type" 4
+			SetMCMFloat 1 12 "_value" DUIF3.xTimeSDF
+
+			SetMCMFloat 1 13 "_enable" 1
+			SetMCMString 1 13 "_title" "  Current Value"
+			SetMCMFloat 1 13 "_RGB" 191137050
+			SetMCMFloat 1 13 "_type" 4
+			SetMCMFloat 1 13 "_value" DUIF3.xRadCurrent
+
+			SetMCMFloat 1 15 "_enable" 1
+			SetMCMString 1 15 "_title" "  Radiation Meter"
+			SetMCMFloat 1 15 "_RGB" 191137050
+			SetMCMFloat 1 15 "_type" 4
+			SetMCMFloat 1 15 "_value" DUIF3.xRadMeter
+
+			SetMCMFloat 1 16 "_enable" 1
+			SetMCMString 1 16 "_title" "Experience Settings"
+			SetMCMFloat 1 16 "_type" 0
+
+			SetMCMFloat 1 18 "_enable" 1
+			SetMCMString 1 18 "_title" "  XP Value"
+			SetMCMFloat 1 18 "_RGB" 191137050
+			SetMCMFloat 1 18 "_type" 4
+			SetMCMFloat 1 18 "_value" DUIF3.xXP
+		
+			SetMCMFloat 1 19 "_enable" 1
+			SetMCMString 1 19 "_title" "Karma Settings"
+			SetMCMFloat 1 19 "_type" 0
+
+			SetMCMFloat 1 20 "_enable" 1
+			SetMCMString 1 20 "_title" "  XP Meter"
+			SetMCMFloat 1 20 "_RGB" 191137050
+			SetMCMFloat 1 20 "_type" 4
+			SetMCMFloat 1 20 "_value" DUIF3.xXPMeter
+
+			SetMCMFloat 1 21 "_enable" 1
+			SetMCMString 1 21 "_title" "  Karma Value"
+			SetMCMFloat 1 21 "_RGB" 191137050
+			SetMCMFloat 1 21 "_type" 4
+			SetMCMFloat 1 21 "_value" DUIF3.xKarma
+
+			SetMCMFloat 1 23 "_enable" 1
+			SetMCMString 1 23 "_title" "  Karma Meter"
+			SetMCMFloat 1 23 "_RGB" 191137050
+			SetMCMFloat 1 23 "_type" 4
+			SetMCMFloat 1 23 "_value" DUIF3.xKarmaMeter
+
+			SetMCMFloat 1 25 "_enable" 1
+			SetMCMString 1 25 "_title" "  Karma Alignment"
+			SetMCMFloat 1 25 "_RGB" 191137050
+			SetMCMFloat 1 25 "_type" 4
+			SetMCMFloat 1 25 "_value" DUIF3.xKarmaAlignment
+
+		elseif GetMCMFLoat 0 0 "_NewValue" == 1
+			SetMCMFLoat 0 0 "_NewValue" 0
+			SetMCMFLoat 0 0 "_Reset" 1
+
+			if iOption == 3
+				set DUIF3.xBrackets to fValue
+				SetUIFloat "HUDMainMenu\_xBrackets" DUIF3.xBrackets
+			elseif iOption == 4
+				set DUIF3.xTime to fValue
+				SetUIFloat "HUDMainMenu\_xTime" DUIF3.xTime
+			elseif iOption == 5
+				set DUIF3.xAlignment to fValue
+				SetUIFloat "HUDMainMenu\_xAlignment" DUIF3.xAlignment
+			elseif iOption == 6
+				set DUIF3.xTimeScale to fValue
+				SetUIFloat "HUDMainMenu\_xTimeScale" DUIF3.xTimeScale
+			elseif iOption == 8
+				set DUIF3.xTimeClock to (fValue - 1)
+				SetUIFloat "HUDMainMenu\_xTimeClock" DUIF3.xTimeClock
+			elseif iOption == 10
+				set DUIF3.xTimeDate to (fValue - 1)
+				SetUIFloat "HUDMainMenu\_xTimeDate" DUIF3.xTimeDate
+			elseif iOption == 11
+				set DUIF3.xRad to fValue
+				SetUIFloat "HUDMainMenu\_xRad" DUIF3.xRad
+			elseif iOption == 12
+				set DUIF3.xTimeSDF to fValue
+				SetUIFloat "HUDMainMenu\_xTimeSDF" DUIF3.xTimeSDF
+			elseif iOption == 13
+				set DUIF3.xRadCurrent to fValue
+				SetUIFloat "HUDMainMenu\_xRadCurrent" DUIF3.xRadCurrent
+			elseif iOption == 15
+				set DUIF3.xRadMeter to fValue
+				SetUIFloat "HUDMainMenu\_xRadMeter" DUIF3.xRadMeter
+			elseif iOption == 18
+				set DUIF3.xXP to fValue
+				SetUIFloat "HUDMainMenu\_xXP" DUIF3.xXP
+			elseif iOption == 20
+				set DUIF3.xXPMeter to fValue
+				SetUIFloat "HUDMainMenu\_xXPMeter" DUIF3.xXPMeter
+			elseif iOption == 21
+				set DUIF3.xKarma to fValue
+				SetUIFloat "HUDMainMenu\_xKarma" DUIF3.xKarma
+			elseif iOption == 23
+				set DUIF3.xKarmaMeter to fValue
+				SetUIFloat "HUDMainMenu\_xKarmaMeter" DUIF3.xKarmaMeter
+			elseif iOption == 25
+				set DUIF3.xKarmaAlignment to fValue
+				SetUIFloat "HUDMainMenu\_xKarmaAlignment" DUIF3.xKarmaAlignment
+			endif
+
+		elseif GetMCMFLoat 0 0 "_ShowList" == 1
+			SetMCMFLoat 0 0 "_ShowList" 2
+
+			if iOption == 8
+				SetMCMString 3 0 "_title" "Time Format"
+				SetMCMFloat 3 1 "_enable" 1
+				SetMCMFloat 3 2 "_enable" 1
+				SetMCMFloat 3 3 "_enable" 1
+				SetMCMString 3 1 "text/string" "OFF"
+				SetMCMString 3 2 "text/string" "24 HOUR"
+				SetMCMString 3 3 "text/string" "12 HOUR"
+			elseif iOption == 10
+				SetMCMString 3 0 "_title" "Date Format"
+				SetMCMFloat 3 1 "_enable" 1
+				SetMCMFloat 3 2 "_enable" 1
+				SetMCMFloat 3 3 "_enable" 1
+				SetMCMString 3 1 "text/string" "OFF"
+				SetMCMString 3 2 "text/string" "MM:DD:YYYY"
+				SetMCMString 3 3 "text/string" "DD:MM:YYYY"		
+			endif
+		endif
+	endif
+
+End

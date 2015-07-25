@@ -1,0 +1,38 @@
+<!-- button_companion_wheel.xml -->
+
+<x>
+	<copy src="parent()" trait="width"/>
+	<sub src="me()" trait="width"/>
+	<div> 2 </div>
+</x>
+<y>
+	<copy src="parent()" trait="height"/>
+	<sub src="me()" trait="height"/>
+	<div> 2 </div>
+</y>
+<width> <copy src="parent(CWM_MainRect)" trait="width"/> </width>
+<height> <copy src="parent(CWM_MainRect)" trait="height"/> </height>
+<target> <copy src="me()" trait="_enabled"/> </target>
+
+
+<user0> <!-- The X position of the circle's center -->
+	<copy src="screen()" trait="width"/>
+	<div> 2 </div>
+</user0>
+<user1> <!-- The Y position of the circle's center -->
+	<copy src="screen()" trait="height"/>
+	<div> 2 </div>
+	<sub> 55 </sub> <!-- DarN subtitle... -->
+</user1>
+<user4> 76.0 </user4>	<!-- The Minimum magnitude from the circle center you must be to be in this slice of pie -->
+<user5> 332.0 </user5>	<!-- The Maximum magnitude from the circle center you must be to be in this slice of pie -->
+
+<alpha>
+	<copy src="me()" trait="user10"/>
+	<mul src="globals()" trait="_background_fill_alpha"/>
+</alpha>
+<_enabled> &true; </_enabled>
+<zoom> &scale; </zoom>
+<depth> 4 </depth>
+
+<!-- </radial> -->

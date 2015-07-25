@@ -1,0 +1,460 @@
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			scrollbar_vert.xml
+// VERSION		1.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			November 13, 2006
+// INFO			A vertical scrollbar
+-->
+
+<!--<hotrect name="scrollbar_vert.xml">-->
+
+<!--INPUTS: Traits that may be optionally overridden-->
+<!-- Sizing info -->
+<_width> 32 </_width>
+<_height> 450 </_height>
+<_x> 0 </_x>
+<_y> 0 </_y>
+
+<!-- Num items / visible items in scrollbar-->
+<_number_of_items> 9 </_number_of_items>
+<_number_of_visible_items> 5 </_number_of_visible_items>
+
+<!-- Step intervals for scrollbar movement-->
+<_step_size> 1 </_step_size>
+<_jump_size>
+	<copy src="me()" trait="_number_of_visible_items"/>
+	<sub> 1 </sub>
+</_jump_size>
+
+<!-- Flags for scrollbar enabling / visibility-->
+<_enabled> &true; </_enabled>
+<_show_always> &false; </_show_always>
+<_has_arrows> &true; </_has_arrows>
+
+<!-- If true, scales the marker image proportional to the # items-->
+<!-- <_scale_marker_image> &true; </_scale_marker_image> -->
+<_scale_marker_image> <not src="globals()" trait="_gl_customSB" /> </_scale_marker_image>
+<_marker_width> <copy src="globals()" trait="_gl_SBWidth" /> </_marker_width>
+<_marker_height> <copy src="globals()" trait="_gl_SBHeight" /> </_marker_height>
+<_marker_image> Interface\Shared\scrollbar\vert_marker.dds  </_marker_image>
+<_marker_alpha> 255 </_marker_alpha>
+<_hoverRed> 220 </_hoverRed>
+<_hoverGreen> 220 </_hoverGreen>
+<_hoverBlue> 255 </_hoverBlue>
+
+<_wheelmoved> 0 </_wheelmoved>
+<_SetInCode></_SetInCode>			<!-- Must be poked when setting the current value in code to signal the scrollbar marker to scroll -->
+
+<!--OUTPUTS-->
+<!-- Scrollbar height including ending arrows-->
+<_total_height>
+	<copy src="me()" trait="height"/>
+	<add>
+		<!-- 2x 16 px arrows -->
+		<copy> 32 </copy>
+		<!-- <copy src="child(scrollbar_vert_up)" trait="height" />
+		<add src="child(scrollbar_vert_down)" trait="height" /> -->
+		<onlyif src="me()" trait="_has_arrows"/>
+	</add>
+</_total_height>
+
+<!-- Current scrollbar percentage based on current / max values-->
+<_current_percentage>
+	<copy src="me()" trait="_current_value"/>
+	<div>
+		<copy src="me()" trait="_number_of_items"/>
+		<sub src="me()" trait="_number_of_visible_items"/>
+		<max> 0 </max>
+	</div>
+</_current_percentage>
+
+<!-- Current scrollbar value-->
+<_current_value>
+	<!-- Incr. by _step_size when Up/Down arrows clicked-->
+	<add>
+		<copy src="child(scrollbar_vert_down)" trait="clicked"/>
+		<sub src="child(scrollbar_vert_up)" trait="clicked"/>
+		<mul src="me()" trait="_step_size"/>
+		<onlyif src="me()" trait="_enabled"/>
+	</add>
+
+	<!-- Incr. by _jump_size when page tiles clicked-->
+	<add>
+		<copy src="child(scrollbar_vert_page_down)" trait="clicked"/>
+		<sub src="child(scrollbar_vert_page_up)" trait="clicked"/>
+		<mul src="me()" trait="_jump_size"/>
+		<onlyif src="me()" trait="_enabled"/>
+	</add>
+
+	<!-- Incr. by _step_size when wheel moves-->
+	<add>
+		<copy src="me()" trait="_wheelmoved"/>
+		<mul src="me()" trait="_step_size"/>
+		<onlyif src="me()" trait="_enabled"/>
+	</add>
+
+	<!-- Only use currently calculated value if no dragging has occurred over the scrollbar marker-->
+	<onlyif>
+		<copy src="child(scrollbar_vert_marker)" trait="dragstarty"/>
+		<lt> 0 </lt>
+	</onlyif>
+
+	<!-- Add drag offest if dragging has occured-->
+	<add>
+		<copy src="child(scrollbar_vert_marker)" trait="_drag_value"/>
+		<onlyifnot>
+			<copy src="child(scrollbar_vert_marker)" trait="dragstarty"/>
+			<lt> 0 </lt>
+		</onlyifnot>
+	</add>
+
+	<!-- Upper bound of # items - # visible items, lower bound of 0-->
+	<min>
+		<copy src="me()" trait="_number_of_items"/>
+		<sub src="me()" trait="_number_of_visible_items"/>
+	</min>
+	<max> 0 </max>
+</_current_value>
+
+<alpha> 0 </alpha>
+<locus> &true; </locus>
+<target> &true; </target>
+<x>
+	<copy src="me()" trait="_x"/>
+</x>
+<y>
+	<copy src="me()" trait="_y"/>
+	<!-- <add src="child(scrollbar_vert_up)" trait="height"/> -->
+	<add> 16 </add>
+</y>
+<depth> 2 </depth>
+
+<!-- Scrollbar width excluding end arrows-->
+<height>
+	<copy src="me()" trait="_height"/>
+	<sub> 32 </sub>
+	<!-- <sub src="child(scrollbar_vert_up)" trait="height"/>
+	<sub src="child(scrollbar_vert_down)" trait="height"/> -->
+</height>
+
+<width> <copy src="me()" trait="_width"/> </width>
+
+<!-- Only visible if # items > # visible items, or if _show_always is set to &true;-->
+<visible>
+	<copy src="me()" trait="_number_of_items"/>
+	<gt src="me()" trait="_number_of_visible_items"/>
+	<or src="me()" trait="_show_always"/>
+</visible>
+
+<!--  Area on scrollbar to left of marker; moves marker a whole page when clicked -->
+<hotrect name="scrollbar_vert_page_up">
+	<id> &generic; </id>
+	<alpha>
+		<copy> 15 </copy>
+		<mul src="me()" trait="mouseover" />
+	</alpha>
+	<systemcolor> &pipboy; </systemcolor>
+	<target> <copy src="parent()" trait="target"/> </target>
+
+	<width> <copy src="parent()" trait="width"/> </width>
+	<height> <copy src="sibling(scrollbar_vert_marker)" trait="y"/> </height>
+	<x> 0 </x>
+	<y> 0 </y>
+</hotrect>
+
+<!--  Area on scrollbar to right of marker; moves marker a whole page when clicked -->
+<hotrect name="scrollbar_vert_page_down">
+	<id> &generic; </id>
+	<alpha>
+		<copy> 15 </copy>
+		<mul src="me()" trait="mouseover" />
+	</alpha>
+	<systemcolor> &pipboy; </systemcolor>
+	<target> <copy src="parent()" trait="target"/> </target>
+
+	<width> <copy src="parent()" trait="width"/></width>
+	<height>
+		<copy src="parent()" trait="height"/>
+		<sub src="sibling(scrollbar_vert_marker)" trait="height"/>
+		<sub src="sibling(scrollbar_vert_marker)" trait="y"/>
+	</height>
+	<x> 0 </x>
+	<y>
+		<copy src="sibling(scrollbar_vert_marker)" trait="y"/>
+		<add src="sibling(scrollbar_vert_marker)" trait="height"/>
+	</y>
+</hotrect>
+
+<!-- Marker on scrollbar that signifies current value-->
+<image name="scrollbar_vert_marker">
+	<id> &generic; </id>
+	<target> <copy src="parent()" trait="target"/> </target>
+
+	<alpha>
+		<copy src="parent()" trait="_marker_alpha"/>
+		<onlyifnot src="globals()" trait="_gl_customSB" />
+		<add>
+			<copy src="globals()" trait="_gl_SBAlpha" />
+			<onlyif src="globals()" trait="_gl_customSB" />
+		</add>
+	</alpha>
+	<brightness>
+		<copy> 255 </copy>
+		<sub>
+			<copy> 256 </copy>
+			<onlyif src="me()" trait="mouseover" />
+		</sub>
+	</brightness>
+	<red> <copy src="parent()" trait="_hoverRed" /> </red>
+	<green> <copy src="parent()" trait="_hoverGreen" /> </green>
+	<blue> <copy src="parent()" trait="_hoverBlue" /> </blue>
+
+	<filename> <copy src="parent()" trait="_marker_image"/> </filename>
+	<depth> 2 </depth>
+	<texatlas> Interface\InterfaceShared.tai </texatlas>
+	
+	<width>
+		<copy> 0 </copy>
+		<add>
+			<copy src="parent()" trait="_marker_width"/>
+			<onlyifnot src="parent()" trait="_scale_marker_image"/>
+		</add>
+		<add>
+			<copy> 6 </copy>
+			<onlyif src="parent()" trait="_scale_marker_image"/>
+		</add>
+		<add>
+			<copy> 4 </copy>
+			<onlyif src="me()" trait="mouseover" />
+		</add>
+		<min src="parent()" trait="width" />
+	</width>
+	<height>
+		<copy> 0 </copy>
+		<add>
+			<copy src="parent()" trait="_marker_height"/>
+			<onlyifnot src="parent()" trait="_scale_marker_image"/>
+		</add>
+		<add>
+			<copy src="parent()" trait="height"/>
+			<div src="me()" trait="_number_not_visible"/>
+			<max> 32 </max>
+			<onlyif src="parent()" trait="_scale_marker_image"/>
+		</add>
+	</height>
+
+	<!-- <x> 12 </x> -->
+	<x>
+		<copy src="parent()" trait="width" />
+		<sub src="me()" trait="width" />
+		<div> 2 </div>
+	</x>
+	
+	<!-- Marker's Y-value is based off of either the last drag value or the current value
+		times the step width, depending on whether the mouse or the keyboard / gamepad was used
+		to last move the marker-->
+	<y>
+		<copy> 0 </copy>
+		<add>
+			<copy src="me()" trait="dragy"/>
+			<sub src="me()" trait="dragoffsety"/>
+			<onlyif>
+				<copy src="me()" trait="_drag_flag"/>
+				<eq> 0 </eq>
+			</onlyif>
+		</add>
+		<add>
+			<copy src="parent()" trait="_current_value"/>
+			<mul src="me()" trait="_step_height"/>
+			<onlyifnot>
+				<copy src="me()" trait="_drag_flag"/>
+				<eq> 0 </eq>
+			</onlyifnot>
+		</add>
+		<max> 0 </max>
+		<min>
+			<copy src="parent()" trait="height"/>
+			<sub src="me()" trait="height"/>
+		</min>
+	</y>
+
+	<draggable> <copy src="parent()" trait="_enabled"/> </draggable>
+	<dragstarty> -1 </dragstarty>
+
+	<!-- The current value of the scrollbar based on the current drag position of the scrollbar -->
+	<_drag_value>
+		<copy src="me()" trait="dragy"/>
+		<div src="me()" trait="_step_height"/>
+		<floor> 0 </floor>
+	</_drag_value>
+
+	<!-- 0 if the scrollbar was altered by dragging the marker, 1 or more if other methods were used -->
+	<_drag_flag>
+		<add>
+			<copy> 1 </copy>
+			<onlyif>
+				<copy src="sibling(scrollbar_vert_up)" trait="clicked"/>
+				<add src="sibling(scrollbar_vert_down)" trait="clicked"/>
+				<add src="sibling(scrollbar_vert_page_up)" trait="clicked"/>
+				<add src="sibling(scrollbar_vert_page_down)" trait="clicked"/>
+				<add src="parent()" trait="_SetInCode"/>
+				<add>
+					<copy src="parent()" trait="_wheelmoved"/>
+					<abs> 0 </abs>
+				</add>
+				<gt> 0 </gt>
+			</onlyif>
+		</add>
+		<mul>
+			<copy> 1 </copy>
+			<onlyif>
+				<copy src="me()" trait="dragstarty"/>
+				<lt> 0 </lt>
+			</onlyif>
+		</mul>
+	</_drag_flag>
+
+	<_number_not_visible>
+		<copy src="parent()" trait="_number_of_items"/>
+		<sub src="parent()" trait="_number_of_visible_items"/>
+		<add> 1 </add>
+	</_number_not_visible>
+
+	<!-- Total drag distance needed before current value will incr / decr -->
+	<_step_height>
+		<copy src="parent()" trait="height"/>
+		<sub src="me()" trait="height"/>
+		<div>
+			<copy src="me()" trait="_number_not_visible"/>
+			<sub> 1 </sub>
+		</div>
+	</_step_height>
+
+</image>
+
+<!-- Left button: Moves marker to the left -->
+<image name="scrollbar_vert_up">
+	<id> &generic; </id>
+	<brightness>
+		<copy> 255 </copy>
+		<sub>
+			<copy> 256 </copy>
+			<onlyif src="me()" trait="mouseover" />
+		</sub>
+	</brightness>
+	<red> <copy src="parent()" trait="_hoverRed" /> </red>
+	<green> <copy src="parent()" trait="_hoverGreen" /> </green>
+	<blue> <copy src="parent()" trait="_hoverBlue" /> </blue>
+	
+	<target> <copy src="parent()" trait="target"/> </target>
+	
+	<filename> Interface\Shared\scrollbar\arrow_up.dds </filename>
+	<texatlas> Interface\InterfaceShared.tai </texatlas>
+	<width>
+		<copy> 0 </copy>
+		<add>
+			<copy> 32 </copy>
+			<add>
+				<copy> 6 </copy> <!-- DarN 2 -->
+				<onlyif src="me()" trait="mouseover" />
+			</add>
+			<onlyif src="parent()" trait="_has_arrows"/>
+		</add>
+	</width>
+	<height>
+		<copy> 0 </copy>
+		<add>
+			<copy> 16 </copy>
+			<add>
+				<copy> 6 </copy> <!-- DarN 2 -->
+				<onlyif src="me()" trait="mouseover" />
+			</add>
+			<onlyif src="parent()" trait="_has_arrows"/>
+		</add>
+	</height>
+	<x>
+		<copy> 0 </copy>
+		<sub src="me()" trait="mouseover" />
+		<sub src="me()" trait="mouseover" />
+		<sub src="me()" trait="mouseover" />
+	</x>
+	<y>
+		<copy> 0 </copy>
+		<sub src="me()" trait="height"/>
+		
+		<!-- <sub>
+			<copy src="me()" trait="mouseover" />
+			<mul> 2 </mul>
+		</sub> -->
+	</y>
+	
+	<alpha> <copy src="parent()" trait="_marker_alpha"/> </alpha>
+</image>
+
+<!-- Right button: Moves marker to the right -->
+<image name="scrollbar_vert_down">
+	<id> &generic; </id>
+	<brightness>
+		<copy> 255 </copy>
+		<sub>
+			<copy> 256 </copy>
+			<onlyif src="me()" trait="mouseover" />
+		</sub>
+	</brightness>
+	<red> <copy src="parent()" trait="_hoverRed" /> </red>
+	<green> <copy src="parent()" trait="_hoverGreen" /> </green>
+	<blue> <copy src="parent()" trait="_hoverBlue" /> </blue>
+
+	<target> <copy src="parent()" trait="target"/> </target>
+
+	<filename> Interface\Shared\scrollbar\arrow_down.dds </filename>
+	<texatlas> Interface\InterfaceShared.tai </texatlas>
+	<width>
+		<copy> 0 </copy>
+		<add>
+			<copy> 32 </copy>
+			<add>
+				<copy> 6 </copy>
+				<onlyif src="me()" trait="mouseover" />
+			</add>
+			<onlyif src="parent()" trait="_has_arrows"/>
+		</add>
+	</width>
+	<height>
+		<copy> 0 </copy>
+		<add>
+			<copy> 16 </copy>
+			<add>
+				<copy> 6 </copy>
+				<onlyif src="me()" trait="mouseover" />
+			</add>
+			<onlyif src="parent()" trait="_has_arrows"/>
+		</add>
+	</height>
+	<x>
+		<copy> 0 </copy>
+		<sub src="me()" trait="mouseover" />
+		<sub src="me()" trait="mouseover" />
+		<sub src="me()" trait="mouseover" />
+	</x>
+	<y>
+		<copy src="parent()" trait="height" />
+		<!-- <add src="me()" trait="mouseover" />
+		<add src="me()" trait="mouseover" /> -->
+	</y>
+	
+	<alpha> <copy src="parent()" trait="_marker_alpha"/> </alpha>
+</image>
+<!--</image>-->

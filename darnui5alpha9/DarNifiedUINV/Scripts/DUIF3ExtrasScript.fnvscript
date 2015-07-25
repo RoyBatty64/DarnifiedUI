@@ -1,0 +1,364 @@
+scn DUIF3ExtrasScript
+
+int doonce
+int gHour
+int gMinute
+int gDay
+int gMonth
+int gYear
+int dow
+int lastMin
+int lastHr
+int ke
+int kve
+int kg
+int kvg
+int ixp
+int lastXp
+int xpnxtlvl
+int xpb
+int xpbb
+int range
+int pos
+int xpo
+int lvl
+int nxtlvl
+int cw
+int cw1
+int iw
+int iw1
+int cc
+int dr
+int dt
+int pr
+int fr
+int fo
+int el
+int en
+int em
+int rr
+int hn
+int th
+int sl
+int lastsettingsMode
+int KarmaMinMax
+int iKarma
+int sKarma
+int ci
+int armorCND
+int armorBH
+int bDelayEnable
+int TTW
+float prads
+float envrads
+float er
+float er1
+float showInCombat
+float fTimer
+ref armorRef
+string_var stRads
+string_var stDay
+string_var stMonth
+string_var stKarma
+array_var aShortDay
+array_var aLongDay
+array_var aShortMonth
+array_var aLongMonth
+array_var aKarma
+
+Begin GameMode
+
+	if GetGameRestarted
+		if IsModLoaded "TaleOfTwoWastelands.esm"
+			set TTW to 1
+		endif
+	endif
+
+	if player.GetEquipped PipBoy
+			
+		if doonce == 0
+			set ke to GetGlobalValue KarmaEvil
+			set kve to GetGlobalValue KarmaVeryEvil
+			set kg to GetGlobalValue KarmaGood
+			set kvg to GetGlobalValue KarmaVeryGood
+			set lastXp to -1
+			set lastMin to -1
+			set lastHr to -1
+		
+			let aKarma := ar_list "Very Evil", "Evil", "Neutral", "Good", "Very Good"
+		
+			let aShortDay := ar_list "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+			let aShortMonth := ar_list "Jan", "Feb", "Mar", "Apr" , "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+		
+			let aLongDay := ar_list "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+			let aLongMonth := ar_list "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+			
+			set doonce to 1
+
+		endif
+		
+		if bDelayEnable == 0
+			set fTimer to fTimer+GetSecondsPassed
+			if fTimer >= 5
+				set bDelayEnable to 1
+			endif
+		else
+				SetUIFloat "HUDMainMenu\_lvlSkillsUncap" DUIF3.xSkillFix
+				SetUIFloat "HUDMainMenu\_swMaxHours" DUIF3.swMaxHours
+				SetUIFloat "HUDMainMenu\_HUDScale" DUIF3.HUDScale
+				SetUIFloat "HUDMainMenu\_HUDWarnLevel" DUIF3.HUDWarnLevel
+				SetUIFloat "HUDMainMenu\_HUDAlertLevel" DUIF3.HUDAlertLevel
+				SetUIFloat "HUDMainMenu\_HUDOverrideColor" DUIF3.HUDOverrideColor
+				SetUIFloat "HUDMainMenu\_HUDSolidMeters" DUIF3.HUDSolidMeters
+				SetUIFloat "HUDMainMenu\_HUDDynamicColors" DUIF3.HUDDynamicColors
+				SetUIFloat "HUDMainMenu\_HUDShowGuides" DUIF3.HUDShowGuides
+				SetUIFloat "HUDMainMenu\_HUDRed" DUIF3.HUDRed
+				SetUIFloat "HUDMainMenu\_HUDGreen" DUIF3.HUDGreen
+				SetUIFloat "HUDMainMenu\_HUDBlue" DUIF3.HUDBlue
+				SetUIFloat "HUDMainMenu\_HUDTxtRed" DUIF3.HUDTxtRed
+				SetUIFloat "HUDMainMenu\_HUDTxtGreen" DUIF3.HUDTxtGreen
+				SetUIFloat "HUDMainMenu\_HUDTxtBlue" DUIF3.HUDTxtBlue
+				SetUIFloat "HUDMainMenu\_HUDWarnRed" DUIF3.HUDWarnRed
+				SetUIFloat "HUDMainMenu\_HUDWarnGreen" DUIF3.HUDWarnGreen
+				SetUIFloat "HUDMainMenu\_HUDWarnBlue" DUIF3.HUDWarnBlue
+				SetUIFloat "HUDMainMenu\_HUDAlertRed" DUIF3.HUDAlertRed
+				SetUIFloat "HUDMainMenu\_HUDAlertGreen" DUIF3.HUDAlertGreen
+				SetUIFloat "HUDMainMenu\_HUDAlertBlue" DUIF3.HUDAlertBlue
+				SetUIFloat "HUDMainMenu\_xPanels" DUIF3.xPanels
+				SetUIFloat "HUDMainMenu\_xPanelsX" DUIF3.xPanelsX
+				SetUIFloat "HUDMainMenu\_xPanelsY" DUIF3.xPanelsY
+				SetUIFloat "HUDMainMenu\_xBrackets" DUIF3.xBrackets
+				SetUIFloat "HUDMainMenu\_xBracketStyle" DUIF3.xBracketStyle
+				SetUIFloat "HUDMainMenu\_xAlignment" DUIF3.xAlignment
+				SetUIFloat "HUDMainMenu\_xStatsArmorCND" DUIF3.xStatsArmorCND
+				SetUIFloat "HUDMainMenu\_HUDShowCI" DUIF3.xShowCI
+				SetUIFloat "HUDMainMenu\_HUDShowCLI" DUIF3.HUDShowCLI
+				SetUIFloat "HUDMainMenu\_xTime" DUIF3.xTime
+				SetUIFloat "HUDMainMenu\_xTimeClock" DUIF3.xTimeClock
+				SetUIFloat "HUDMainMenu\_xTimeDate" DUIF3.xTimeDate
+				SetUIFloat "HUDMainMenu\_xTimeSDF" DUIF3.xTimeSDF
+				SetUIFloat "HUDMainMenu\_xTimeScale" DUIF3.xTimeScale
+				SetUIFloat "HUDMainMenu\_xKarma" DUIF3.xKarma
+				SetUIFloat "HUDMainMenu\_xKarmaMeter" DUIF3.xKarmaMeter
+				SetUIFloat "HUDMainMenu\_xKarmaAlignment" DUIF3.xKarmaAlignment
+				SetUIFloat "HUDMainMenu\_xXP" DUIF3.xXP
+				SetUIFloat "HUDMainMenu\_xXPMeter" DUIF3.xXPMeter
+				SetUIFloat "HUDMainMenu\_xRad" DUIF3.xRad
+				SetUIFloat "HUDMainMenu\_xRadCurrent" DUIF3.xRadCurrent
+				SetUIFloat "HUDMainMenu\_xRadMeter" DUIF3.xRadMeter
+				SetUIFloat "HUDMainMenu\_xStats" DUIF3.xStats
+				SetUIFloat "HUDMainMenu\_xStatsDM" DUIF3.xStatsDM
+				SetUIFloat "HUDMainMenu\_xStatsEN" DUIF3.xStatsEN
+				SetUIFloat "HUDMainMenu\_xStatsCC" DUIF3.xStatsCC
+				SetUIFloat "HUDMainMenu\_xStatsDR" DUIF3.xStatsDR
+				SetUIFloat "HUDMainMenu\_xStatsDT" DUIF3.xStatsDT
+				SetUIFloat "HUDMainMenu\_xStatsPR" DUIF3.xStatsPR
+				SetUIFloat "HUDMainMenu\_xStatsFR" DUIF3.xStatsFR
+				SetUIFloat "HUDMainMenu\_xStatsFO" DUIF3.xStatsFO
+				SetUIFloat "HUDMainMenu\_xStatsEL" DUIF3.xStatsEL
+				SetUIFloat "HUDMainMenu\_xStatsER" DUIF3.xStatsER
+				SetUIFloat "HUDMainMenu\_xStatsEM" DUIF3.xStatsEM
+				SetUIFloat "HUDMainMenu\_xStatsRR" DUIF3.xStatsRR
+				SetUIFloat "HUDMainMenu\_xStatsThirst" DUIF3.xStatsThirst
+				SetUIFloat "HUDMainMenu\_xStatsHunger" DUIF3.xStatsHunger
+				SetUIFloat "HUDMainMenu\_xStatsSleep" DUIF3.xStatsSleep
+				SetUIFloat "HUDMainMenu\_NVSE" 1
+		endif
+	else
+		Return
+	endif
+
+	set gHour to GameHour
+	set gMinute to (GameHour * 60) - (gHour * 60)
+	SetUIFloat "HUDMainMenu\_TimeScale" Timescale
+	if gMinute != lastMin || gHour != lastHr
+		set lastMin to gMinute
+		set lastHr to gHour
+		SetUIFloat  "HUDMainMenu\DUIF3Extras\HUDTime\_Minute" gMinute
+		if DUIF3.xTimeClock == 2
+			if gHour == 0
+				set gHour to 12
+				SetUIString "HUDMainMenu\DUIF3Extras\HUDTime\timeContainer\timeAMPM\string" "AM"
+			elseif gHour < 12
+				SetUIString "HUDMainMenu\DUIF3Extras\HUDTime\timeContainer\timeAMPM\string" "AM"
+			elseif gHour > 12
+				set gHour to gHour - 12
+				SetUIString "HUDMainMenu\DUIF3Extras\HUDTime\timeContainer\timeAMPM\string" "PM"
+			endif
+		endif
+		SetUIFloat "HUDMainMenu\DUIF3Extras\HUDTime\_Hour" gHour
+	endif
+
+	set dow to GetDayOfWeek
+	set gMonth to GameMonth
+	set gDay to GameDay
+	
+	if DUIF3.xTimeSDF
+		set gYear to GameYear - 2200
+		let stDay := aShortDay[dow]
+		let stMonth := aShortMonth[gMonth]
+	else
+		set gYear to GameYear
+		let stDay := aLongDay[dow]
+		let stMonth := aLongMonth[gMonth]
+	endif
+	
+	set gMonth to gMonth + 1
+	SetUIFloat "HUDMainMenu\DUIF3Extras\HUDTime\_year" gYear
+		
+	if DUIF3.xTimeDate == 1
+		SetUIStringEx "HUDMainMenu\_DayString" "$stMonth"
+		SetUIStringEx "HUDMainMenu\_MonthString" "$stDay"
+		SetUIFloat "HUDMainMenu\DUIF3Extras\HUDTime\_day" gMonth
+		SetUIFloat "HUDMainMenu\DUIF3Extras\HUDTime\_month" gDay
+	else
+		SetUIStringEx "HUDMainMenu\_DayString" "$stDay"
+		SetUIStringEx "HUDMainMenu\_MonthString" "$stMonth"
+		SetUIFloat "HUDMainMenu\DUIF3Extras\HUDTime\_day" gDay
+		SetUIFloat "HUDMainMenu\DUIF3Extras\HUDTime\_month" gMonth
+	endif
+	
+	sv_destruct stDay
+	sv_destruct stMonth
+
+	set iKarma to Player.GetAV Karma
+	SetUIFloat "HUDMainMenu\_Karma" iKarma
+	if iKarma <= kve
+		set sKarma to 0
+	elseif iKarma <= ke && iKarma > kve
+		set sKarma to 1
+	elseif iKarma > ke && iKarma < kg
+		set sKarma to 2
+	elseif iKarma >= kg && iKarma < kvg
+		set sKarma to 3
+	elseif iKarma >= kvg
+		set sKarma to 4
+	endif
+
+	let stKarma := aKarma[sKarma]
+	SetUIString "HUDMainMenu\_KarmaString" "$stKarma"
+	sv_Destruct stKarma
+
+	set ixp to Player.GetAV XP
+	set lvl to Player.GetLevel
+	if ixp != lastXp || lvl == nxtlvl || GetGameLoaded
+		set lastXp to ixp
+		set nxtlvl to lvl + 1
+		set xpb to GetGameSetting iXPBase
+		set xpbb to GetGameSetting iXPBumpBase
+		set xpnxtlvl to GetXPForNextLevel + ixp
+		SetUIFloat "HUDMainMenu\_XP" ixp
+		SetUIFloat "HUDMainMenu\_Lvl" lvl
+		SetUIFloat "HUDMainMenu\_XPNxt" xpnxtlvl
+		set xpo to (lvl - 1) * ((lvl - 2) / 2 * xpbb + xpb)
+		set range to xpnxtlvl - xpo
+		set pos to xpnxtlvl - ixp
+		SetUIFloat "HUDMainMenu\_XPPos" pos
+		SetUIFloat "HUDMainMenu\_XPRange" range
+	endif
+
+	set prads to Player.GetAV RadiationRads
+	SetUIFloat "HUDMainMenu\_Rad" prads
+	set envrads to Player.GetRadiationLevel
+	set er1 to Floor envrads
+	SetUIFloat "HUDMainMenu\_Rads" er1
+	set er to (envrads - er1) / 1 * 10
+	set er1 to Floor er
+	set er1 to (er - er1) / 1 * 10
+	if er1 >= 5
+		set er to Ceil er
+	else
+		set er to Floor er
+	endif
+	let stRads := "." + $er + "/sec" 
+	SetUIStringEx "HUDMainMenu\_Rads2" "$stRads"
+	sv_Destruct stRads
+
+	set iw to Player.GetAV InventoryWeight
+	set iw1 to Floor iw
+	SetUIFloat "HUDMainMenu\_EN" iw1
+	set cw to Player.GetAV CarryWeight
+	set cw1 to Floor cw
+	SetUIFloat "HUDMainMenu\_MaxEN" cw
+	set cc to Player.GetAV CritChance
+	SetUIFloat "HUDMainMenu\_CC" cc
+	
+	set dr to Player.GetAV DamageResist
+	if dr >= 85
+		set dr to 85
+	endif
+	SetUIFloat "HUDMainMenu\_DR" dr
+	set dt to Player.GetAv DamageThreshold
+	if dt >= 85
+		set dt to 85
+	endif
+	SetUIFloat "HUDMainMenu\_DT" dt
+	set pr to Player.GetAV PoisonResist
+	if pr >= 85
+		set pr to 85
+	endif
+	SetUIFloat "HUDMainMenu\_PR" pr
+	set fr to Player.GetAV FireResist
+	if fr >= 85
+		set fr to 85
+	endif
+	SetUIFloat "HUDMainMenu\_FR" fr
+	set fo to Player.GetAV FrostResist
+	if fo >= 85
+		set fo to 85
+	endif
+	SetUIFloat "HUDMainMenu\_FO" fo
+	set el to Player.GetAV ElectricResist
+	if el >= 85
+		set el to 85
+	endif
+	SetUIFloat "HUDMainMenu\_EL" el
+	set em to Player.GetAV EMPResist
+	if em >= 85
+		set em to 85
+	endif
+	SetUIFloat "HUDMainMenu\_EM" em
+	set er to Player.GetAV EnergyResist
+	if er >= 85
+		set em to 85
+	endif
+	SetUIFloat "HUDMainMenu\_ER" er
+	set rr to Player.GetAV RadResist
+	if rr >= 85
+		set rr to 85
+	endif
+	SetUIFloat "HUDMainMenu\_RR" rr
+
+	set hn to Player.GetAV Hunger
+	set hn to hn / 10
+	if hn < 0
+		set hn to 0
+	endif
+	SetUIFloat "HUDMainMenu\_Hunger" hn
+	set th to Player.GetAV Dehydration
+	set th to th / 10
+	if th < 0
+		set th to 0
+	endif
+	SetUIFloat "HUDMainMenu\_Thirst" th
+	set sl to Player.GetAV SleepDeprevation
+	set sl to sl / 10
+	if sl < 0
+		set sl to 0
+	endif
+	SetUIFloat "HUDMainMenu\_Sleep" sl
+
+	if DUIF3.xShowCI
+		set ci to Player.IsInCombat
+		SetUIFloat "HUDMainMenu\_inCombat" ci
+	endif
+
+	if Player.GetEquippedCurrentHealth 2 != armorCND || Player.GetEquippedObject 2 != armorRef
+		set armorRef To Player.GetEquippedObject 2
+		set armorBH To GetHealth armorRef
+		set armorCND To Player.GetEquippedCurrentHealth 2
+		SetUIFloat "HUDMainMenu\_ArmorCND" armorCND
+		SetUIFloat "HUDMainMenu\_ArmorMaxCND" armorBH
+	endif
+
+End

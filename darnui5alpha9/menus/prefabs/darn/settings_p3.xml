@@ -1,0 +1,35 @@
+﻿<locus> &true; </locus>
+<x>
+	<copy src="sibling(DUI_ulcv)" trait="_x" />
+	<add> 30 </add>
+</x>
+<y>
+	<copy src="sibling(DUI_ulch)" trait="y" />
+	<add> 40 </add>
+</y>
+<visible>
+	<copy src="io()" trait="_CurrentTab" />
+	<eq> 3 </eq>
+</visible>
+<depth> 1 </depth>
+
+<_ctrlSpacing> 0 </_ctrlSpacing>
+<_alpha> 200 </_alpha>
+<_buttonWidth> 250 </_buttonWidth>
+<_buttonHeight> <copy src="child(xPanelsBtn)" trait="height" /> <sub> 4 </sub></_buttonHeight>
+<_buttonFont> 4 </_buttonFont>
+<_hasVTabs>
+	<copy> 1 </copy>
+	<onlyif src="me()" trait="visible" />
+</_hasVTabs>
+
+<rect name="vtabs">
+	<include src="darn\duif3Settings_verttabline.xml" />
+	<_subButtonCount> 6 </_subButtonCount>
+	<_Tab1Caption> Barter </_Tab1Caption>
+	<_Tab2Caption> Map </_Tab2Caption>
+	<_Tab3Caption> Dialog </_Tab3Caption>
+	<_Tab4Caption> Stats </_Tab4Caption>
+	<_Tab5Caption> Sleep/Wait </_Tab5Caption>
+	<_Tab6Caption> LevelUp </_Tab6Caption>
+</rect>

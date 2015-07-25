@@ -1,0 +1,219 @@
+scn DUIF3ConfigSubMenuStats
+
+int iMaster
+int iOption
+float fValue
+ref rList
+
+Begin GameMode
+	if GetGameRestarted
+		if IsModLoaded "The Mod Configuration Menu.esp"
+			set iMaster to GetModIndex "The Mod Configuration Menu.esp"
+			set rList to BuildRef iMaster 2790
+		endif
+	endif
+End
+
+Begin MenuMode 1013
+	if IsModLoaded "The Mod Configuration Menu.esp" && GetMCMFloat 0 0 "_ActiveSubMenu" == 3
+	else
+		Return
+	endif
+
+	if GetMCMFloat 0 0 "_ActiveMod" == GetModIndex "DarNifiedUINV.esp"
+		set iOption to GetMCMFloat 0 0 "_ActiveOption"
+		set fValue to GetMCMFloat 0 0 "_Value"
+		
+		if GetMCMFloat 0 0 "_Reset" == 1
+			SetMCMFloat 0 0 "_Reset" 0
+			SetMCMFloat 1 0 "_columns" 2
+		
+			SetMCMFloat 1 1 "_enable" 1
+			SetMCMString 1 1 "_title" "General Settings"
+			SetMCMFloat 1 1 "_type" 0
+
+			SetMCMFloat 1 3 "_enable" 1
+			SetMCMString 1 3 "_title" "  Statistics"
+			SetMCMFloat 1 3 "_RGB" 191137050
+			SetMCMFloat 1 3 "_type" 4
+			SetMCMFloat 1 3 "_value" DUIF3.xStats
+
+			SetMCMFloat 1 4 "_enable" 1
+			SetMCMString 1 4 "_title" "  Display Mode"
+			SetMCMFloat 1 4 "_RGB" 191137050
+			SetMCMFloat 1 4 "_type" 1
+
+			if DUIF3.xStatsDM == 0
+				SetMCMString 1 4 "value/*:1/string" "Percentages"
+			elseif DUIF3.xStatsDM == 1
+				SetMCMString 1 4 "value/*:1/string" "Percentages & Meters"
+			elseif DUIF3.xStatsDM == 2
+				SetMCMString 1 4 "value/*:1/string" "Meters"
+			endif
+
+			SetMCMFloat 1 7 "_enable" 1
+			SetMCMString 1 7 "_title" "Hardcore Statistics"
+			SetMCMFloat 1 7 "_type" 0
+
+			SetMCMFloat 1 8 "_enable" 1
+			SetMCMString 1 8 "_title" "Resistances"
+			SetMCMFloat 1 8 "_type" 0
+
+			SetMCMFloat 1 9 "_enable" 1
+			SetMCMString 1 9 "_title" "  Thirst"
+			SetMCMFloat 1 9 "_RGB" 191137050
+			SetMCMFloat 1 9 "_type" 4
+			SetMCMFloat 1 9 "_value" DUIF3.xStatsThirst
+
+			SetMCMFloat 1 10 "_enable" 1
+			SetMCMString 1 10 "_title" "  Damage Resistance"
+			SetMCMFloat 1 10 "_RGB" 191137050
+			SetMCMFloat 1 10 "_type" 4
+			SetMCMFloat 1 10 "_value" DUIF3.xStatsDR
+
+			SetMCMFloat 1 11 "_enable" 1
+			SetMCMString 1 11 "_title" "  Hunger"
+			SetMCMFloat 1 11 "_RGB" 191137050
+			SetMCMFloat 1 11 "_type" 4
+			SetMCMFloat 1 11 "_value" DUIF3.xStatsHunger
+
+			SetMCMFloat 1 12 "_enable" 1
+			SetMCMString 1 12 "_title" "  Damage Threshold"
+			SetMCMFloat 1 12 "_RGB" 191137050
+			SetMCMFloat 1 12 "_type" 4
+			SetMCMFloat 1 12 "_value" DUIF3.xStatsDT
+
+			SetMCMFloat 1 13 "_enable" 1
+			SetMCMString 1 13 "_title" "  Sleep"
+			SetMCMFloat 1 13 "_RGB" 191137050
+			SetMCMFloat 1 13 "_type" 4
+			SetMCMFloat 1 13 "_value" DUIF3.xStatsSleep
+
+			SetMCMFloat 1 14 "_enable" 1
+			SetMCMString 1 14 "_title" "  Poison Resistance"
+			SetMCMFloat 1 14 "_RGB" 191137050
+			SetMCMFloat 1 14 "_type" 4
+			SetMCMFloat 1 14 "_value" DUIF3.xStatsPR
+
+			SetMCMFloat 1 16 "_enable" 1
+			SetMCMString 1 16 "_title" "  Fire Resistance"
+			SetMCMFloat 1 16 "_RGB" 191137050
+			SetMCMFloat 1 16 "_type" 4
+			SetMCMFloat 1 16 "_value" DUIF3.xStatsFR
+		
+			SetMCMFloat 1 17 "_enable" 1
+			SetMCMString 1 17 "_title" "General Statistics"
+			SetMCMFloat 1 17 "_type" 0
+
+			SetMCMFloat 1 18 "_enable" 1
+			SetMCMString 1 18 "_title" "  Frost Resistance"
+			SetMCMFloat 1 18 "_RGB" 191137050
+			SetMCMFloat 1 18 "_type" 4
+			SetMCMFloat 1 18 "_value" DUIF3.xStatsFO
+
+			SetMCMFloat 1 19 "_enable" 1
+			SetMCMString 1 19 "_title" "  Encumbrance"
+			SetMCMFloat 1 19 "_RGB" 191137050
+			SetMCMFloat 1 19 "_type" 4
+			SetMCMFloat 1 19 "_value" DUIF3.xStatsEN
+
+			SetMCMFloat 1 20 "_enable" 1
+			SetMCMString 1 20 "_title" "  Electrical Resistance"
+			SetMCMFloat 1 20 "_RGB" 191137050
+			SetMCMFloat 1 20 "_type" 4
+			SetMCMFloat 1 20 "_value" DUIF3.xStatsEL
+
+			SetMCMFloat 1 21 "_enable" 1
+			SetMCMString 1 21 "_title" "  Critical Chance"
+			SetMCMFloat 1 21 "_RGB" 191137050
+			SetMCMFloat 1 21 "_type" 4
+			SetMCMFloat 1 21 "_value" DUIF3.xStatsCC
+		
+			SetMCMFloat 1 22 "_enable" 1
+			SetMCMString 1 22 "_title" "  Energy Resistance"
+			SetMCMFloat 1 22 "_RGB" 191137050
+			SetMCMFloat 1 22 "_type" 4
+			SetMCMFloat 1 22 "_value" DUIF3.xStatsER
+
+			SetMCMFloat 1 24 "_enable" 1
+			SetMCMString 1 24 "_title" "  EMP Resistance"
+			SetMCMFloat 1 24 "_RGB" 191137050
+			SetMCMFloat 1 24 "_type" 4
+			SetMCMFloat 1 24 "_value" DUIF3.xStatsEM
+
+			SetMCMFloat 1 26 "_enable" 1
+			SetMCMString 1 26 "_title" "  Radiation Resistance"
+			SetMCMFloat 1 26 "_RGB" 191137050
+			SetMCMFloat 1 26 "_type" 4
+			SetMCMFloat 1 26 "_value" DUIF3.xStatsRR
+
+		elseif GetMCMFloat 0 0 "_NewValue" == 1
+			SetMCMFloat 0 0 "_NewValue" 0
+			SetMCMFloat 0 0 "_Reset" 1
+
+			if iOption == 3
+				set DUIF3.xStats to fValue
+				SetUIFloat "HUDMainMenu\_xStats" DUIF3.xStats
+			elseif iOption == 4
+				set DUIF3.xStatsDM to (fValue - 1)
+				SetUIFloat "HUDMainMenu\_xStatsDM" DUIF3.xStatsDM
+			elseif iOption == 9
+				set DUIF3.xStatsThirst to fValue
+				SetUIFloat "HUDMainMenu\_xStatsThirst" DUIF3.xStatsThirst
+			elseif iOption == 10
+				set DUIF3.xStatsDR to fValue
+				SetUIFloat "HUDMainMenu\_xStatsDR" DUIF3.xStatsDR
+			elseif iOption == 11
+				set DUIF3.xStatsHunger to fValue
+				SetUIFloat "HUDMainMenu\_xStatsHunger" DUIF3.xStatsHunger
+			elseif iOption == 12
+				set DUIF3.xStatsDT to fValue
+				SetUIFloat "HUDMainMenu\_xStatsDT" DUIF3.xStatsDT	
+			elseif iOption == 13
+				set DUIF3.xStatsSleep to fValue
+				SetUIFloat "HUDMainMenu\_xStatsSleep" DUIF3.xStatsSleep
+			elseif iOption == 14
+				set DUIF3.xStatsPR to fValue
+				SetUIFloat "HUDMainMenu\_xStatsPR" DUIF3.xStatsPR
+			elseif iOption == 16
+				set DUIF3.xStatsFR to fValue
+				SetUIFloat "HUDMainMenu\_xStatsFR" DUIF3.xStatsFR
+			elseif iOption == 18
+				set DUIF3.xStatsFO to fValue
+				SetUIFloat "HUDMainMenu\_xStatsFO" DUIF3.xStatsFO
+			elseif iOption == 19
+				set DUIF3.xStatsEN to fValue
+				SetUIFloat "HUDMainMenu\_xStatsEN" DUIF3.xStatsEN
+			elseif iOption == 20
+				set DUIF3.xStatsEL to fValue
+				SetUIFloat "HUDMainMenu\_xStatsEL" DUIF3.xStatsEL
+			elseif iOption == 21
+				set DUIF3.xStatsCC to fValue
+				SetUIFloat "HUDMainMenu\_xStatsCC" DUIF3.xStatsCC
+			elseif iOption == 22
+				set DUIF3.xStatsER to fValue
+				SetUIFloat "HUDMainMenu\_xStatsER" DUIF3.xStatsER
+			elseif iOption == 24
+				set DUIF3.xStatsEM to fValue
+				SetUIFloat "HUDMainMenu\_xStatsEM" DUIF3.xStatsEM
+			elseif iOption == 26
+				set DUIF3.xStatsRR to fValue
+				SetUIFloat "HUDMainMenu\_xStatsRR" DUIF3.xStatsRR
+			endif
+
+		elseif GetMCMFloat 0 0 "_ShowList" == 1
+			SetMCMFloat 0 0 "_ShowList" 2
+		
+			if iOption == 4
+				SetMCMString 3 0 "_title" "Statistics Display Mode"
+				SetMCMFloat 3 1 "_enable" 1
+				SetMCMFloat 3 2 "_enable" 1
+				SetMCMFloat 3 3 "_enable" 1
+				SetMCMString 3 1 "text/string" "Percentages"
+				SetMCMString 3 2 "text/string" "Percentages & Meters"
+				SetMCMString 3 3 "text/string" "Meters"
+			endif
+		endif
+	endif
+
+End

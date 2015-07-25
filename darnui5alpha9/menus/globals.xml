@@ -1,0 +1,34 @@
+<!-- globals.xml -->
+<rect name="Strings">
+	<!--=========================== DarNified UI NV ===========================-->
+	 <!-- Do not edit! -->
+	<include src="DUINVSettings.xml" />
+	<include src="darn\duiUtilFunc.xml" />
+	<!--========================== /DarNified UI NV ===========================-->
+	<!-- CONSTANTS -->
+	<_line_thickness>
+		<copy> 2 </copy>
+		<mul src="screen()" trait="resolutionconverter"/>
+	</_line_thickness>
+	
+	<_line_brightness> 200 </_line_brightness>
+	<_line_brightness_disabled> 128 </_line_brightness_disabled>
+	
+	<_text_brightness> 255 </_text_brightness>
+	<_text_brightness_disabled> 128 </_text_brightness_disabled>
+	
+	<_background_fill_alpha> 32 </_background_fill_alpha>
+	<_background_fill_brightness> 128 </_background_fill_brightness>
+	
+	<_gap_size> 15 </_gap_size>
+	
+	<_sound_button_click> UIMenuOK </_sound_button_click>
+
+	<_pipboy_width> 1024 </_pipboy_width>
+	<_pipboy_height> 768 </_pipboy_height>
+	
+	<!-- #39515: Added new reference trait that gets updated whenever we plug / unplug a PC 360 controller -->
+	<_Has360Controller> &true; </_Has360Controller>
+	<_Has360Controller2> &true; </_Has360Controller2>
+</rect>
+	

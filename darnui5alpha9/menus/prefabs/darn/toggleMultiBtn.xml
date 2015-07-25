@@ -1,0 +1,152 @@
+﻿
+<!-- hotrect name="selected_box" -->
+<xbuttona> <ref src="me()" trait="clicked" /> </xbuttona>
+
+	<_horbuf> 10 </_horbuf>
+	<_verbuf> 10 </_verbuf>
+	<!-- <xdefault>1</xdefault> -->
+
+<!-- Alpha of the text and enclosing box; set to 255 when targeted, 128 otherwise -->
+	<_line_alpha>
+		<copy> 128 </copy>
+		<add>
+			<copy> 127 </copy>
+			<onlyif>
+				<copy src="me()" trait="_Value" />
+				<gt> 0 </gt>
+				<or src="me()" trait="_noOffState" />
+				<and src="me()" trait="target" />
+			</onlyif>
+		</add>
+	</_line_alpha>
+
+	<x> 0 </x>
+	<y> 0 </y>
+
+	<width> 200 </width>
+	<height>
+		<copy src="child(button_text)" trait="height" />
+		<add src="me()" trait="_verbuf" />
+	</height>
+
+	<string> Button Text </string>
+	
+	<target> <copy src="me()" trait="_enabled" /> </target>
+
+	<locus> &true; </locus>
+	<alpha>
+		<copy> 60 </copy> <!-- DarN 40 -->
+		<onlyif src="me()" trait="mouseover" />
+	</alpha>
+	<brightness> 255 </brightness>
+	<mouseoversound> UIMenuFocus </mouseoversound>
+	<clicksound> UIMenuOK </clicksound>
+	
+	<_State>
+		<copy src="child(marker)" trait="_value" />
+		<add src="me()" trait="_Start" />
+		<sub> 1 </sub>
+	</_State>
+	
+	<_realState>
+		<copy src="me()" trait="_States" />
+		<sub> 1 </sub>
+	</_realState>
+	
+	<user1>
+		<copy src="me()" trait="user2" />
+		<sub src="me()" trait="_realState" />
+	</user1>
+	<!-- maximum range value -->
+	<user2>
+		<copy src="me()" trait="_States" />
+		<sub src="me()" trait="_Start" />
+	</user2>
+	
+
+	<!-- Text within the text box-->
+	<text name="button_text">
+		<font> 4 </font>
+
+		<string> <copy src="parent()" trait="_Caption" /> </string>
+
+		<alpha>
+			<copy> 255 </copy>
+			<div>
+				<copy> 2 </copy>
+				<onlyifnot src="parent()" trait="target" />
+			</div>
+		</alpha>
+
+		<wrapwidth>
+			<copy src="parent()" trait="_fixedwidth" />
+			<sub src="parent()" trait="_horbuf" />
+			<onlyif>
+				<copy src="parent()" trait="_fixedwidth" />
+				<gt> 0 </gt>
+			</onlyif>
+		</wrapwidth>
+		<depth> 2 </depth>
+
+		<!-- Text has the same justification as the surrounding box -->
+		<x> 5 </x>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+	</text>
+	
+	<text name="state_text">
+		<font> 4 </font>
+		<_fuck>
+			<copy src="parent()" trait="_State" />
+			<copy src="parent()" trait="_State_" />
+		</_fuck>
+		<string> <copy src="me()" trait="_fuck" /> </string>
+		<justify> &right; </justify>
+
+		<alpha> <copy src="parent()" trait="_line_alpha" /> </alpha>
+		<brightness> 255 </brightness>
+		<wrapwidth>
+			<copy src="parent()" trait="width" />
+			<sub src="parent()" trait="_horbuf" />
+		</wrapwidth>
+		<depth> 2 </depth>
+
+		<!-- Text has the same justification as the surrounding box -->
+		<x>
+			<copy src="parent()" trait="width" />
+			<sub src="parent()" trait="_horbuf" />
+		</x>
+		<y>
+			<copy src="parent()" trait="height" />
+			<sub src="me()" trait="height" />
+			<div> 2 </div>
+		</y>
+	</text>
+
+	<rect name="marker">
+		<visible> &false; </visible>
+		<_value>
+			<!-- copy old value -->
+			<sub>
+				<copy src="parent()" trait="clicked" />
+				<mul src="parent()" trait="_realState" />
+				<onlyif>
+					<copy src="parent()" trait="_Value" />
+					<eq src="parent()" trait="_realState" />
+				</onlyif>
+			</sub>
+			<add>
+				<copy src="parent()" trait="clicked" />
+				<onlyif>
+					<copy src="parent()" trait="_Value" />
+					<lt src="parent()" trait="_realState" />
+				</onlyif>
+			</add>
+			<max src="parent()" trait="user1" />
+			<min src="parent()" trait="user2" />
+		</_value>
+	</rect>
+<!-- /hotrect -->

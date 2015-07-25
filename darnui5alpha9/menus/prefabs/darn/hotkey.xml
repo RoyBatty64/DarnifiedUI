@@ -1,0 +1,99 @@
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			HotKey.xml
+// VERSION		1.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			5-23-2007
+// INFO			An element of the hot-key menu.  Represents one hot-keyed item.
+-->
+<!-- rect name="hot_key" -->
+	<width> 60 </width>
+	<height> 60 </height>
+	<locus> &true; </locus>
+
+	<_HotKeyIcon></_HotKeyIcon>
+	<_HotKeyNumber></_HotKeyNumber>
+	<_HotKeyAssigned> &false; </_HotKeyAssigned>
+
+	<hotrect name="HK_SelectionBox">
+		<include src="darn\box.xml"/>
+		
+		<width> <copy src="parent()" trait="width"/> </width>
+		<height> <copy src="parent()" trait="height"/> </height>
+		<_fill_alpha> 80 </_fill_alpha>
+		<visible>
+			<copy src="grandparent()" trait="_SelectedHotkey"/>
+			<eq src="parent()" trait="_HotKeyNumber"/>
+		</visible>
+		<depth> 1 </depth>
+	</hotrect>
+
+	<hotrect name="HK_Border">
+		<include src="darn\box.xml"/>
+		<x> 5 </x>
+		<y> 5 </y>
+		<width>
+			<copy src="parent()" trait="width"/>
+			<sub> 10 </sub>
+		</width>
+		<height>
+			<copy src="parent()" trait="height"/>
+			<sub> 10 </sub>
+		</height>
+		<depth> 2 </depth>
+	</hotrect>
+	
+	<image name="HK_Icon">
+		<filename> <copy src="parent()" trait="_HotKeyIcon"/> </filename>
+		<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDRed" /> </red>
+		<green> <copy src="io()" trait="_HUDGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDBlue" /> </blue>
+		
+		<x> 5 </x>
+		<y> 5 </y>
+		<width>
+			<copy src="parent()" trait="width"/>
+			<sub> 10 </sub>
+		</width>
+		<height>
+			<copy src="parent()" trait="height"/>
+			<sub> 10 </sub>
+		</height>
+		<zoom> &scale; </zoom>
+		<visible> <copy src="parent()" trait="_HotKeyAssigned"/> </visible>
+		<depth> 2 </depth>
+	</image>
+
+	<text name="HK_Number">
+		<x> <copy src="parent()" trait="width"/> </x>
+		<y>
+			<copy src="parent()" trait="height"/>
+			<sub src="me()" trait="height"/>
+			<add> 5 </add>
+		</y>
+		<string>
+			<copy src="parent()" trait="_HotKeyNumber"/>
+			<add> 1 </add>
+		</string>
+		<font> <copy src="globals()" trait="_HUDMeterFont" /> </font>
+		<systemcolor> <copy src="io()" trait="_duiHUDSysColor" /> </systemcolor>
+		<brightness> <copy src="io()" trait="_duiHUDBrightness" /> </brightness>
+		<red> <copy src="io()" trait="_HUDTxtRed" /> </red>
+		<green> <copy src="io()" trait="_HUDTxtGreen" /> </green>
+		<blue> <copy src="io()" trait="_HUDTxtBlue" /> </blue>
+		<depth> 2 </depth>
+	</text>
+<!-- /rect -->

@@ -1,0 +1,34 @@
+﻿<locus> &true; </locus>
+<x>
+	<copy src="sibling(DUI_ulcv)" trait="_x" />
+	<add> 30 </add>
+</x>
+<y>
+	<copy src="sibling(DUI_ulch)" trait="y" />
+	<add> 40 </add>
+</y>
+<width>
+	<copy src="sibling(DUI_urcv)" trait="_x" />
+	<sub src="sibling(DUI_ulcv)" trait="_x" />
+	<sub src="me()" trait="x" />
+</width>
+<height> 600 </height>
+<visible>
+	<copy src="io()" trait="_CurrentTab" />
+	<eq> 2 </eq>
+</visible>
+<depth> 1 </depth>
+<_HRState> <copy src="child(ScrubHRTest)" trait="_State" /> </_HRState>
+
+
+	<hotrect name="ScrubHRTest">
+		<include src="darn\scrubHRCtrl.xml" />
+		<_Start> 4.5 </_Start>
+		<_Min> -10.5 </_Min>
+		<_Max> 10.5 </_Max>
+		<_Caption> HighResVal: </_Caption>
+		<_enabled> &true; </_enabled>
+		<_Value> <copy src="parent()" trait="_HRState" /> </_Value>
+	</hotrect>
+
+

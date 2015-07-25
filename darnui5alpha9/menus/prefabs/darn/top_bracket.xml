@@ -1,0 +1,59 @@
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			top_bracket.xml
+// VERSION		1.0
+// AUTHOR:		
+// DATE			
+// INFO			A bracket image that goes on top of menus
+-->
+<!--rect name="top_bracket"-->
+	<width> <copy src="parent()" trait="width"/> </width>
+	<height> 50 </height>
+	<alpha> 255 </alpha>
+	<locus> &true; </locus>
+
+	<!-- Main line -->
+	<image name="MainLine">
+		<filename> solid.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<width> <copy src="parent()" trait="width"/> </width>
+		<height> <copy src="globals()" trait="_line_thickness"/> </height>
+		<alpha> <copy src="parent()" trait="alpha"/> </alpha>
+	</image>
+	
+	<!-- Vertical fade lines on side -->
+	<image name="LeftVert">
+		<filename> fade_to_bottom.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<zoom> &scale; </zoom>
+		
+		<width> <copy src="globals()" trait="_line_thickness"/> </width>
+		<height> <copy src="parent()" trait="height"/> </height>
+		<alpha> <copy src="parent()" trait="alpha"/> </alpha>
+	</image>
+
+	<image name="RightVert">
+		<filename> fade_to_bottom.dds </filename>
+		<texatlas> Interface\InterfaceShared.tai </texatlas>
+		<zoom> &scale; </zoom>
+		
+		<width> <copy src="globals()" trait="_line_thickness"/> </width>
+		<height> <copy src="parent()" trait="height"/> </height>
+		<x>
+			<copy src="parent()" trait="width"/>
+			<sub> 1 </sub> <!-- DarN 2 -->
+		</x>
+		<alpha> <copy src="parent()" trait="alpha"/> </alpha>
+	</image>
+<!--rect-->

@@ -1,0 +1,136 @@
+<!-- icon_companion_wheel.xml -->
+
+<image name="CWM_Icon_Off">
+  <x>
+    <copy src="parent()" trait="user6"/>
+    <sub src="parent()" trait="x"/> <!-- Don't compensate for the master radial rect, that's already been done-->
+  </x>
+  <y>
+    <copy src="parent()" trait="user7"/>
+    <sub src="grandparent()" trait="y"/>
+    <sub src="parent()" trait="y"/>
+  </y>
+  <width>
+    160
+  </width>
+  <height>
+    160
+  </height>
+  <filename>
+    <copy src="parent()" trait="user8"/>
+  </filename>
+  <zoom> &scale; </zoom>
+  <depth> 5 </depth>
+  <alpha>
+    <copy> 1 </copy>
+    <sub src="parent()" trait="user10"/>
+    <mult> 255 </mult>
+    <onlyif>
+      <copy src="parent()" trait="user11"/>
+      <!-- Only show these icons if trait user11 is 0 (user11 is used to toggle the alt icons) -->
+      <eq> 0 </eq>
+    </onlyif>
+  </alpha>
+</image>
+<image name="CWM_Icon_On">
+  <x>
+    <copy src="parent()" trait="user6"/>
+    <!-- Don't compensate for the master radial rect, that's already been done-->
+    <sub src="parent()" trait="x"/>
+  </x>
+  <y>
+    <copy src="parent()" trait="user7"/>
+    <sub src="grandparent()" trait="y"/>
+    <sub src="parent()" trait="y"/>
+  </y>
+  <width>
+    160
+  </width>
+  <height>
+    160
+  </height>
+  <filename>
+    <copy src="parent()" trait="user9"/>
+  </filename>
+  <zoom> &scale; </zoom>
+  <depth> 5 </depth>
+  <alpha>
+    <copy> 255 </copy>
+    <mult src="parent()" trait="user10"/>
+    <onlyif>
+      <copy src="parent()" trait="user11"/>
+      <!-- Only show these icons if trait user11 is 0 (user11 is used to toggle the alt icons) -->
+      <eq> 0 </eq>
+    </onlyif>
+  </alpha>
+</image>
+
+
+<image name="CWM_Alt_Icon_Off">
+  <x>
+    <copy src="parent()" trait="user6"/>
+    <sub src="parent()" trait="x"/>
+    <!-- Don't compensate for the master radial rect, that's already been done-->
+  </x>
+  <y>
+    <copy src="parent()" trait="user7"/>
+    <sub src="grandparent()" trait="y"/>
+    <sub src="parent()" trait="y"/>
+  </y>
+  <width>
+    160
+  </width>
+  <height>
+    160
+  </height>
+  <filename>
+    <copy src="parent()" trait="user12"/>
+  </filename>
+  <zoom> &scale; </zoom>
+  <depth> 5 </depth>
+  <alpha>
+    <copy> 1 </copy>
+    <sub src="parent()" trait="user10"/>
+    <mult> 255 </mult>
+    <onlyif>
+      <copy src="parent()" trait="user11"/> <!-- Only show these alt icons if trait user11 is 1 (user11 is used to toggle the alt icons) -->
+      <eq> 1 </eq>
+    </onlyif>
+  </alpha>
+</image>
+<image name="CWM_Alt_Icon_On">
+  <x>
+    <copy src="parent()" trait="user6"/>
+    <!-- Don't compensate for the master radial rect, that's already been done-->
+    <sub src="parent()" trait="x"/>
+  </x>
+  <y>
+    <copy src="parent()" trait="user7"/>
+    <sub src="grandparent()" trait="y"/>
+    <sub src="parent()" trait="y"/>
+  </y>
+  <width>
+    160
+  </width>
+  <height>
+    160
+  </height>
+  <filename>
+    <copy src="parent()" trait="user13"/>
+  </filename>
+  <zoom> &scale; </zoom>
+  <depth> 5 </depth>
+  <alpha>
+    <copy> 255 </copy>
+    <mult src="parent()" trait="user10"/>
+    <onlyif>
+      <copy src="parent()" trait="user11"/>
+      <!-- Only show these alt icons if trait user11 is 1 (user11 is used to toggle the alt icons) -->
+      <eq> 1 </eq>
+    </onlyif>
+  </alpha>
+</image>
+
+
+
+<!-- end icon -->

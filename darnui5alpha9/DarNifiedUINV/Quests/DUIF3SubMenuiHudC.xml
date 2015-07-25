@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="QUST">
+  <Flags>0</Flags>
+  <FormID ID="0100300B">DUIF3SubMenuiHudC</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">DUIF3SubMenuiHudC</EditorID>
+    <Script Tag="SCRI">
+      <Reference ID="0100400E">DUIF3ConfigSubMenuiHudC</Reference>
+    </Script>
+    <Name Tag="FULL">DUIF3SubMenuiHudC</Name>
+    <Data Tag="DATA">
+      <Flags>17</Flags>
+      <Priority>50</Priority>
+      <QuestDelay>0.00999999978</QuestDelay>
+    </Data>
+  </Subrecords>
+</Record>

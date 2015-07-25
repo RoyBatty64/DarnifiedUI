@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="SCPT">
+  <Flags>0</Flags>
+  <FormID ID="01015522">UCBQuestScript</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">UCBQuestScript</EditorID>
+    <Data>
+      <Data Tag="SCHR">
+        <ReferenceCount>4</ReferenceCount>
+        <CompiledSize>1113</CompiledSize>
+        <VariableCount>20</VariableCount>
+        <Type>Quest</Type>
+        <Flags>Enabled</Flags>
+      </Data>
+      <CompiledScript Tag="SCDA">HQAAABAABgAAAFUAAAAWAAgAAgAEACBHAQAVAAcARwEAAgAgMDkQCgACAHICAG4AAAAAGQAAANwRDgACAHICAHoAAAAAAADwPxUABwBmEwACACAwFQAHAHMUAAIAIDARAAAAEAANAAEALwAAAAEAbukDAAAWAA0AAQAJACBHAwAgMCA9PR4AAAAZAAAA3BEOAAIAcgIAepqZmZmZmbk/EQAAABAADQABAMoBAAABAG4fBAAAFgANAAEACQAgRwMAIDAgPT0eAAAAGQAAANwRDgACAHICAHqamZmZmZm5PxYADwAFAAsAIFhTFAUAAQBHBAAVAAcAcxQAAgAgMRYAMQEAAC0BIFgkEAcAAQBuAwAAACBYJBAHAAEAbu8DAAAgfHwgWCQQBwABAG7pAwAAIHx8IFgkEAcAAQBu8QMAACB8fCBYJBAHAAEAbvUDAAAgfHwgWCQQBwABAG4DBAAAIHx8IFgkEAcAAQBuDAQAACB8fCBYJBAHAAEAbhcEAAAgfHwgWCQQBwABAG4YBAAAIHx8IFgkEAcAAQBuGwQAACB8fCBYJBAHAAEAbiQEAAAgfHwgWCQQBwABAG4yBAAAIHx8IFgkEAcAAQBuNAQAACB8fCBYJBAHAAEAbjUEAAAgfHwgWCQQBwABAG44BAAAIHx8IFgkEAcAAQBuOQQAACB8fCBYJBAHAAEAbjoEAAAgfHwgWCQQBwABAG47BAAAIHx8IFgkEAcAAQBuPAQAACB8fBcAAgABABUAEQBmEwAMACBmEwAgWAwQAAAgKxkAAAAXAAIABAAWAAgAAgAEACBzFAAVAAcAcxQAAgAgMD0UAAAZAAAAGQAAABEAAAAQAA0AAQDKAQAAAQBuIQQAABYADQABAAkAIEcDACAwID09HgAAABkAAADcEQ4AAgByAgB6mpmZmZmZuT8WAA8ABQALACBYUxQFAAEARwQAFQAHAHMUAAIAIDEWADEBAAAtASBYJBAHAAEAbgMAAAAgWCQQBwABAG7vAwAAIHx8IFgkEAcAAQBu6QMAACB8fCBYJBAHAAEAbvEDAAAgfHwgWCQQBwABAG71AwAAIHx8IFgkEAcAAQBuAwQAACB8fCBYJBAHAAEAbgwEAAAgfHwgWCQQBwABAG4XBAAAIHx8IFgkEAcAAQBuGAQAACB8fCBYJBAHAAEAbhsEAAAgfHwgWCQQBwABAG4kBAAAIHx8IFgkEAcAAQBuMgQAACB8fCBYJBAHAAEAbjQEAAAgfHwgWCQQBwABAG41BAAAIHx8IFgkEAcAAQBuOAQAACB8fCBYJBAHAAEAbjkEAAAgfHwgWCQQBwABAG46BAAAIHx8IFgkEAcAAQBuOwQAACB8fCBYJBAHAAEAbjwEAAAgfHwXAAIAAQAVABEAZhMADAAgZhMAIFgMEAAAICsZAAAAFwACAAQAFgAIAAIABAAgcxQAFQAHAHMUAAIAIDA9FAAAGQAAABkAAAARAAAA</CompiledScript>
+      <ScriptSource Tag="SCTX" External="UCBQuestScript.fnvscript" />
+      <LocalVariables>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>19</Index>
+            <Flags>0</Flags>
+          </Data>
+          <Name Tag="SCVR">fTimer</Name>
+        </Variable>
+        <Variable>
+          <Data Tag="SLSD">
+            <Index>20</Index>
+            <Flags>IsLongOrShort</Flags>
+          </Data>
+          <Name Tag="SCVR">iKeyPressed</Name>
+        </Variable>
+      </LocalVariables>
+      <References>
+        <Reference Tag="SCRO">
+          <Reference ID="0101551F">UCBrestarted</Reference>
+        </Reference>
+        <Reference Tag="SCRO">
+          <Reference ID="01015521">UCBQuest</Reference>
+        </Reference>
+        <Reference Tag="SCRO">
+          <Reference ID="0101551E">UCBhasNVSE</Reference>
+        </Reference>
+        <Reference Tag="SCRO">
+          <Reference ID="0101551D">UCBKey</Reference>
+        </Reference>
+      </References>
+    </Data>
+  </Subrecords>
+</Record>

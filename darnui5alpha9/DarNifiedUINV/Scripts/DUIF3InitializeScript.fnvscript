@@ -1,0 +1,92 @@
+scn DUIF3InitializeScript
+
+int doonce
+float fNVSEVersion
+string_var stNVSEMinorV
+
+Begin MenuMode 1004
+
+	if doonce == 0
+	
+		set DUIF3.NVSEVersion to GetNVSEVersion
+		set DUIF3.NVSERevision to GetNVSERevision
+		set DUIF3.NVSEBeta to GetNVSEBeta
+
+		set fNVSEVersion to (GetNVSEVersion+(GetNVSERevision / 10))
+
+		if fNVSEVersion >= 4.2
+		
+			SetUIFloat "StartMenu\_NVSE_MajorV" DUIF3.NVSEVersion
+			let stNVSEMinorV := "." + $DUIF3.NVSERevision
+			SetUIStringEx "StartMenu\_NVSE_MinorV" "$stNVSEMinorV"
+			SetUIFloat "StartMenu\_NVSE_BetaV" DUIF3.NVSEBeta
+			sv_destruct stNVSEMinorV
+			SetUIFloat "HUDMainMenu\_NVSE" 1
+
+			set DUIF3.xSkillFix to GetUIFloat "HUDMainMenu\_lvlSkillsUncap"
+			set DUIF3.swMaxHours to GetUIFloat "HUDMainMenu\_swMaxHours"
+			set DUIF3.xPanels to GetUIFloat "HUDMainMenu\_HUDxPanels"
+			set DUIF3.xPanelsX to GetUIFloat "HUDMainMenu\_HUDxPanelsX"
+			set DUIF3.xPanelsY to GetUIFloat "HUDMainMenu\_HUDxPanelsY"
+			set DUIF3.xBrackets to GetUIFloat "HUDMainMenu\_HUDxBrackets"
+			set DUIF3.xBracketStyle to GetUIFloat "HudMainMenu\_HUDxBracketStyle"
+			set DUIF3.xStatsArmorCND to GetUIFloat "HUDMainMenu\_HUDxStatsArmorCND"
+			set DUIF3.xTime to GetUIFloat "HUDMainMenu\_HUDxTime"
+			set DUIF3.xTimeClock to GetUIFloat "HUDMainMenu\_HUDxTimeClock"
+			set DUIF3.xTimeDate to GetUIFloat "HUDMainMenu\_HUDxTimeDate"
+			set DUIF3.xTimeSDF to GetUIFloat "HUDMainMenu\_HUDxTimeSDF"
+			set DUIF3.xTimeScale to GetUIFloat "HUDMainMenu\_HUDxTimeScale"
+			set DUIF3.xKarma to GetUIFloat "HUDMainMenu\_HUDxKarma"
+			set DUIF3.xKarmaMeter to GetUIFloat "HUDMainMenu\_HUDxKarmaMeter"
+			set DUIF3.xKarmaAlignment to GetUIFloat "HUDMainMenu\_HUDxKarmaAlignment"
+			set DUIF3.xXP to GetUIFloat "HUDMainMenu\_HUDxXP"
+			set DUIF3.xXPMeter to GetUIFloat "HUDMainMenu\_HUDxXPMeter"
+			set DUIF3.xRad to GetUIFloat "HUDMainMenu\_HUDxRad"
+			set DUIF3.xRadCurrent to GetUIFloat "HUDMainMenu\_HUDxRadCurrent"
+			set DUIF3.xRadMeter to GetUIFloat "HUDMainMenu\_HUDxRadMeter"
+			set DUIF3.xStats to GetUIFloat "HUDMainMenu\_HUDxStats"
+			set DUIF3.xStatsDM to GetUIFloat "HUDMainMenu\_HUDxStatsDM"
+			set DUIF3.xStatsEN to GetUIFloat "HUDMainMenu\_HUDxStatsEN"
+			set DUIF3.xStatsCC to GetUIFloat "HUDMainMenu\_HUDxStatsCC"
+			set DUIF3.xStatsDR to GetUIFloat "HUDMainMenu\_HUDxStatsDR"
+			set DUIF3.xStatsDT to GetUIFloat "HudMainMenu\_HUDxStatsDT"
+			set DUIF3.xStatsPR to GetUIFloat "HUDMainMenu\_HUDxStatsPR"
+			set DUIF3.xStatsFR to GetUIFloat "HUDMainMenu\_HUDxStatsFR"
+			set DUIF3.xStatsFO to GetUIFloat "HUDMainMenu\_HUDxStatsFO"
+			set DUIF3.xStatsEL to GetUIFloat "HUDMainMenu\_HUDxStatsEL"
+			set DUIF3.xStatsER to GetUIFloat "HUDMainMenu\_HUDxStatsER"
+			set DUIF3.xStatsEM to GetUIFloat "HUDMainMenu\_HUDxStatsEM"
+			set DUIF3.xStatsRR to GetUIFloat "HUDMainMenu\_HUDxStatsRR"
+			set DUIF3.xStatsThirst to GetUIFloat "HUDMainMenu\_HUDxStatsThirst"
+			set DUIF3.xStatsHunger to GetUIFloat "HUDMainMenu\_HUDxStatsHunger"
+			set DUIF3.xStatsSleep to GetUIFloat "HUDMainMenu\_HUDxStatsSleep"
+		
+;			set DUIF3.SaveToINI
+;			set DUIF3.LoadFromINI
+;			set DUIF3.AlwaysSaveToINI
+;			set DUIF3.AlwaysLoadFromINI
+
+			set DUIF3.HUDScale to GetUIFloat "HUDMainMenu\_HUDScale"
+			set DUIF3.HUDWarnLevel to GetUIFloat "HUDMainMenu\_HUDWarnLevel"
+			set DUIF3.HUDAlertLevel to GetUIFloat "HUDMainMenu\_HUDAlertLevel"
+			set DUIF3.HUDOverrideColor to GetUIFloat "HUDMainMenu\_HUDOverrideColor"
+			set DUIF3.HUDSolidMeters to GetUIFloat "HUDMainMenu\_HUDSolidMeters"
+			set DUIF3.HUDDynamicColors to GetUIFloat "HUDMainMenu\_HUDDynamicColors"
+			set DUIF3.HUDShowGuides to GetUIFloat "HUDMainMenu\_HUDShowGuides"
+			set DUIF3.HUDRed to GetUIFloat "HUDMainMenu\_HUDRed"
+			set DUIF3.HUDGreen to GetUIFloat "HUDMainMenu\_HUDGreen"
+			set DUIF3.HUDBlue to GetUIFloat "HUDMainMenu\_HUDBlue"
+			set DUIF3.HUDTxtRed to GetUIFloat "HUDMainMenu\_HUDTxtRed"
+			set DUIF3.HUDTxtGreen to GetUIFloat "HUDMainMenu\_HUDTxtGreen"
+			set DUIF3.HUDTxtBlue to GetUIFloat "HUDMainMenu\_HUDTxtBlue"
+			set DUIF3.HUDWarnRed to GetUIFloat "HUDMainMenu\_HUDWarnRed"
+			set DUIF3.HUDWarnGreen to GetUIFloat "HUDMainMenu\_HUDWarnGreen"
+			set DUIF3.HUDWarnBlue to GetUIFloat "HUDMainMenu\_HUDWarnBlue"
+			set DUIF3.HUDAlertRed to GetUIFloat "HUDMainMenu\_HUDAlertRed"
+			set DUIF3.HUDAlertGreen to GetUIFloat "HUDMainMenu\_HUDAlertGreen"
+			set DUIF3.HUDAlertBlue to GetUIFloat "HUDMainMenu\_HUDAlertBlue"
+			set doonce to 1
+		endif
+	endif
+
+End

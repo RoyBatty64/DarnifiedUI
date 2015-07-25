@@ -1,0 +1,326 @@
+scn DUIF3ConfigSubMenuMain
+
+int iMaster
+int iOption
+float fValue
+ref rList
+
+Begin GameMode
+	if GetGameRestarted
+		if IsModLoaded "The Mod Configuration Menu.esp"
+			set iMaster to GetModIndex "The Mod Configuration Menu.esp"
+			set rList to BuildRef iMaster 2790
+		endif
+	endif
+End
+
+Begin MenuMode 1013
+	if IsModLoaded "The Mod Configuration Menu.esp" && GetMCMFloat 0 0 "_ActiveSubMenu" == 1
+	else
+		Return
+	endif
+
+	if GetMCMFloat 0 0 "_ActiveMod" == GetModIndex "DarNifiedUINV.esp"
+		set iOption to GetMCMFloat 0 0 "_ActiveOption"
+		set fValue to GetMCMFloat 0 0 "_Value"
+
+		if GetMCMFloat 0 0 "_Reset" == 1
+			SetMCMFloat 0 0 "_Reset" 0
+			SetMCMFloat 1 0 "_columns" 2
+		
+			SetMCMFloat 1 1 "_enable" 1
+			SetMCMString 1 1 "_title" "Global Settings"
+			SetMCMFloat 1 1 "_highlight" 0
+			SetMCMFloat 1 1 "_type" 0
+
+;			SetMCMFloat 1 3 "_enable" 1
+;			SetMCMString 1 3 "_title" "  Crosshair Scale"
+;			SetMCMFloat 1 3 "_RGB" 191137050
+;			SetMCMFloat 1 3 "_type" 2
+;			SetMCMFloat 1 3 "_value" DUIF3.HUDScale
+
+			SetMCMFloat 1 4 "_enable" 1
+			SetMCMString 1 4 "_title" "  Warn Level"
+			SetMCMFloat 1 4 "_RGB" 191137050
+			SetMCMFloat 1 4 "_type" 2
+			SetMCMFloat 1 4 "_value" DUIF3.HUDWarnLevel
+
+			SetMCMFloat 1 5 "_enable" 1
+			SetMCMString 1 5 "_title" "  Alert Level"
+			SetMCMFloat 1 5 "_RGB" 191137050
+			SetMCMFloat 1 5 "_type" 2
+			SetMCMFloat 1 5 "_value" DUIF3.HUDAlertLevel
+
+			SetMCMFloat 1 9 "_enable" 1
+			SetMCMString 1 9 "_title" "Visual Settings"
+			SetMCMFloat 1 9 "_highlight" 0
+			SetMCMFloat 1 9 "_type" 0
+
+			SetMCMFloat 1 11 "_enable" 1
+			SetMCMString 1 11 "_title" "  Override Color"
+			SetMCMFloat 1 11 "_RGB" 191137050
+			SetMCMFloat 1 11 "_type" 4
+			SetMCMFloat 1 11 "_value" DUIF3.HUDOverrideColor
+
+			SetMCMFloat 1 12 "_enable" 1
+			SetMCMString 1 12 "_title" "  HUD Color"
+			SetMCMFloat 1 12 "_RGB" 191137050
+			SetMCMFloat 1 12 "_type" 9
+			SetMCMFloat 1 12 "_Value1" DUIF3.HUDRed
+			SetMCMFloat 1 12 "_Value2" DUIF3.HUDGreen
+			SetMCMFloat 1 12 "_Value3" DUIF3.HUDBlue
+
+			SetMCMFloat 1 13 "_enable" 1
+			SetMCMString 1 13 "_title" "  Solid Meters"
+			SetMCMFloat 1 13 "_RGB" 191137050
+			SetMCMFloat 1 13 "_type" 4
+			SetMCMFloat 1 13 "_value" DUIF3.HUDSolidMeters
+
+			SetMCMFloat 1 14 "_enable" 1
+			SetMCMString 1 14 "_title" "  Text Color"
+			SetMCMFloat 1 14 "_RGB" 191137050
+			SetMCMFloat 1 14 "_type" 9
+			SetMCMFloat 1 14 "_Value1" DUIF3.HUDTxtRed
+			SetMCMFloat 1 14 "_Value2" DUIF3.HUDTxtGreen
+			SetMCMFloat 1 14 "_Value3" DUIF3.HUDTxtBlue
+
+			SetMCMFloat 1 15 "_enable" 1
+			SetMCMString 1 15 "_title" "  Dynamic Colors"
+			SetMCMFloat 1 15 "_RGB" 191137050
+			SetMCMFloat 1 15 "_type" 4
+			SetMCMFloat 1 15 "_value" DUIF3.HUDDynamicColors
+
+			SetMCMFloat 1 16 "_enable" 1
+			SetMCMString 1 16 "_title" "  Warning Color"
+			SetMCMFloat 1 16 "_RGB" 191137050
+			SetMCMFloat 1 16 "_type" 9
+			SetMCMFloat 1 16 "_Value1" DUIF3.HUDWarnRed
+			SetMCMFloat 1 16 "_Value2" DUIF3.HUDWarnGreen
+			SetMCMFloat 1 16 "_Value3" DUIF3.HUDWarnBlue
+
+			SetMCMFloat 1 17 "_enable" 1
+			SetMCMString 1 17 "_title" "  Bracket Style"
+			SetMCMFloat 1 17 "_RGB" 191137050
+			SetMCMString 1 17 "_textOff" "Fallout New Vegas"
+			SetMCMString 1 17 "_textOn" "Fallout 3"
+			SetMCMFloat 1 17 "_type" 6
+			SetMCMFloat 1 17 "_value" DUIF3.xBracketStyle
+			
+			SetMCMFloat 1 18 "_enable" 1
+			SetMCMString 1 18 "_title" "  Alert Color"
+			SetMCMFloat 1 18 "_RGB" 191137050
+			SetMCMFloat 1 18 "_type" 9
+			SetMCMFloat 1 18 "_Value1" DUIF3.HUDAlertRed
+			SetMCMFloat 1 18 "_Value2" DUIF3.HUDAlertGreen
+			SetMCMFloat 1 18 "_Value3" DUIF3.HUDAlertBlue
+
+			SetMCMFloat 1 21 "_enable" 1
+			SetMCMString 1 21 "_title" "Miscellaneous Settings"
+			SetMCMFloat 1 21 "_highlight" 0
+			SetMCMFloat 1 21 "_type" 0
+		
+			SetMCMFloat 1 23 "_enable" 1
+			SetMCMString 1 23 "_title" "  Sleep/Wait Max Hours"
+			SetMCMFloat 1 23 "_RGB" 191137050
+			SetMCMFloat 1 23 "_type" 2
+			SetMCMFloat 1 23 "_value" DUIF3.swMaxHours
+
+			SetMCMFloat 1 24 "_enable" 1
+			SetMCMString 1 24 "_title" "  Show Guides"
+			SetMCMFloat 1 24 "_RGB" 191137050
+			SetMCMFloat 1 24 "_type" 4
+			SetMCMFloat 1 24 "_value" DUIF3.HUDShowGuides
+
+			SetMCMFloat 1 25 "_enable" 1
+			SetMCMString 1 25 "_title" "  Allow Skills over 100"
+			SetMCMFloat 1 25 "_RGB" 191137050
+			SetMCMFloat 1 25 "_type" 4
+			SetMCMFloat 1 25 "_value" DUIF3.xSkillFix
+
+			SetMCMFloat 1 29 "_enable" 1
+			SetMCMString 1 29 "_title" "  Save To INI"
+			SetMCMFloat 1 29 "_RGB" 191137050
+			SetMCMString 1 29 "_textOff" "%e"
+			SetMCMString 1 29 "_textOn" "%e"
+			SetMCMFloat 1 29 "_type" 6
+			SetMCMFloat 1 29 "_value" DUIF3.SaveToIni
+
+			SetMCMFloat 1 30 "_enable" 1
+			SetMCMString 1 30 "_title" "  Always Save To INI"
+			SetMCMFloat 1 30 "_RGB" 191137050
+			SetMCMFloat 1 30 "_type" 5
+			SetMCMFloat 1 30 "_value" DUIF3.AlwaysSaveToIni
+		
+			SetMCMFloat 1 31 "_enable" 1
+			SetMCMString 1 31 "_title" "  Load From INI"
+			SetMCMFloat 1 31 "_RGB" 191137050
+			SetMCMString 1 31 "_textOff" "%e"
+			SetMCMString 1 31 "_textOn" "%e"
+			SetMCMFloat 1 31 "_type" 6
+			SetMCMFloat 1 31 "_value" DUIF3.LoadFromIni
+
+			SetMCMFloat 1 32 "_enable" 1
+			SetMCMString 1 32 "_title" "  Always Load From INI"
+			SetMCMFloat 1 32 "_RGB" 191137050
+			SetMCMFloat 1 32 "_type" 5
+			SetMCMFloat 1 32 "_value" DUIF3.AlwaysLoadFromINI
+
+		elseif GetMCMFloat 0 0 "_NewValue" == 1
+			SetMCMFloat 0 0 "_NewValue" 0
+			SetMCMFloat 0 0 "_Reset" 1
+			
+;			if iOption == 3
+;				set DUIF3.HUDScale to fValue
+;				SetUIFloat "HUDMainMenu\_HUDScale" DUIF3.HUDScale
+			if iOption == 4
+				set DUIF3.HUDWarnLevel to fValue
+				SetUIFloat "HUDMainMenu\_HUDWarnLevel" DUIF3.HUDWarnLevel
+			elseif iOption == 5
+				set DUIF3.HUDAlertLevel to fValue
+				SetUIFloat "HUDMainMenu\_HUDAlertLevel" DUIF3.HUDAlertLevel
+			elseif iOption == 11
+				set DUIF3.HUDOverrideColor to fValue
+				SetUIFloat "HUDMainMenu\_HUDOverrideColor" DUIF3.HUDOverrideColor
+			elseif iOption == 12
+				set DUIF3.HUDRed to GetMCMFloat 0 0 "_Value1"
+				set DUIF3.HUDGreen to GetMCMFloat 0 0 "_Value2"
+				set DUIF3.HUDBlue to GetMCMFloat 0 0 "_Value3"
+				SetUIFloat "HUDMainMenu\_HUDRed" DUIF3.HUDRed
+				SetUIFloat "HUDMainMenu\_HUDGreen" DUIF3.HUDGreen
+				SetUIFloat "HUDMainMenu\_HUDBlue" DUIF3.HUDBlue
+			elseif iOption == 13
+				set DUIF3.HUDSolidMeters to fValue
+				SetUIFloat "HUDMainMenu\_HUDSolidMeters" DUIF3.HUDSolidMeters
+			elseif iOption == 14
+				set DUIF3.HUDTxtRed to GetMCMFloat 0 0 "_Value1"
+				set DUIF3.HUDTxtGreen to GetMCMFloat 0 0 "_Value2"
+				set DUIF3.HUDTxtBlue to GetMCMFloat 0 0 "_Value3"
+				SetUIFloat "HUDMainMenu\_HUDTxtRed" DUIF3.HUDTxtRed
+				SetUIFloat "HUDMainMenu\_HUDTxtGreen" DUIF3.HUDTxtGreen
+				SetUIFloat "HUDMainMenu\_HUDTxtBlue" DUIF3.HUDTxtBlue
+			elseif iOption == 15
+				set DUIF3.HUDDynamicColors to fValue
+				SetUIFloat "HUDMainMenu\_HUDDynamicColors" DUIF3.HUDDynamicColors
+			elseif iOption == 16
+				set DUIF3.HUDWarnRed to GetMCMFloat 0 0 "_Value1"
+				set DUIF3.HUDWarnGreen to GetMCMFloat 0 0 "_Value2"
+				set DUIF3.HUDWarnBlue to GetMCMFloat 0 0 "_Value3"
+				SetUIFloat "HUDMainMenu\_HUDWarnRed" DUIF3.HUDWarnRed
+				SetUIFloat "HUDMainMenu\_HUDWarnGreen" DUIF3.HUDWarnGreen
+				SetUIFloat "HUDMainMenu\_HUDWarnBlue" DUIF3.HUDWarnBlue
+			elseif iOption == 17
+				set DUIF3.xBracketStyle to fValue
+				SetUIFloat "HUDMainMenu\_xBracketStyle" DUIF3.xBracketStyle
+			elseif iOption == 18
+				set DUIF3.HUDAlertRed to GetMCMFloat 0 0 "_Value1"
+				set DUIF3.HUDAlertGreen to GetMCMFloat 0 0 "_Value2"
+				set DUIF3.HUDAlertBlue to GetMCMFloat 0 0 "_Value3"
+				SetUIFloat "HUDMainMenu\_HUDAlertRed" DUIF3.HUDAlertRed
+				SetUIFloat "HUDMainMenu\_HUDAlertGreen" DUIF3.HUDAlertGreen
+				SetUIFloat "HUDMainMenu\_HUDAlertBlue" DUIF3.HUDAlertBlue
+			elseif iOption == 23
+				set DUIF3.swmaxHours to fValue
+				SetUIFloat "HUDMainMenu\_swMaxHours" DUIF3.swMaxHours
+			elseif iOption == 24
+				set DUIF3.HUDShowGuides to fValue
+				SetUIFloat "HUDMainMenu\_HUDShowGuides" DUIF3.HUDShowGuides
+			elseif iOption == 25
+				set DUIF3.xSkillFix to fValue
+				SetUIFloat "HUDMainMenu\_lvlSkillsUncap" DUIF3.xSkillFix
+			elseif iOption == 29
+				set DUIF3.SaveToIni to 1
+			elseif iOption == 30
+				set DUIF3.AlwaysSaveToIni to fValue
+			elseif iOption == 31
+				set DUIF3.LoadFromIni to 1
+			elseif iOption == 32
+				set DUIF3.AlwaysLoadFromIni to fValue
+			endif
+
+		elseif GetMCMFloat 0 0 "_ShowScale" == 1
+			SetMCMFloat 0 0 "_ShowScale" 2
+
+;			if iOption == 3
+;				SetMCMFloat 0 0 "_Value" DUIF3.HUDScale
+;				SetMCMFloat 0 0 "_ValueDecimal" 3
+;				SetMCMFloat 0 0 "_ValueIncrement" 5
+;				SetMCMFloat 0 0 "_ValueMax" 300
+;				SetMCMFloat 0 0 "_ValueMin" 40
+;				SetMCMString 2 0 "_title" "Hud Scale"
+			if iOption == 4
+				SetMCMFloat 0 0 "_Value" DUIF3.HUDWarnLevel
+				SetMCMFloat 0 0 "_ValueDecimal" 2
+				SetMCMFloat 0 0 "_ValueIncrement" 1
+				SetMCMFloat 0 0 "_ValueMax" 90
+				SetMCMFloat 0 0 "_ValueMin" 5
+				SetMCMString 2 0 "_suffixText" "%%"
+				SetMCMString 2 0 "_title" "Warn Level"
+			elseif iOption == 5
+				SetMCMFloat 0 0 "_Value" DUIF3.HUDAlertLevel
+				SetMCMFloat 0 0 "_ValueDecimal" 2
+				SetMCMFloat 0 0 "_ValueIncrement" 1
+				SetMCMFloat 0 0 "_ValueMax" 90
+				SetMCMFloat 0 0 "_ValueMin" 5
+				SetMCMString 2 0 "_suffixText" "%%"
+				SetMCMString 2 0 "_title" "Alert Level"
+			elseif iOption == 12
+				SetMCMFloat 0 0 "_Value1" DUIF3.HUDRed
+				SetMCMFloat 0 0 "_Value2" DUIF3.HUDGreen
+				SetMCMFloat 0 0 "_Value3" DUIF3.HUDBlue
+				SetMCMString 2 0 "_title" "HUD Color"
+			elseif iOption == 14
+				SetMCMFloat 0 0 "_Value1" DUIF3.HUDTxtRed
+				SetMCMFloat 0 0 "_Value2" DUIF3.HUDTxtGreen
+				SetMCMFloat 0 0 "_Value3" DUIF3.HUDTxtBlue
+				SetMCMString 2 0 "_title" "Text Color"
+			elseif iOption == 16
+				SetMCMFloat 0 0 "_Value1" DUIF3.HUDWarnRed
+				SetMCMFloat 0 0 "_Value2" DUIF3.HUDWarnGreen
+				SetMCMFloat 0 0 "_Value3" DUIF3.HUDWarnBlue
+				SetMCMString 2 0 "_title" "Warning Color"
+			elseif iOption == 18
+				SetMCMFloat 0 0 "_Value1" DUIF3.HUDAlertRed
+				SetMCMFloat 0 0 "_Value2" DUIF3.HUDAlertGreen
+				SetMCMFloat 0 0 "_Value3" DUIF3.HUDAlertBlue
+				SetMCMString 2 0 "_title" "Alert Color"
+			elseif iOption == 23
+				SetMCMFloat 0 0 "_Value" DUIF3.swMaxHours
+				SetMCMFloat 0 0 "_ValueDecimal" 3
+				SetMCMFloat 0 0 "_ValueIncrement" 1
+				SetMCMFloat 0 0 "_ValueMax" 168
+				SetMCMFloat 0 0 "_ValueMin" 24
+				SetMCMString 2 0 "_title" "Sleep/Wait Max Hours"
+			endif
+
+		elseif GetMCMFloat 0 0 "_DefaultScale" == 1
+			SetMCMFloat 0 0 "_DefaultScale" 0
+			SetMCMFloat 0 0 "_ShowScale" 2
+
+;			if iOption == 3
+;				SetMCMFloat 0 0 "_Value" 65
+			if iOption == 4
+				SetMCMFloat 0 0 "_Value" 50
+			elseif iOption == 5
+				SetMCMFloat 0 0 "_Value" 25
+			elseif iOption == 12
+				SetMCMFloat 0 0 "_Value1" 20
+				SetMCMFloat 0 0 "_Value2" 250
+				SetMCMFloat 0 0 "_Value3" 255
+			elseif iOption == 14
+				SetMCMFloat 0 0 "_Value1" 200
+				SetMCMFloat 0 0 "_Value2" 245
+				SetMCMFloat 0 0 "_Value3" 255
+			elseif iOption == 16
+				SetMCMFloat 0 0 "_Value1" 190
+				SetMCMFloat 0 0 "_Value2" 140
+				SetMCMFloat 0 0 "_Value3" 0
+			elseif iOption == 18
+				SetMCMFloat 0 0 "_Value1" 200
+				SetMCMFloat 0 0 "_Value2" 10
+				SetMCMFloat 0 0 "_Value3" 0
+			elseif iOption == 23
+				SetMCMFloat 0 0 "_Value" 24
+			endif
+		endif
+	endif
+End

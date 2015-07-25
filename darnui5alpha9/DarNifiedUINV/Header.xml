@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="TES4">
+  <Flags>0</Flags>
+  <FormID ID="00000000">NullReference</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <FileHeader Tag="HEDR">
+      <Version>1.34000003</Version>
+      <RecordCount>56</RecordCount>
+      <NextObjectID>89530</NextObjectID>
+    </FileHeader>
+    <Author Tag="CNAM">DarN</Author>
+    <Description Tag="SNAM">DarNified UI NV companion plugin
+
+Allows for additional info to be displayed in the hud &amp; menus with in-game UI configuration (requires NVSE and MCM)
+
+Also enables the world map to be zoomed further (Vanilla)
+
+Requires NVSE 4.2 or higher</Description>
+    <MasterFiles>
+      <MasterFile>
+        <FileName Tag="MAST">FalloutNV.esm</FileName>
+        <FileSize Tag="DATA">0</FileSize>
+      </MasterFile>
+    </MasterFiles>
+  </Subrecords>
+</Record>

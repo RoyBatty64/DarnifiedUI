@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Record Tag="QUST">
+  <Flags>0</Flags>
+  <FormID ID="01012A2A">DUIF3DynamicQuantityQuest</FormID>
+  <FormVersion>15</FormVersion>
+  <CompressionCorrupted>false</CompressionCorrupted>
+  <Subrecords>
+    <EditorID Tag="EDID">DUIF3DynamicQuantityQuest</EditorID>
+    <Script Tag="SCRI">
+      <Reference ID="01012A2B">DUIF3DynamicQuantityScript</Reference>
+    </Script>
+    <Name Tag="FULL">DUIF3DynamicQuantityQuest</Name>
+    <Data Tag="DATA">
+      <Flags>17</Flags>
+      <Priority>50</Priority>
+      <QuestDelay>1</QuestDelay>
+    </Data>
+  </Subrecords>
+</Record>

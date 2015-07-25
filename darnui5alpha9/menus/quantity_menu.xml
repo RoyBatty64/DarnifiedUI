@@ -1,0 +1,237 @@
+<!-- quantity_menu.xml -->
+<!-- 
+// ZENIMAX MEDIA PROPRIETARY INFORMATION
+//
+// This software is developed and/or supplied under the terms of a license
+// or non-disclosure agreement with ZeniMax Media Inc. and may not be copied
+// or disclosed except in accordance with the terms of that agreement.
+//
+//   Copyright (c) 1999 ZeniMax Media Incorporated.
+//   All Rights Reserved.
+//
+// ZeniMax Media Incorporated, Rockville, Maryland 20850
+// http://www.zenimax.com
+//
+// FILE			quantity_menu.xml
+// VERSION		1.0
+// AUTHOR:		Ricardo Gonzalez
+// DATE			January 30, 2007
+// INFO			Menu shown when selecting a number of items from a group
+-->
+<menu name="QuantityMenu">
+    <class> &QuantityMenu; </class>
+   <stackingtype> &no_click_past; </stackingtype> 
+    
+	<!-- XBox 360 control bindings -->
+	<xbuttona>	<ref src="QM_OKButton" trait="clicked"/></xbuttona>
+	<xleft>	<ref src="QM_DecreaseArrow" trait="clicked"/></xleft>
+	<xright>	<ref src="QM_IncreaseArrow" trait="clicked"/></xright>
+	
+	<_PCButton_A> QM_OKButton </_PCButton_A>
+	<_PCButton_E> QM_CancelButton </_PCButton_E>
+
+	<rect name="NOGLOW_BRANCH">
+		<id> &noglow_branch; </id>
+		<systemcolor> &hudmain; </systemcolor>
+
+		<!-- Menu background -->
+		<image name="QM_Background">
+			<x>
+				<copy src="screen()" trait="width"/>
+				<sub src="me()" trait="width"/>
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy src="screen()" trait="height"/>
+				<sub src="me()" trait="height"/>
+				<div> 2 </div>
+			</y>
+			<width> 540 </width> <!-- DarN 740 -->
+			<height> 350 </height> <!-- DarN 370 -->
+
+			<filename> Interface\Shared\background\solid_black.dds </filename>
+			<zoom> &scale; </zoom>
+			<brightness> 128 </brightness>
+			<alpha> <copy src="globals()" trait="_background_fill_alpha"/> </alpha>		<!-- Set in code -->
+			<depth> 1 </depth>
+		</image>
+		
+		<hotrect name="QM_MainRect">
+			<locus> &true; </locus>
+			<id> &generic; </id>
+			<target> &true; </target>
+			<wheelable> &true; </wheelable>
+			<depth> 2 </depth>
+
+			<x>
+				<copy src="sibling(QM_Background)" trait="x"/>
+				<add> 22 </add>
+			</x>
+			<y>
+				<copy src="sibling(QM_Background)" trait="y"/>
+				<add> 42 </add>
+			</y>
+
+			<!-- Top-most bracket -->
+			<rect name="QM_TopBracket">
+				<include src="top_bracket.xml"/>
+				<width> <!-- DarN 690 -->
+					<copy src="QM_Background" trait="width" />
+					<sub> 50 </sub>
+				</width>
+			</rect>
+
+			<!-- Bottom-most bracket -->
+			<rect name="QM_BottomBracket">
+				<include src="bottom_bracket.xml"/>
+
+				<y> 270 </y> <!-- DarN 290 -->
+				<width> <copy src="sibling(QM_TopBracket)" trait="width" /> </width>
+			</rect>
+
+			<!-- The "How many?" prompt at top of screen -->
+			<text name="QM_HowManyText">
+				<x> <!-- DarN 345 -->
+					<copy src="QM_Background" trait="width" />
+					<div> 2 </div>
+					<sub> 22 </sub>
+				</x>
+				<y> 40 </y> <!-- DarN 50 -->
+
+				<font> 2 </font>
+				<justify> &center; </justify>
+				<string> &-sHowMany; </string>
+			</text>
+
+			<rect name="QM_AmountMeter">
+				<id> 0 </id>
+				<include src="meter.xml"/>
+				<x> <!-- DarN 149.5 -->
+					<copy src="sibling(QM_HowManyText)" trait="x" />
+					<sub>
+						<copy src="me()" trait="width" />
+						<div> 2 </div>
+					</sub>
+				</x>
+				<y> 95 </y> <!-- DarN 115 -->
+				<width> 296 </width> <!-- DarN 391 -->
+				<height> 24 </height>
+				<_ShowBackground> &true; </_ShowBackground>
+				<draggable> &true; </draggable>
+				<target> &true; </target>
+				<repeathorizontal> &true; </repeathorizontal>
+				<xdefault> 1 </xdefault>
+				<_Value>
+					<copy> 0 </copy>
+					<add>
+						<copy src="me()" trait="user1"/>
+						<onlyif src="me()" trait="dragx"/>
+					</add>
+					<add>
+						<copy src="me()" trait="user2"/>
+						<div src="me()" trait="user0"/>
+						<onlyifnot src="me()" trait="dragx"/>
+					</add>
+				</_Value>
+				
+				<user0> 1 </user0>		<!-- Max amount -->
+				
+				<!-- Drag value: goes from 0 to 1 based on mouse drag -->
+				<user1>
+					<copy src="me()" trait="dragx"/>
+					<sub> 100 </sub> <!-- DarN 140 -->
+					<div> 298.5 </div> <!-- DarN 392.5 -->
+					<max> 0 </max>
+					<min> 1 </min>
+				</user1>
+				
+				<!-- Code value: Set whenever arrows are clicked, value is set in code, etc.  Overrides drag value -->
+				<user2></user2>
+				
+				<user3></user3>		<!-- Step size: Amount to change with Left / Right -->
+				<user4></user4>		<!-- Jump size: Large amount to change with LB / RB -->
+			</rect>
+			
+			<image name="QM_DecreaseArrow">
+				<id> 1 </id>
+				<filename> Interface\Main\main_arrow_left.dds </filename>
+				<x> <!-- DarN 130/80 -->
+					<copy src="sibling(QM_AmountMeter)" trait="x" />
+					<sub>
+						<copy src="me()" trait="width" />
+						<!-- <add> 10 </add> -->
+					</sub>
+				</x>
+				<y> 95 </y> <!-- DarN 115 -->
+				<width> 17.5 </width>
+				<height> 35 </height>
+				<zoom> &scale; </zoom>
+				<target> &true; </target>
+			</image>
+			
+			<image name="QM_IncreaseArrow">
+				<id> 2 </id>
+				<filename> Interface\Main\main_arrow_right.dds </filename>
+				<x>
+					<copy src="sibling(QM_AmountMeter)" trait="x" />
+					<add src="sibling(QM_AmountMeter)" trait="width" />
+					<add> 5 </add>
+				</x> <!-- DarN 549 -->
+				<y> 95 </y> <!-- DarN 115 -->
+				<width> 17.5 </width>
+				<height> 35 </height>
+				<zoom> &scale; </zoom>
+				<target> &true; </target>
+			</image>
+
+			<!-- Scrollbar value text -->
+			<text name="QM_AmountChosen">
+				<id> 3 </id>
+				<x> <copy src="sibling(QM_HowManyText)" trait="x" /> </x>
+				<y> 150 </y> <!-- DarN 170 -->
+
+				<font> 6 </font>
+				<justify> &center; </justify>
+				<string>
+					<copy src="sibling(QM_AmountMeter)" trait="_Value"/>
+					<mul src="sibling(QM_AmountMeter)" trait="user0"/>
+					<round> 1 </round>
+				</string>
+			</text>
+
+			<!-- The Wait / Sleep button: Begins the Wait / Sleep process-->
+			<hotrect name="QM_OKButton">
+				<include src="darn\text_box.xml"/>
+				<id> 4 </id>
+
+				<_x> 60 </_x> <!-- DarN 665 -->
+				<_y> 210 </_y> <!-- DarN 155 -->
+
+				<justify> &right; </justify>
+				<string> &-sOK; </string>
+
+				<_xbox_button> &xbuttona; </_xbox_button>
+				<_PCButtonText> &-sPCMenuHintA; </_PCButtonText> 
+			</hotrect>
+
+			<!-- The Cancel button: Exits the menu-->
+			<hotrect name="QM_CancelButton">
+				<include src="darn\text_box.xml"/>
+				<id> 5 </id>
+
+				<_x> 435 </_x> <!-- DarN 665 -->
+				<_y> 210 </_y> <!-- DarN 200 -->
+				<systemcolor> &hudalt; </systemcolor>
+
+				<justify> &right; </justify>
+				<string> &-sCancel; </string>
+				<_xbox_button> &xbuttonb; </_xbox_button>
+				<_PCButtonText> &-sPCMenuHintE; </_PCButtonText>
+			</hotrect>
+		</hotrect>	<!-- end QM_MainRect -->
+	</rect>
+
+	<rect name="GLOW_BRANCH">
+		<id> &glow_branch; </id>
+	</rect>			<!-- end GLOW_BRANCH-->
+</menu>

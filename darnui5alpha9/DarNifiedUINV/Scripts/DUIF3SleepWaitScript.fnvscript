@@ -1,0 +1,20 @@
+scn DUIF3SleepWaitScript
+
+int doonce
+
+Begin GameMode
+
+	if doonce == 0
+		set doonce to 1
+	endif
+	
+End
+
+Begin MenuMode 1012
+
+	if doonce 
+		SetUIFloat "SleepWaitMenu\_MaxHours" DUIF3.swMaxHours
+		set doonce to 0
+	endif
+	
+End
