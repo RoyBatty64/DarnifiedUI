@@ -1,0 +1,12 @@
+## Ignore ESMs and BSAs
+*.esp
+*.esm
+*.bsa
+
+## Ignore ESPSharp stuff
+*.dll
+*.exe
+PluginSearchLocations.csv
+
+# Ignore Misc Windows Debris
+meta.ini

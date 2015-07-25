@@ -361,4 +361,10 @@ Begin GameMode
 		SetUIFloat "HUDMainMenu\_ArmorMaxCND" armorBH
 	endif
 
+	if (Player.GetEquippedObject 2 == 0)
+		SetUIFloat "HUDMainMenu\_xArmorIsWorn" 0
+	else
+		SetUIFloat "HUDMainMenu\_xArmorIsWorn" 1
+	endif
+
 End
