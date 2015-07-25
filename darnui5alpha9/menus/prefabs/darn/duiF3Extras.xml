@@ -332,6 +332,7 @@
 <_HUDxBracketStyle> <copy src="globals()" trait="_xBracketstyle" /> </_HUDxBracketStyle>
 <_HUDxAlignment> <copy src="globals()" trait="_xAlignment" /> </_HUDxAlignment>
 <_HUDxStatsArmorCND> <copy src="globals()" trait="_xStatsArmorCND" /> </_HUDxStatsArmorCND>
+<_xArmorIsWorn> <copy src="globals()" trait="_xArmorIsWorn" /> </_xArmorIsWorn>
 <_HUDxTime> <copy src="globals()" trait="_xTime" /> </_HUDxTime>
 <_HUDxTimeClock> <copy src="globals()" trait="_xTimeClock" /> </_HUDxTimeClock>
 <_HUDxTimeDate> <copy src="globals()" trait="_xTimeDate" /> </_HUDxTimeDate>
@@ -719,6 +720,7 @@
 		<visible>
 			<copy src="io()" trait="_NVSEHUD" />
 			<and src="io()" trait="_xStatsArmorCND" />
+			<and src="io()" trait="_xArmorIsWorn" />
 		</visible>
 		<text name="ArmorCNDLbl">
 			<alpha> <copy src="io()" trait="_HUDAlpha" /> </alpha>

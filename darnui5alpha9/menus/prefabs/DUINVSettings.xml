@@ -283,6 +283,7 @@ on your center monitor, as opposed to the far left and right of the others. 				
 <_xAlignment> 0 </_xAlignment>			<!-- [0] 0 = orient left, 1 = orient right				-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Armor Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <_xStatsArmorCND> 1 </_xStatsArmorCND>	<!-- [1] Show Armor Condition							-->
+<_xArmorIsWorn> 0 </_xArmorIsWorn>		<!-- [1] Player is wearing armor						-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Time Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <_xTime> 1 </_xTime>					<!-- [1] Show Time Panel								-->
 <_xTimeClock> 1 </_xTimeClock>			<!-- [2] 0 = off, 1 = 24hr mode, 2 = 12hr mode			-->
